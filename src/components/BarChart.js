@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import useD3 from "../hooks/useD3.js";
 
 //TODO: Refactor this to use more idiomatic react
-export default function BarChart({data}){
+export default function BarChart(){
   const ref = useD3(
     async function(svg){
 
