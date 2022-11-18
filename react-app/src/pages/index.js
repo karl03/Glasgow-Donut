@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import axios from "axios";
 import BarChart from "../components/BarChart";
 
-const Home = () => {
+const HomePage = () => {
   const [users, setUsers] = useState([])
   function componentDidMount() {
     axios.get("/users.json").then((response) => {
       setUsers(response.data);
+      console.log(users);
     });
   }
   return (
@@ -32,7 +33,7 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage
 
 // export default class App extends React.Component {
 //   state = {
