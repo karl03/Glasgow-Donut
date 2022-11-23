@@ -1,7 +1,10 @@
 import styled from 'styled-components'
+import '../DefaultStyles.css'
+
+
 
 export const AdminContainer = styled.div`
-    background-color: black;
+    background-color: #D9D9D9;
     align-items:center;
     justify-content: center;
     margin: auto;
@@ -18,7 +21,8 @@ export const AdminContainer = styled.div`
 `
 
 export const AdminDataListing = styled.div`
-    background-color: red;
+    
+    background-color: white;
     grid-area: a;
     display: flex;
     height: 100%;
@@ -30,7 +34,7 @@ export const AdminDataListing = styled.div`
 `
 
 export const AdminDonutGraph = styled.div`
-    background-color: green;
+    background-color: white;
     grid-area: b;
     display: flex;
     height: 100%;
@@ -40,7 +44,7 @@ export const AdminDonutGraph = styled.div`
 `
 
 export const AdminAddData = styled.div`
-    background-color: blue;
+    background-color: white;
     grid-area: c;
     display: flex;
     height: 100%;
