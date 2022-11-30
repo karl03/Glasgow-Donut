@@ -7,16 +7,6 @@ import Data from "./Data.json";
 export default function BarChart(){
   const ref = useD3(
     async function(svg){
-
-      const data = await d3.dsv(",", "http://voxel.rs/Test/Data.csv", (d) => {
-        return {
-          Statistic: d.Statistic,
-          Outer: +d.Outer,
-          Inner: +d.Inner,
-        };
-      });
-      console.log(data);
-
       console.log(Data);
 
       svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this

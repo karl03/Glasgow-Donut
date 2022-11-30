@@ -1,28 +1,24 @@
-import React from 'react'
-import { AdminAddData, AdminContainer, AdminDataListing, AdminDonutGraph } from './AdminElements'
+import React from 'react';
+import { AdminAddData, AdminContainer, AdminDataListing, AdminDonutGraph } from './AdminElements';
+import AdminSlider from "./AdminSlider";
 
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"></link>
-</head>
-
-const Admin = () => {
+export default function Admin(){
   return (
     <AdminContainer>
-        <AdminDataListing> 
-          <span className="font-link">
-              <h1>List Data here</h1>
-          </span>
-        </AdminDataListing>
-        <AdminDonutGraph>
-            <h1>Display Donut graph preview here</h1>
-        </AdminDonutGraph>
-        <AdminAddData>
-            <h1>Options for adding new data here</h1>
-        </AdminAddData>
+      <AdminDataListing> 
+        <h1>List Data here</h1>
+        {
+          [1, 2, 3, 41, 5].map((e, i) => (
+            <AdminSlider value={e} key={"AdminSliders" + i} />
+          ))
+        }
+      </AdminDataListing>
+      <AdminDonutGraph>
+        <h1>Display Donut graph preview here</h1>
+      </AdminDonutGraph>
+      <AdminAddData>
+        <h1>Options for adding new data here</h1>
+      </AdminAddData>
     </AdminContainer>
-  )
-}
-
-export default Admin
+  );
+};

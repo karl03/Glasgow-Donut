@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import '../DefaultStyles.css'
+import styled from 'styled-components';
+import '../DefaultStyles.css';
 
 
 
@@ -18,7 +18,7 @@ export const AdminContainer = styled.div`
         "a a a a b b b b"
         "a a a a c c c c";
     padding: 0 30px 0 30px;
-`
+`;
 
 export const AdminDataListing = styled.div`
     
@@ -31,7 +31,7 @@ export const AdminDataListing = styled.div`
     align-items: center;
     justify-content: flex-start;
     overflow-y: auto;
-`
+`;
 
 export const AdminDonutGraph = styled.div`
     background-color: white;
@@ -41,7 +41,7 @@ export const AdminDonutGraph = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
-`
+`;
 
 export const AdminAddData = styled.div`
     background-color: white;
@@ -51,4 +51,4 @@ export const AdminAddData = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
-`
+`;
