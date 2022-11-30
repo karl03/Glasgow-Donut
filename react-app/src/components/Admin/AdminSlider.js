@@ -52,9 +52,14 @@ const SliderInput = styled.input`
   flex-grow: 1;
 `;
 
-const Output = styled.div`
-  min-width: 40px;
-  text-align: center;
+const Number = styled.input`
+  min-width: 50px;
+  width: 50px;
+  font-size: 20px;
+`;
+
+const TextInput = styled.input`
+  font-size: 20px;
 `;
 
 export default function AdminSlider({initialValue, handleEvent, initialName, initialFactor}){
@@ -70,11 +75,11 @@ export default function AdminSlider({initialValue, handleEvent, initialName, ini
     <AdminSliderWrapper>
       <Left>
         <Top>
-          <div>{initialName}</div><div style={{"textAlign": "right"}}>Factor type: <input type="text" defaultValue={initialFactor} /></div>
+          <div>{initialName}</div><div style={{"textAlign": "right"}}>Factor type: <TextInput type="text" defaultValue={initialFactor} /></div>
         </Top>
         <Bottom>
-          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" defaultValue={initialValue} />
-          <Output>{"" + value}</Output>
+          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" defaultValue={initialValue} value={value} />
+          <Number onInput={event => {setValue(event.target.value);}} type="Number" min="0" max="100" step="1" defaultValue={initialValue} value={value} />
         </Bottom>
       </Left>
       <TrashIcon />
