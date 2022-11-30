@@ -2,6 +2,18 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
+import { image, link } from "d3";
+
+import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
+import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
+import ChemicalPollutionB from "./Icons/Dimension Icons Global Ecological/ChemicalPollution-black.png"
+import ExcessiveFertilizerUseB from "./Icons/Dimension Icons Global Ecological/ExcessiveFertilizerUse-black.png"
+import FreshwaterWithdrawalB from "./Icons/Dimension Icons Global Ecological/FreshwaterWithdrawal-black.png"
+import LandConversionB from "./Icons/Dimension Icons Global Ecological/LandConversion-black.png"
+import OceanAcidificationB from "./Icons/Dimension Icons Global Ecological/OceanAcidification-black.png"
+import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/OzoneLayerDepletion-black.png"
+import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
+import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart(){
@@ -101,17 +113,27 @@ export default function BarChart(){
                 const Rotation = ((x(d.Name) + x.bandwidth() / 2) * 180 / Math.PI - 90);
                 return "rotate(" + Rotation + ")"+"translate(" + (90) + ",0)" + "rotate(" + -Rotation + ")";
               })
-            .append("text")
-              .text(function(d){return(["🏭", "⛰️", "🚰", "🌳", "🍞", "🐟", "✈️", "🔥", "☁️", "☀️"][d.Name[4]])})
-              //.attr("transform", function(d) { return (x(d.Name) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)"; })
-              .style("font-size", "11px")
-              .attr("alignment-baseline", "middle")
-              .style("user-select", "none")
-              .style("-webkit-user-select", "none")
-              .style("cursor", "pointer")
-              .on("click", function(Event, ElementProperties){
-                console.log(Event, ElementProperties);
-              });
+              .append("svg:image")
+                .attr('x', -7)
+                .attr('y', -7)
+                .attr('width', 14)
+                .attr('height', 14)
+                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
+                .style("cursor", "pointer")
+                .on("click", function(Event, ElementProperties){
+                  console.log(Event, ElementProperties);
+                });
+            // .append("text")
+              // .text(function(d){return(["", "⛰️", "🚰", "🌳", "🍞", "🐟", "✈️", "🔥", "☁️", "☀️"][d.Name[4]])})
+            //   //.attr("transform", function(d) { return (x(d.Name) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)"; })
+            //   .style("font-size", "11px")
+            //   .attr("alignment-baseline", "middle")
+            //   .style("user-select", "none")
+            //   .style("-webkit-user-select", "none")
+            //   .style("cursor", "pointer")
+              // .on("click", function(Event, ElementProperties){
+              //   console.log(Event, ElementProperties);
+              // });
               
       }
       for(const [Half, Properties] of Object.entries(Data.Outer)){
@@ -193,8 +215,7 @@ export default function BarChart(){
     <svg ref={ref} style={{
       height: 500,
       width: 500,
-      marginRight: "0px",
-      marginLeft: "0px"
+      transform: "scale(1.4)"
     }}>
     </svg>
   );
