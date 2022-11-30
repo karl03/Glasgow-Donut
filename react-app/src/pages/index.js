@@ -1,21 +1,41 @@
 import React, {useState} from "react";
 import axios from "axios";
 import BarChart from "../components/BarChart";
+import YoutubeEmbed from "../components/YoutubeAddon";
 
-const HomePage = () => {
-  const [users, setUsers] = useState([])
+function HomePage() {
+  const [users, setUsers] = useState([]);
   function componentDidMount() {
-    axios.get("/users.json").then((response) => {
+    axios.get("/graph_test_data.json").then((response) => {
       setUsers(response.data);
       console.log(users);
-    });
-  }
+      
+        });
+      }
+  
   return (
-    <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center"}}>
-      <BarChart/>
+
+    <div>
+    <div style={{ height: "100vh", width: "100wh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+      <BarChart />
+
       {componentDidMount()}
+      <br/>
+      
     </div>
-  )
+
+    <div style={{ height: "100vh", width: "100wh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div>
+        <YoutubeEmbed embedId="I77B871YOTQ" />
+        </div>
+        
+    </div>
+    </div>
+    
+    
+    
+  );
 }
 
 export default HomePage
