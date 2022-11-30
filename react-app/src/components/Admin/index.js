@@ -49,7 +49,7 @@ export default function(){
         }
       </AdminDataListing>
       <AdminDonutGraphContainer>
-        <AdminDonutGraph state={sliders}/>
+        <AdminDonutGraph sliders={sliders}/>
       </AdminDonutGraphContainer>
       <AdminAddDataContainer>
         <h1>Options for adding new data here</h1>
