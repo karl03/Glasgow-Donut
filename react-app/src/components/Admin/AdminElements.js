@@ -33,7 +33,7 @@ export const AdminDataListing = styled.div`
     overflow-y: auto;
 `;
 
-export const AdminDonutGraph = styled.div`
+export const AdminDonutGraphContainer = styled.div`
     background-color: white;
     grid-area: b;
     display: flex;
@@ -43,7 +43,7 @@ export const AdminDonutGraph = styled.div`
     justify-content: center;
 `;
 
-export const AdminAddData = styled.div`
+export const AdminAddDataContainer = styled.div`
     background-color: white;
     grid-area: c;
     display: flex;

@@ -57,26 +57,27 @@ const Output = styled.div`
   text-align: center;
 `;
 
-export default class AdminSlider extends React.Component{
-    constructor(props){
-        super(props);
-        this.props = props;
-        this.state = { value: props.value };
-    }
-    render(){
-        return (
-            <AdminSliderWrapper>
-              <Left>
-                <Top>
-                  <div>Property</div><div Style="text-align: right;">Factor type: <input type="text" defaultValue="hello" /></div>
-                </Top>
-                <Bottom>
-                  <SliderInput onInput={event => {this.setState({"value": event.target.value})}} type="range" step="1" min="0" max="100" defaultValue={this.props.value} />
-                  <Output>{"" + this.state.value}</Output>
-                </Bottom>
-              </Left>
-              <TrashIcon />
-            </AdminSliderWrapper>
-        );
-    }
+export default function AdminSlider({initialValue, handleEvent, initialName, initialFactor}){
+  const [value, setValue] = React.useState(initialValue);
+  const [name, setName] = React.useState(initialName);
+  const [factor, setFactor] = React.useState(initialFactor);
+
+  React.useEffect(() => {
+    handleEvent(value);
+  }, [value, name, factor]);
+  
+  return (
+    <AdminSliderWrapper>
+      <Left>
+        <Top>
+          <div>{initialName}</div><div style={{"textAlign": "right"}}>Factor type: <input type="text" defaultValue={initialFactor} /></div>
+        </Top>
+        <Bottom>
+          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" defaultValue={initialValue} />
+          <Output>{"" + value}</Output>
+        </Bottom>
+      </Left>
+      <TrashIcon />
+    </AdminSliderWrapper>
+  );
 };
