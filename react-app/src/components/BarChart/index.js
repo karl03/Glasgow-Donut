@@ -111,7 +111,7 @@ export default function BarChart({
                 .attr('y', -smallRingRadius / 3.)
                 .attr('width', smallRingRadius / 1.5)
                 .attr('height', smallRingRadius / 1.5)
-                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[0]])})
+                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   console.log(Event, ElementProperties);

@@ -15,7 +15,7 @@ export default function AdminDonutGraph({sliderGroups}){
       let j = 0;
       for(const slider of sliders){
         Entries.push({
-          "Name": `${j++}`,
+          "Name": `....${j++}`,
           "Value": slider.Value,
           "Indicator": "abc",
           "Target": "abc",
