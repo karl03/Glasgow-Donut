@@ -1,7 +1,22 @@
 import AdminSlider from "./AdminSlider";
+import styled from "styled-components";
+const AdminSliderWrapper = styled.div`
+  width: calc(100% - 20px);
+  align-items: center;
+  padding: 10px;
+  margin: 0 10px 10px 10px;
+  box-sizing: border-box;
+  background-color: #eeeeee;
+`;
+const Title = styled.h2`
+  text-align: center;
+  margin: 10px;
+`;
+
 export default function AdminSliderGroup({sliders, eventHandler, groupID}){
   return (
-    <div>
+    <AdminSliderWrapper>
+      <Title>Group {groupID}</Title>
       {
         sliders.map((slider) => (
           <AdminSlider
@@ -14,6 +29,6 @@ export default function AdminSliderGroup({sliders, eventHandler, groupID}){
           />
         ))
       }
-    </div>
+    </AdminSliderWrapper>
   );
 };
