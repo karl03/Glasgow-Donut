@@ -2,33 +2,46 @@ import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer } from './AdminElements';
 import AdminSlider from "./AdminSlider";
 import ReactDOM from "react-dom";
-import ExampleSliders from "./ExampleSliders.json"; //This is temporary
+import Data from "../BarChart/Data.json"; //This is temporary
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
+import AdminSliderGroup from './AdminSliderGroup';
 
 
 export default function(){
   //const [state, setState] = useState({});
-  const [sliders, setSliders] = useState(ExampleSliders);
+  const [sliderGroups, setSliderGroups] = useState([
+    Data.Inner.Top,
+    Data.Inner.Bottom,
+    Data.Outer.Top,
+    Data.Outer.Bottom
+  ]);
 
-  function eventHandler(index){
-    return function(event){
-      const newValue = Number.parseInt(event);
-      setSliders(function(oldSliders){
-        const New = [...oldSliders];
-        New[index].Value = newValue;
-        return New;
-      });
-    };
+  function eventHandler(groupID, name, event){
+    const newValue = Number.parseInt(event);
+    setSliderGroups(function(oldSliders){
+      const New = JSON.parse(JSON.stringify(oldSliders));
+      for(const slider of New[groupID]){
+        if(slider.Name === name){
+          slider.Value = newValue;
+          break;
+        }
+      }
+      return New;
+    });
   }
 
-  function addedElementHandler(event){
-    setSliders(function(oldSliders){
-      return [...oldSliders, {
-        "Name": event,
-        "Factor": "idk",
-        "Value": Math.floor(Math.random() * 100.)
-      }];
+  function addedElementHandler(groupID, name){
+    setSliderGroups(function(oldSliders){
+      const New = JSON.parse(JSON.stringify(oldSliders));
+      New[groupID].push({
+        "Name": name,
+        "Value": Math.round(Math.random() * 100.),
+        "Indicator": "abc",
+        "Target": "abc",
+        "Links": []
+      });
+      return New;
     });
   }
   
@@ -37,19 +50,18 @@ export default function(){
       <AdminDataListing> 
         <h1>List Data here</h1>
         {
-          sliders.map((slider, index) => (
-            <AdminSlider
-              handleEvent={eventHandler(index)} //This index should probably be some unique id so it's easier to delete elements
-              initialValue={slider.Value}
-              initialName={slider.Name}
-              initialFactor={slider.Factor}
-              key={"AdminSliders" + index}
+          sliderGroups.map((sliders, groupID) =>{
+            return <AdminSliderGroup
+              sliders={sliders}
+              groupID={groupID}
+              eventHandler={eventHandler}
+              key={`AdminSliderGroup${groupID}`}
             />
-          ))
+          })
         }
       </AdminDataListing>
       <AdminDonutGraphContainer>
-        <AdminDonutGraph sliders={sliders}/>
+        <AdminDonutGraph sliderGroups={sliderGroups}/>
       </AdminDonutGraphContainer>
       <AdminAddDataContainer>
         <h1>Options for adding new data here</h1>

@@ -62,13 +62,13 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
-export default function AdminSlider({initialValue, handleEvent, initialName, initialFactor}){
+export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
   const [factor, setFactor] = React.useState(initialFactor);
 
   React.useEffect(() => {
-    handleEvent(value);
+    eventHandler(groupID, name, value);
   }, [value, name, factor]);
   
   return (

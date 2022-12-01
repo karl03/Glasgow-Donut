@@ -28,7 +28,7 @@ export default function BarChart({
   const ref = useD3(
     function(svg){
       svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
-
+      
       const group = svg.append("g")
         .attr("transform", "translate(250, 250)");
 
@@ -44,12 +44,12 @@ export default function BarChart({
         .range([innerRadius - ringRadius / 2. - margin, 10]) //This is 10 because the inner part of the graph would become too pointy
         .domain([0, 100]);
       
-      for(const [Half, Properties] of Object.entries(Data.Inner)){
+      for(const [Half, Properties] of Object.entries(data.Inner)){
         const x = d3.scaleBand()
           .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
           .align(0)                  // This does nothing
           .domain(Properties.map(function(d) {return d.Name; })); // The domain of the X axis is the list of states.
-        console.log(Properties);
+        
         group.append("g")
           .selectAll("path")
           .data(Properties)
@@ -111,14 +111,14 @@ export default function BarChart({
                 .attr('y', -smallRingRadius / 3.)
                 .attr('width', smallRingRadius / 1.5)
                 .attr('height', smallRingRadius / 1.5)
-                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
+                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[0]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   console.log(Event, ElementProperties);
                 });
               
       }
-      for(const [Half, Properties] of Object.entries(Data.Outer)){
+      for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
           .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
           .align(0)                  // This does nothing

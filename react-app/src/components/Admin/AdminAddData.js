@@ -8,13 +8,13 @@ export default function AdminAddData({addedElementHandler}){
       didMount.current = true;
     }
     else{
-      addedElementHandler(["Mountain", "River", "Lake", "Forest"][exampleState & 3]); //"rude code"
+      addedElementHandler(2, ["Mountain", "River", "Lake", "Forest"][exampleState & 3]); //"rude code"
     }
   }, [exampleState]);
 
   return (
     <div>
-      <button onClick={(event) => {setExampleState(exampleState + 1);}}>Click me</button>
+      <button onClick={()=>{setExampleState(exampleState + 1);}}>Click me</button>
     </div>
   );
 };
