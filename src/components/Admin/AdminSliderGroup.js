@@ -6,7 +6,7 @@ const AdminSliderWrapper = styled.div`
   padding: 10px;
   margin: 0 10px 10px 10px;
   box-sizing: border-box;
-  background-color: #eeeeee;
+  background-color: #8fc53a;
 `;
 const Title = styled.h2`
   text-align: center;

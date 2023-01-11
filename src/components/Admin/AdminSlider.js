@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const AdminSliderWrapper = styled.div`
   font-family: Arial;
+  background-color: #d2e9af;
   width: 100%;
   display: flex;
   align-items: center;

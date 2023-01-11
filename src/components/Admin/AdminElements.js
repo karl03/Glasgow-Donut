@@ -4,7 +4,7 @@ import '../DefaultStyles.css';
 
 
 export const AdminContainer = styled.div`
-    background-color: #D9D9D9;
+    background-color: #8fc53a;
     align-items:center;
     justify-content: center;
     margin: auto;
@@ -22,7 +22,7 @@ export const AdminContainer = styled.div`
 
 export const AdminDataListing = styled.div`
     
-    background-color: white;
+    background-color: #d2e9af;
     grid-area: a;
     display: flex;
     height: 100%;
@@ -34,7 +34,7 @@ export const AdminDataListing = styled.div`
 `;
 
 export const AdminDonutGraphContainer = styled.div`
-    background-color: white;
+    background-color: #d2e9af;
     grid-area: b;
     display: flex;
     height: 100%;
@@ -44,7 +44,7 @@ export const AdminDonutGraphContainer = styled.div`
 `;
 
 export const AdminAddDataContainer = styled.div`
-    background-color: white;
+    background-color: #d2e9af;
     grid-area: c;
     display: flex;
     height: 100%;

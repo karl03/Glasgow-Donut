@@ -5,7 +5,7 @@ import Header from '../components/Header'
 const AdminPage = () => {
   return (
     <div>
-      <Header/>
+      <Header title="Admin Page" color="#8fc53a"/>
       <Admin/>
     </div>
   )
