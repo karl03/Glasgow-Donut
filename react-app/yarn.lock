@@ -8886,11 +8886,6 @@
     "shallowequal" "^1.1.0"
     "supports-color" "^5.5.0"
 
-"styled@^1.0.0":
-  "integrity" "sha512-mPbinkDY7K//Jxi7hZBNSiUF3Q9LE8NHrlUuQXLHCFZcVJeSXQh/Kn4C7lWf8Obre3iyYHo0OqA3WptZrwST/A=="
-  "resolved" "https://registry.npmjs.org/styled/-/styled-1.0.0.tgz"
-  "version" "1.0.0"
-
 "stylehacks@^5.1.1":
   "integrity" "sha512-sBpcd5Hx7G6seo7b1LkpttvTz7ikD0LlH5RmdcBNb6fFR0Fl7LQwHDFr300q4cwUqi+IYrFGmsIHieMBfnN/Bw=="
   "resolved" "https://registry.npmjs.org/stylehacks/-/stylehacks-5.1.1.tgz"
