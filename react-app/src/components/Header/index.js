@@ -2,10 +2,10 @@ import React from 'react'
 import '../DefaultStyles.css'
 import { Head } from './HeaderElements'
 
-const Header = () => {
+const Header = ({title}) => {
   return (
     <Head>
-        <h3>~Website Header~</h3>
+        <h1>{title}</h1>
     </Head>
   )
 }
