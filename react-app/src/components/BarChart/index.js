@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import { image, link } from "d3";
+import { image, link, scaleBand, transition } from "d3";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -144,7 +144,8 @@ export default function BarChart({
   return (
     <svg ref={ref} style={{
       height: 500,
-      width: 500
+      width: 500,
+      transform: "scale(1.2)",
     }}>
     </svg>
   );
