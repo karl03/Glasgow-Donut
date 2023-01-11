@@ -22,7 +22,7 @@ function HomePage() {
       <MainBg>
         <ImageBg src={BackgroundImage}/>
       </MainBg>
-      <Header title="Gallant donut graph"/>
+      <Header title="Gallant Donut Graph"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
         <BarChart />
       </div>

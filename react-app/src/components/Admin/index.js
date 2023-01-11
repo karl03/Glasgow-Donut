@@ -48,7 +48,7 @@ export default function(){
   return (
     <AdminContainer>
       <AdminDataListing> 
-        <h1>List Data here</h1>
+        <h1>Graph Components</h1>
         {
           sliderGroups.map((sliders, groupID) =>{
             return <AdminSliderGroup

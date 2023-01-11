@@ -5,7 +5,7 @@ export const Head = styled.nav`
     display: flex;
     align-items:center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 2rem;
     top: 0;
     z-index:10;
     @media screen and (max-width: 960px) {
