@@ -4,61 +4,61 @@
       "global":{
         "air_pollution":{
           "value":85,
-          "adjacent":[["ecological","local","air","air quality affects the air pollition"]],
+          "adjacent":[["ecological","local","air","air pollution affects the air quality"],["social","local","health","air pollution affects health"],["ecological","local","store_carbon","air pollution affects the stored carbon"],["ecological","local","wellbeing","air pollution affects the wellbeing"],["ecological","local","store_carbon","air pollution affects the stored carbon"],["ecological","local","temperature","air pollution affects the temperature"],["ecological","global","chemical_pollution","chemical pollution affects air pollution"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much pollution is in the air",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "chemical_pollution":{
           "value":12,
-          "adjacent":[],
+          "adjacent":[["social","local","health","chemical pollution affects health"],["ecological","local","air","air pollution affects the air quality"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much chemical pollution there is",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "ocean_acidification":{
           "value":0,
-          "adjacent":[],
+          "adjacent":[["ecological","local","fresh_water","ocean acidification affects the water quality"],["social","local","water","ocean acidification affects water"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much acid in the ocean",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "biodiversity_loss":{
           "value":26,
-          "adjacent":[],
+          "adjacent":[["social","local","culture","biodiversity loss affects culture"],["ecological","local","biodiversity","biodiversity loss affects biodiversity"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much loss in biodiversity",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "excessive_fertilizer_use":{
           "value":75,
-          "adjacent":[],
+          "adjacent":[["social","local","health","excessive fertilizer use affects health"],["ecological","local","soil","excessive fertilizer use affects soil"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much excessive use of fertilizer",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "fresh_water_withdrawal":{
           "value":24,
-          "adjacent":[],
+          "adjacent":[["ecological","local","fresh_water","fresh water withdrawal affects the water quality"],["social","local","water","fresh water withdrawal affects water"],["social","local","health","fresh water withdrawal affects health"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much fresh water loss",
           "quotes":"These are the quotes/citations",
-          "video_hash":"dQw4w9WgXcQ"
+          "video_hash":"I77B871YOTQ"
         },
         "land_conversion":{
           "value":90,
-          "adjacent":[],
+          "adjacent":[["ecological","local","store_carbon","land conversion affects the stored carbon"],["ecological","local","soil","land conversion affects soil"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"if land is the same",
@@ -67,7 +67,7 @@
         },
         "ozone_layer_depletion":{
           "value":100,
-          "adjacent":[],
+          "adjacent":[["social","local","health","ozone layer depletion affects health"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much depletion in the ozone layer",
@@ -78,7 +78,7 @@
       "local":{
         "soil":{
           "value":44,
-          "adjacent":[],
+          "adjacent":[["ecological","global","land_conversion","soil affected by land conversion"],["ecological","global","excessive_fertilizer_use","soil affected by excessive fertilizer use"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"if soil is good",
@@ -88,7 +88,7 @@
       },
       "air":{
         "value":77,
-        "adjacent":[],
+        "adjacent":[["ecological","global","air_pollution","air is affected by air pollution"],["ecological","global","chemical_pollution","air is affected by chemical pollution"],["ecological","local","wellbeing","air affects wellbeing"],["social","local","health","air affects health"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"air quality",
@@ -98,7 +98,7 @@
       },
       "fresh_water":{
         "value":44,
-        "adjacent":[],
+        "adjacent":[["ecological","global","fresh_water_withdrawal","fresh water withdrawal affects fresh water"],["social","local","health","fresh water affects health"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"fresh water quality",
@@ -108,7 +108,7 @@
       },
       "wellbeing":{
         "value":86,
-        "adjacent":[],
+        "adjacent":[["ecological","global","air_pollution","air pollution affects wellbeing"],["ecological","local","air","wellbeing affected by air"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"wellbeing quality",
@@ -118,7 +118,7 @@
       },
       "energy":{
         "value":23,
-        "adjacent":[],
+        "adjacent":[["social","global","networks","energy is affected by networks"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"energy use",
@@ -128,7 +128,7 @@
       },
       "biodiversity":{
         "value":14,
-        "adjacent":[],
+        "adjacent":[["ecological","global","biodiversity_loss","biodiversity affected by biodiversity loss"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"biodiversity goodness",
@@ -138,7 +138,7 @@
       },
       "temperature":{
         "value":4,
-        "adjacent":[],
+        "adjacent":[["ecological","global","air_pollution","air pollution affects temperature"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"temperature quality",
@@ -148,7 +148,7 @@
       },
       "store_carbon":{
         "value":69,
-        "adjacent":[],
+        "adjacent":[["ecological","global","air_pollution","air pollution affects stored carbon"]],
         "indicator":"this is the indicator",
         "target":"aim to make it a better category",
         "description":"how much carbon is stored and if its a good amount stored",
@@ -163,7 +163,7 @@
       "global":{
         "networks":{
           "value":34,
-          "adjacent":[],
+          "adjacent":[["ecological","local","energy","energy affects networking"],["social","local","connectivity","connectivity affects networking"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how much networking affects globally",
@@ -175,7 +175,7 @@
       "local":{
         "community":{
           "value":67,
-          "adjacent":[],
+          "adjacent":[["social","local","connectivity","connectivity affects community"],["social","local","health","health affects community"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"community quality",
@@ -185,7 +185,7 @@
         },
         "connectivity":{
           "value":86,
-          "adjacent":[],
+          "adjacent":[["social","local","community","connectivity affects community"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"connectivity quality",
@@ -195,7 +195,7 @@
         },
         "culture":{
           "value":98,
-          "adjacent":[],
+          "adjacent":[["social","local","community","community affects culture"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"culture quality",
@@ -205,7 +205,7 @@
         },
         "education":{
           "value":45,
-          "adjacent":[],
+          "adjacent":[["social","local","community","community affects education"],["social","local","culture","culture affects education"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"how educated people are",
@@ -215,7 +215,7 @@
         },
         "water":{
           "value":76,
-          "adjacent":[],
+          "adjacent":[["ecological","local","fresh_water","water is affected by fresh water"],["ecological","global","ocean_acidification","ocean acidification affects water"],["ecological","local","wellbeing","water affects the wellbeing"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"water quality",
@@ -225,7 +225,7 @@
         },
         "health":{
           "value":34,
-          "adjacent":[],
+          "adjacent":[["ecological","global","ozone_layer_depletion","ozone layer depletion affects health"],["ecological","local","wellbeing","health affected by wellbeing"],["ecological","local","air","air pollution affects health"],["ecological","global","chemical_pollution","chemical pollution affects health"]],
           "indicator":"this is the indicator",
           "target":"aim to make it a better category",
           "description":"health quality",
