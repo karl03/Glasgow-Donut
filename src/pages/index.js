@@ -3,6 +3,7 @@ import axios from "axios";
 import BarChart from "../components/BarChart";
 import Header from "../components/Header";
 import YoutubeEmbed from "../components/YoutubeAddon";
+import LightBox from "../components/lightbox";
 import {ImageBg, MainBg} from "./PageElements";
 import BackgroundImage from "../images/glasgow_background.jpg"
 
@@ -18,6 +19,7 @@ function HomePage() {
       }
   
   return (
+    
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
       <MainBg>
         <ImageBg src={BackgroundImage}/>
