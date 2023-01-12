@@ -2,6 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
+import "./Lightbox.css"
 import { image, link, scaleBand, transition } from "d3";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
@@ -14,6 +15,10 @@ import OceanAcidificationB from "./Icons/Dimension Icons Global Ecological/Ocean
 import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/OzoneLayerDepletion-black.png"
 import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
 import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
+
+const lightbox = document.createElement('div')
+lightbox.id = 'lightbox'
+document.body.appendChild(lightbox)
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
@@ -115,8 +120,18 @@ export default function BarChart({
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   console.log(Event, ElementProperties);
-                });
-              
+                  lightbox.classList.add('active')
+                  const img = document.createElement('image')
+                  img.src = image.src
+                  while (lightbox.firstChild) {
+                    lightbox.removeChild(lightbox.firstChild)
+                      }
+                  lightbox.appendChild(img)
+                  });
+                  lightbox.addEventListener("click", e=>{
+                    if(e.target !== e.currentTarget) return
+                    lightbox.classList.remove('active')
+                  })
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
