@@ -4,7 +4,7 @@
   top: 0;
   height:100%;
   width:100%;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(134, 134, 134, 0.8);
   display:none;
 }
 
@@ -12,4 +12,13 @@
   display:flex;
   justify-content:center;
   align-items:center;
+}
+
+#lightbox img{
+  max-width:90%;
+  max-height:90%;
+  z-index: 1000;
+  filter: brightness(0);
+  height:5vw;
+  width:5vw;
 }

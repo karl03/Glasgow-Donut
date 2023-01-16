@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
 import "./Lightbox.css"
-import { image, link, scaleBand, transition } from "d3";
+import { image, link, scaleBand, transition, zoom } from "d3";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -119,10 +119,12 @@ export default function BarChart({
                 .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
-                  console.log(Event, ElementProperties);
+                  //console.log(ElementProperties);
+                  //console.log(Event);
                   lightbox.classList.add('active')
-                  const img = document.createElement('image')
-                  img.src = image.src
+                  const img = document.createElement('img')
+                  img.src = Event.path[0].href.baseVal;
+                  console.log(Event.path[0]);
                   while (lightbox.firstChild) {
                     lightbox.removeChild(lightbox.firstChild)
                       }
