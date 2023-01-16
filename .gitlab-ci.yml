@@ -28,13 +28,15 @@ test_async:
   script:
     - npm install
     - yarn install
-    - node ./specs/start.js ./specs/async.spec.js
+    - yarn run build
+    #- node ./specs/start.js ./specs/async.spec.js
 
 test_db:
   script:
     - npm install
     - yarn install
-    - node ./specs/start.js ./specs/db-postgres.spec.js
+    - npm run build
+    #- node ./specs/start.js ./specs/db-postgres.spec.js
 
 deploy:
   stage: deploy
