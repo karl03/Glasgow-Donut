@@ -1,3 +1,14 @@
+image: node:latest
+
+services:
+  - mysql:latest
+  - redis:latest
+  - postgres:latest
+
+cache:
+  paths:
+    - node_modules/
+
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
