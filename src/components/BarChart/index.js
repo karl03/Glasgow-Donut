@@ -69,6 +69,7 @@ export default function BarChart({
               .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
               .padAngle(margin / 100.)
               .padRadius(innerRadius));
+
         
         group.append("g")
         .selectAll("path")
@@ -85,6 +86,7 @@ export default function BarChart({
             .padAngle(0.)
             .padRadius(innerRadius)
           );
+          
         group.append("g")
           .selectAll("path")
           .data(Properties)
@@ -119,15 +121,20 @@ export default function BarChart({
                 .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
-                  //console.log(ElementProperties);
+                  console.log(ElementProperties);
                   //console.log(Event);
                   lightbox.classList.add('active')
+                  const heading = document.createElement('h1')
                   const img = document.createElement('img')
                   img.src = Event.path[0].href.baseVal;
+                  heading.innerText = ElementProperties.Name;
+                  console.log(ElementProperties.Name)
                   console.log(Event.path[0]);
                   while (lightbox.firstChild) {
                     lightbox.removeChild(lightbox.firstChild)
                       }
+                  
+                  lightbox.appendChild(heading)
                   lightbox.appendChild(img)
                   });
                   lightbox.addEventListener("click", e=>{
@@ -153,7 +160,18 @@ export default function BarChart({
             .startAngle(function(d) { return x(d.Name); })
             .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
             .padAngle(margin / 100.)
-            .padRadius(innerRadius));
+            .padRadius(innerRadius))
+            .style("cursor", "pointer")
+            .on("click", function(Event, ElementProperties){
+              lightbox.classList.add('active')
+              const heading = document.createElement('h1')
+              heading.innerText = ElementProperties.Name;
+              console.log(ElementProperties.Name)
+              while (lightbox.firstChild) {
+                lightbox.removeChild(lightbox.firstChild)
+                  }
+              lightbox.appendChild(heading)
+              });
       }
     },
     [data]

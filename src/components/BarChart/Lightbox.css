@@ -11,14 +11,18 @@
 #lightbox.active{
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items: center;
 }
 
 #lightbox img{
-  max-width:90%;
-  max-height:90%;
   z-index: 1000;
   filter: brightness(0);
   height:5vw;
   width:5vw;
+}
+
+#lightbox h1{
+  vertical-align: top;
+  position:absolute;
+  padding-top:30vw;
 }
