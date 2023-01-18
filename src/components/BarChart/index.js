@@ -2,6 +2,8 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
+import "./Lightbox.css"
+import { image, link, scaleBand, transition, zoom } from "d3";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -13,6 +15,10 @@ import OceanAcidificationB from "./Icons/Dimension Icons Global Ecological/Ocean
 import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/OzoneLayerDepletion-black.png"
 import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
 import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
+
+const lightbox = document.createElement('div')
+lightbox.id = 'lightbox'
+document.body.appendChild(lightbox)
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
@@ -63,6 +69,7 @@ export default function BarChart({
               .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
               .padAngle(margin / 100.)
               .padRadius(innerRadius));
+
         
         group.append("g")
         .selectAll("path")
@@ -79,6 +86,7 @@ export default function BarChart({
             .padAngle(0.)
             .padRadius(innerRadius)
           );
+          
         group.append("g")
           .selectAll("path")
           .data(Properties)
@@ -113,9 +121,27 @@ export default function BarChart({
                 .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
-                  console.log(Event, ElementProperties);
-                });
-              
+                  console.log(ElementProperties);
+                  document.body.scrollTop = 65; // For Safari
+                  document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+                  document.body.id = 'hide_scroll';
+                  lightbox.classList.add('active')
+                  const heading = document.createElement('h1')
+                  const img = document.createElement('img')
+                  img.src = Event.path[0].href.baseVal;
+                  heading.innerText = ElementProperties.Name;
+                  while (lightbox.firstChild) {
+                    lightbox.removeChild(lightbox.firstChild)
+                      }
+                  
+                  lightbox.appendChild(heading)
+                  lightbox.appendChild(img)
+                  });
+                  lightbox.addEventListener("click", e=>{
+                    if(e.target !== e.currentTarget) return
+                    lightbox.classList.remove('active')
+                    document.body.id = 'show_scroll';
+                  })
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
@@ -135,7 +161,21 @@ export default function BarChart({
             .startAngle(function(d) { return x(d.Name); })
             .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
             .padAngle(margin / 100.)
-            .padRadius(innerRadius));
+            .padRadius(innerRadius))
+            .style("cursor", "pointer")
+            .on("click", function(Event, ElementProperties){
+              document.body.scrollTop = 65; // For Safari
+              document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+              document.body.id = 'hide_scroll';
+              lightbox.classList.add('active')
+              const heading = document.createElement('h1')
+              heading.innerText = ElementProperties.Name;
+              console.log(ElementProperties.Name)
+              while (lightbox.firstChild) {
+                lightbox.removeChild(lightbox.firstChild)
+                  }
+              lightbox.appendChild(heading)
+              });
       }
     },
     data

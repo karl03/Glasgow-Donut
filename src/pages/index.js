@@ -18,6 +18,7 @@ function HomePage() {
       }*/
   
   return (
+    
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
       <MainBg>
         <ImageBg src={BackgroundImage}/>
