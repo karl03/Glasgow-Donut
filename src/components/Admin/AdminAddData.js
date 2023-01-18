@@ -10,7 +10,7 @@ export default function AdminAddData({addedElementHandler}){
     else{
       addedElementHandler(2, ["Mountain", "River", "Lake", "Forest"][exampleState & 3]); //"rude code"
     }
-  }, [exampleState]);
+  }, [exampleState, addedElementHandler]);
 
   return (
     <div>

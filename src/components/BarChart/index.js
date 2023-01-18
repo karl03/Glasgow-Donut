@@ -2,7 +2,6 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import { image, link, scaleBand, transition } from "d3";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -104,7 +103,7 @@ export default function BarChart({
               .attr("text-anchor", function(d) { return "middle";/*(x(d.Name) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "end" : "start"; */})
               .attr("transform", function(d) {
                 const Rotation = ((x(d.Name) + x.bandwidth() / 2) * 180 / Math.PI - 90);
-                return "rotate(" + Rotation + ")"+"translate(" + innerRadius + ",0)" + "rotate(" + -Rotation + ")";
+                return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
               })
               .append("svg:image")
                 .attr('x', -smallRingRadius / 3.)
@@ -139,7 +138,7 @@ export default function BarChart({
             .padRadius(innerRadius));
       }
     },
-    [data]
+    data
   )
   return (
     <svg ref={ref} style={{

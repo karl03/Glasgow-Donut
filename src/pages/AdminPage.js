@@ -9,6 +9,6 @@ const AdminPage = () => {
       <Admin/>
     </div>
   )
-}
+};
 
-export default AdminPage
+export default AdminPage;

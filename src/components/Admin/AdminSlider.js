@@ -65,12 +65,13 @@ const TextInput = styled.input`
 
 export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
   const [value, setValue] = React.useState(initialValue);
-  const [name, setName] = React.useState(initialName);
-  const [factor, setFactor] = React.useState(initialFactor);
+  const [name/*, setName*/] = React.useState(initialName);
+  const [factor/*, setFactor*/] = React.useState(initialFactor);
 
   React.useEffect(() => {
     eventHandler(groupID, name, value);
-  }, [value, name, factor]);
+  }, [value, name, factor, eventHandler, groupID]);
+  
   
   return (
     <AdminSliderWrapper>
@@ -79,8 +80,8 @@ export default function AdminSlider({initialValue, eventHandler, initialName, in
           <div>{initialName}</div><div style={{"textAlign": "right"}}>Factor type: <TextInput type="text" defaultValue={initialFactor} /></div>
         </Top>
         <Bottom>
-          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" defaultValue={initialValue} value={value} />
-          <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" defaultValue={initialValue} value={value} />
+          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
+          <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
         </Bottom>
       </Left>
       <TrashIcon />

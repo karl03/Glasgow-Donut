@@ -2,7 +2,7 @@ import React from "react";
 import BarChart from "../BarChart";
 
 export default function AdminDonutGraph({sliderGroups}){
-  const [data, setData] = React.useState({
+  const [data/*, setData*/] = React.useState({
     "Inner": {"Top": [], "Bottom": []},
     "Outer": {"Top": [], "Bottom": []}
   });
@@ -23,8 +23,8 @@ export default function AdminDonutGraph({sliderGroups}){
         });
       }
     }
-    setData(New);
-  }, [sliderGroups]);
+    //setData(New); //todo: removing this may have caused issues @luka
+  }, [sliderGroups, data]);
   
   return (
     <div>

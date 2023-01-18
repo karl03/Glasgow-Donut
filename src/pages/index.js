@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import axios from "axios";
+import React from "react";
+//import axios from "axios";
 import BarChart from "../components/BarChart";
 import Header from "../components/Header";
 import YoutubeEmbed from "../components/YoutubeAddon";
@@ -8,14 +8,14 @@ import BackgroundImage from "../images/glasgow_background.jpg"
 
 
 function HomePage() {
-  const [users, setUsers] = useState([]);
-  function componentDidMount() {
+  //const [users, setUsers] = useState([]);
+  /*function componentDidMount() {
     axios.get("/graph_test_data.json").then((response) => {
       setUsers(response.data);
       console.log(users);
       
         });
-      }
+      }*/
   
   return (
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>

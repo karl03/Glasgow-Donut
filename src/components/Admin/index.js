@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer } from './AdminElements';
-import AdminSlider from "./AdminSlider";
-import ReactDOM from "react-dom";
+//import AdminSlider from "./AdminSlider";
+//import ReactDOM from "react-dom";
 import Data from "../BarChart/Data.json"; //This is temporary
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
 
 
-export default function(){
+export default function AdminMain(){
   //const [state, setState] = useState({});
   const [sliderGroups, setSliderGroups] = useState([
     Data.Inner.Top,
@@ -17,7 +17,8 @@ export default function(){
     Data.Outer.Bottom
   ]);
 
-  function eventHandler(groupID, name, event){
+  
+  const eventHandler = React.useCallback(function(groupID, name, event){
     const newValue = Number.parseInt(event);
     setSliderGroups(function(oldSliders){
       const New = JSON.parse(JSON.stringify(oldSliders));
@@ -29,9 +30,9 @@ export default function(){
       }
       return New;
     });
-  }
+  }, []);
 
-  function addedElementHandler(groupID, name){
+  const addedElementHandler = React.useCallback(function(groupID, name){
     setSliderGroups(function(oldSliders){
       const New = JSON.parse(JSON.stringify(oldSliders));
       New[groupID].push({
@@ -43,7 +44,7 @@ export default function(){
       });
       return New;
     });
-  }
+  }, []);
   
   return (
     <AdminContainer>
