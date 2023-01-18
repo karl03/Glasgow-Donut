@@ -14,11 +14,20 @@
   align-items: center;
 }
 
+#hide_scroll{
+  overflow:hidden;
+}
+
+#show_scroll{
+  overflow:visible;
+}
+
 #lightbox img{
   z-index: 1000;
   filter: brightness(0);
-  height:5vw;
-  width:5vw;
+  height:4vw;
+  width:4vw;
+  position:fixed;
 }
 
 #lightbox h1{

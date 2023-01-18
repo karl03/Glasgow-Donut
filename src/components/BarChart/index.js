@@ -122,14 +122,14 @@ export default function BarChart({
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   console.log(ElementProperties);
-                  //console.log(Event);
+                  document.body.scrollTop = 65; // For Safari
+                  document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+                  document.body.id = 'hide_scroll';
                   lightbox.classList.add('active')
                   const heading = document.createElement('h1')
                   const img = document.createElement('img')
                   img.src = Event.path[0].href.baseVal;
                   heading.innerText = ElementProperties.Name;
-                  console.log(ElementProperties.Name)
-                  console.log(Event.path[0]);
                   while (lightbox.firstChild) {
                     lightbox.removeChild(lightbox.firstChild)
                       }
@@ -140,6 +140,7 @@ export default function BarChart({
                   lightbox.addEventListener("click", e=>{
                     if(e.target !== e.currentTarget) return
                     lightbox.classList.remove('active')
+                    document.body.id = 'show_scroll';
                   })
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
@@ -163,6 +164,9 @@ export default function BarChart({
             .padRadius(innerRadius))
             .style("cursor", "pointer")
             .on("click", function(Event, ElementProperties){
+              document.body.scrollTop = 65; // For Safari
+              document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+              document.body.id = 'hide_scroll';
               lightbox.classList.add('active')
               const heading = document.createElement('h1')
               heading.innerText = ElementProperties.Name;
