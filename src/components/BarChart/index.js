@@ -2,8 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import "./Lightbox.css"
-import { image, link, scaleBand, transition, zoom } from "d3";
+import "./Lightbox.css";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -127,8 +126,9 @@ export default function BarChart({
                   document.body.id = 'hide_scroll';
                   lightbox.classList.add('active')
                   const heading = document.createElement('h1')
-                  const img = document.createElement('img')
-                  img.src = Event.path[0].href.baseVal;
+                  const img = document.createElement('img');
+                  console.log(Event);
+                  img.src = Event.target.href.baseVal;
                   heading.innerText = ElementProperties.Name;
                   while (lightbox.firstChild) {
                     lightbox.removeChild(lightbox.firstChild)
