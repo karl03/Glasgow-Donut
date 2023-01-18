@@ -16,7 +16,7 @@ export const AdminContainer = styled.div`
         "a a a a b b b b"
         "a a a a b b b b"
         "a a a a b b b b"
-        "a a a a c c c c";
+        "c c c c d d d d";
     padding: 0 30px 0 30px;
 `;
 
@@ -52,3 +52,13 @@ export const AdminAddDataContainer = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+export const AdminUploadFileContainer = styled.div`
+    background-color: #d2e9af;
+    grid-area: d;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+`
