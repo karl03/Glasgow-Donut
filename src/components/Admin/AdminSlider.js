@@ -63,6 +63,10 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
+function handleSliderDelete(){
+  console.log('handleSliderDelete executed!');
+};
+
 export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
@@ -83,7 +87,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, in
           <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" defaultValue={initialValue} value={value} />
         </Bottom>
       </Left>
-      <TrashIcon />
+      <TrashIcon onClick={handleSliderDelete}/>
     </AdminSliderWrapper>
   );
 };
