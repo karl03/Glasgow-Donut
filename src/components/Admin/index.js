@@ -80,7 +80,17 @@ export default function AdminMain(){
       });
       return New;
     });
-  }, []);
+  }
+
+  function deleteSliderHandler(id, groupID) {
+    setSliderGroups(function(oldSliders){
+      let New = JSON.parse(JSON.stringify(oldSliders));
+      New[groupID] = New[groupID].filter(function(item){
+          return item.id != id;  
+      })
+      return New;
+    })
+  }
   
   return (
     <AdminContainer>
@@ -92,6 +102,7 @@ export default function AdminMain(){
               sliders={sliders}
               groupID={groupID}
               eventHandler={eventHandler}
+              deleteFunction={deleteSliderHandler}
               key={`AdminSliderGroup${groupID}`}
             />
           })

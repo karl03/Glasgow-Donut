@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const AdminSliderWrapper = styled.div`
   font-family: Arial;
   background-color: #d2e9af;
@@ -63,7 +64,7 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
-export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
+export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID, id, deleteFunction}){
   const [value, setValue] = React.useState(initialValue);
   const [name/*, setName*/] = React.useState(initialName);
   const [factor/*, setFactor*/] = React.useState(initialFactor);
@@ -84,7 +85,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, in
           <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
         </Bottom>
       </Left>
-      <TrashIcon />
+      <TrashIcon onClick={ () => deleteFunction(id, groupID) }/>
     </AdminSliderWrapper>
   );
 };
