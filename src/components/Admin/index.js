@@ -87,7 +87,7 @@ export default function AdminMain(){
     setSliderGroups(function(oldSliders){
       let New = JSON.parse(JSON.stringify(oldSliders));
       New[groupID] = New[groupID].filter(function(item){
-          return item.id != id;  
+          return item.id !== id;  
       })
       return New;
     })
