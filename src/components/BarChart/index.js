@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import "./Lightbox.css";
+import LightBox from "../LightBox";
+import "../LightBox/Lightbox.css";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -15,9 +16,9 @@ import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/Ozon
 import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
 import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
 
-const lightbox = document.createElement('div')
-lightbox.id = 'lightbox'
-document.body.appendChild(lightbox)
+// const lightbox = document.createElement('div')
+// lightbox.id = 'lightbox'
+// document.body.appendChild(lightbox)
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
@@ -29,6 +30,11 @@ export default function BarChart({
   margin = 3,
   data = Data
 }){
+  const [events, eventSetter] = useState();
+  const [elementProperties,propertySetter] = useState();
+
+  
+
   const ref = useD3(
     function(svg){
       svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
@@ -121,14 +127,22 @@ export default function BarChart({
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   console.log(ElementProperties);
-                  document.body.scrollTop = 65; // For Safari
-                  document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-                  document.body.id = 'hide_scroll';
-                  lightbox.addEventListener("click", e=>{
-                    if(e.target !== e.currentTarget) return
-                    lightbox.classList.remove('active')
-                    document.body.id = 'show_scroll';
-                  })
+                  eventSetter(Event);
+                  propertySetter(ElementProperties);
+                  console.log(events);
+                  console.log(elementProperties);
+                  <LightBox DataProperty = {elementProperties} EventProperty = {events}/>
+
+                  // document.body.scrollTop = 65; // For Safari
+                  // document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+                  // document.body.id = 'hide_scroll';
+                  
+                });
+                  // lightbox.addEventListener("click", e=>{
+                  //   if(e.target !== e.currentTarget) return
+                  //   lightbox.classList.remove('active')
+                  //   document.body.id = 'show_scroll';
+                  // })
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
@@ -151,17 +165,17 @@ export default function BarChart({
             .padRadius(innerRadius))
             .style("cursor", "pointer")
             .on("click", function(Event, ElementProperties){
-              document.body.scrollTop = 65; // For Safari
-              document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-              document.body.id = 'hide_scroll';
-              lightbox.classList.add('active')
-              const heading = document.createElement('h1')
-              heading.innerText = ElementProperties.Name;
-              console.log(ElementProperties.Name)
-              while (lightbox.firstChild) {
-                lightbox.removeChild(lightbox.firstChild)
-                  }
-              lightbox.appendChild(heading)
+              // document.body.scrollTop = 65; // For Safari
+              // document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+              // document.body.id = 'hide_scroll';
+              // lightbox.classList.add('active')
+              // const heading = document.createElement('h1')
+              // heading.innerText = ElementProperties.Name;
+              // console.log(ElementProperties.Name)
+              // while (lightbox.firstChild) {
+              //   lightbox.removeChild(lightbox.firstChild)
+              //     }
+              // lightbox.appendChild(heading)
               });
       }
     },
