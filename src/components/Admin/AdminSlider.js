@@ -68,7 +68,7 @@ function handleSliderDelete(id){
   console.log('handleSliderDelete executed on ' + id + '!');
 };
 
-export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
+export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID, id}){
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
   const [factor, setFactor] = React.useState(initialFactor);
