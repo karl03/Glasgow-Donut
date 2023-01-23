@@ -15,11 +15,7 @@ const Title = styled.h2`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, groupID}){
-
-  function deleteSlider(id) {
-
-  }
+export default function AdminSliderGroup({sliders, eventHandler, groupID, deleteFunction}){
 
   return (
     <AdminSliderWrapper>
@@ -28,10 +24,11 @@ export default function AdminSliderGroup({sliders, eventHandler, groupID}){
         sliders.map((slider) => (
           <AdminSlider
             eventHandler={eventHandler}
-            id = {uuidv4()}
+            id = {slider.id = uuidv4()}
             initialValue={slider.Value}
             initialName={slider.Name}
             initialFactor={slider.Factor}
+            deleteFunction={deleteFunction}
             groupID={groupID}
             key={`AdminSlider${slider.Name},${groupID}`}
           />
