@@ -46,7 +46,6 @@ export default function(){
   }
 
   function deleteSliderHandler(id, groupID) {
-    console.log("deleteSliderHandler executed!")
     setSliderGroups(function(oldSliders){
       let New = JSON.parse(JSON.stringify(oldSliders));
       New[groupID] = New[groupID].filter(function(item){
