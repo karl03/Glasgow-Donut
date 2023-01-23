@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 const AdminSliderWrapper = styled.div`
   font-family: Arial;
@@ -63,11 +64,12 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
-function handleSliderDelete(){
-  console.log('handleSliderDelete executed!');
+function handleSliderDelete(id){
+  console.log('handleSliderDelete executed on ' + id + '!');
 };
 
 export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
+  const [id, setID] = React.useState(uuidv4());
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
   const [factor, setFactor] = React.useState(initialFactor);
@@ -87,7 +89,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, in
           <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" defaultValue={initialValue} value={value} />
         </Bottom>
       </Left>
-      <TrashIcon onClick={handleSliderDelete}/>
+      <TrashIcon onClick={ () => handleSliderDelete(id) }/>
     </AdminSliderWrapper>
   );
 };
