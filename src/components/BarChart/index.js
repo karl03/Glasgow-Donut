@@ -124,19 +124,6 @@ export default function BarChart({
                   document.body.scrollTop = 65; // For Safari
                   document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
                   document.body.id = 'hide_scroll';
-                  lightbox.classList.add('active')
-                  const heading = document.createElement('h1')
-                  const img = document.createElement('img');
-                  console.log(Event);
-                  img.src = Event.target.href.baseVal;
-                  heading.innerText = ElementProperties.Name;
-                  while (lightbox.firstChild) {
-                    lightbox.removeChild(lightbox.firstChild)
-                      }
-                  
-                  lightbox.appendChild(heading)
-                  lightbox.appendChild(img)
-                  });
                   lightbox.addEventListener("click", e=>{
                     if(e.target !== e.currentTarget) return
                     lightbox.classList.remove('active')
