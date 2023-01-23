@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
+
 
 const AdminSliderWrapper = styled.div`
   font-family: Arial;
@@ -69,7 +69,6 @@ function handleSliderDelete(id){
 };
 
 export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID}){
-  const [id, setID] = React.useState(uuidv4());
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
   const [factor, setFactor] = React.useState(initialFactor);
