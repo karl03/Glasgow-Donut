@@ -2,7 +2,7 @@ import React from 'react'
 import "./Lightbox.css";
 
 export default function LightBox ({DataProperty, EventProperty}){
-  const [style,SetActive] = React.useState(".active");
+  const [style, SetActive] = React.useState("active");
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
@@ -16,7 +16,7 @@ export default function LightBox ({DataProperty, EventProperty}){
 
   <div className='active' onClick={changeState}>
     <h1>{DataProperty.Name}</h1>
-    <img src={EventProperty.target.href.baseVal}/>
+    <img src={EventProperty?.target?.href?.baseVal ?? 4}/>
   </div>
 
     );
