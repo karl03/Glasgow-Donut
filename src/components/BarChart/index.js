@@ -131,17 +131,7 @@ export default function BarChart({
                   propertySetter(ElementProperties);
                   console.log(events);
                   console.log(elementProperties);
-
-                  // document.body.scrollTop = 65; // For Safari
-                  // document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-                  // document.body.id = 'hide_scroll';
-                  
                 });
-                  // lightbox.addEventListener("click", e=>{
-                  //   if(e.target !== e.currentTarget) return
-                  //   lightbox.classList.remove('active')
-                  //   document.body.id = 'show_scroll';
-                  // })
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
@@ -164,21 +154,10 @@ export default function BarChart({
             .padRadius(innerRadius))
             .style("cursor", "pointer")
             .on("click", function(Event, ElementProperties){
-              // document.body.scrollTop = 65; // For Safari
-              // document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-              // document.body.id = 'hide_scroll';
-              // lightbox.classList.add('active')
-              // const heading = document.createElement('h1')
-              // heading.innerText = ElementProperties.Name;
-              // console.log(ElementProperties.Name)
-              // while (lightbox.firstChild) {
-              //   lightbox.removeChild(lightbox.firstChild)
-              //     }
-              // lightbox.appendChild(heading)
+              eventSetter(Event);
+              propertySetter(ElementProperties);
               console.log(ElementProperties);
               console.log(Event);
-              // propertySetter(ElementProperties['Name']);
-              // eventSetter(Event[target][href][baseVal]);
               });
       }
     },
