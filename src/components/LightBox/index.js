@@ -2,10 +2,10 @@ import React from 'react'
 import "./Lightbox.css";
 
 export default function LightBox ({DataProperty, EventProperty}){
-  const [style,SetActive] = React.useState("lightbox.active");
-  console.log("hello")
-  function changeState({}) {
-    
+  const [style,SetActive] = React.useState(".active");
+
+  function changeState() {
+    console.log("LightBox ChangeState function called!");
     if(style=="lightbox.hidden"){
       style="lightbox.active"
     }else{
@@ -14,16 +14,7 @@ export default function LightBox ({DataProperty, EventProperty}){
   }
   return (
 
-      // lightbox.classList.add('active')
-      // const heading = document.createElement('h1')
-      // const img = document.createElement('img');
-      // img.src = Event.target.href.baseVal;
-      // heading.innerText = ElementProperties.Name;
-      // lightbox.appendChild(heading)
-      // lightbox.appendChild(img)
-  //     });
-
-  <div id={style}>
+  <div className='active' onClick={changeState}>
     <h1>{DataProperty.Name}</h1>
     <img src={EventProperty.target.href.baseVal}/>
   </div>

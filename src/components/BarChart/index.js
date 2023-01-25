@@ -30,8 +30,8 @@ export default function BarChart({
   margin = 3,
   data = Data
 }){
-  const [events, eventSetter] = useState();
-  const [elementProperties,propertySetter] = useState();
+  const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
+  const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
 
   
 
@@ -131,7 +131,6 @@ export default function BarChart({
                   propertySetter(ElementProperties);
                   console.log(events);
                   console.log(elementProperties);
-                  <LightBox DataProperty = {elementProperties} EventProperty = {events}/>
 
                   // document.body.scrollTop = 65; // For Safari
                   // document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
@@ -176,17 +175,24 @@ export default function BarChart({
               //   lightbox.removeChild(lightbox.firstChild)
               //     }
               // lightbox.appendChild(heading)
+              console.log(ElementProperties);
+              console.log(Event);
+              // propertySetter(ElementProperties['Name']);
+              // eventSetter(Event[target][href][baseVal]);
               });
       }
     },
     data
   )
   return (
+    <>
     <svg ref={ref} style={{
       height: 500,
       width: 500,
       transform: "scale(1.2)",
     }}>
     </svg>
+    <LightBox DataProperty={elementProperties} EventProperty={events}/>
+    </>
   );
 };
