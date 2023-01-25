@@ -81,7 +81,7 @@ export default function AdminMain(){
       });
       return New;
     });
-  });
+  }, []);
 
   function deleteSliderHandler(id, groupID) {
     setSliderGroups(function(oldSliders){
