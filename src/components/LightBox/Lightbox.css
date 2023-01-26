@@ -1,5 +1,4 @@
 .hidden{
-  position: fixed;
   z-index: 1000;
   top: 0;
   height:100%;
@@ -9,8 +8,11 @@
 }
 
 .active{
+  position:absolute;
+  height:1000vh;
+  width: 1000vw;
   background-color: rgba(134, 134, 134, 0.8);
-  display:fixed;
+  display:flex;
   justify-content:center;
   align-items: center;
 }
@@ -23,14 +25,14 @@
   overflow:visible;
 }
 
-.lightbox img{
+#lightbox_img{
   z-index: 1000;
   filter: brightness(0);
   height:4vw;
-  position:fixed;
+  position:absolute;
 }
 
-.lightbox h1{
+#lightbox_title{
   vertical-align: top;
   position:relative;
   padding-top:30vh;

@@ -8,7 +8,6 @@ import BackgroundImage from "../images/glasgow_background.jpg"
 
 
 function HomePage() {
-  
   return (
     
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>

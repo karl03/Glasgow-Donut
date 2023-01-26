@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import LightBox from "../LightBox";
+import LightBox, {clicked} from "../LightBox";
 import "../LightBox/Lightbox.css";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
@@ -32,6 +32,7 @@ export default function BarChart({
 }){
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
+  const [triggered, setTrigger] = useState("hidden");
 
   
 
@@ -126,11 +127,13 @@ export default function BarChart({
                 .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
-                  console.log(ElementProperties);
+                  if(clicked.click == true){
+                    setTrigger("active")
+                  }else{
+                    setTrigger("hidden")
+                  }
                   eventSetter(Event);
                   propertySetter(ElementProperties);
-                  console.log(events);
-                  console.log(elementProperties);
                 });
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
@@ -171,7 +174,7 @@ export default function BarChart({
       transform: "scale(1.2)",
     }}>
     </svg>
-    <LightBox DataProperty={elementProperties} EventProperty={events}/>
+    <LightBox trigger={triggered} DataProperty={elementProperties} EventProperty={events}/>
     </>
   );
 };
