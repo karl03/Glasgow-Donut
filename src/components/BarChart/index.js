@@ -68,7 +68,7 @@ export default function BarChart({
             const x = d3.scaleBand()
               .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing
-              .domain(Properties.map(function(d) {return d.Name; })); // The domain of the X axis is the list of states.
+              .domain(Properties.map(property => property.Name)); // The domain of the X axis is the list of states.
             
             group.append("g")
               .selectAll("path")
@@ -79,9 +79,9 @@ export default function BarChart({
                 .attr("fill", "#ed7d79")
                 .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                   .innerRadius(innerRadius - ringRadius / 2. - margin)
-                  .outerRadius(function(d) { return yInner(d.Value); })
-                  .startAngle(function(d) { return x(d.Name); })
-                  .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
+                  .outerRadius(d => yInner(d.Value))
+                  .startAngle(d => x(d.Name))
+                  .endAngle(d => x(d.Name) + x.bandwidth())
                   .padAngle(margin / 100.)
                   .padRadius(innerRadius));
       
@@ -96,8 +96,8 @@ export default function BarChart({
               .attr("d", d3.arc()
                 .innerRadius(innerRadius - ringRadius / 2.)
                 .outerRadius(innerRadius + ringRadius / 2.)
-                .startAngle(function(d) { return x(d.Name) - .01; }) //The -.01 is to fix slight gaps
-                .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
+                .startAngle(d => x(d.Name) - .01) //The -.01 is to fix slight gaps
+                .endAngle(d => x(d.Name) + x.bandwidth())
                 .padAngle(0.)
                 .padRadius(innerRadius)
               );
@@ -112,8 +112,8 @@ export default function BarChart({
                 .attr("d", d3.arc()
                   .innerRadius(innerRadius - smallRingRadius / 2.)
                   .outerRadius(innerRadius + smallRingRadius / 2.)
-                  .startAngle(function(d) { return x(d.Name) - .01; }) //The -.01 is to fix slight gaps
-                  .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
+                  .startAngle(d => x(d.Name) - .01 ) //The -.01 is to fix slight gaps
+                  .endAngle(d => x(d.Name) + x.bandwidth())
                   .padAngle(0.)
                   .padRadius(innerRadius)
                 );
@@ -123,7 +123,7 @@ export default function BarChart({
               .data(Properties)
               .enter()
                 .append("g")
-                  .attr("text-anchor", function(d) { return "middle";/*(x(d.Name) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "end" : "start"; */})
+                  .attr("text-anchor", "middle")
                   .attr("transform", function(d) {
                     const Rotation = ((x(d.Name) + x.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
@@ -148,7 +148,7 @@ export default function BarChart({
             const x = d3.scaleBand()
               .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing
-              .domain(Properties.map(function(d) {return d.Name; })); // The domain of the X axis is the list of states.
+              .domain(Properties.map(d =>  d.Name)); // The domain of the X axis is the list of states.
             group.append("g")
             .selectAll("path")
             .data(Properties)
@@ -158,9 +158,9 @@ export default function BarChart({
               .attr("fill", "#fa9197")
               .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                 .innerRadius(innerRadius + ringRadius / 2. + margin)
-                .outerRadius(function(d) { return yOuter(d.Value); })
-                .startAngle(function(d) { return x(d.Name); })
-                .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
+                .outerRadius(d => yOuter(d.Value))
+                .startAngle(d =>x(d.Name))
+                .endAngle(d => x(d.Name) + x.bandwidth())
                 .padAngle(margin / 100.)
                 .padRadius(innerRadius))
                 .style("cursor", "pointer")
