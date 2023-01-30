@@ -1,46 +1,28 @@
 import React, { useEffect } from 'react'
 import "./Lightbox.css";
 
-// currently can only be clicked once before refreshing
 
-var click = true;
-
-export default function LightBox ({trigger,DataProperty, EventProperty}){
-  const [style, SetActive] = React.useState("hidden");
-
-  console.log(style)
-  console.log(trigger)
-  console.log(click)
-
+export default function LightBox ({trigger, setTrigger, DataProperty, EventProperty}){
   useEffect(() => {
-    if(trigger==="active" && style==="hidden" && click === true){
-      SetActive("active")
-      click = true;
+    if(trigger==="active"){
+      setTrigger("active")
     }
-  }); //this will be replaced
-
-  if(click===false && style==="active"){
-    click = true;
-  }
+  });
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    if(style ==="active"){
-      console.log("am i here?")
-      SetActive("hidden")
-      trigger="hidden";
-      click = false;
+    if(trigger ==="active"){
+      setTrigger("hidden")
+      document.body.id="show_scroll"
     }
   }
 
   return (
-
-  <div className={style} onClick={changeState}>
-    <h1 id="lightbox_title">{DataProperty.Name}</h1>
-    <img id="lightbox_img" src={EventProperty?.target?.href?.baseVal ?? 4}/>
+  <div className={trigger} onClick={changeState}>
+    <span id="circle">
+      <img id="lightbox_img" src={EventProperty?.target?.href?.baseVal ?? 4}/>
+      <h1 id="lightbox_title">{DataProperty.Name}</h1>
+      </span>
   </div>
-
     );
   };
-
-  export const clicked = {click};

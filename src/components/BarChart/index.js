@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
 import Data from "./Data.json";
-import LightBox, {clicked} from "../LightBox";
+import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
 
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
@@ -16,10 +16,6 @@ import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/Ozon
 import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
 import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
 
-// const lightbox = document.createElement('div')
-// lightbox.id = 'lightbox'
-// document.body.appendChild(lightbox)
-
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
   size = 500,
@@ -32,9 +28,16 @@ export default function BarChart({
 }){
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
-  const [triggered, setTrigger] = useState("hidden");
+  const [trigger, setTrigger] = useState("hidden");
 
-  
+  function LightBoxTrigger(Event, ElementProperties){
+    document.body.scrollTop = 65; // For Safari
+    document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+    setTrigger("active")
+    eventSetter(Event);
+    propertySetter(ElementProperties);
+    document.body.id="hide_scroll"
+  }
 
   const ref = useD3(
     function(svg){
@@ -127,13 +130,7 @@ export default function BarChart({
                 .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
-                  if(clicked.click == true){
-                    setTrigger("active")
-                  }else{
-                    setTrigger("hidden")
-                  }
-                  eventSetter(Event);
-                  propertySetter(ElementProperties);
+                  LightBoxTrigger(Event, ElementProperties);
                 });
       }
       for(const [Half, Properties] of Object.entries(data.Outer)){
@@ -157,10 +154,7 @@ export default function BarChart({
             .padRadius(innerRadius))
             .style("cursor", "pointer")
             .on("click", function(Event, ElementProperties){
-              eventSetter(Event);
-              propertySetter(ElementProperties);
-              console.log(ElementProperties);
-              console.log(Event);
+              LightBoxTrigger(Event, ElementProperties);
               });
       }
     },
@@ -174,7 +168,7 @@ export default function BarChart({
       transform: "scale(1.2)",
     }}>
     </svg>
-    <LightBox trigger={triggered} DataProperty={elementProperties} EventProperty={events}/>
+    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
     </>
   );
 };
