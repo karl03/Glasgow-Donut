@@ -20,7 +20,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   return (
   <div className={trigger} onClick={changeState}>
     <span id="circle">
-      <img id="lightbox_img" src={EventProperty?.target?.href?.baseVal ?? 4}/>
+      <img id="lightbox_img" src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
       <h1 id="lightbox_title">{DataProperty.Name}</h1>
       </span>
   </div>
