@@ -8,7 +8,7 @@ export default function AdminAddData({addedElementHandler}){
       didMount.current = true;
     }
     else{
-      addedElementHandler(2, ["Mountain", "River", "Lake", "Forest"][exampleState & 3]); //"rude code"
+      addedElementHandler("ecological", "global", ["Mountain", "River", "Lake", "Forest"][exampleState & 3] + exampleState); //"rude code"
     }
   }, [exampleState, addedElementHandler]);
 
