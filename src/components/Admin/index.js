@@ -13,6 +13,7 @@ export default function AdminMain(){
   const [file, setFile] = useState(null);
   //const [filename, setFilename] = useState('Choose File');
   const setFilename = useState('Choose File')[1];
+
 	const changeHandler = (e) => {
 		setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -80,13 +81,13 @@ export default function AdminMain(){
       });
       return New;
     });
-  })
+  }, []);
 
   function deleteSliderHandler(id, groupID) {
     setSliderGroups(function(oldSliders){
       let New = JSON.parse(JSON.stringify(oldSliders));
       New[groupID] = New[groupID].filter(function(item){
-          return item.id != id;  
+          return item.id !== id;  
       })
       return New;
     })
