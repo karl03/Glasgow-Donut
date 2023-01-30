@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
-import useD3 from "./useD3";
 import Data from "./Data.json";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
