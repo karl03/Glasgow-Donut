@@ -62,13 +62,9 @@ export default function BarChart({
     let {group, yOuter, yInner} = SetupBarChart();
   
     function SetupBarChartInnerSectors(group, yInner){
-      for(const [Half, Properties] of Object.entries(data.Inner)){
-          const x = d3.scaleBand()
-            .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
-            .align(0)                  // This does nothing
-            .domain(Properties.map(property => property.Name)); // The domain of the X axis is the list of states.
-          
-          group.append("g")
+      
+      function CreateGraphColumnInner(Properties, group, xScale, yInner){
+        group.append("g")
             .selectAll("path")
             .data(Properties)
             .enter()
@@ -78,13 +74,14 @@ export default function BarChart({
               .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                 .innerRadius(innerRadius - ringRadius / 2. - margin)
                 .outerRadius(d => yInner(d.Value))
-                .startAngle(d => x(d.Name))
-                .endAngle(d => x(d.Name) + x.bandwidth())
+                .startAngle(d => xScale(d.Name))
+                .endAngle(d => xScale(d.Name) + xScale.bandwidth())
                 .padAngle(margin / 100.)
                 .padRadius(innerRadius));
-    
-          
-          group.append("g")
+      }
+
+      function CreateRingSegment(Properties, group, xScale){
+        group.append("g")
           .selectAll("path")
           .data(Properties)
           .enter()
@@ -94,36 +91,38 @@ export default function BarChart({
             .attr("d", d3.arc()
               .innerRadius(innerRadius - ringRadius / 2.)
               .outerRadius(innerRadius + ringRadius / 2.)
-              .startAngle(d => x(d.Name) - .01) //The -.01 is to fix slight gaps
-              .endAngle(d => x(d.Name) + x.bandwidth())
+              .startAngle(d => xScale(d.Name) - .01) //The -.01 is to fix slight gaps
+              .endAngle(d => xScale(d.Name) + xScale.bandwidth())
               .padAngle(0.)
               .padRadius(innerRadius)
             );
-            
-          group.append("g")
-            .selectAll("path")
-            .data(Properties)
-            .enter()
-            .append("path")
-              .attr("class", "GraphRingSegment")
-              .attr("fill", "#44d345")
-              .attr("d", d3.arc()
-                .innerRadius(innerRadius - smallRingRadius / 2.)
-                .outerRadius(innerRadius + smallRingRadius / 2.)
-                .startAngle(d => x(d.Name) - .01 ) //The -.01 is to fix slight gaps
-                .endAngle(d => x(d.Name) + x.bandwidth())
-                .padAngle(0.)
-                .padRadius(innerRadius)
-              );
-    
-          group.append("g")
+
+        group.append("g")
+        .selectAll("path")
+        .data(Properties)
+        .enter()
+        .append("path")
+          .attr("class", "GraphRingSegment")
+          .attr("fill", "#44d345")
+          .attr("d", d3.arc()
+            .innerRadius(innerRadius - smallRingRadius / 2.)
+            .outerRadius(innerRadius + smallRingRadius / 2.)
+            .startAngle(d => xScale(d.Name) - .01 ) //The -.01 is to fix slight gaps
+            .endAngle(d => xScale(d.Name) + xScale.bandwidth())
+            .padAngle(0.)
+            .padRadius(innerRadius)
+          );
+      }
+
+      function CreateIconRing(Properties, group, xScale){
+        group.append("g")
             .selectAll("g")
             .data(Properties)
             .enter()
               .append("g")
                 .attr("text-anchor", "middle")
                 .attr("transform", function(d) {
-                  const Rotation = ((x(d.Name) + x.bandwidth() / 2) * 180 / Math.PI - 90);
+                  const Rotation = ((xScale(d.Name) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                   return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                 })
                 .append("svg:image")
@@ -136,33 +135,51 @@ export default function BarChart({
                   .on("click", function(Event, ElementProperties){
                     LightBoxTrigger(Event, ElementProperties);
                   });
+      }
+
+      for(const [Half, Properties] of Object.entries(data.Inner)){
+          const xScale = d3.scaleBand()
+            // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
+            .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])
+            .align(0)                  // This does nothing
+            .domain(Properties.map(property => property.Name)); // The domain of the X axis is the list of states.
+          
+          CreateGraphColumnInner(Properties, group, xScale, yInner);
+          CreateRingSegment(Properties, group, xScale);
+          CreateIconRing(Properties, group, xScale);
         }
     }
   
     function SetupBarChartOuterSectors(group, yOuter){
+
+      function CreateGraphColumnOuter(Properties, group, xScale, yOuter){
+        group.append("g")
+        .selectAll("path")
+        .data(Properties)
+        .enter()
+        .append("path")
+        .attr("class", "GraphColumn")
+          .attr("fill", "#fa9197")
+          .attr("d", d3.arc()     // imagine your doing a part of a donut plot
+            .innerRadius(innerRadius + ringRadius / 2. + margin)
+            .outerRadius(d => yOuter(d.Value))
+            .startAngle(d =>xScale(d.Name))
+            .endAngle(d => xScale(d.Name) + xScale.bandwidth())
+            .padAngle(margin / 100.)
+            .padRadius(innerRadius))
+            .style("cursor", "pointer")
+            .on("click", function(Event, ElementProperties){
+              LightBoxTrigger(Event, ElementProperties);
+              });
+      }
+
       for(const [Half, Properties] of Object.entries(data.Outer)){
-          const x = d3.scaleBand()
+          const xScale = d3.scaleBand()
             .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
             .align(0)                  // This does nothing
             .domain(Properties.map(d =>  d.Name)); // The domain of the X axis is the list of states.
-          group.append("g")
-          .selectAll("path")
-          .data(Properties)
-          .enter()
-          .append("path")
-          .attr("class", "GraphColumn")
-            .attr("fill", "#fa9197")
-            .attr("d", d3.arc()     // imagine your doing a part of a donut plot
-              .innerRadius(innerRadius + ringRadius / 2. + margin)
-              .outerRadius(d => yOuter(d.Value))
-              .startAngle(d =>x(d.Name))
-              .endAngle(d => x(d.Name) + x.bandwidth())
-              .padAngle(margin / 100.)
-              .padRadius(innerRadius))
-              .style("cursor", "pointer")
-              .on("click", function(Event, ElementProperties){
-                LightBoxTrigger(Event, ElementProperties);
-                });
+          
+          CreateGraphColumnOuter(Properties, group, xScale, yOuter);
         }
     }
   
