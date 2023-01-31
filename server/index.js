@@ -7,6 +7,7 @@ const fs = require("fs");
 // add middleware
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
+app.use(express.json());
 
 app.use((req, res, next) => {
   if (/^\/api\//.test(req.originalUrl)) return void next();
@@ -14,9 +15,10 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/change-data", function(req, res){
-  //res.json({requestBody: req.body})
-  console.log("Writing file, new data: ", JSON.stringify(req.body));
+  console.log(req.body);
   fs.writeFileSync(path.join(__dirname, "Data.json"), JSON.stringify(req.body));
+  console.log("Written file" /*, new data: ", JSON.stringify(req.body)*/);
+  res.status(200).send("Success");
 });
 
 app.get("/api/get-data", function(request, response){

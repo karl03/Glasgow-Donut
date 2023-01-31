@@ -52,7 +52,6 @@ export default function AdminMain(){
   });
   const [loaded, setLoaded] = useState(false);
   React.useEffect(function(){
-    console.log("hi");
     async function getData(){
       const LoadedData = (await (await fetch("/api/get-data")).json())[0];
       setSliderGroups(LoadedData);
