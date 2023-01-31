@@ -64,14 +64,14 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
-export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, groupID, id, deleteFunction}){
+export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, ecoOrSoc, gloOrLoc, id, deleteFunction}){
   const [value, setValue] = React.useState(initialValue);
   const [name/*, setName*/] = React.useState(initialName);
   const [factor/*, setFactor*/] = React.useState(initialFactor);
 
   React.useEffect(() => {
-    eventHandler(groupID, name, value);
-  }, [value, name, factor, eventHandler, groupID]);
+    eventHandler(ecoOrSoc, gloOrLoc, "value", name, value);
+  }, [value, name, factor, ecoOrSoc, gloOrLoc, eventHandler]);
   
   
   return (
@@ -85,7 +85,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, in
           <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
         </Bottom>
       </Left>
-      <TrashIcon onClick={ () => deleteFunction(id, groupID) }/>
+      <TrashIcon onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>
     </AdminSliderWrapper>
   );
 };
