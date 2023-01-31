@@ -13,7 +13,8 @@ export default function AdminDonutGraph({sliderGroups}){
     New.social.global = sliderGroups.social.global;
     New.social.local = sliderGroups.social.local;
     setData(New);
-  }, [sliderGroups, data]);
+    console.log("hi");
+  }, [sliderGroups]);
   
   return (
     <div>

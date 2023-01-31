@@ -59,7 +59,7 @@ export default function AdminMain(){
       setLoaded(true);
     }
     if(!loaded) getData();
-  }, []);
+  }, [loaded]);
 
   
   const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
