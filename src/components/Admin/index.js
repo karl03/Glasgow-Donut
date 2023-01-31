@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer, AdminUploadFileContainer } from './AdminElements';
 //import AdminSlider from "./AdminSlider";
 //import ReactDOM from "react-dom";
-import Data from "../../Data.json"; //TODO: This is temporary, this should be removed to be replaced by server-side loaded data
+//import Data from "../../Data.json"; //TODO: This is temporary, this should be removed to be replaced by server-side loaded data
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
@@ -46,7 +46,20 @@ export default function AdminMain(){
     }
   };
 
-  const [sliderGroups, setSliderGroups] = useState(Data[0]);
+  const [sliderGroups, setSliderGroups] = useState({
+    ecological: {global: {}, local: {}},
+    social: {global: {}, local: {}}
+  });
+  const [loaded, setLoaded] = useState(false);
+  React.useEffect(function(){
+    console.log("hi");
+    async function getData(){
+      const LoadedData = (await (await fetch("/api/get-data")).json())[0];
+      setSliderGroups(LoadedData);
+      setLoaded(true);
+    }
+    if(!loaded) getData();
+  }, []);
 
   
   const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){

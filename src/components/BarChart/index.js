@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
-import Data from "../../Data.json"; //TODO: This is temporary!! 
+//import Data from "../../Data.json"; //TODO: This is temporary!! 
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
 
@@ -24,7 +24,7 @@ export default function BarChart({
   ringRadius = 40,
   smallRingRadius = 24,
   margin = 3,
-  data = Data[0]
+  data = null//Data[0]
 }){
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
