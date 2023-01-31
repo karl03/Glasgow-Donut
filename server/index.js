@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.post("/api/change-data", function(req, res){
   console.log(req.body);
   fs.writeFileSync(path.join(__dirname, "Data.json"), JSON.stringify(req.body));
-  console.log("Written file" /*, new data: ", JSON.stringify(req.body)*/);
+  console.log("Wrote file" /*, new data: ", JSON.stringify(req.body)*/);
   res.status(200).send("Success");
 });
 
