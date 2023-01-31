@@ -1,18 +1,28 @@
 import React from "react";
 import BarChart from "../BarChart";
-import Data from "../../Data.json";
 
 export default function AdminDonutGraph({sliderGroups}){
   const [data/*, setData*/] = React.useState({
-    ecological: {global: {}, local: {}},
-    social: {global: {}, local: {}}
+    "Inner": {"Top": [], "Bottom": []},
+    "Outer": {"Top": [], "Bottom": []}
   });
   React.useEffect(function(){
-    const New = {...data};//JSON.parse(JSON.stringify(sliderGroups));
-    data.ecological.global = sliderGroups.ecological.global;
-    data.ecological.local = sliderGroups.ecological.local;
-    data.social.global = sliderGroups.social.global;
-    data.social.local = sliderGroups.social.local;
+    const New = {...data};
+    for(let i = 0; i < 4; ++i){
+      const Entries = [];
+      New[(i & 2) === 0 ? "Inner" : "Outer"][(i & 1) === 0 ? "Top" : "Bottom"] = Entries;
+      const sliders = sliderGroups[i];
+      let j = 0;
+      for(const slider of sliders){
+        Entries.push({
+          "Name": `....${j++}`,
+          "Value": slider.Value,
+          "Indicator": "abc",
+          "Target": "abc",
+          "Links": []
+        });
+      }
+    }
     //setData(New); //todo: removing this may have caused issues @luka
   }, [sliderGroups, data]);
   

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer, AdminUploadFileContainer } from './AdminElements';
 //import AdminSlider from "./AdminSlider";
 //import ReactDOM from "react-dom";
-import Data from "../../Data.json"; //TODO: This is temporary, this should be removed to be replaced by server-side loaded data
+import Data from "../BarChart/Data.json"; //This is temporary
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
@@ -46,54 +46,59 @@ export default function AdminMain(){
     }
   };
 
-  const [sliderGroups, setSliderGroups] = useState(Data[0]);
+  //const [state, setState] = useState({});
+  const [sliderGroups, setSliderGroups] = useState([
+    Data.Inner.Top,
+    Data.Inner.Bottom,
+    Data.Outer.Top,
+    Data.Outer.Bottom
+  ]);
 
   
-  const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
-    switch(type){
-      case "value":{
-        const NewValue = Number.parseInt(newValue);
-        setSliderGroups(function(oldSliders){
-          const New = JSON.parse(JSON.stringify(oldSliders)); //Make a deep copy of the object (this needs to be done so that it doesn't mess with React's state mechanism)
-          New[ecoOrSoc][gloOrLoc][name].value = NewValue; //Set the new value
-          return New; //Return this object to save it
-        });
-        break;
-      }
-      default: throw new Error("Not implemented!"); //TODO: Remove this in release
-    }
-  }, []);
-
-  const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
+  const eventHandler = React.useCallback(function(groupID, name, event){
+    const newValue = Number.parseInt(event);
     setSliderGroups(function(oldSliders){
       const New = JSON.parse(JSON.stringify(oldSliders));
-      New[ecoOrSoc][gloOrLoc][name] = {
-        "value": Math.round(Math.random() * 100.),
-        "adjacent":[["ecological","local","fresh_water","ocean acidification affects the water quality"],["social","local","water","ocean acidification affects water"]],
-        "indicator":"this is the indicator",
-        "target":"aim to make it a better category",
-        "description":"how much acid in the ocean",
-        "quotes":"These are the quotes/citations",
-        "video_hash":"I77B871YOTQ"
-      };
+      for(const slider of New[groupID]){
+        if(slider.Name === name){
+          slider.Value = newValue;
+          break;
+        }
+      }
       return New;
     });
   }, []);
 
-  function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
+  const addedElementHandler = React.useCallback(function(groupID, name){
     setSliderGroups(function(oldSliders){
-      let New = JSON.parse(JSON.stringify(oldSliders));
-      delete New[ecoOrSoc][gloOrLoc][name];
+      const New = JSON.parse(JSON.stringify(oldSliders));
+      New[groupID].push({
+        "Name": name,
+        "Value": Math.round(Math.random() * 100.),
+        "Indicator": "abc",
+        "Target": "abc",
+        "Links": []
+      });
       return New;
     });
+  }, []);
+
+  function deleteSliderHandler(id, groupID) {
+    setSliderGroups(function(oldSliders){
+      let New = JSON.parse(JSON.stringify(oldSliders));
+      New[groupID] = New[groupID].filter(function(item){
+          return item.id !== id;  
+      })
+      return New;
+    })
   }
   
   return (
     <AdminContainer>
-      <AdminDataListing>
+      <AdminDataListing> 
         <h1>Graph Components</h1>
         {
-          /*sliderGroups.map((sliders, groupID) =>{
+          sliderGroups.map((sliders, groupID) =>{
             return <AdminSliderGroup
               sliders={sliders}
               groupID={groupID}
@@ -101,25 +106,7 @@ export default function AdminMain(){
               deleteFunction={deleteSliderHandler}
               key={`AdminSliderGroup${groupID}`}
             />
-          })*/
-          (function(){
-            const Elements = [];
-            for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
-              for(const [gloOrLoc, sliders] of Object.entries(gloAndLoc)){
-                Elements.push(
-                  <AdminSliderGroup
-                    sliders={sliders}
-                    ecoOrSoc={ecoOrSoc}
-                    gloOrLoc={gloOrLoc}
-                    eventHandler={eventHandler}
-                    deleteFunction={deleteSliderHandler}
-                    key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
-                  />
-                );
-              }
-            }
-            return Elements;
-          })()
+          })
         }
       </AdminDataListing>
       <AdminDonutGraphContainer>

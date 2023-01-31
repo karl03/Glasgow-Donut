@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as d3 from "d3";
 import useD3 from "./useD3";
-import Data from "../../Data.json"; //TODO: This is temporary!! 
+import Data from "./Data.json";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
 
@@ -24,7 +24,7 @@ export default function BarChart({
   ringRadius = 40,
   smallRingRadius = 24,
   margin = 3,
-  data = Data[0]
+  data = Data
 }){
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
@@ -58,31 +58,31 @@ export default function BarChart({
         .range([innerRadius - ringRadius / 2. - margin, 10]) //This is 10 because the inner part of the graph would become too pointy
         .domain([0, 100]);
       
-      for(const [Half, Properties] of Object.entries(data.ecological)){
+      for(const [Half, Properties] of Object.entries(data.Inner)){
         const x = d3.scaleBand()
-          .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
+          .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
           .align(0)                  // This does nothing
-          .domain(Object.keys(Properties)); // The domain of the X axis is the list of states.
+          .domain(Properties.map(function(d) {return d.Name; })); // The domain of the X axis is the list of states.
         
         group.append("g")
           .selectAll("path")
-          .data(Object.entries(Properties))
+          .data(Properties)
           .enter()
           .append("path")
             .attr("class", "GraphColumn")
             .attr("fill", "#ed7d79")
             .attr("d", d3.arc()     // imagine your doing a part of a donut plot
               .innerRadius(innerRadius - ringRadius / 2. - margin)
-              .outerRadius(function(d) { return yInner(d[1].value); })
-              .startAngle(function(d) { return x(d[0]); })
-              .endAngle(function(d) { return x(d[0]) + x.bandwidth(); })
+              .outerRadius(function(d) { return yInner(d.Value); })
+              .startAngle(function(d) { return x(d.Name); })
+              .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
               .padAngle(margin / 100.)
               .padRadius(innerRadius));
 
         
         group.append("g")
         .selectAll("path")
-        .data(Object.entries(Properties))
+        .data(Properties)
         .enter()
         .append("path")
           .attr("class", "GraphRingSegment")
@@ -90,15 +90,15 @@ export default function BarChart({
           .attr("d", d3.arc()
             .innerRadius(innerRadius - ringRadius / 2.)
             .outerRadius(innerRadius + ringRadius / 2.)
-            .startAngle(function(d) { return x(d[0]) - .01; }) //The -.01 is to fix slight gaps
-            .endAngle(function(d) { return x(d[0]) + x.bandwidth(); })
+            .startAngle(function(d) { return x(d.Name) - .01; }) //The -.01 is to fix slight gaps
+            .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
             .padAngle(0.)
             .padRadius(innerRadius)
           );
           
         group.append("g")
           .selectAll("path")
-          .data(Object.entries(Properties))
+          .data(Properties)
           .enter()
           .append("path")
             .attr("class", "GraphRingSegment")
@@ -106,20 +106,20 @@ export default function BarChart({
             .attr("d", d3.arc()
               .innerRadius(innerRadius - smallRingRadius / 2.)
               .outerRadius(innerRadius + smallRingRadius / 2.)
-              .startAngle(function(d) { return x(d[0]) - .01; }) //The -.01 is to fix slight gaps
-              .endAngle(function(d) { return x(d[0]) + x.bandwidth(); })
+              .startAngle(function(d) { return x(d.Name) - .01; }) //The -.01 is to fix slight gaps
+              .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
               .padAngle(0.)
               .padRadius(innerRadius)
             );
-            
+
         group.append("g")
           .selectAll("g")
-          .data(Object.entries(Properties))
+          .data(Properties)
           .enter()
             .append("g")
               .attr("text-anchor", function(d) { return "middle";/*(x(d.Name) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "end" : "start"; */})
               .attr("transform", function(d) {
-                const Rotation = ((x(d[0]) + x.bandwidth() / 2) * 180 / Math.PI - 90);
+                const Rotation = ((x(d.Name) + x.bandwidth() / 2) * 180 / Math.PI - 90);
                 return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
               })
               .append("svg:image")
@@ -127,35 +127,35 @@ export default function BarChart({
                 .attr('y', -smallRingRadius / 3.)
                 .attr('width', smallRingRadius / 1.5)
                 .attr('height', smallRingRadius / 1.5)
-                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
+                .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d.Name[4]])})
                 .style("cursor", "pointer")
                 .on("click", function(Event, ElementProperties){
                   LightBoxTrigger(Event, ElementProperties);
                 });
       }
-      for(const [Half, Properties] of Object.entries(data.social)){
+      for(const [Half, Properties] of Object.entries(data.Outer)){
         const x = d3.scaleBand()
-          .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
+          .range(Half === "Top" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
           .align(0)                  // This does nothing
-          .domain(Object.keys(Properties)); // The domain of the X axis is the list of states.
+          .domain(Properties.map(function(d) {return d.Name; })); // The domain of the X axis is the list of states.
         group.append("g")
         .selectAll("path")
-        .data(Object.entries(Properties))
+        .data(Properties)
         .enter()
         .append("path")
         .attr("class", "GraphColumn")
           .attr("fill", "#fa9197")
           .attr("d", d3.arc()     // imagine your doing a part of a donut plot
             .innerRadius(innerRadius + ringRadius / 2. + margin)
-            .outerRadius(function(d) { return yOuter(d[1].value); })
-            .startAngle(function(d) { return x(d[0]); })
-            .endAngle(function(d) { return x(d[0]) + x.bandwidth(); })
+            .outerRadius(function(d) { return yOuter(d.Value); })
+            .startAngle(function(d) { return x(d.Name); })
+            .endAngle(function(d) { return x(d.Name) + x.bandwidth(); })
             .padAngle(margin / 100.)
             .padRadius(innerRadius))
             .style("cursor", "pointer")
             .on("click", function(Event, ElementProperties){
               LightBoxTrigger(Event, ElementProperties);
-            });
+              });
       }
     },
     data
