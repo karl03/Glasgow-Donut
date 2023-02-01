@@ -15,11 +15,11 @@ import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/Build
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
-  size = 100,
+  size = 500,
   outerRadius = (size / 2) - 20,
   innerRadius = outerRadius / 2,
-  ringRadius = 40,
-  smallRingRadius = 24,
+  ringRadius = 60,
+  smallRingRadius = 45,
   margin = 3,
   data = null//Data[0]
 }){
@@ -130,13 +130,104 @@ export default function BarChart({
                   .append("svg:image")
                     .attr('x', -smallRingRadius / 3.)
                     .attr('y', -smallRingRadius / 3.)
-                    .attr('width', smallRingRadius / 1.5)
-                    .attr('height', smallRingRadius / 1.5)
+                    .attr('width', smallRingRadius / 1.9)
+                    .attr('height', smallRingRadius / 1.9)
                     .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
                     .style("cursor", "pointer")
                     .on("click", function(Event, ElementProperties){
                       LightBoxTrigger(Event, ElementProperties);
                     });
+                    
+                // All Text Labeling of Bar Chart --------
+        // 
+            group.append("path")
+              .attr("id", "arc-top") //Unique id of the path
+              .attr("d", "M -89.95,0 A 90 90 0 0 1 90 0") //SVG path
+              .style("fill", "none")
+              .style("stroke", "0");
+
+            group.append("g")
+              .selectAll("path")
+              .data(Properties)
+              .enter()
+              .append("text")
+              .append("textPath")
+                .attr("xlink:href", "#arc-top")
+                .attr("alignment-baseline", "middle")
+                .style("fill", "white")
+                .style("font-size", 8)
+                .style("letter-spacing", "0.001em")
+                .style("text-anchor","middle")
+                .attr("startOffset", "50%")
+                .attr("dy", ".1em")
+                .text("GLOBAL SOCIAL FOUNDATION");
+
+            group.append("path")
+              .attr("id", "arc-bottom") //Unique id of the path
+              .attr("d", "M -89.99,0 A 90 90 0 0 0 90 0") //SVG path
+              .style("fill", "none")
+              .style("stroke", "0");
+          
+            group.append("g")
+              .selectAll("path")
+              .data(Properties)
+              .enter()
+              .append("text")
+              .append("textPath")
+                .attr("xlink:href", "#arc-bottom")
+                .attr("alignment-baseline", "middle")
+                .style("fill", "white")
+                .style("font-size", 8)
+                .style("letter-spacing", "0.001em")
+                .style("text-anchor","middle")
+                .attr("startOffset", "50%")
+                .attr("dy", ".1em")
+                .text("LOCAL SOCIAL FOUNDATION");
+
+            group.append("path")
+                .attr("id", "lower-arc-bottom") //Unique id of the path
+                .attr("d", "M -142,0 A 90 90 0 0 0 142 0") //SVG path
+                .style("fill", "none")
+                .style("stroke", "0");
+
+            group.append("g")
+                .selectAll("path")
+                .data(Properties)
+                .enter()
+                .append("text")
+                .append("textPath")
+                  .attr("xlink:href", "#lower-arc-bottom")
+                  .attr("alignment-baseline", "middle")
+                  .style("fill", "white")
+                  .style("font-size", 8)
+                  .style("letter-spacing", "0.001em")
+                  .style("text-anchor","middle")
+                  .attr("startOffset", "50%")
+                  .attr("dy", ".1em")
+                  .text("LOCAL ECOLOGICAL GENEROSITY");
+
+
+            group.append("path")
+              .attr("id", "upper-arc-top") //Unique id of the path
+              .attr("d", "M -142,0 A 90 90 0 0 1 142 0") //SVG path
+              .style("fill", "none")
+              .style("stroke", "0");
+
+            group.append("g")
+              .selectAll("path")
+              .data(Properties)
+              .enter()
+              .append("text")
+              .append("textPath")
+                .attr("xlink:href", "#upper-arc-top")
+                .attr("alignment-baseline", "middle")
+                .style("fill", "white")
+                .style("font-size", 8)
+                .style("letter-spacing", "0.001em")
+                .style("text-anchor","middle")
+                .attr("startOffset", "50%")
+                .attr("dy", ".1em")
+                .text("GLOBAL ECOLOGICAL CEILING");
         }
 
         for(const [Half, Properties] of Object.entries(data.ecological)){
@@ -151,6 +242,8 @@ export default function BarChart({
             CreateIconRing(PropertiesEntries, group, xScale);
           }
       }
+
+        
     
       function SetupBarChartOuterSectors(group, yOuter){
 
@@ -180,106 +273,18 @@ export default function BarChart({
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing
               .domain(Object.keys(Properties)); // The domain of the X axis is the list of states.
+              
             
             const PropertiesEntries = Object.entries(Properties);
             CreateGraphColumnOuter(PropertiesEntries, group, xScale, yOuter);
           }
       }
+
+
     
-      function SetupGraphArcText(group, Properties){
-         // All Text Labeling of Bar Chart -----------------------------------------------------------------------------
-         group.append("path")
-         .attr("id", "arc-top") //Unique id of the path
-         .attr("d", "M -89.95,0 A 90 90 0 0 1 90 0") //SVG path
-         .style("fill", "none")
-         .style("stroke", "0");
-
-       group.append("g")
-         .selectAll("path")
-         .data(Properties)
-         .enter()
-         .append("text")
-         .append("textPath")
-           .attr("xlink:href", "#arc-top")
-           .attr("alignment-baseline", "middle")
-           .style("fill", "white")
-           .style("font-size", 8)
-           .style("letter-spacing", "0.001em")
-           .style("text-anchor","middle")
-           .attr("startOffset", "50%")
-           .attr("dy", ".1em")
-           .text("GLOBAL SOCIAL FOUNDATION");
-
-       group.append("path")
-         .attr("id", "arc-bottom") //Unique id of the path
-         .attr("d", "M -89.99,0 A 90 90 0 0 0 90 0") //SVG path
-         .style("fill", "none")
-         .style("stroke", "0");
-     
-       group.append("g")
-         .selectAll("path")
-         .data(Properties)
-         .enter()
-         .append("text")
-         .append("textPath")
-           .attr("xlink:href", "#arc-bottom")
-           .attr("alignment-baseline", "middle")
-           .style("fill", "white")
-           .style("font-size", 8)
-           .style("letter-spacing", "0.001em")
-           .style("text-anchor","middle")
-           .attr("startOffset", "50%")
-           .attr("dy", ".1em")
-           .text("LOCAL SOCIAL FOUNDATION");
-
-         group.append("path")
-           .attr("id", "lower-arc-bottom") //Unique id of the path
-           .attr("d", "M -142,0 A 90 90 0 0 0 142 0") //SVG path
-           .style("fill", "none")
-           .style("stroke", "0");
-
-         group.append("g")
-           .selectAll("path")
-           .data(Properties)
-           .enter()
-           .append("text")
-           .append("textPath")
-             .attr("xlink:href", "#lower-arc-bottom")
-             .attr("alignment-baseline", "middle")
-             .style("fill", "white")
-             .style("font-size", 8)
-             .style("letter-spacing", "0.001em")
-             .style("text-anchor","middle")
-             .attr("startOffset", "50%")
-             .attr("dy", ".1em")
-             .text("LOCAL ECOLOGICAL GENEROSITY");
-
-
-           group.append("path")
-             .attr("id", "upper-arc-top") //Unique id of the path
-             .attr("d", "M -142,0 A 90 90 0 0 1 142 0") //SVG path
-             .style("fill", "none")
-             .style("stroke", "0");
-   
-           group.append("g")
-             .selectAll("path")
-             .data(Properties)
-             .enter()
-             .append("text")
-             .append("textPath")
-               .attr("xlink:href", "#upper-arc-top")
-               .attr("alignment-baseline", "middle")
-               .style("fill", "white")
-               .style("font-size", 8)
-               .style("letter-spacing", "0.001em")
-               .style("text-anchor","middle")
-               .attr("startOffset", "50%")
-               .attr("dy", ".1em")
-               .text("GLOBAL ECOLOGICAL CEILING");
-      }
+      
       SetupBarChartInnerSectors(group, yInner);
       SetupBarChartOuterSectors(group, yOuter);
-      SetupGraphArcText();
     }
 
     const svgElement = d3.select(ref.current);
