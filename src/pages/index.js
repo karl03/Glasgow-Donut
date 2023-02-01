@@ -8,6 +8,20 @@ import BackgroundImage from "../images/glasgow_background.jpg"
 
 
 function HomePage() {
+  const [sliderGroups, setSliderGroups] = React.useState({
+    ecological: {global: {}, local: {}},
+    social: {global: {}, local: {}}
+  });
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(function(){
+    async function getData(){
+      const LoadedData = (await (await fetch("/api/get-data")).json())[0];
+      setSliderGroups(LoadedData);
+      setLoaded(true);
+    }
+    if(!loaded) getData();
+  }, [loaded]);
+
   return (
     
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
@@ -16,7 +30,7 @@ function HomePage() {
       </MainBg>
       <Header title="Gallant Donut Graph"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
-        <BarChart />
+        <BarChart data={sliderGroups}/>
       </div>
     
       <h1>Understanding the Graph</h1>
