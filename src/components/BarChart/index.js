@@ -15,7 +15,7 @@ import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/Build
 
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
-  size = 500,
+  size = 100,
   outerRadius = (size / 2) - 20,
   innerRadius = outerRadius / 2,
   ringRadius = 40,
@@ -111,7 +111,10 @@ export default function BarChart({
                 .padAngle(0.)
                 .padRadius(innerRadius)
               );
+
+            
         }
+
 
         function CreateIconRing(Properties, group, xScale){
           group.append("g")
@@ -183,8 +186,100 @@ export default function BarChart({
           }
       }
     
+      function SetupGraphArcText(group, Properties){
+         // All Text Labeling of Bar Chart -----------------------------------------------------------------------------
+         group.append("path")
+         .attr("id", "arc-top") //Unique id of the path
+         .attr("d", "M -89.95,0 A 90 90 0 0 1 90 0") //SVG path
+         .style("fill", "none")
+         .style("stroke", "0");
+
+       group.append("g")
+         .selectAll("path")
+         .data(Properties)
+         .enter()
+         .append("text")
+         .append("textPath")
+           .attr("xlink:href", "#arc-top")
+           .attr("alignment-baseline", "middle")
+           .style("fill", "white")
+           .style("font-size", 8)
+           .style("letter-spacing", "0.001em")
+           .style("text-anchor","middle")
+           .attr("startOffset", "50%")
+           .attr("dy", ".1em")
+           .text("GLOBAL SOCIAL FOUNDATION");
+
+       group.append("path")
+         .attr("id", "arc-bottom") //Unique id of the path
+         .attr("d", "M -89.99,0 A 90 90 0 0 0 90 0") //SVG path
+         .style("fill", "none")
+         .style("stroke", "0");
+     
+       group.append("g")
+         .selectAll("path")
+         .data(Properties)
+         .enter()
+         .append("text")
+         .append("textPath")
+           .attr("xlink:href", "#arc-bottom")
+           .attr("alignment-baseline", "middle")
+           .style("fill", "white")
+           .style("font-size", 8)
+           .style("letter-spacing", "0.001em")
+           .style("text-anchor","middle")
+           .attr("startOffset", "50%")
+           .attr("dy", ".1em")
+           .text("LOCAL SOCIAL FOUNDATION");
+
+         group.append("path")
+           .attr("id", "lower-arc-bottom") //Unique id of the path
+           .attr("d", "M -142,0 A 90 90 0 0 0 142 0") //SVG path
+           .style("fill", "none")
+           .style("stroke", "0");
+
+         group.append("g")
+           .selectAll("path")
+           .data(Properties)
+           .enter()
+           .append("text")
+           .append("textPath")
+             .attr("xlink:href", "#lower-arc-bottom")
+             .attr("alignment-baseline", "middle")
+             .style("fill", "white")
+             .style("font-size", 8)
+             .style("letter-spacing", "0.001em")
+             .style("text-anchor","middle")
+             .attr("startOffset", "50%")
+             .attr("dy", ".1em")
+             .text("LOCAL ECOLOGICAL GENEROSITY");
+
+
+           group.append("path")
+             .attr("id", "upper-arc-top") //Unique id of the path
+             .attr("d", "M -142,0 A 90 90 0 0 1 142 0") //SVG path
+             .style("fill", "none")
+             .style("stroke", "0");
+   
+           group.append("g")
+             .selectAll("path")
+             .data(Properties)
+             .enter()
+             .append("text")
+             .append("textPath")
+               .attr("xlink:href", "#upper-arc-top")
+               .attr("alignment-baseline", "middle")
+               .style("fill", "white")
+               .style("font-size", 8)
+               .style("letter-spacing", "0.001em")
+               .style("text-anchor","middle")
+               .attr("startOffset", "50%")
+               .attr("dy", ".1em")
+               .text("GLOBAL ECOLOGICAL CEILING");
+      }
       SetupBarChartInnerSectors(group, yInner);
       SetupBarChartOuterSectors(group, yOuter);
+      SetupGraphArcText();
     }
 
     const svgElement = d3.select(ref.current);
