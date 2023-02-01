@@ -30,28 +30,31 @@
   z-index: 1000;
   filter: brightness(0);
   height:4vh;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  text-align: center;
+  display: block;
 }
 
 #lightbox_title{
   vertical-align: top;
-  padding-top:3vh;
+  margin: auto;
+  text-align: center;
   font-size:20px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 }
 
 #circle{
     position: absolute;
     background-color: grey;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
     border-color: black;
     border: solid;
+}
+#lightbox_wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
 }
