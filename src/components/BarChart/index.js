@@ -117,6 +117,46 @@ export default function BarChart({
 
 
         function CreateIconRing(Properties, group, xScale){
+
+          var Tooltip = d3.select(".svgClass")
+            .append("text")
+            .attr("id", "abcd")
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+            .style("stroke", "black")
+            .style("font-size", "12px")
+          
+          var mouseover = function(d) {
+            Tooltip
+              .style("opacity", 1)
+            d3.select(this)
+              .style("stroke", "black")
+              //.style("opacity", 1)
+          }
+          var mousemove = function(event, data) {
+            Tooltip
+              .html("The exact value of this cell is: " + data[1].indicator)
+              .attr("x", (event.layerX+70))
+              .attr("y", (event.layerY))
+          }
+          var mouseleave = function(d) {
+            Tooltip
+              .style("opacity", 0)
+            d3.select(this)
+              .style("stroke", "none")
+              //.style("opacity", 0.8)
+          }
+
+          
+
+
+
+
+
           group.append("g")
               .selectAll("g")
               .data(Properties)
@@ -127,16 +167,24 @@ export default function BarChart({
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                   })
-                  .append("svg:image")
-                    .attr('x', -smallRingRadius / 3.)
-                    .attr('y', -smallRingRadius / 3.)
-                    .attr('width', smallRingRadius / 1.9)
-                    .attr('height', smallRingRadius / 1.9)
-                    .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
-                    .style("cursor", "pointer")
-                    .on("click", function(Event, ElementProperties){
-                      LightBoxTrigger(Event, ElementProperties);
-                    });
+
+
+
+                  
+
+                .append("svg:image")
+                  .attr('x', -smallRingRadius / 3.)
+                  .attr('y', -smallRingRadius / 3.)
+                  .attr('width', smallRingRadius / 1.9)
+                  .attr('height', smallRingRadius / 1.9)
+                  .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
+                  .style("cursor", "pointer")
+                  .on("mouseover", mouseover)
+                  .on("mousemove", mousemove)
+                  .on("mouseleave", mouseleave)
+                  .on("click", function(Event, ElementProperties){
+                    LightBoxTrigger(Event, ElementProperties);
+                  });
                     
                 // All Text Labeling of Bar Chart --------
         // 
@@ -293,7 +341,7 @@ export default function BarChart({
 
   return (
     <>
-    <svg ref={ref} style={{
+    <svg className = "svgClass" ref={ref} style={{
       height: 500,
       width: 500,
       transform: "scale(1.2)",
