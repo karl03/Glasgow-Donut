@@ -8,14 +8,9 @@ export default function DropDown({ dataArray } ) {
 
   const [isOpen, SetOpen] = useState(false);
 
-
-  function HandleOpen(){
-      SetOpen(!isOpen);
-  }
-
   return (
     <div className='dropdown'>
-      <button onClick={HandleOpen}> {"" + isOpen}</button>
+      <button onClick={() => SetOpen(!isOpen)}> {"" + isOpen}</button>
       {isOpen ? 
       <ul className='menu'>
         {dataArray.map((Item, index) => (
