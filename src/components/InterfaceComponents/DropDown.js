@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import './DropDown.css'
 
 export default function DropDown({ dataArray } ) {
+  if (dataArray === undefined) {
+    dataArray = [];
+  }
+
   const [isOpen, setOpen] = useState(false);
 
 
