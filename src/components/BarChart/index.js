@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
+import axios from 'axios';
 import "../LightBox/Lightbox.css";
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -129,14 +130,29 @@ export default function BarChart({
                     .attr('y', -smallRingRadius / 3.)
                     .attr('width', smallRingRadius / 1.5)
                     .attr('height', smallRingRadius / 1.5)
-                    .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
                     .style("cursor", "pointer")
                     .on("click", function(Event, ElementProperties){
                       LightBoxTrigger(Event, ElementProperties);
                     });
+
+          Properties.forEach(function(d) {
+            axios.get("/api/get-icon/" + d[1].symbol_id, { responseType: 'arraybuffer' })
+              .then(response => {
+                const blob = new Blob([response.data], { type: 'image/png' });
+                const url = URL.createObjectURL(blob);
+                d3.selectAll("image")
+                  .filter(function(f) {
+                    return f[0] === d[0];
+                  })
+                  .attr("xlink:href", url);
+              })
+              .catch( error => {
+                console.error(error);
+              });
+          });
         }
 
-        for(const [Half, Properties] of Object.entries(data.ecological)){
+        for(const [Half, Properties] of Object.entries(data.social)){
             const xScale = d3.scaleBand()
               // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])
@@ -172,7 +188,7 @@ export default function BarChart({
                 });
         }
 
-        for(const [Half, Properties] of Object.entries(data.social)){
+        for(const [Half, Properties] of Object.entries(data.ecological)){
             const xScale = d3.scaleBand()
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing
