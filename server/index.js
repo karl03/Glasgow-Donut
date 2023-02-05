@@ -30,6 +30,22 @@ app.get("/api/get-data", function(request, response){
   });
 });
 
+app.get("/api/get-icon/:folder/:filename", (req, res) => {
+  const folder = req.params.folder;
+  const filename = req.params.filename;
+  if (!["Global_Ecological", "Global_Social", "Local_Ecological", "Local_Social"].includes(folder)) {
+    return res.status(400).json({ msg: 'Folder does not exist' });
+  }
+
+  res.sendFile(`${__dirname}/Icons/${folder}/${filename}`, function(err) {
+    if (err) {
+      return res.status(400).json({ msg: 'Filename does not exist' });
+    } else {
+      console.log('Sent: ', filename);
+    }
+  });
+});
+
 
 app.use(fileUpload());
 app.post('/api/upload', (req, res) => {
