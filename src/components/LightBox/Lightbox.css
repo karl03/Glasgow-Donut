@@ -1,20 +1,16 @@
 .hidden{
-  z-index: 1000;
-  top: 0;
-  height:100%;
-  width:100%;
-  background-color: rgba(134, 134, 134, 0.8);
   display:none;
 }
 
 .active{
+  display:inline-block;
+}
+
+#lightbox{
   position:absolute;
-  height:130%;
+  height:120%;
   width: 100%;
   background-color: rgba(134, 134, 134, 0.8);
-  display:flex;
-  justify-content:center;
-  align-items: center;
   overflow:hidden;
 }
 
@@ -27,9 +23,9 @@
 }
 
 #lightbox_img{
-  z-index: 1000;
   filter: brightness(0);
   height:4vh;
+  padding-top:20%;
   margin: auto;
   text-align: center;
   display: block;
@@ -42,8 +38,7 @@
   font-size:20px;
 }
 
-#circle{
-    position: absolute;
+.circle{
     background-color: grey;
     width: 180px;
     height: 180px;
@@ -52,9 +47,19 @@
     border: solid;
 }
 #lightbox_wrapper{
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position:absolute;
+  top: 60%;
+  left: 60%;
+  width:31%;
   transform: translate(-50%, -50%);
-  width: 90%;
+}
+
+
+#circle_hidden{
+  display:none;
+}
+
+#circle_active{
+  display:inline-flex;
+  float:right;
 }
