@@ -52,8 +52,9 @@
           "target": "aim to make it a better category",
           "description": "how much pollution is in the air",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/AirPollution-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "b647b23e-a98f-4bad-a66f-9d59b4ef60e1"
+          "id": "6f520e53-0113-4b0c-b815-82e25f4507f0"
         },
         "chemical_pollution": {
           "value": 47,
@@ -75,8 +76,9 @@
           "target": "aim to make it a better category",
           "description": "how much chemical pollution there is",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/ChemicalPollution-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "afb56837-ef86-45f4-9787-19e3439a6101"
+          "id": "78c3310c-9e45-49f4-b505-d8334328f59a"
         },
         "biodiversity_loss": {
           "value": 78,
@@ -98,8 +100,9 @@
           "target": "aim to make it a better category",
           "description": "how much loss in biodiversity",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/BiodiversityLoss-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "f58071d7-668d-4479-9d04-3c7e083c4afd"
+          "id": "5f9cb4b7-c3d6-481b-b8d6-e6e3b1522b01"
         },
         "excessive_fertilizer_use": {
           "value": 44,
@@ -121,8 +124,9 @@
           "target": "aim to make it a better category",
           "description": "how much excessive use of fertilizer",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/ExcessiveFertilizerUse-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "0db9bfbf-85b9-44aa-b030-0e7a143d39f4"
+          "id": "860c0484-e559-41bf-80bd-887702f536c1"
         },
         "fresh_water_withdrawal": {
           "value": 24,
@@ -150,8 +154,9 @@
           "target": "aim to make it a better category",
           "description": "how much fresh water loss",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/FreshwaterWithdrawal-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "afcd85e6-1b7c-4839-a980-7935c1220ac4"
+          "id": "a4e437aa-7017-48fe-b449-56c0f05cfaa5"
         },
         "land_conversion": {
           "value": 90,
@@ -173,8 +178,9 @@
           "target": "aim to make it a better category",
           "description": "if land is the same",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/LandConversion-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "b6c9a981-a565-48ee-8ef0-87863af866e4"
+          "id": "110ffb8f-7c91-4438-a351-8f62b26f5dd5"
         },
         "ozone_layer_depletion": {
           "value": 100,
@@ -190,8 +196,9 @@
           "target": "aim to make it a better category",
           "description": "how much depletion in the ozone layer",
           "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/OzoneLayerDepletion-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "64997078-625f-45ac-917f-b62fe51d8480"
+          "id": "73b37c77-7d2f-42c2-8fe7-d3dac5263504"
         }
       },
       "local": {
@@ -215,9 +222,9 @@
           "target": "aim to make it a better category",
           "description": "if soil is good",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 0,
+          "symbol_id": "Local_Ecological/BuildAndProtectSoil-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "eaf76c80-8ebb-4414-ac32-09e14e7f3c10"
+          "id": "ad695fd1-f713-4f7b-a1e1-9aacd77c252a"
         },
         "air": {
           "value": 77,
@@ -251,9 +258,9 @@
           "target": "aim to make it a better category",
           "description": "air quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 1,
+          "symbol_id": "Local_Ecological/CleanseTheAir-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "adf0baad-82e3-4c9c-ae86-4e34a36f961a"
+          "id": "dc175313-96ee-4550-90fc-9abd558c9c66"
         },
         "fresh_water": {
           "value": 44,
@@ -275,9 +282,9 @@
           "target": "aim to make it a better category",
           "description": "fresh water quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 2,
+          "symbol_id": "Local_Ecological/CycleFreshwater-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "d0e5fb02-ebaa-4ac0-8006-449e06306704"
+          "id": "a3788758-939a-47c0-ac44-b5b30b164522"
         },
         "wellbeing": {
           "value": 86,
@@ -299,9 +306,9 @@
           "target": "aim to make it a better category",
           "description": "wellbeing quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 3,
+          "symbol_id": "Local_Ecological/EnhanceWellbeing-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "4b060032-2f1d-4e89-b72d-7033a6f25fb2"
+          "id": "384fb4e5-71a3-4183-8997-e090b392914c"
         },
         "energy": {
           "value": 23,
@@ -317,9 +324,9 @@
           "target": "aim to make it a better category",
           "description": "energy use",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 4,
+          "symbol_id": "Local_Ecological/HarvestEnergy-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "95b1fdb2-a7e8-47c4-b2ea-e9c4bf1e35f0"
+          "id": "090f1da7-de16-4c42-8fdc-d5b566cdc511"
         },
         "biodiversity": {
           "value": 14,
@@ -335,9 +342,9 @@
           "target": "aim to make it a better category",
           "description": "biodiversity goodness",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 5,
+          "symbol_id": "Local_Ecological/HouseBiodiversity-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "cd19f033-8375-4cd2-9ae6-3ca81d3abe16"
+          "id": "8f10e88a-9cc0-4a3f-bafb-f767cbe62a18"
         },
         "temperature": {
           "value": 4,
@@ -353,9 +360,9 @@
           "target": "aim to make it a better category",
           "description": "temperature quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 6,
+          "symbol_id": "Local_Ecological/RegulateTheTemperature-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "36594b31-ee18-4dc7-a3a4-0b35bb0e5590"
+          "id": "ce81be78-da4a-46f0-8ea2-01389c278c39"
         },
         "store_carbon": {
           "value": 69,
@@ -371,9 +378,9 @@
           "target": "aim to make it a better category",
           "description": "how much carbon is stored and if its a good amount stored",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 7,
+          "symbol_id": "Local_Ecological/StoreCarbon-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "7464cbfc-1962-40ff-9be9-50b7cb8fb3f0"
+          "id": "f853d225-2a9c-4cef-a047-7b05d029f129"
         }
       }
     },
@@ -399,9 +406,9 @@
           "target": "aim to make it a better category",
           "description": "community quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 9,
+          "symbol_id": "Global_Social/Networks-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "33b02936-54e2-498c-a018-9696fa5de29e"
+          "id": "57b58f49-32d7-4a25-92b9-0525dee89864"
         },
         "networks": {
           "value": 73,
@@ -423,9 +430,9 @@
           "target": "aim to make it a better category",
           "description": "how much networking affects globally",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 8,
+          "symbol_id": "Global_Social/Networks-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "cc24ab56-97e2-4b53-a8dd-63eb92d92ffd"
+          "id": "0901b009-5dfb-4f34-9b92-671f55db1224"
         }
       },
       "local": {
@@ -443,9 +450,9 @@
           "target": "aim to make it a better category",
           "description": "connectivity quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 10,
+          "symbol_id": "Local_Social/Connectivity-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "45f5f50c-e4e4-4a6b-ae69-e398ec3e1aee"
+          "id": "f4947029-8d72-4cab-a7aa-a231853c6319"
         },
         "culture": {
           "value": 98,
@@ -461,9 +468,9 @@
           "target": "aim to make it a better category",
           "description": "culture quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 11,
+          "symbol_id": "Local_Social/Culture-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "33b21a68-5e18-49ba-b5d1-ac71e585ebaa"
+          "id": "0c18ced2-9c21-45b6-bcff-c4c08480bc99"
         },
         "education": {
           "value": 45,
@@ -485,9 +492,9 @@
           "target": "aim to make it a better category",
           "description": "how educated people are",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 12,
+          "symbol_id": "Local_Social/Education-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "ecc8975c-36a5-4e66-956c-0d98821dbd81"
+          "id": "fd744177-c73f-4d85-abfe-28044d230559"
         },
         "water": {
           "value": 76,
@@ -515,9 +522,9 @@
           "target": "aim to make it a better category",
           "description": "water quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 13,
+          "symbol_id": "Local_Social/Water-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "c2f103d3-050a-42a3-84cc-10c75debd097"
+          "id": "0202d499-5586-478c-8b44-056fa01a57bb"
         },
         "health": {
           "value": 34,
@@ -551,9 +558,9 @@
           "target": "aim to make it a better category",
           "description": "health quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 14,
+          "symbol_id": "Local_Social/Health-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "52255844-536c-4274-93ae-b41b8ea3ae12"
+          "id": "ef62b10e-85f4-4e65-982f-a5f7e4950547"
         }
       }
     }
