@@ -19,29 +19,57 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
     if(trigger ==="active"){
       setHidden("circle_hidden");
       setTrigger("hidden")
+      document.getElementById("primary_circle").style.cursor = 'pointer';
+      document.getElementById("Indicator").innerText = 'Indicator';
+      document.getElementById("Target").innerText = 'Target';
       document.body.id="show_scroll"
     }
   }
 
   function additionalCircles() {
     if(Hide==="circle_hidden"){
+      document.getElementById("primary_circle").style.cursor = 'default';
       setHidden("circle_active");
     }
   }
+
+  function changeIndicator() {
+    if(document.getElementById("Indicator").innerText === 'Indicator'){
+      document.getElementById("Indicator").innerText = DataProperty[1]?.indicator ?? "why are you here go away";
+      document.getElementById("Indicator").onClick=changeIndicator;
+    }else{
+      document.getElementById("Indicator").innerText = 'Indicator';
+      document.getElementById("Indicator").onClick=changeIndicator;
+    }
+  }
+
+  function changeTarget(){
+    if(document.getElementById("Target").innerText === 'Target'){
+      document.getElementById("Target").innerText = DataProperty[1]?.target ?? "why are you here go away";
+      document.getElementById("Target").onClick=changeTarget;
+    }else{
+      document.getElementById("Target").innerText = 'Target';
+      document.getElementById("Target").onClick=changeTarget;
+    }
+  }
+
+
 
   return (
     <>
   <div className={trigger} id="lightbox" onClick={changeState}>
   </div>
-  <div id="lightbox_wrapper">
-    <span className={"circle " + trigger} onClick={additionalCircles}>
+
+    <span id="primary_circle" className={"circle " + trigger} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
-      <h1 id="lightbox_title" onClick={additionalCircles}>{Name}</h1>
+      <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
-    <span className="circle" id={Hide}>
-      <h1 id="lightbox_title">{DataProperty[1]?.target ?? "why are you here go away"}</h1>
+    <span  id="right_circle" className={"circle " + Hide} onClick={changeTarget}>
+      <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
-  </div>
+    <span  id="left_circle" className={"circle " + Hide} onClick={changeIndicator}>
+      <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
+    </span>
   </>
     );
   };
