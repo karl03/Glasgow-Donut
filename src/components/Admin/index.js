@@ -100,24 +100,53 @@ export default function AdminMain(){
       return New;
     });
   }
-  
-  return (
-    <AdminContainer>
 
-      <div className="modal-manager">
-        {/*modal-manager-button is DEBUG.*/}
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
-        <ModalMenu
-         isShow={isShowingModal}
-         onClose={() => setShowingModal(false)}
-         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
-         title="Modal Title"
-         >
+  function addSectorModal(){
+    /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
+        - Should generate a modal for sector modification containing prior data.
+          - Upon saving, the old sector should be delete, and the new inserted in its place.
+
+        - If it is a new sector, the Modal is unpopulated.
+          - Upon saving, the new sector is added.
+    */
+    return (
+      <ModalMenu
+          isShow={isShowingModal}
+          onClose={() => setShowingModal(false)}
+          onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+          title="Modal Title"
+          >
           <p>This is inside the menu.</p>
           <p>More text</p>
           <p>More text</p>
           <p>More text</p>
         </ModalMenu>
+    )
+  }
+
+  function quitWithoutSaveModal(){
+    /* Opens an warning / query when clicking to leave the editor without saving.
+        - A simple message Modal.
+    */
+    return (
+      <ModalMenu
+         isShow={isShowingModal}
+         onClose={() => setShowingModal(false)}
+         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+         title="Unsaved Data!"
+         >
+          <p>There is unsaved changes to the bar chart!</p>
+        </ModalMenu>
+    )
+  }
+  
+  return (
+    <AdminContainer>
+
+      {/*modal-manager is DEBUG.*/}
+      <div className="modal-manager">
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
+        {addSectorModal()}        
       </div>
 
       <AdminDataListing>
