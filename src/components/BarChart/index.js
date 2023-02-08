@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
+import axios from 'axios';
 import "../LightBox/Lightbox.css";
 import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
 import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
@@ -167,17 +168,12 @@ export default function BarChart({
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                   })
-
-
-
-                  
-
                 .append("svg:image")
                   .attr('x', -smallRingRadius / 3.)
                   .attr('y', -smallRingRadius / 3.)
                   .attr('width', smallRingRadius / 1.9)
                   .attr('height', smallRingRadius / 1.9)
-                  .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
+                  .attr("xlink:href", function(d){return "";/*([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])*/})
                   .style("cursor", "pointer")
                   .on("mouseover", mouseover)
                   .on("mousemove", mousemove)
@@ -186,8 +182,7 @@ export default function BarChart({
                     LightBoxTrigger(Event, ElementProperties);
                   });
                     
-                // All Text Labeling of Bar Chart --------
-        // 
+            // All Text Labeling of Bar Chart --------
             group.append("path")
               .attr("id", "arc-top") //Unique id of the path
               .attr("d", "M -89.95,0 A 90 90 0 0 1 90 0") //SVG path
@@ -276,9 +271,25 @@ export default function BarChart({
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
+
+          Properties.forEach(function(d) {
+            axios.get("/api/get-icon/" + d[1].symbol_id, { responseType: 'arraybuffer' })
+              .then(response => {
+                const blob = new Blob([response.data], { type: 'image/png' });
+                const url = URL.createObjectURL(blob);
+                d3.selectAll("image")
+                  .filter(function(f) {
+                    return f[0] === d[0];
+                  })
+                  .attr("xlink:href", url);
+              })
+              .catch( error => {
+                console.error(error);
+              });
+          });
         }
 
-        for(const [Half, Properties] of Object.entries(data.ecological)){
+        for(const [Half, Properties] of Object.entries(data.social)){
             const xScale = d3.scaleBand()
               // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])
@@ -316,7 +327,7 @@ export default function BarChart({
                 });
         }
 
-        for(const [Half, Properties] of Object.entries(data.social)){
+        for(const [Half, Properties] of Object.entries(data.ecological)){
             const xScale = d3.scaleBand()
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing

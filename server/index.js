@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 app.post("/api/change-data", function(req, res){
   console.log(req.body);
-  fs.writeFileSync(path.join(__dirname, "Data.json"), JSON.stringify(req.body));
+  fs.writeFileSync(path.join(__dirname, "Data.json"), JSON.stringify(req.body, null, 2));
   console.log("Wrote file" /*, new data: ", JSON.stringify(req.body)*/);
   res.status(200).send("Success");
 });
@@ -27,6 +27,22 @@ app.get("/api/get-data", function(request, response){
     console.log(Data);
   
     response.send(JSON.stringify(Data)); 
+  });
+});
+
+app.get("/api/get-icon/:folder/:filename", (req, res) => {
+  const folder = req.params.folder;
+  const filename = req.params.filename;
+  if (!["Global_Ecological", "Global_Social", "Local_Ecological", "Local_Social"].includes(folder)) {
+    return res.status(400).json({ msg: 'Folder does not exist' });
+  }
+
+  res.sendFile(`${__dirname}/Icons/${folder}/${filename}`, function(err) {
+    if (err) {
+      return res.status(400).json({ msg: 'Filename does not exist' });
+    } else {
+      console.log('Sent: ', filename);
+    }
   });
 });
 
