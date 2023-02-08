@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer, AdminUploadFileContainer } from './AdminElements';
-//import AdminSlider from "./AdminSlider";
-//import ReactDOM from "react-dom";
-//import Data from "../../Data.json"; //TODO: This is temporary, this should be removed to be replaced by server-side loaded data
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
@@ -11,7 +8,6 @@ import axios from 'axios';
 
 export default function AdminMain(){
   const [file, setFile] = useState(null);
-  //const [filename, setFilename] = useState('Choose File');
   const setFilename = useState('Choose File')[1];
 
 	const changeHandler = (e) => {
@@ -66,9 +62,10 @@ export default function AdminMain(){
       case "value":{
         const NewValue = Number.parseInt(newValue);
         setSliderGroups(function(oldSliders){
-          const New = JSON.parse(JSON.stringify(oldSliders)); //Make a deep copy of the object (this needs to be done so that it doesn't mess with React's state mechanism)
-          New[ecoOrSoc][gloOrLoc][name].value = NewValue; //Set the new value
-          return New; //Return this object to save it
+          //Make a deep copy of the object (avoids React's State)
+          const New = JSON.parse(JSON.stringify(oldSliders));
+          New[ecoOrSoc][gloOrLoc][name].value = NewValue;
+          return New;
         });
         break;
       }
@@ -105,15 +102,6 @@ export default function AdminMain(){
       <AdminDataListing>
         <h1>Graph Components</h1>
         {
-          /*sliderGroups.map((sliders, groupID) =>{
-            return <AdminSliderGroup
-              sliders={sliders}
-              groupID={groupID}
-              eventHandler={eventHandler}
-              deleteFunction={deleteSliderHandler}
-              key={`AdminSliderGroup${groupID}`}
-            />
-          })*/
           (function(){
             const Elements = [];
             for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
