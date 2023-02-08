@@ -105,8 +105,14 @@ export default function AdminMain(){
     <AdminContainer>
 
       <div className="modal-manager">
-        <button className="modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
-        <ModalMenu isShow={isShowingModal} onClose={() => setShowingModal(false)} title="Modal Title">
+        {/*modal-manager-button is DEBUG.*/}
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
+        <ModalMenu
+         isShow={isShowingModal}
+         onClose={() => setShowingModal(false)}
+         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+         title="Modal Title"
+         >
           <p>This is inside the menu.</p>
           <p>More text</p>
           <p>More text</p>
