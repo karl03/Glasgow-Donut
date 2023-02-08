@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import './ModalMenu.css'
 
 export default function ModalMenu(props) {
-    if(props.isShow == false){
-        return null;
-    }
 
   return (
-    <div className='modal'>
+    <div className={`modal ${props.isShow ? 'isShow' : ''}`}>
         <div className="modal-content">
 
             <div className="modal-header">
