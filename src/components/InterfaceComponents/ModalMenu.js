@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './ModalMenu.css'
 
-export default function ModalMenu({ isShow }) {
+export default function ModalMenu({ isShow, onClose }) {
     if(isShow == false){
         return null;
     }
@@ -19,7 +19,7 @@ export default function ModalMenu({ isShow }) {
             </div>
 
             <div className="modal-footer">
-                <button className="modal-button">Close</button>
+                <button className="modal-button" onClick={onClose}>Close</button>
             </div>
             
         </div>

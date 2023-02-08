@@ -106,7 +106,7 @@ export default function AdminMain(){
 
       <div className="modal-manager">
         <button className="modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
-        <ModalMenu isShow={isShowingModal}/>
+        <ModalMenu isShow={isShowingModal} onClose={() => setShowingModal(false)}/>
       </div>
 
       <AdminDataListing>
