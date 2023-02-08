@@ -132,7 +132,9 @@ export default function BarChart({
                     .attr("xlink:href", function(d){return([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])})
                     .style("cursor", "pointer")
                     .on("click", function(Event, ElementProperties){
-                      LightBoxTrigger(Event, ElementProperties);
+                      if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
+                        LightBoxTrigger(Event, ElementProperties);
+                      }
                     });
         }
 
@@ -168,7 +170,9 @@ export default function BarChart({
               .padRadius(innerRadius))
               .style("cursor", "pointer")
               .on("click", function(Event, ElementProperties){
-                LightBoxTrigger(Event, ElementProperties);
+                if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
+                  LightBoxTrigger(Event, ElementProperties);
+                }
                 });
         }
 
