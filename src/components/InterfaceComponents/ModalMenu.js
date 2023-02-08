@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 import './ModalMenu.css'
 
 export default function ModalMenu(props) {
 
-  return (
+  return ReactDOM.createPortal(
     <div className={`modal ${props.isShow ? 'isShow' : ''}`}>
         <div className="modal-content">
 
@@ -21,5 +22,6 @@ export default function ModalMenu(props) {
             
         </div>
     </div>
+    , document.getElementById('root')
   )
 }
