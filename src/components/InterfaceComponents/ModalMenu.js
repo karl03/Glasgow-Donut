@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './ModalMenu.css'
 
 export default function ModalMenu() {
+
+    const [isShown, setShown] = useState(false);
+
+
   return (
     <div className='modal'>
         <div className="modal-content">
