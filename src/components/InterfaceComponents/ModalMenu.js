@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './ModalMenu.css'
 
-export default function ModalMenu() {
-
+export default function ModalMenu({ isShow }) {
+    if(isShow == false){
+        return null;
+    }
 
   return (
     <div className='modal'>

@@ -4,6 +4,7 @@ import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
 import axios from 'axios';
+import ModalMenu from '../InterfaceComponents/ModalMenu'
 
 
 export default function AdminMain(){
@@ -102,7 +103,12 @@ export default function AdminMain(){
   
   return (
     <AdminContainer>
-      
+
+      <div className="modal-manager">
+        <button className="modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
+        <ModalMenu isShow={isShowingModal}/>
+      </div>
+
       <AdminDataListing>
         <h1>Graph Components</h1>
         {
