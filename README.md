@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## STYLE GUIDE
+Function Names: PascalCase
+Variable Names: camelCase
+
 ## Useful Commands
 *As a minor warning, do not run* `npm install` *or equivalent* `npm` *commands as this will generate an additional set of dependency files.*
 
