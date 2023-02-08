@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './ModalMenu.css'
 
-export default function ModalMenu({ isShow, onClose }) {
-    if(isShow == false){
+export default function ModalMenu(props) {
+    if(props.isShow == false){
         return null;
     }
 
@@ -11,7 +11,7 @@ export default function ModalMenu({ isShow, onClose }) {
         <div className="modal-content">
 
             <div className="modal-header">
-                <h4 className="modal-title">Modal Menu</h4>
+                <h4 className="modal-title">{props.title}</h4>
             </div>
 
             <div className="modal-body">
@@ -19,7 +19,7 @@ export default function ModalMenu({ isShow, onClose }) {
             </div>
 
             <div className="modal-footer">
-                <button className="modal-button" onClick={onClose}>Close</button>
+                <button className="modal-button" onClick={props.onClose}>Close</button>
             </div>
             
         </div>
