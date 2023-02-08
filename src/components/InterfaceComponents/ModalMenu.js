@@ -15,7 +15,7 @@ export default function ModalMenu(props) {
             </div>
 
             <div className="modal-body">
-                This is where the main content is.
+                {props.children}
             </div>
 
             <div className="modal-footer">
