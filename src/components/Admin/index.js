@@ -8,6 +8,7 @@ import axios from 'axios';
 
 export default function AdminMain(){
   const [file, setFile] = useState(null);
+  const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
 
 	const changeHandler = (e) => {
@@ -46,7 +47,9 @@ export default function AdminMain(){
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
+
   const [loaded, setLoaded] = useState(false);
+  
   React.useEffect(function(){
     async function getData(){
       const LoadedData = (await (await fetch("/api/get-data")).json())[0];
@@ -99,6 +102,7 @@ export default function AdminMain(){
   
   return (
     <AdminContainer>
+      
       <AdminDataListing>
         <h1>Graph Components</h1>
         {
@@ -122,19 +126,23 @@ export default function AdminMain(){
           })()
         }
       </AdminDataListing>
+
       <AdminDonutGraphContainer>
         <AdminDonutGraph sliderGroups={sliderGroups}/>
       </AdminDonutGraphContainer>
+
       <AdminAddDataContainer>
         <p>Options for adding new data here</p>
         <AdminAddData addedElementHandler={addedElementHandler}/>
       </AdminAddDataContainer>
+
       <AdminUploadFileContainer>
         <form onSubmit={handleUpload}>
           <input type="file" name='file' onChange={changeHandler}/>
           <button>Upload</button>
         </form>
       </AdminUploadFileContainer>
+
     </AdminContainer>
   );
 };

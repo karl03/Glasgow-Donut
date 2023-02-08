@@ -3,8 +3,6 @@ import './ModalMenu.css'
 
 export default function ModalMenu() {
 
-    const [isShown, setShown] = useState(false);
-
 
   return (
     <div className='modal'>
