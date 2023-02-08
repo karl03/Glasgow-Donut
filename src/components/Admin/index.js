@@ -146,7 +146,7 @@ export default function AdminMain(){
       {/*modal-manager is DEBUG.*/}
       <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
-        {addSectorModal()}        
+        {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
 
       <AdminDataListing>
