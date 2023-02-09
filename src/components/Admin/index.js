@@ -4,10 +4,12 @@ import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
 import axios from 'axios';
+import ModalMenu from '../InterfaceComponents/ModalMenu'
 
 
 export default function AdminMain(){
   const [file, setFile] = useState(null);
+  const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
 
 	const changeHandler = (e) => {
@@ -46,7 +48,9 @@ export default function AdminMain(){
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
+
   const [loaded, setLoaded] = useState(false);
+  
   React.useEffect(function(){
     async function getData(){
       const LoadedData = (await (await fetch("/api/get-data")).json())[0];
@@ -96,9 +100,55 @@ export default function AdminMain(){
       return New;
     });
   }
+
+  function addSectorModal(){
+    /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
+        - Should generate a modal for sector modification containing prior data.
+          - Upon saving, the old sector should be delete, and the new inserted in its place.
+
+        - If it is a new sector, the Modal is unpopulated.
+          - Upon saving, the new sector is added.
+    */
+    return (
+      <ModalMenu
+          isShow={isShowingModal}
+          onClose={() => setShowingModal(false)}
+          onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+          title="Modal Title"
+          >
+          <p>This is inside the menu.</p>
+          <p>More text</p>
+          <p>More text</p>
+          <p>More text</p>
+        </ModalMenu>
+    )
+  }
+
+  function quitWithoutSaveModal(){
+    /* Opens an warning / query when clicking to leave the editor without saving.
+        - A simple message Modal.
+    */
+    return (
+      <ModalMenu
+         isShow={isShowingModal}
+         onClose={() => setShowingModal(false)}
+         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+         title="Unsaved Data!"
+         >
+          <p>There is unsaved changes to the bar chart!</p>
+        </ModalMenu>
+    )
+  }
   
   return (
     <AdminContainer>
+
+      {/*modal-manager is DEBUG.*/}
+      <div className="modal-manager">
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
+        {true ? addSectorModal(): quitWithoutSaveModal()}        
+      </div>
+
       <AdminDataListing>
         <h1>Graph Components</h1>
         {
@@ -122,19 +172,23 @@ export default function AdminMain(){
           })()
         }
       </AdminDataListing>
+
       <AdminDonutGraphContainer>
         <AdminDonutGraph sliderGroups={sliderGroups}/>
       </AdminDonutGraphContainer>
+
       <AdminAddDataContainer>
         <p>Options for adding new data here</p>
         <AdminAddData addedElementHandler={addedElementHandler}/>
       </AdminAddDataContainer>
+
       <AdminUploadFileContainer>
         <form onSubmit={handleUpload}>
           <input type="file" name='file' onChange={changeHandler}/>
           <button>Upload</button>
         </form>
       </AdminUploadFileContainer>
+
     </AdminContainer>
   );
 };
