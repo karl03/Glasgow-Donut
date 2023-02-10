@@ -140,31 +140,33 @@ export default function AdminPage(){
   
   return (
     <>
-      <div className="admin-header">
+      <header className="admin-header">
+        <button className="admin-back-button">Back</button>
         <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
-      </div>
+        <button className="admin-help-button">HELP</button>
+      </header>
 
       <div className="admin-body">
 
         <div className="admin-left-panel">
-        { (function(){
-            const Elements = [];
-            for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
-              for(const [gloOrLoc, sliders] of Object.entries(gloAndLoc)){
-                Elements.push(
-                  <AdminSliderGroup
-                    sliders={sliders}
-                    ecoOrSoc={ecoOrSoc}
-                    gloOrLoc={gloOrLoc}
-                    eventHandler={eventHandler}
-                    deleteFunction={deleteSliderHandler}
-                    key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
-                  />
-                );
+          { (function(){
+              const Elements = [];
+              for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
+                for(const [gloOrLoc, sliders] of Object.entries(gloAndLoc)){
+                  Elements.push(
+                    <AdminSliderGroup
+                      sliders={sliders}
+                      ecoOrSoc={ecoOrSoc}
+                      gloOrLoc={gloOrLoc}
+                      eventHandler={eventHandler}
+                      deleteFunction={deleteSliderHandler}
+                      key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
+                    />
+                  );
+                }
               }
-            }
-            return Elements;
-          })()}
+              return Elements;
+            })()}
         </div>
 
         <div className="admin-right-panel">
