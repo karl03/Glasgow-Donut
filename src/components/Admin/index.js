@@ -11,6 +11,12 @@ export default function AdminMain(){
   const [file, setFile] = useState(null);
   const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
+  const [sliderGroups, setSliderGroups] = useState({
+    ecological: {global: {}, local: {}},
+    social: {global: {}, local: {}}
+  });
+
+  const [loaded, setLoaded] = useState(false);
 
 	const changeHandler = (e) => {
 		setFile(e.target.files[0]);
@@ -43,13 +49,6 @@ export default function AdminMain(){
       }
     }
   };
-
-  const [sliderGroups, setSliderGroups] = useState({
-    ecological: {global: {}, local: {}},
-    social: {global: {}, local: {}}
-  });
-
-  const [loaded, setLoaded] = useState(false);
   
   React.useEffect(function(){
     async function getData(){
