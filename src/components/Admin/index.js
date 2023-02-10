@@ -146,9 +146,14 @@ export default function AdminMain(){
         {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
 
-        <h1>Graph Components</h1>
-        {
-          (function(){
+      <div className="admin-header">
+        <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
+      </div>
+
+      <div className="admin-body">
+
+        <div className="admin-left-panel">
+        { (function(){
             const Elements = [];
             for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
               for(const [gloOrLoc, sliders] of Object.entries(gloAndLoc)){
@@ -165,18 +170,25 @@ export default function AdminMain(){
               }
             }
             return Elements;
-          })()
-        }
+          })()}
+        </div>
 
-        <AdminDonutGraph sliderGroups={sliderGroups}/>
+        <div className="admin-right-panel">
 
-        <p>Options for adding new data here</p>
-        <AdminAddData addedElementHandler={addedElementHandler}/>
+          <div className="admin-barchart-container">
+            <AdminDonutGraph sliderGroups={sliderGroups}/>
+          </div>
 
-        <form onSubmit={handleUpload}>
-          <input type="file" name='file' onChange={changeHandler}/>
-          <button>Upload</button>
-        </form>
+          <div className="admin-io-container">
+            <form onSubmit={handleUpload}>
+            <input type="file" name='file' onChange={changeHandler}/>
+            <button>Upload</button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
 
     </>
   );
