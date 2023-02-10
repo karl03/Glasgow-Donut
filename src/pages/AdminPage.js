@@ -139,11 +139,6 @@ export default function AdminPage(){
   
   return (
     <>
-      <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
-        {true ? addSectorModal(): quitWithoutSaveModal()}        
-      </div>
-
       <div className="admin-header">
         <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
       </div>
@@ -186,6 +181,11 @@ export default function AdminPage(){
 
         </div>
 
+      </div>
+
+      <div className="modal-manager">
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
+        {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
 
     </>
