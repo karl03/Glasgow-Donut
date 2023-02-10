@@ -3,7 +3,7 @@ import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import axios from 'axios';
 import ModalMenu from '../components/InterfaceComponents/ModalMenu';
-
+import '../components/Admin/Admin.css'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);

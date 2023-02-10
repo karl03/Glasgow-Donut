@@ -1,0 +1,24 @@
+.admin-header {
+    background-color: var(--dark-green);
+    display: flex;
+    justify-content: center;
+}
+
+.admin-title {
+    color: var(--light-green);
+    font-size: x-large;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-body {
+    display: flex;
+}
+
+.admin-left-panel, .admin-barchart-container, .admin-io-container {
+    background-color: var(--light-green);
+    border-radius: 12px;
+    margin: 10px;
+    padding: 15px;
+    flex-grow: 1;
+}
+
