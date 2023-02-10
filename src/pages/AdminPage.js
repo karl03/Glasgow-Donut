@@ -139,7 +139,7 @@ export default function AdminPage(){
   }
   
   return (
-    <>
+    <div className="admin">
       <header className="admin-header">
         <button className="admin-back-button">Back</button>
         <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
@@ -191,7 +191,6 @@ export default function AdminPage(){
         {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
       <AdminAddData addedElementHandler={addedElementHandler}/>
-
-    </>
+    </div>
   );
 };

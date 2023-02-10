@@ -35,7 +35,9 @@
 .admin-body {
     display: flex;
     justify-content: center;
+    align-items: center;
     max-height: min-content;
+    padding: 15px;
 }
 
 .admin-left-panel {
@@ -45,10 +47,7 @@
 
     min-width: min-content;
     max-width: 50%;
-    max-height: 850px;
-
-    margin: 15px;
-    margin-left: 8%;
+    max-height: 700px;
 
     padding: 20px;
     padding-top: 25px;
