@@ -141,15 +141,12 @@ export default function AdminMain(){
   }
   
   return (
-    <AdminContainer>
-
-      {/*modal-manager is DEBUG.*/}
+    <>
       <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
         {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
 
-      <AdminDataListing>
         <h1>Graph Components</h1>
         {
           (function(){
@@ -171,24 +168,17 @@ export default function AdminMain(){
             return Elements;
           })()
         }
-      </AdminDataListing>
 
-      <AdminDonutGraphContainer>
         <AdminDonutGraph sliderGroups={sliderGroups}/>
-      </AdminDonutGraphContainer>
 
-      <AdminAddDataContainer>
         <p>Options for adding new data here</p>
         <AdminAddData addedElementHandler={addedElementHandler}/>
-      </AdminAddDataContainer>
 
-      <AdminUploadFileContainer>
         <form onSubmit={handleUpload}>
           <input type="file" name='file' onChange={changeHandler}/>
           <button>Upload</button>
         </form>
-      </AdminUploadFileContainer>
 
-    </AdminContainer>
+    </>
   );
 };
