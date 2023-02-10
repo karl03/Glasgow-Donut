@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
+import AdminAddData from '../components/Admin/AdminAddData'
 import axios from 'axios';
 import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
@@ -187,6 +188,7 @@ export default function AdminPage(){
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
         {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
+      <AdminAddData addedElementHandler={addedElementHandler}/>
 
     </>
   );
