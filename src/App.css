@@ -1,3 +1,27 @@
+:root {
+  /* Colour Palette */
+  --dark-green: #477C3C;
+  --bright-green: #8FC53A;
+  --light-green: #D2E9AF;
+  
+  --extra-dark-blue: #1C525E;
+  --dark-blue: #297C8E;
+  --bright-blue: 3AADC6;
+  --light-blue: #B0EBF1;
+  
+  --dark-orange: #B84900;
+  --bright-orange: #FF7518;
+  --light-orange: #FFC299;
+  
+  --white: #fff;
+  --black: #000;
+
+  /* Fonts */
+  --main-font: 'Poppins', sans-serif;
+  --secondary-font: "JetBrains Mono";
+  --backup-font: 'Arial';
+}
+
 body {
   font-size: 20px;
 }

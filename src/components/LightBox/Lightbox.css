@@ -1,20 +1,17 @@
 .hidden{
-  z-index: 1000;
-  top: 0;
-  height:100%;
-  width:100%;
-  background-color: rgba(134, 134, 134, 0.8);
   display:none;
 }
 
 .active{
+  display:inline-block;
+}
+
+#lightbox{
+  z-index:4;
   position:absolute;
-  height:130%;
+  height:120%;
   width: 100%;
   background-color: rgba(134, 134, 134, 0.8);
-  display:flex;
-  justify-content:center;
-  align-items: center;
   overflow:hidden;
 }
 
@@ -27,31 +24,62 @@
 }
 
 #lightbox_img{
-  z-index: 1000;
   filter: brightness(0);
   height:4vh;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  padding-top:20%;
+  margin: auto;
+  text-align: center;
+  display: block;
 }
 
-#lightbox_title{
+.lightbox_title{
   vertical-align: top;
-  padding-top:3vh;
+  margin: auto;
+  text-align: center;
   font-size:20px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 }
 
-#circle{
-    position: absolute;
+.circle{
+    z-index:5;
     background-color: grey;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
     border-color: black;
     border: solid;
+    cursor: pointer;
+}
+
+.circle_used{
+  z-index:5;
+  background-color: grey;
+  width: 180px;
+  height: 180px;
+  border-radius: 90px;
+  border-color: black;
+  border: solid;
+  cursor: none;
+}
+
+#primary_circle{
+  position:absolute;
+}
+
+#right_circle{
+  margin-left: 650px;
+  margin-bottom: 118px;
+}
+
+#left_circle{
+  margin-right: 650px;
+  margin-bottom: 118px;
+}
+
+.circle_hidden{
+  display:none;
+}
+
+.circle_active{
+  display:inline-flex;
+  position:fixed;
 }

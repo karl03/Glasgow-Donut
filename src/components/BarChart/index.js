@@ -168,6 +168,7 @@ export default function BarChart({
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                   })
+<<<<<<< src/components/BarChart/index.js
                 .append("svg:image")
                   .attr('x', -smallRingRadius / 3.)
                   .attr('y', -smallRingRadius / 3.)
@@ -179,7 +180,9 @@ export default function BarChart({
                   .on("mousemove", mousemove)
                   .on("mouseleave", mouseleave)
                   .on("click", function(Event, ElementProperties){
-                    LightBoxTrigger(Event, ElementProperties);
+                    if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
+                      LightBoxTrigger(Event, ElementProperties);
+                    }
                   });
                     
             // All Text Labeling of Bar Chart --------
@@ -323,7 +326,9 @@ export default function BarChart({
               .padRadius(innerRadius))
               .style("cursor", "pointer")
               .on("click", function(Event, ElementProperties){
-                LightBoxTrigger(Event, ElementProperties);
+                if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
+                  LightBoxTrigger(Event, ElementProperties);
+                }
                 });
         }
 

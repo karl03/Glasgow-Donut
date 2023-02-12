@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { AdminAddDataContainer, AdminContainer, AdminDataListing, AdminDonutGraphContainer, AdminUploadFileContainer } from './AdminElements';
-//import AdminSlider from "./AdminSlider";
-//import ReactDOM from "react-dom";
-//import Data from "../../Data.json"; //TODO: This is temporary, this should be removed to be replaced by server-side loaded data
 import AdminDonutGraph from "./AdminDonutGraph";
 import AdminAddData from "./AdminAddData";
 import AdminSliderGroup from './AdminSliderGroup';
 import axios from 'axios';
+import ModalMenu from '../InterfaceComponents/ModalMenu'
 
 
 export default function AdminMain(){
   const [file, setFile] = useState(null);
-  //const [filename, setFilename] = useState('Choose File');
+  const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
 
 	const changeHandler = (e) => {
@@ -50,7 +48,9 @@ export default function AdminMain(){
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
+
   const [loaded, setLoaded] = useState(false);
+  
   React.useEffect(function(){
     async function getData(){
       const LoadedData = (await (await fetch("/api/get-data")).json())[0];
@@ -66,9 +66,10 @@ export default function AdminMain(){
       case "value":{
         const NewValue = Number.parseInt(newValue);
         setSliderGroups(function(oldSliders){
-          const New = JSON.parse(JSON.stringify(oldSliders)); //Make a deep copy of the object (this needs to be done so that it doesn't mess with React's state mechanism)
-          New[ecoOrSoc][gloOrLoc][name].value = NewValue; //Set the new value
-          return New; //Return this object to save it
+          //Make a deep copy of the object (avoids React's State)
+          const New = JSON.parse(JSON.stringify(oldSliders));
+          New[ecoOrSoc][gloOrLoc][name].value = NewValue;
+          return New;
         });
         break;
       }
@@ -99,21 +100,58 @@ export default function AdminMain(){
       return New;
     });
   }
+
+  function addSectorModal(){
+    /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
+        - Should generate a modal for sector modification containing prior data.
+          - Upon saving, the old sector should be delete, and the new inserted in its place.
+
+        - If it is a new sector, the Modal is unpopulated.
+          - Upon saving, the new sector is added.
+    */
+    return (
+      <ModalMenu
+          isShow={isShowingModal}
+          onClose={() => setShowingModal(false)}
+          onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+          title="Modal Title"
+          >
+          <p>This is inside the menu.</p>
+          <p>More text</p>
+          <p>More text</p>
+          <p>More text</p>
+        </ModalMenu>
+    )
+  }
+
+  function quitWithoutSaveModal(){
+    /* Opens an warning / query when clicking to leave the editor without saving.
+        - A simple message Modal.
+    */
+    return (
+      <ModalMenu
+         isShow={isShowingModal}
+         onClose={() => setShowingModal(false)}
+         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+         title="Unsaved Data!"
+         >
+          <p>There is unsaved changes to the bar chart!</p>
+        </ModalMenu>
+    )
+  }
   
   return (
     <AdminContainer>
+
+      {/*modal-manager is DEBUG.*/}
+      <div className="modal-manager">
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>HIYA</button>
+        {true ? addSectorModal(): quitWithoutSaveModal()}        
+      </div>
+
       <AdminDataListing>
         <h1>Graph Components</h1>
         {
-          /*sliderGroups.map((sliders, groupID) =>{
-            return <AdminSliderGroup
-              sliders={sliders}
-              groupID={groupID}
-              eventHandler={eventHandler}
-              deleteFunction={deleteSliderHandler}
-              key={`AdminSliderGroup${groupID}`}
-            />
-          })*/
           (function(){
             const Elements = [];
             for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
@@ -134,19 +172,23 @@ export default function AdminMain(){
           })()
         }
       </AdminDataListing>
+
       <AdminDonutGraphContainer>
         <AdminDonutGraph sliderGroups={sliderGroups}/>
       </AdminDonutGraphContainer>
+
       <AdminAddDataContainer>
         <p>Options for adding new data here</p>
         <AdminAddData addedElementHandler={addedElementHandler}/>
       </AdminAddDataContainer>
+
       <AdminUploadFileContainer>
         <form onSubmit={handleUpload}>
           <input type="file" name='file' onChange={changeHandler}/>
           <button>Upload</button>
         </form>
       </AdminUploadFileContainer>
+
     </AdminContainer>
   );
 };
