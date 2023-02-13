@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AdminAddData from '../components/Admin/AdminAddData'
+import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
 import axios from 'axios';
 import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
@@ -108,17 +109,24 @@ export default function AdminPage(){
           - Upon saving, the new sector is added.
     */
     return (
-      <ModalMenu
+      // <ModalMenu
+      //     isShow={isShowingModal}
+      //     onClose={() => setShowingModal(false)}
+      //     onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+      //     title="Modal Title"
+      //     >
+      //     <p>This is inside the menu.</p>
+      //     <p>More text</p>
+      //     <p>More text</p>
+      //     <p>More text</p>
+      //   </ModalMenu>
+
+      <AddSectorModal
           isShow={isShowingModal}
-          onClose={() => setShowingModal(false)}
-          onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
-          title="Modal Title"
-          >
-          <p>This is inside the menu.</p>
-          <p>More text</p>
-          <p>More text</p>
-          <p>More text</p>
-        </ModalMenu>
+          setShow={setShowingModal}
+      >
+
+      </AddSectorModal>
     )
   }
 
