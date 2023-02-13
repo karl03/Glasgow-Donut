@@ -5,26 +5,32 @@ import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
+    function handleSubmit(form){
+        console.log("HELLOS!")
+        console.log(form);
+        props.setShow(false);
+    }
+
   return (
     <ModalMenu 
         isShow={props.isShow}
         onClose={() => props.setShow(false)}
-        onSave={() => props.setShow(false)} // TODO: onSave function to pass data from Modal
+        onSave={() => handleSubmit} // TODO: onSave function to pass data from Modal
         title="Sector Editor"
     >
-        <form action="" className="add-sector-form">
+        <form action="handleSubmit" className="add-sector-form" method='post'>
 
             <label for="sector-title">Title </label>
-            <input type="text" className="sector-title" />
+            <input type="text" name='title' className="sector-title" />
 
             <div className="">SLIDER INPUT </div>
     
             <label for="sector-indicator">Indicator </label>
-            <input type="text" className="sector-indicator" />
+            <input type="text" name='indicator' className="sector-indicator" />
         
     
             <label for="sector-target">Target </label>
-            <input type="text" className="sector-target" />
+            <input type="text" name='target' className="sector-target" />
         
     
             <label for="sector-description">Description </label>
@@ -32,13 +38,11 @@ export default function AddSectorModal(props) {
         
     
             <label for="sector-cites">Citations </label>
-            <input type="text" className="sector-cites" />
+            <input type="text" name='cites' className="sector-cites" />
         
     
             <label for="sector-videolink">Videolink </label>
-            <input type="url"  className="sector-videolink" />
-
-            <input type="submit" value="" />
+            <input type="url" name='video' className="sector-videolink" />
         
         </form>
     </ModalMenu>
