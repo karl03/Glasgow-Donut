@@ -54,7 +54,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/AirPollution-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "3a98ddfe-cd1a-43ff-a3fa-462019905d08"
+          "id": "5a530dbe-8036-46c1-bd91-8e95ff174e57"
         },
         "chemical_pollution": {
           "value": 47,
@@ -78,7 +78,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/ChemicalPollution-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "ed4d5444-ee16-4fc4-ac72-4687152e413e"
+          "id": "547ada7e-1787-40df-9134-4283a36f6917"
         },
         "biodiversity_loss": {
           "value": 78,
@@ -102,7 +102,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/BiodiversityLoss-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "f56d4fb7-41de-4e9b-ab1e-75728a43dbf7"
+          "id": "6915f43a-4a28-4ddb-809f-3455a36791e5"
         },
         "excessive_fertilizer_use": {
           "value": 44,
@@ -126,7 +126,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/ExcessiveFertilizerUse-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "a69ca9ce-af72-465b-ae1f-1395f9254262"
+          "id": "c627c696-87b4-4751-b882-1476e5149369"
         },
         "fresh_water_withdrawal": {
           "value": 24,
@@ -156,7 +156,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/FreshwaterWithdrawal-black.png",
           "video_hash": "I77B871YOTQ",
-          "id": "0fda40a2-8270-4736-87da-49b3fc683e92"
+          "id": "5e8b566c-af55-4b5f-a77c-6e157a35a305"
         },
         "land_conversion": {
           "value": 90,
@@ -180,7 +180,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/LandConversion-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "61571c04-9935-491f-b81f-18c2b73d1ae3"
+          "id": "9919c2fd-eba6-423b-93d5-19e8e3e33a19"
         },
         "ozone_layer_depletion": {
           "value": 100,
@@ -198,7 +198,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/OzoneLayerDepletion-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "24ae345c-bd24-4428-be9b-124fc36f7beb"
+          "id": "b6e42d06-b961-4498-af2a-dc666a73d706"
         }
       },
       "local": {
@@ -224,7 +224,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/BuildAndProtectSoil-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "9f038d71-9a36-4ee4-9e56-38996f3dfead"
+          "id": "f4f5190c-93f3-449b-a276-626a43514024"
         },
         "air": {
           "value": 72,
@@ -260,7 +260,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/CleanseTheAir-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "46d2eb50-c574-4435-944f-b010e66eabfa"
+          "id": "704cafb6-88b4-4ce6-a75e-40ef74dff56c"
         },
         "fresh_water": {
           "value": 44,
@@ -284,7 +284,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/CycleFreshwater-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "27ec65ed-75dd-4688-b39c-ff98ee03d1da"
+          "id": "4821b1f8-2a14-4823-b81d-ef4d02573ced"
         },
         "wellbeing": {
           "value": 66,
@@ -308,7 +308,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/EnhanceWellbeing-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "1facfae7-ce10-4966-9397-999432b56c98"
+          "id": "1fbda043-a8ad-479b-92d4-823ec6506290"
         },
         "energy": {
           "value": 23,
@@ -326,7 +326,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/HarvestEnergy-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "60862c56-48ef-4b6c-ab19-43db9a0dfa85"
+          "id": "579e2eee-4457-423b-88b4-c71e2d10621d"
         },
         "biodiversity": {
           "value": 14,
@@ -344,7 +344,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/HouseBiodiversity-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "87fa067a-4f4f-4ca3-995d-994ba5f9178c"
+          "id": "8c4ed4e3-182d-4471-a4e5-680c3802493f"
         },
         "temperature": {
           "value": 4,
@@ -362,7 +362,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/RegulateTheTemperature-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "287f1184-1c38-4587-8f75-943dd06992d9"
+          "id": "63e2466c-2d51-470b-ad98-c9bedb605f4c"
         },
         "store_carbon": {
           "value": 69,
@@ -380,7 +380,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Ecological/StoreCarbon-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "42ad8e74-7fd2-4c19-8033-840769290d59"
+          "id": "24cdc8aa-6f47-4767-b9ca-d50fdf50e32e"
         }
       }
     },
@@ -408,7 +408,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Social/Networks-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "f7da1cea-0946-451e-9444-d720d79ec80f"
+          "id": "342e435b-a07f-4291-937e-f3032e96fe52"
         },
         "networks": {
           "value": 80,
@@ -432,7 +432,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Social/Networks-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "91442d05-3c7a-467b-879d-04c78e48a176"
+          "id": "bc2bf9b1-57b0-4d09-9e99-fdc641015ab7"
         }
       },
       "local": {
@@ -452,7 +452,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Social/Connectivity-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "256c88c4-761a-4a49-8b31-840795404e3e"
+          "id": "05277c46-0191-43aa-b71b-759131ab3117"
         },
         "culture": {
           "value": 98,
@@ -470,7 +470,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Social/Culture-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "202974a6-123b-4bd3-9a76-1264d27ae107"
+          "id": "062d2e85-741f-4868-8f6d-593537f2e750"
         },
         "education": {
           "value": 45,
@@ -494,7 +494,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Social/Education-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "2519f339-88a3-405e-900b-35411a20a048"
+          "id": "9b2ec972-d41e-4292-81c4-24f5a023d4dc"
         },
         "water": {
           "value": 76,
@@ -524,7 +524,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Social/Water-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "a51a5d7a-cc73-4351-b447-f4134be85b2b"
+          "id": "f27bf1a7-58ca-4c40-9abe-cb829f87a15f"
         },
         "health": {
           "value": 34,
@@ -560,7 +560,7 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Local_Social/Health-black.png",
           "video_hash": "dQw4w9WgXcQ",
-          "id": "a0433277-8099-4190-b30e-27f85dbc4f2e"
+          "id": "dffc4372-fd84-4d83-9237-ae3f3d444a96"
         }
       }
     }
