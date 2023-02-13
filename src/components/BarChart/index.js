@@ -3,17 +3,6 @@ import * as d3 from "d3";
 import LightBox from "../LightBox";
 import axios from 'axios';
 import "../LightBox/Lightbox.css";
-import AirPollutionB from "./Icons/Dimension Icons Global Ecological/AirPollution-black.png"
-import BioDiversityB from "./Icons/Dimension Icons Global Ecological/BiodiversityLoss-black.png"
-import ChemicalPollutionB from "./Icons/Dimension Icons Global Ecological/ChemicalPollution-black.png"
-import ExcessiveFertilizerUseB from "./Icons/Dimension Icons Global Ecological/ExcessiveFertilizerUse-black.png"
-import FreshwaterWithdrawalB from "./Icons/Dimension Icons Global Ecological/FreshwaterWithdrawal-black.png"
-import LandConversionB from "./Icons/Dimension Icons Global Ecological/LandConversion-black.png"
-import OceanAcidificationB from "./Icons/Dimension Icons Global Ecological/OceanAcidification-black.png"
-import OzoneLayerDepletionB from "./Icons/Dimension Icons Global Ecological/OzoneLayerDepletion-black.png"
-import NetworksB from "./Icons/Dimension Icons Global Social (additional)/Networks-black.png"
-import BuildAndProtectSoilB from "./Icons/Dimension Icons Local Ecological/BuildAndProtectSoil-black.png"
-
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
   size = 500,
@@ -168,7 +157,6 @@ export default function BarChart({
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                   })
-<<<<<<< src/components/BarChart/index.js
                 .append("svg:image")
                   .attr('x', -smallRingRadius / 3.)
                   .attr('y', -smallRingRadius / 3.)
