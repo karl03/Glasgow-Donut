@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import '../DefaultStyles.css';
 
 
-
+/*
 export const AdminContainer = styled.div`
     background-color: #8fc53a;
     align-items:center;
@@ -61,4 +61,4 @@ export const AdminUploadFileContainer = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
-`
+`*/
