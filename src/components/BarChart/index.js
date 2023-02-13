@@ -168,7 +168,6 @@ export default function BarChart({
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
                     return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
                   })
-<<<<<<< src/components/BarChart/index.js
                 .append("svg:image")
                   .attr('x', -smallRingRadius / 3.)
                   .attr('y', -smallRingRadius / 3.)
