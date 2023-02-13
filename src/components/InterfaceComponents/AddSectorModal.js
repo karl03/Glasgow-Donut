@@ -26,7 +26,7 @@ export default function AddSectorModal(props) {
             </div>
             <div>
                 <label for="sector-description">description: </label>
-                <input type="text" className="sector-description" />
+                <textarea name="" id="" cols="30" rows="10"></textarea>
             </div>
             <div>
                 <label for="sector-cites">Citations: </label>
