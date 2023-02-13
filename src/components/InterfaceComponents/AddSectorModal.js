@@ -1,5 +1,7 @@
 import React from 'react'
 import ModalMenu from './ModalMenu'
+import './AddSectorModal.css'
+import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
@@ -8,34 +10,36 @@ export default function AddSectorModal(props) {
         isShow={props.isShow}
         onClose={() => props.setShow(false)}
         onSave={() => props.setShow(false)} // TODO: onSave function to pass data from Modal
-        title="Modal Title"
+        title="Sector Editor"
     >
         <form action="" className="add-sector-form">
-            <div>
-                <label for="sector-title">Title: </label>
-                <input type="text" className="sector-title" />
-            </div>
-            <div>SLIDER INSERT</div>
-            <div>
-                <label for="sector-indicator">Indicator: </label>
-                <input type="text" className="sector-indicator" />
-            </div>
-            <div>
-                <label for="sector-target">target: </label>
-                <input type="text" className="sector-target" />
-            </div>
-            <div>
-                <label for="sector-description">description: </label>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div>
-                <label for="sector-cites">Citations: </label>
-                <input type="text" className="sector-cites" />
-            </div>
-            <div>
-                <label for="sector-videolink">Videolink: </label>
-                <input type="url"  className="sector-videolink" />
-            </div>
+
+            <label for="sector-title">Title </label>
+            <input type="text" className="sector-title" />
+
+            <div className="">SLIDER INPUT </div>
+    
+            <label for="sector-indicator">Indicator </label>
+            <input type="text" className="sector-indicator" />
+        
+    
+            <label for="sector-target">Target </label>
+            <input type="text" className="sector-target" />
+        
+    
+            <label for="sector-description">Description </label>
+            <textarea name="sector-description" id="sector-description" cols="30" rows="10"></textarea>
+        
+    
+            <label for="sector-cites">Citations </label>
+            <input type="text" className="sector-cites" />
+        
+    
+            <label for="sector-videolink">Videolink </label>
+            <input type="url"  className="sector-videolink" />
+
+            <input type="submit" value="" />
+        
         </form>
     </ModalMenu>
   )
