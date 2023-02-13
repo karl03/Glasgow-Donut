@@ -1,0 +1,101 @@
+/* --- Header Styles --- */
+
+.admin-header {
+    background-color: var(--dark-green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.admin-title {
+    color: var(--light-green);
+    font-size: x-large;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-back-button, .admin-help-button {
+    background-color: var(--light-green);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: var(--dark-green);
+    border-radius: 8px;
+    border: 0;
+    font-weight: bold;
+    max-height: fit-content;
+    max-width: fit-content;
+}
+
+.admin-back-button:hover, .admin-help-button:hover {
+    color: var(--bright-green);
+}
+
+/* --- Page Styles --- */
+
+.admin-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: min-content;
+    padding: 15px;
+}
+
+.admin-left-panel {
+    background-color: var(--light-green);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    min-width: min-content;
+    max-width: 50%;
+    max-height: 700px;
+
+    padding: 20px;
+    padding-top: 25px;
+
+    overflow: auto;
+}
+
+.admin-right-panel {
+    overflow: hidden;
+    flex-grow: 1;
+    max-width: 50%;
+    margin: 15px;
+    margin-right: 8%;
+}
+
+.admin-barchart-container, .admin-io-container {
+    background-color: var(--light-green);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.admin-barchart-container {
+    margin-bottom: 15px;
+    min-width: 600px;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Custom Scroll Bar */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--white);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bright-green);
+}
