@@ -17,9 +17,9 @@ const Title = styled.h2`
 
 export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, modalHandles}){
 
-  function openAddSectorModal(ecoOrSoc, gloAndLoc, modalHandles){
+  function openAddSectorModal(ecoOrSoc, gloOrLoc, modalHandles){
     const [setLastCategorySelect, setShowingModal] = modalHandles;
-    setLastCategorySelect({ecoOrSoc, gloAndLoc});
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
     setShowingModal(true);
   }
 

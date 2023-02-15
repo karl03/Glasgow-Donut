@@ -204,6 +204,7 @@ export default function AdminPage(){
         isShow={isShowingModal}
         setShow={setShowingModal}
         sliderGroups={sliderGroups}
+        setSliderGroups={setSliderGroups}
         ></AddSectorModal>
       <AdminAddData addedElementHandler={addedElementHandler}/>
     </div>

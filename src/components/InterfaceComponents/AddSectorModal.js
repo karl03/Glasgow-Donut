@@ -7,17 +7,50 @@ export default function AddSectorModal(props) {
 
     function handleSubmit(props){
         const title = document.getElementById("modal-sector-title");
+        const value = document.getElementById("modal-sector-value");
         const indicator = document.getElementById("modal-sector-indicator");
         const target = document.getElementById("modal-sector-target");
         const description = document.getElementById("modal-sector-description");
         const cites = document.getElementById("modal-sector-cites");
         const videolink = document.getElementById("modal-sector-videolink");
 
-        console.log(props);
+        if (!isValidForm(title.value)) {
+            alert("The sector requires a title!");
+            return;
+        }
 
-        console.log(title.value + '\n' + indicator.value + '\n' + target.value + '\n' + description.value + '\n' + cites.value + '\n' + videolink.value);
+        const New = JSON.parse(JSON.stringify(props.sliderGroups));
+        const {ecoOrSoc, gloOrLoc} = props.lastCategorySelect;
+
+        New[ecoOrSoc][gloOrLoc][title.value] = {
+            "value": value.value,
+            "adjacent": [],
+            "indicator": indicator.value,
+            "target": target.value,
+            "description": description.value,
+            "quotes": cites.value,
+            "video_hash": videolink.value
+        };
+        props.setSliderGroups(New);
+
+        title.value = '';
+        value.value = '';
+        indicator.value = '';
+        target.value = '';
+        description.value = '';
+        cites.value = '';
+        videolink.value = '';
 
         props.setShow(false);
+    }
+
+    function isValidForm(title){
+        if (title != '') {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
   return (
@@ -33,8 +66,11 @@ export default function AddSectorModal(props) {
             <input type="text" name='title' id='modal-sector-title' className="sector-title" 
                 placeholder='Title...'/>
 
-            <div className="">SLIDER INPUT </div>
-    
+            <label for="sector-value">Value </label>
+            <input type="number" name="sector-value" id="modal-sector-value"
+                max="100" min="0" placeholder='0' defaultValue='0'/>
+
+
             <label for="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"
                 placeholder='Category indicator...' />
