@@ -28,28 +28,35 @@ export default function AddSectorModal(props) {
         <form action="" className="add-sector-form" method='post'>
 
             <label for="sector-title">Title </label>
-            <input type="text" name='title' id='modal-sector-title' className="sector-title" />
+            <input type="text" name='title' id='modal-sector-title' className="sector-title" 
+                placeholder='Title...'/>
 
             <div className="">SLIDER INPUT </div>
     
             <label for="sector-indicator">Indicator </label>
-            <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator" />
+            <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"
+                placeholder='Category indicator...' />
         
     
             <label for="sector-target">Target </label>
-            <input type="text" name='target' id='modal-sector-target'className="sector-target" />
+            <input type="text" name='target' id='modal-sector-target'className="sector-target"
+                placeholder='Category target...' />
         
     
             <label for="sector-description">Description </label>
-            <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"></textarea>
+            <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
+                placeholder='Description...'></textarea>
         
     
             <label for="sector-cites">Citations </label>
-            <input type="text" name='cites' id='modal-sector-cites' className="sector-cites" />
+            <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
+                placeholder="John Smith, 'generic paper', www.JohnSmith.com" />
         
     
             <label for="sector-videolink">Videolink </label>
-            <input type="url" name='video' id="modal-sector-videolink" className="sector-videolink" />
+            <input type="url" name='video' id="modal-sector-videolink" className="sector-videolink"
+                placeholder="https://example.com"
+                pattern="https://.*"/>
         
         </form>
     </ModalMenu>
