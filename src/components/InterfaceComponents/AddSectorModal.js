@@ -5,43 +5,24 @@ import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
-    function handleSubmit(props){
-        const title = document.getElementById("modal-sector-title");
-        const value = document.getElementById("modal-sector-value");
-        const indicator = document.getElementById("modal-sector-indicator");
-        const target = document.getElementById("modal-sector-target");
-        const description = document.getElementById("modal-sector-description");
-        const cites = document.getElementById("modal-sector-cites");
-        const videolink = document.getElementById("modal-sector-videolink");
+    function getFormData(){
+        const formElements = {
+         "title" : document.getElementById("modal-sector-title"),
+         "value" : document.getElementById("modal-sector-value"),
+         "indicator" : document.getElementById("modal-sector-indicator"),
+         "target" : document.getElementById("modal-sector-target"),
+         "description" : document.getElementById("modal-sector-description"),
+         "cites" : document.getElementById("modal-sector-cites"),
+         "videolink" : document.getElementById("modal-sector-videolink")
+        };
 
-        if (!isValidForm(title.value)) {
-            alert("The sector requires a title!");
-            return;
+        let formData = {};
+        for (var key in formElements){
+            formData[key] = formElements[key].value;
+            formElements[key].value = '';
         }
 
-        const New = JSON.parse(JSON.stringify(props.sliderGroups));
-        const {ecoOrSoc, gloOrLoc} = props.lastCategorySelect;
-
-        New[ecoOrSoc][gloOrLoc][title.value] = {
-            "value": value.value,
-            "adjacent": [],
-            "indicator": indicator.value,
-            "target": target.value,
-            "description": description.value,
-            "quotes": cites.value,
-            "video_hash": videolink.value
-        };
-        props.setSliderGroups(New);
-
-        title.value = '';
-        value.value = '';
-        indicator.value = '';
-        target.value = '';
-        description.value = '';
-        cites.value = '';
-        videolink.value = '';
-
-        props.setShow(false);
+        return formData;
     }
 
     function isValidForm(title){
@@ -53,11 +34,41 @@ export default function AddSectorModal(props) {
         }
     }
 
+    function handleSubmit(props){
+        const {title, value, indicator, target, description, cites, videolink} = getFormData();
+
+        if (!isValidForm(title.value)) {
+            alert("The sector requires a title!");
+            return;
+        }
+
+        const New = JSON.parse(JSON.stringify(props.sliderGroups));
+        const {ecoOrSoc, gloOrLoc} = props.lastCategorySelect;
+
+        New[ecoOrSoc][gloOrLoc][title] = {
+            "value": value,
+            "adjacent": [],
+            "indicator": indicator,
+            "target": target,
+            "description": description,
+            "quotes": cites,
+            "video_hash": videolink
+        };
+        props.setSliderGroups(New);
+
+        props.setShow(false);
+    }
+
+    function handleClose(props){
+        getFormData();
+        props.setShow(false);
+    }
+
   return (
     <ModalMenu 
         isShow={props.isShow}
-        onClose={() => props.setShow(false)}
-        onSave={() => handleSubmit(props)} // TODO: onSave function to pass data from Modal
+        onClose={() => handleClose(props)}
+        onSave={() => handleSubmit(props)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
