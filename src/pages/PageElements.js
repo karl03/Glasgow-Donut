@@ -9,6 +9,7 @@ export const ImageBg = styled.img`
   background:#232a34;
   object-position:0% 0%;
   opacity:0.5;
+  z-index: -2;
 `
 
 export const MainBg = styled.div`
@@ -20,4 +21,5 @@ export const MainBg = styled.div`
   width:100%;
   height:100%;
   overflow: hidden;
+  z-index: -1;
 `
