@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./Lightbox.css";
 
 
-export default function LightBox ({trigger, setTrigger, DataProperty, EventProperty}){
+export default function LightBox ({trigger, setTrigger, DataProperty}){
   
   const [Name,setName] = React.useState(DataProperty[0]);
   const [Hide, setHidden] = React.useState("circle_hidden");
@@ -10,7 +10,6 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   useEffect(() => {
     if(trigger==="active"){
       console.log(DataProperty);
-      console.log(EventProperty);
       setName(DataProperty[0].split('_').join(' '));
       setTrigger("active")
     }
