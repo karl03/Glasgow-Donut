@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AdminAddData from '../components/Admin/AdminAddData'
@@ -18,9 +19,14 @@ export default function AdminPage(){
   const [loaded, setLoaded] = useState(false);
 
 	const changeHandler = (e) => {
-		setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
-	};
+    const file = e.target.files[0];
+    const label = e.target.nextElementSibling;
+
+    setFile(file);
+    setFilename(file.name);
+    label.textContent = file ? file.name : "File Upload";
+  };
+
 
   const handleUpload = async e => {
     e.preventDefault();
@@ -39,11 +45,14 @@ export default function AdminPage(){
 
       console.log(fileName);
       console.log(filePath);
+      alert('Upload Success');
 
     } catch (err) {
       if (err.response.status === 500) {
+        alert('There was a problem with the server');
         console.log('There was a problem with the server');
       } else {
+        alert(err.response.data.msg);
         console.log(err.response.data.msg);
       }
     }
@@ -139,10 +148,10 @@ export default function AdminPage(){
   }
   
   return (
-    <div className="admin">
+    <div className="admin-container">
       <header className="admin-header">
-        <button className="admin-back-button">Back</button>
-        <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
+        <LinkR to="/" className="admin-back-button">&lt; Back</LinkR>
+        <h1 className="admin-title">Gallant Donut Chart Editor</h1>
         <button className="admin-help-button">HELP</button>
       </header>
 
@@ -172,13 +181,14 @@ export default function AdminPage(){
         <div className="admin-right-panel">
 
           <div className="admin-barchart-container">
-            <AdminDonutGraph sliderGroups={sliderGroups}/>
+            <AdminDonutGraph sliderGroups={sliderGroups} size={500}/>
           </div>
 
           <div className="admin-io-container">
-            <form onSubmit={handleUpload}>
-            <input type="file" name='file' onChange={changeHandler}/>
-            <button>Upload</button>
+            <form className="admin-upload-form" onSubmit={handleUpload}>
+            <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeHandler}/>
+            <label className="admin-upload-label" for="file">File Upload</label>
+            <button className="admin-upload-button">Upload</button>
             </form>
           </div>
 
@@ -186,11 +196,11 @@ export default function AdminPage(){
 
       </div>
 
-      <div className="modal-manager">
+      {/* <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
         {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
-      <AdminAddData addedElementHandler={addedElementHandler}/>
+      <AdminAddData addedElementHandler={addedElementHandler}/> */}
     </div>
   );
 };
