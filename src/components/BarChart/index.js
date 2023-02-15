@@ -302,6 +302,7 @@ export default function BarChart({
           .selectAll("path")
           .data(Properties)
           .enter()
+          
           .append("path")
           .attr("class", "GraphColumn")
             .attr("fill", "#fa9197")
@@ -317,7 +318,8 @@ export default function BarChart({
                 if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
                   LightBoxTrigger(Event, ElementProperties);
                 }
-                });
+              })
+
         }
 
         for(const [Half, Properties] of Object.entries(data.ecological)){
