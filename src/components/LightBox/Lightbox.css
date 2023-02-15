@@ -1,9 +1,13 @@
 .hidden{
-  display:none;
+  /*display:none;*/
+  opacity: 0;
+  pointer-events: none;
 }
 
 .active{
   display:inline-block;
+  opacity: 1;
+  pointer-events: visible;
 }
 
 #lightbox{
@@ -11,7 +15,8 @@
   position:absolute;
   height:120%;
   width: 100%;
-  background-color: rgba(134, 134, 134, 0.8);
+  background-color: rgba(0,0,0,0.5);
+  transition: all 0.3s ease-in-out;
   overflow:hidden;
 }
 
@@ -46,6 +51,7 @@
     height: 180px;
     border-radius: 90px;
     border-color: black;
+    transition: all 0.3s ease-in-out;
     border: solid;
     cursor: pointer;
 }
@@ -76,10 +82,13 @@
 }
 
 .circle_hidden{
+  opacity: 0;
   display:none;
 }
 
 .circle_active{
   display:inline-flex;
   position:fixed;
+  opacity: 1;
+  pointer-events: visible;
 }
