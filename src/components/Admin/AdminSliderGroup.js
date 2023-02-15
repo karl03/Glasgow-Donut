@@ -5,11 +5,13 @@ const AdminSliderWrapper = styled.div`
   width: calc(100% - 20px);
   align-items: center;
   padding: 10px;
+  padding-top: 0px;
   margin: 0 10px 10px 10px;
   box-sizing: border-box;
   background-color: #8fc53a;
+  border-radius: 10px;
 `;
-const Title = styled.h2`
+const Title = styled.h3`
   text-align: center;
   margin: 10px;
 `;
