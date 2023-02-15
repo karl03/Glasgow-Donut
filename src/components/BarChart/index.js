@@ -8,7 +8,7 @@ export default function BarChart({
   size = 500,
   outerRadius = (size / 2) - 20,
   innerRadius = outerRadius / 2,
-  ringRadius = 60,
+  ringRadius = 70,
   smallRingRadius = 45,
   margin = 3,
   data = null//Data[0]
@@ -18,6 +18,8 @@ export default function BarChart({
   const [trigger, setTrigger] = useState("hidden");
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
+  const innerTextRadius = innerRadius - (ringRadius + smallRingRadius) / 4;
+  const outerTextRadius = innerRadius + (ringRadius + smallRingRadius) / 4;
   useEffect(() => {
 
     function LightBoxTrigger(Event, ElementProperties){
@@ -35,7 +37,7 @@ export default function BarChart({
         svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
         
         const group = svg.append("g")
-            .attr("transform", "translate(250, 250)");
+          .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
     
         const yOuter = d3.scaleRadial()
           .range([innerRadius + ringRadius / 2. + margin, outerRadius])   // Domain will be define later.
@@ -101,8 +103,6 @@ export default function BarChart({
                 .padAngle(0.)
                 .padRadius(innerRadius)
               );
-
-            
         }
 
 
@@ -110,15 +110,10 @@ export default function BarChart({
 
           var Tooltip = d3.select(".svgClass")
             .append("text")
-            .attr("id", "abcd")
             .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-            .style("stroke", "black")
+            .style("fill", "black")
             .style("font-size", "12px")
+            .style("pointer-events", "none")
           
           var mouseover = function(d) {
             Tooltip
@@ -129,9 +124,9 @@ export default function BarChart({
           }
           var mousemove = function(event, data) {
             Tooltip
-              .html("The exact value of this cell is: " + data[1].indicator)
-              .attr("x", (event.layerX+70))
-              .attr("y", (event.layerY))
+              .html("Value: " + data[1].indicator)
+              .attr("x", (event.offsetX + 20))
+              .attr("y", (event.offsetY + 20))
           }
           var mouseleave = function(d) {
             Tooltip
@@ -176,42 +171,36 @@ export default function BarChart({
             // All Text Labeling of Bar Chart --------
             group.append("path")
               .attr("id", "arc-top") //Unique id of the path
-              .attr("d", "M -89.95,0 A 90 90 0 0 1 90 0") //SVG path
+              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 1 ${innerTextRadius} 0`) //SVG path
+              .attr("dy", ".1em")
               .style("fill", "none")
               .style("stroke", "0");
 
             group.append("g")
-              .selectAll("path")
-              .data(Properties)
-              .enter()
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#arc-top")
                 .attr("alignment-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 8)
+                .style("font-size", 12)
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
-                .attr("dy", ".1em")
                 .text("GLOBAL SOCIAL FOUNDATION");
 
             group.append("path")
               .attr("id", "arc-bottom") //Unique id of the path
-              .attr("d", "M -89.99,0 A 90 90 0 0 0 90 0") //SVG path
+              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 0 ${innerTextRadius} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
           
             group.append("g")
-              .selectAll("path")
-              .data(Properties)
-              .enter()
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#arc-bottom")
                 .attr("alignment-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 8)
+                .style("font-size", 12)
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
@@ -220,20 +209,17 @@ export default function BarChart({
 
             group.append("path")
                 .attr("id", "lower-arc-bottom") //Unique id of the path
-                .attr("d", "M -142,0 A 90 90 0 0 0 142 0") //SVG path
+                .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 0 ${outerTextRadius} 0`) //SVG path
                 .style("fill", "none")
                 .style("stroke", "0");
 
             group.append("g")
-                .selectAll("path")
-                .data(Properties)
-                .enter()
                 .append("text")
                 .append("textPath")
                   .attr("xlink:href", "#lower-arc-bottom")
                   .attr("alignment-baseline", "middle")
                   .style("fill", "white")
-                  .style("font-size", 8)
+                  .style("font-size", 12)
                   .style("letter-spacing", "0.001em")
                   .style("text-anchor","middle")
                   .attr("startOffset", "50%")
@@ -243,20 +229,17 @@ export default function BarChart({
 
             group.append("path")
               .attr("id", "upper-arc-top") //Unique id of the path
-              .attr("d", "M -142,0 A 90 90 0 0 1 142 0") //SVG path
+              .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 1 ${outerTextRadius} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
 
             group.append("g")
-              .selectAll("path")
-              .data(Properties)
-              .enter()
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#upper-arc-top")
                 .attr("alignment-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 8)
+                .style("font-size", 12)
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
@@ -346,9 +329,8 @@ export default function BarChart({
   return (
     <>
     <svg className = "svgClass" ref={ref} style={{
-      height: 500,
-      width: 500,
-      transform: "scale(1.2)",
+      height: size.toString(),
+      width: size.toString(),
     }}>
     </svg>
     <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
