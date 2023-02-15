@@ -5,10 +5,16 @@ import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
-    function handleSubmit(){
+    function handleSubmit(form){
+        const title = document.getElementById("modal-sector-title");
+        const indicator = document.getElementById("modal-sector-indicator");
+        const target = document.getElementById("modal-sector-target");
+        const description = document.getElementById("modal-sector-description");
+        const cites = document.getElementById("modal-sector-cites");
+        const videolink = document.getElementById("modal-sector-videolink");
 
+        console.log(title.value + '\n' + indicator.value + '\n' + target.value + '\n' + description.value + '\n' + cites.value + '\n' + videolink.value);
 
-        console.log("Title: " + title.value)
         props.setShow(false);
     }
 
