@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
-import AdminAddData from '../components/Admin/AdminAddData'
+//import AdminAddData from '../components/Admin/AdminAddData'
 import axios from 'axios';
-import ModalMenu from '../components/InterfaceComponents/ModalMenu';
+//import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  const [isShowingModal, setShowingModal] = useState(false);
+  //const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
     ecological: {global: {}, local: {}},
@@ -84,7 +84,7 @@ export default function AdminPage(){
     }
   }, []);
 
-  const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
+  /*const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
     setSliderGroups(function(oldSliders){
       const New = JSON.parse(JSON.stringify(oldSliders));
       New[ecoOrSoc][gloOrLoc][name] = {
@@ -98,7 +98,7 @@ export default function AdminPage(){
       };
       return New;
     });
-  }, []);
+  }, []);*/
 
   function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setSliderGroups(function(oldSliders){
@@ -108,7 +108,7 @@ export default function AdminPage(){
     });
   }
 
-  function addSectorModal(){
+  //function addSectorModal(){
     /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
         - Should generate a modal for sector modification containing prior data.
           - Upon saving, the old sector should be delete, and the new inserted in its place.
@@ -116,7 +116,7 @@ export default function AdminPage(){
         - If it is a new sector, the Modal is unpopulated.
           - Upon saving, the new sector is added.
     */
-    return (
+    /*return (
       <ModalMenu
           isShow={isShowingModal}
           onClose={() => setShowingModal(false)}
@@ -129,13 +129,13 @@ export default function AdminPage(){
           <p>More text</p>
         </ModalMenu>
     )
-  }
+  }*/
 
-  function quitWithoutSaveModal(){
+  /*function quitWithoutSaveModal(){
     /* Opens an warning / query when clicking to leave the editor without saving.
         - A simple message Modal.
     */
-    return (
+    /*return (
       <ModalMenu
          isShow={isShowingModal}
          onClose={() => setShowingModal(false)}
@@ -145,7 +145,7 @@ export default function AdminPage(){
           <p>There is unsaved changes to the bar chart!</p>
         </ModalMenu>
     )
-  }
+  }*/
   
   return (
     <div className="admin-container">

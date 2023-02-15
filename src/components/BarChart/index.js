@@ -180,9 +180,10 @@ export default function BarChart({
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#arc-top")
-                .attr("alignment-baseline", "middle")
+                .style("alignment-baseline", "middle")
+                .style("dominant-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 12)
+                .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
@@ -198,9 +199,10 @@ export default function BarChart({
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#arc-bottom")
-                .attr("alignment-baseline", "middle")
+                .style("alignment-baseline", "middle")
+                .style("dominant-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 12)
+                .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
@@ -217,9 +219,10 @@ export default function BarChart({
                 .append("text")
                 .append("textPath")
                   .attr("xlink:href", "#lower-arc-bottom")
-                  .attr("alignment-baseline", "middle")
+                  .style("alignment-baseline", "middle")
+                  .style("dominant-baseline", "middle")
                   .style("fill", "white")
-                  .style("font-size", 12)
+                  .style("font-size", 12 + "px")
                   .style("letter-spacing", "0.001em")
                   .style("text-anchor","middle")
                   .attr("startOffset", "50%")
@@ -237,9 +240,10 @@ export default function BarChart({
               .append("text")
               .append("textPath")
                 .attr("xlink:href", "#upper-arc-top")
-                .attr("alignment-baseline", "middle")
+                .style("alignment-baseline", "middle")
+                .style("dominant-baseline", "middle")
                 .style("fill", "white")
-                .style("font-size", 12)
+                .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
                 .attr("startOffset", "50%")
@@ -326,11 +330,11 @@ export default function BarChart({
 
     const svgElement = d3.select(ref.current);
     CreateBarChart(svgElement);
-  }, [data, innerRadius, margin, outerRadius, ringRadius, smallRingRadius]);
+  }, [data, innerRadius, margin, outerRadius, ringRadius, smallRingRadius, innerTextRadius, outerTextRadius, size]);
 
   return (
     <>
-    <svg className = "svgClass" ref={ref} style={{
+    <svg className = "svgClass" ref={ref} width={size} height={size} style={{
       height: size.toString(),
       width: size.toString(),
     }}>
