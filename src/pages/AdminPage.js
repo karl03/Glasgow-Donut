@@ -9,6 +9,7 @@ import '../components/Admin/Admin.css'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
+  const [lastCategorySelect, setLastCategorySelect] = useState();
   const [isShowingModal, setShowingModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
@@ -168,6 +169,7 @@ export default function AdminPage(){
                       gloOrLoc={gloOrLoc}
                       eventHandler={eventHandler}
                       deleteFunction={deleteSliderHandler}
+                      modalHandles={[setLastCategorySelect, setShowingModal]}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
@@ -196,8 +198,13 @@ export default function AdminPage(){
 
       <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
-        {true ? addSectorModal(): quitWithoutSaveModal()}        
       </div>
+      <AddSectorModal 
+        lastCategorySelect={lastCategorySelect}
+        isShow={isShowingModal}
+        setShow={setShowingModal}
+        sliderGroups={sliderGroups}
+        ></AddSectorModal>
       <AdminAddData addedElementHandler={addedElementHandler}/>
     </div>
   );
