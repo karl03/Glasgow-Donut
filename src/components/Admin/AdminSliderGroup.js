@@ -46,7 +46,6 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
-                id={SliderInfo.id = uuidv4()}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );
