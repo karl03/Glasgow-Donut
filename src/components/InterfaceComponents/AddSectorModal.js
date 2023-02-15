@@ -5,13 +5,15 @@ import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
-    function handleSubmit(form){
+    function handleSubmit(props){
         const title = document.getElementById("modal-sector-title");
         const indicator = document.getElementById("modal-sector-indicator");
         const target = document.getElementById("modal-sector-target");
         const description = document.getElementById("modal-sector-description");
         const cites = document.getElementById("modal-sector-cites");
         const videolink = document.getElementById("modal-sector-videolink");
+
+        console.log(props);
 
         console.log(title.value + '\n' + indicator.value + '\n' + target.value + '\n' + description.value + '\n' + cites.value + '\n' + videolink.value);
 
@@ -22,7 +24,7 @@ export default function AddSectorModal(props) {
     <ModalMenu 
         isShow={props.isShow}
         onClose={() => props.setShow(false)}
-        onSave={handleSubmit} // TODO: onSave function to pass data from Modal
+        onSave={() => handleSubmit(props)} // TODO: onSave function to pass data from Modal
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
