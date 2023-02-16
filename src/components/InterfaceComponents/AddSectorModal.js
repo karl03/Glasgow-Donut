@@ -28,7 +28,7 @@ export default function AddSectorModal(props) {
     }
 
     function isValidForm(title){
-        if (title != '') {
+        if (title !== '') {
             return true;
         }
         else{

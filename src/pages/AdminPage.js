@@ -4,7 +4,6 @@ import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AdminAddData from '../components/Admin/AdminAddData'
 import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
 import axios from 'axios';
-import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
 
 export default function AdminPage(){
