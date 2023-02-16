@@ -5,17 +5,19 @@ import '../Admin/AdminSlider'
 
 export default function AddSectorModal(props) {
 
-    function getFormData(){
-        const formElements = {
-         "title" : document.getElementById("modal-sector-title"),
-         "value" : document.getElementById("modal-sector-value"),
-         "indicator" : document.getElementById("modal-sector-indicator"),
-         "target" : document.getElementById("modal-sector-target"),
-         "description" : document.getElementById("modal-sector-description"),
-         "cites" : document.getElementById("modal-sector-cites"),
-         "videolink" : document.getElementById("modal-sector-videolink")
-        };
+    function getFormElements(){
+        return {
+            "title" : document.getElementById("modal-sector-title"),
+            "value" : document.getElementById("modal-sector-value"),
+            "indicator" : document.getElementById("modal-sector-indicator"),
+            "target" : document.getElementById("modal-sector-target"),
+            "description" : document.getElementById("modal-sector-description"),
+            "cites" : document.getElementById("modal-sector-cites"),
+            "videolink" : document.getElementById("modal-sector-videolink")
+           };
+    }
 
+    function getFormData(formElements){
         let formData = {};
         for (var key in formElements){
             formData[key] = formElements[key].value;
@@ -35,7 +37,15 @@ export default function AddSectorModal(props) {
     }
 
     function handleSubmit(props){
-        const {title, value, indicator, target, description, cites, videolink} = getFormData();
+        const {
+            title, 
+            value, 
+            indicator, 
+            target, 
+            description, 
+            cites, 
+            videolink
+        } = getFormData(getFormElements());
 
         if (!isValidForm(title.value)) {
             alert("The sector requires a title!");
