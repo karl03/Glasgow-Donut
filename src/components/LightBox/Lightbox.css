@@ -49,8 +49,8 @@
 .circle{
     z-index:5;
     background-color: grey;
-    width: 180px;
     height: 180px;
+    width: 180px;
     border-radius: 90px;
     border-color: black;
     transition: all 0.3s ease-in-out;
