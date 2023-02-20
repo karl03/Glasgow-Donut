@@ -15,7 +15,7 @@ export default function BarChart({
 }){
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
-  const [trigger, setTrigger] = useState("hidden");
+  const [trigger, setTrigger] = useState(false);
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function BarChart({
     function LightBoxTrigger(Event, ElementProperties){
       document.body.scrollTop = 65; // For Safari
       document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-      setTrigger("active")
+      setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
       document.body.id="hide_scroll"

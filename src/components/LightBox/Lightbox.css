@@ -1,13 +1,15 @@
-.hidden{
-  /*display:none;*/
-  opacity: 0;
-  pointer-events: none;
+#primary_circle{
+  position:absolute;
 }
 
-.active{
-  display:inline-block;
-  opacity: 1;
-  pointer-events: visible;
+#right_circle{
+  margin-left: 650px;
+  margin-bottom: 118px;
+}
+
+#left_circle{
+  margin-right: 650px;
+  margin-bottom: 118px;
 }
 
 #lightbox{
@@ -54,44 +56,13 @@
     transition: all 0.3s ease-in-out;
     border: solid;
     cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
 }
 
-.circle_fuck{
-  z-index:5;
-  background-color: grey;
-  width: 180px;
-  height: 180px;
-  border-radius: 90px;
-  border-color: black;
-  transition: all 0.3s ease-in-out;
-  border: solid;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.circle_used{
-  z-index:5;
-  background-color: grey;
-  width: 180px;
-  height: 180px;
-  border-radius: 90px;
-  border-color: black;
-  border: solid;
-  cursor: none;
-}
-
-#primary_circle{
-  position:absolute;
-}
-
-#right_circle{
-  margin-left: 650px;
-  margin-bottom: 118px;
-}
-
-#left_circle{
-  margin-right: 650px;
-  margin-bottom: 118px;
+.active{
+  opacity: 1;
+  pointer-events: visible;
 }
 
 .circle_hidden{
@@ -104,6 +75,11 @@
   position:fixed;
   opacity: 1;
   pointer-events: visible;
+}
+
+.hidden{
+  opacity: 0;
+  pointer-events: none;
 }
 
 .isShow {

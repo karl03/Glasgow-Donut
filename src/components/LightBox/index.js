@@ -5,20 +5,20 @@ import "./Lightbox.css";
 export default function LightBox ({trigger, setTrigger, DataProperty, EventProperty}){
   
   const [Name,setName] = React.useState(DataProperty[0]);
-  const [isShow, setShow] = React.useState(false);
+  const [additionalCirclesIsShow, setShowAdditional] = React.useState(false);
 
   useEffect(() => {
-    if(trigger==="active"){
+    if(trigger===true){
       setName(DataProperty[0].split('_').join(' '));
-      setTrigger("active")
+      setTrigger(true)
     }
   },[trigger, DataProperty, setTrigger]);
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    if(trigger ==="active"){
-      setShow(false);
-      setTrigger("hidden")
+    if(trigger ===true){
+      setShowAdditional(false);
+      setTrigger(false)
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Target").innerText = 'Target';
@@ -27,9 +27,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   }
 
   function additionalCircles() {
-    if(isShow===false){
+    if(additionalCirclesIsShow===false){
       //document.getElementById("primary_circle").style.cursor = 'default';
-      setShow(true);
+      setShowAdditional(true);
       console.log("yeah");
     }
   }
@@ -58,17 +58,17 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
 
   return (
     <>
-  <div className={trigger} id="lightbox" onClick={changeState}>
+  <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
   </div>
 
-    <span id="primary_circle" className={"circle " + trigger} onClick={additionalCircles}>
+    <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
-    <span  id="right_circle" className={`circle_fuck ${isShow ? 'isShow' : ''}`} onClick={changeTarget}>
+    <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
-    <span  id="left_circle" className={`circle_fuck  ${isShow ? 'isShow' : ''}`} onClick={changeIndicator}>
+    <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
   </>
