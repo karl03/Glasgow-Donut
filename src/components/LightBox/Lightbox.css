@@ -56,6 +56,19 @@
     cursor: pointer;
 }
 
+.circle_fuck{
+  z-index:5;
+  background-color: grey;
+  width: 180px;
+  height: 180px;
+  border-radius: 90px;
+  border-color: black;
+  transition: all 0.3s ease-in-out;
+  border: solid;
+  cursor: pointer;
+  opacity: 0;
+}
+
 .circle_used{
   z-index:5;
   background-color: grey;
@@ -89,6 +102,11 @@
 .circle_active{
   display:inline-flex;
   position:fixed;
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.isShow {
   opacity: 1;
   pointer-events: visible;
 }

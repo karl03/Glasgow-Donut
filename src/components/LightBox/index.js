@@ -5,7 +5,7 @@ import "./Lightbox.css";
 export default function LightBox ({trigger, setTrigger, DataProperty, EventProperty}){
   
   const [Name,setName] = React.useState(DataProperty[0]);
-  const [Hide, setHidden] = React.useState("circle_hidden");
+  const [isShow, setShow] = React.useState(false);
 
   useEffect(() => {
     if(trigger==="active"){
@@ -17,7 +17,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   function changeState() {
     console.log("LightBox ChangeState function called!");
     if(trigger ==="active"){
-      setHidden("circle_hidden");
+      setShow(false);
       setTrigger("hidden")
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
@@ -27,9 +27,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   }
 
   function additionalCircles() {
-    if(Hide==="circle_hidden"){
-      document.getElementById("primary_circle").style.cursor = 'default';
-      setHidden("circle_active");
+    if(isShow===false){
+      //document.getElementById("primary_circle").style.cursor = 'default';
+      setShow(true);
+      console.log("yeah");
     }
   }
 
@@ -64,10 +65,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
       <img id="lightbox_img" onClick={additionalCircles} src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
-    <span  id="right_circle" className={"circle " + Hide} onClick={changeTarget}>
+    <span  id="right_circle" className={`circle_fuck ${isShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
-    <span  id="left_circle" className={"circle " + Hide} onClick={changeIndicator}>
+    <span  id="left_circle" className={`circle_fuck  ${isShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
   </>
