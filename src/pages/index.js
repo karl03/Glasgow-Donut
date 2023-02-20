@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg} from "./PageElements";
 import BackgroundImage from "../images/glasgow_background.jpg"
+import Brightness from "../components/InterfaceComponents/Brightness";
 
 
 function HomePage() {
@@ -43,6 +44,9 @@ function HomePage() {
         Praesent posuere lectus sem, sit amet eleifend eros laoreet ut. Duis vitae metus in neque convallis egestas et ut velit. Nunc ut sapien porta, luctus neque eget, sodales arcu. Integer eleifend sem a odio maximus, id mollis mauris dapibus. Nulla tellus sapien, egestas vel suscipit nec, varius ut arcu. Cras erat augue, convallis quis nibh id, scelerisque tempor dolor. Praesent sagittis quam justo, a cursus ante pellentesque in. Aliquam hendrerit tempor neque et feugiat. Sed nec purus et elit sagittis sodales. Nam id dictum dui.
         </p>
       </div>
+      <Brightness>
+      </Brightness>
+
     </div>
   );
 }
