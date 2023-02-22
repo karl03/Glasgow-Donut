@@ -59,7 +59,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
 
   <div className="grid-container">
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
-      <img id="lightbox_img" onClick={additionalCircles} src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
+      <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
