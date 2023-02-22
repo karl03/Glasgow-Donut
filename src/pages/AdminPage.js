@@ -4,12 +4,13 @@ import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 //import AdminAddData from '../components/Admin/AdminAddData'
 import axios from 'axios';
-//import ModalMenu from '../components/InterfaceComponents/ModalMenu';
+import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  //const [isShowingModal, setShowingModal] = useState(false);
+  // const [isShowingModal, setShowingModal] = useState(false);
+  const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
     ecological: {global: {}, local: {}},
@@ -18,7 +19,7 @@ export default function AdminPage(){
 
   const [loaded, setLoaded] = useState(false);
 
-	const changeHandler = (e) => {
+	const changeUploadHandler = (e) => {
     const file = e.target.files[0];
     const label = e.target.nextElementSibling;
 
@@ -27,15 +28,22 @@ export default function AdminPage(){
     label.textContent = file ? file.name : "File Upload";
   };
 
+  const showUploadModal = (e) => {
+    if (!file) {
+      alert("No file upload");
+    } else {
+      setShowingUploadModal(true);
+    }
+  }
 
-  const handleUpload = async e => {
-    e.preventDefault();
+  const handleUpload = async (e) => {
     const formData = new FormData();
     formData.append('myfile', file);
 
     try {
-      console.log(file)
-      const res = await axios.post('/api/upload', formData, {
+      const selectedFolder = document.getElementById("folder").value;
+      
+      const res = await axios.post(`/api/upload/${selectedFolder}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -108,44 +116,79 @@ export default function AdminPage(){
     });
   }
 
-  //function addSectorModal(){
-    /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
-        - Should generate a modal for sector modification containing prior data.
-          - Upon saving, the old sector should be delete, and the new inserted in its place.
+  // function addSectorModal(){
+  //   /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
+  //       - Should generate a modal for sector modification containing prior data.
+  //         - Upon saving, the old sector should be delete, and the new inserted in its place.
 
-        - If it is a new sector, the Modal is unpopulated.
-          - Upon saving, the new sector is added.
-    */
-    /*return (
+  //       - If it is a new sector, the Modal is unpopulated.
+  //         - Upon saving, the new sector is added.
+  //   */
+  //   return (
+  //     <ModalMenu
+  //         isShow={isShowingModal}
+  //         onClose={() => setShowingModal(false)}
+  //         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+  //         title="Modal Title"
+  //         >
+  //         <p>This is inside the menu.</p>
+  //         <p>More text</p>
+  //         <p>More text</p>
+  //         <p>More text</p>
+  //       </ModalMenu>
+  //   )
+  // }
+
+  // function quitWithoutSaveModal(){
+  //   /* Opens an warning / query when clicking to leave the editor without saving.
+  //       - A simple message Modal.
+  //   */
+  //   return (
+  //     <ModalMenu
+  //        isShow={isShowingModal}
+  //        onClose={() => setShowingModal(false)}
+  //        onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+  //        title="Unsaved Data!"
+  //        >
+  //         <p>There is unsaved changes to the bar chart!</p>
+  //       </ModalMenu>
+  //   )
+  // }
+
+  function addUploadModal(){
+    return (
       <ModalMenu
-          isShow={isShowingModal}
-          onClose={() => setShowingModal(false)}
-          onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+          isShow={isShowingUploadModal}
+          onClose={() => setShowingUploadModal(false)}
+          onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
           title="Modal Title"
           >
-          <p>This is inside the menu.</p>
-          <p>More text</p>
-          <p>More text</p>
-          <p>More text</p>
+          <div className='admin-upload-modal'>
+            <label>Choose Upload Folder:</label>
+            <select style={{marginTop:"20px"}} name="folder" id="folder">
+              <option value="Global_Ecological">Global_Ecological</option>
+              <option value="Global_Social">Global_Social</option>
+              <option value="Local_Ecological">Local_Ecological</option>
+              <option value="Local_Social">Local_Social</option>
+            </select>
+            <button style={{maxHeight:"40px", marginTop:"20px"}} className="admin-upload-button" onClick={handleUpload}>Upload</button>
+          </div>
         </ModalMenu>
     )
-  }*/
+  }
 
-  /*function quitWithoutSaveModal(){
-    /* Opens an warning / query when clicking to leave the editor without saving.
-        - A simple message Modal.
-    */
-    /*return (
+  function quitUploadModal(){
+    return (
       <ModalMenu
-         isShow={isShowingModal}
-         onClose={() => setShowingModal(false)}
-         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
+         isShow={isShowingUploadModal}
+         onClose={() => setShowingUploadModal(false)}
+         onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
          title="Unsaved Data!"
          >
-          <p>There is unsaved changes to the bar chart!</p>
+          <p>There is unsaved changes to the upload!</p>
         </ModalMenu>
     )
-  }*/
+  }
   
   return (
     <div className="admin-container">
@@ -185,22 +228,23 @@ export default function AdminPage(){
           </div>
 
           <div className="admin-io-container">
-            <form className="admin-upload-form" onSubmit={handleUpload}>
-            <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeHandler}/>
-            <label className="admin-upload-label" for="file">File Upload</label>
-            <button className="admin-upload-button">Upload</button>
-            </form>
+            <div className="admin-upload-form">
+              <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeUploadHandler}/>
+              <label className="admin-upload-label" for="file">File Upload</label>
+              <button className="admin-upload-button" onClick={showUploadModal}>Upload</button>
+            </div>
           </div>
-
         </div>
 
       </div>
-
+      <div>
+        {true ? addUploadModal(): quitUploadModal()}
+      </div>
       {/* <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
         {true ? addSectorModal(): quitWithoutSaveModal()}        
-      </div>
-      <AdminAddData addedElementHandler={addedElementHandler}/> */}
+      </div> */}
+      {/* <AdminAddData addedElementHandler={addedElementHandler}/> */}
     </div>
   );
 };
