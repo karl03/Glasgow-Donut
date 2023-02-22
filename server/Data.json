@@ -55,6 +55,29 @@
           "symbol_id": "Global_Ecological/AirPollution-black.png",
           "video_hash": "I77B871YOTQ"
         },
+        "chemical_pollution": {
+          "value": 47,
+          "adjacent": [
+            [
+              "social",
+              "local",
+              "health",
+              "chemical pollution affects health"
+            ],
+            [
+              "ecological",
+              "local",
+              "air",
+              "air pollution affects the air quality"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "how much chemical pollution there is",
+          "quotes": "These are the quotes/citations",
+          "symbol_id": "Global_Ecological/ChemicalPollution-black.png",
+          "video_hash": "I77B871YOTQ"
+        },
         "biodiversity_loss": {
           "value": 78,
           "adjacent": [
@@ -436,6 +459,30 @@
     },
     "social": {
       "global": {
+        "community": {
+          "value": 48,
+          "adjacent": [
+            [
+              "social",
+              "local",
+              "connectivity",
+              "connectivity affects community"
+            ],
+            [
+              "social",
+              "local",
+              "health",
+              "health affects community"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "community quality",
+          "quotes": "These are the quotes/citations",
+          "symbol_id": "Local_Social/Connectivity-black.png",
+          "video_hash": "dQw4w9WgXcQ"
+        },
+
         "networks": {
           "value": 80,
           "adjacent": [
