@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
-import AdminAddData from '../components/Admin/AdminAddData'
 import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
+import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
 import {getFormElements, populateForm, onClose, onSave} from '../components/Admin/ModalFunctions'
@@ -93,21 +93,6 @@ export default function AdminPage(){
     }
   }, []);
 
-  /*const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
-    setSliderGroups(function(oldSliders){
-      const New = JSON.parse(JSON.stringify(oldSliders));
-      New[ecoOrSoc][gloOrLoc][name] = {
-        "value": Math.round(Math.random() * 100.),
-        "adjacent":[["ecological","local","fresh_water","ocean acidification affects the water quality"],["social","local","water","ocean acidification affects water"]],
-        "indicator":"this is the indicator",
-        "target":"aim to make it a better category",
-        "description":"how much acid in the ocean",
-        "quotes":"These are the quotes/citations",
-        "video_hash":"I77B871YOTQ"
-      };
-      return New;
-    });
-  }, []);*/
 
   function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setSliderGroups(function(oldSliders){
@@ -119,6 +104,7 @@ export default function AdminPage(){
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setShowingEditModal(true);
+  }
 
   function addUploadModal(){
     return (
@@ -153,6 +139,8 @@ export default function AdminPage(){
           <p>There is unsaved changes to the upload!</p>
         </ModalMenu>
     )
+  }
+
   function TESTING(sliderGroups, lastCategorySelect){
     const elements = getFormElements();
     const {e, g} = lastCategorySelect;
@@ -211,10 +199,10 @@ export default function AdminPage(){
       <div>
         {true ? addUploadModal(): quitUploadModal()}
       </div>
-      {/* <div className="modal-manager">
+      <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
         <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
-      </div> */}
+      </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
         isShow={isShowingEditModal}
@@ -222,7 +210,6 @@ export default function AdminPage(){
         sliderGroups={sliderGroups}
         setSliderGroups={setSliderGroups}
         ></AddSectorModal>
-      {/* <AdminAddData addedElementHandler={addedElementHandler}/> */}
     </div>
   );
 };
