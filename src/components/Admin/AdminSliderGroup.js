@@ -1,6 +1,5 @@
 import AdminSlider from "./AdminSlider";
 import styled from "styled-components";
-import { v4 as uuidv4 } from 'uuid';
 
 const AdminSliderWrapper = styled.div`
   width: calc(100% - 20px);
