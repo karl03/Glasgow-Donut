@@ -37,7 +37,6 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   function changeIndicator() {
     if(document.getElementById("Indicator").innerText === 'Indicator'){
       document.getElementById("Indicator").innerText = DataProperty[1]?.indicator ?? "why are you here go away";
-      document.getElementById("Indicator").onClick=changeIndicator;
     }else{
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Indicator").onClick=changeIndicator;
@@ -47,7 +46,6 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   function changeTarget(){
     if(document.getElementById("Target").innerText === 'Target'){
       document.getElementById("Target").innerText = DataProperty[1]?.target ?? "why are you here go away";
-      document.getElementById("Target").onClick=changeTarget;
     }else{
       document.getElementById("Target").innerText = 'Target';
       document.getElementById("Target").onClick=changeTarget;
@@ -61,6 +59,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
   <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
   </div>
 
+  <div className="grid-container">
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={EventProperty?.target?.href?.baseVal ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
@@ -71,6 +70,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, EventPrope
     <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
+  </div>
   </>
     );
   };
