@@ -279,13 +279,13 @@ export default function BarChart({
         
     
       function SetupBarChartOuterSectors(group, yOuter){
-
+        const foreignObjectWidth = 60;
+        const foreignObjectHeight = 40;
         function CreateGraphColumnOuter(Properties, group, xScale, yOuter){
           group.append("g")
           .selectAll("path")
           .data(Properties)
           .enter()
-          
           .append("path")
           .attr("class", "GraphColumn")
             .attr("fill", "#fa9197")
@@ -302,6 +302,26 @@ export default function BarChart({
                   LightBoxTrigger(Event, ElementProperties);
                 }
               })
+              
+          console.log(Properties);
+           const Groups = group.append("g")
+           
+           .style("pointer-events", "none")
+           .selectAll("path")
+           .data(Properties)
+           .enter()
+           .append("g")
+           .attr("transform", d => "rotate(" + (xScale(d[0]) + (Math.PI / 2.) / Properties.length)  * 180 / Math.PI + ") translate(-" + foreignObjectWidth / 2 + ", -" + (innerRadius + ringRadius / 2. + outerRadius + foreignObjectHeight) / 2. + ")");
+          
+           Groups
+           .append("foreignObject")
+            .attr("width", foreignObjectWidth)
+            .attr("height", foreignObjectHeight)
+            .append("xhtml:div")
+            .style("font", "9px 'Arial'")
+            .html(d => "<p style='margin: auto; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(" + (xScale(d[0]) >= Math.PI / 2. ? 180 : 0) + "deg);'>" + d[0].replaceAll(/_/g, " ") + "</p>");
+              
+
 
         }
 

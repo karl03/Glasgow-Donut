@@ -3,7 +3,7 @@
     "ecological": {
       "global": {
         "air_pollution": {
-          "value": 86,
+          "value": 100,
           "adjacent": [
             [
               "ecological",
