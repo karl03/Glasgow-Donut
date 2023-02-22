@@ -57,7 +57,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
   <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
   </div>
 
-  <div className="grid-container">
+  <div className={`grid-container  ${trigger ? 'isShow' : ''}`}>
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>

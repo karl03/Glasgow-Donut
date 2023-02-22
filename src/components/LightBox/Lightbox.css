@@ -2,6 +2,7 @@
   display: grid;
   gap: 50px 100px;
   position: absolute;
+  pointer-events: none;
 }
 
 #primary_circle{
