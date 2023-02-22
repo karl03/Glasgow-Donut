@@ -16,7 +16,7 @@ export function getFormElements(){
 export function populateForm(sliderGroups, formElements, name, ecoOrSoc, gloOrLoc){
     // Find existing data
 
-    const data = sliderGroups[ecoOrSoc][gloOrLoc][name];
+    const data = sliderGroups;
 
     console.log(name, JSON.stringify(data));
 
