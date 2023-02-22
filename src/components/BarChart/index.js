@@ -5,13 +5,14 @@ import "../LightBox/Lightbox.css";
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
   size = 500,
-  outerRadius = (size / 2) - 20,
-  innerRadius = outerRadius / 2,
-  ringRadius = 70,
-  smallRingRadius = 45,
-  margin = 3,
+  
   data = null//Data[0]
 }){
+  const outerRadius = (size / 2) - 20;
+  const innerRadius = outerRadius / 2;
+  const ringRadius = 100;
+  const smallRingRadius = 75;
+  const margin = 3;
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
   const [trigger, setTrigger] = useState(false);
@@ -34,7 +35,7 @@ export default function BarChart({
 
       function SetupBarChart(){
         svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
-        
+        svg.classed("svg-containter", true)
         const group = svg.append("g")
           .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
     
@@ -135,12 +136,6 @@ export default function BarChart({
               //.style("opacity", 0.8)
           }
 
-          
-
-
-
-
-
           group.append("g")
               .selectAll("g")
               .data(Properties)
@@ -149,15 +144,16 @@ export default function BarChart({
                   .attr("text-anchor", "middle")
                   .attr("transform", function(d) {
                     const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
-                    return `rotate(${Rotation}) translate(${innerRadius},0) rotate(${-Rotation})`;
+                    return `rotate(${Rotation}) translate(${smallRingRadius*1.9},0) rotate(${-Rotation})`;
                   })
                 .append("svg:image")
-                  .attr('x', -smallRingRadius / 3.)
-                  .attr('y', -smallRingRadius / 3.)
-                  .attr('width', smallRingRadius / 1.9)
-                  .attr('height', smallRingRadius / 1.9)
-                  .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
+                  .attr('x', -smallRingRadius + 10)
+                  .attr('y', -smallRingRadius + 10)
+                  .attr('width', smallRingRadius / 3)
+                  .attr('height', smallRingRadius / 3)
+                  .attr("xlink:href", function(d){return "";/*([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])*/})
                   .style("cursor", "pointer")
+                  .attr('transform', 'translate(50, 50)')
                   .on("mouseover", mouseover)
                   .on("mousemove", mousemove)
                   .on("mouseleave", mouseleave)

@@ -8,6 +8,7 @@ export const Head = styled.nav`
     font-size: 2rem;
     top: 0;
     z-index:10;
+    margin-bottom: 0rem;
     @media screen and (max-width: 960px) {
         transition: 0.8s all ease;
     }

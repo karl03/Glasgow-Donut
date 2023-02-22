@@ -7,6 +7,7 @@ import {ImageBg, MainBg} from "./PageElements";
 import BackgroundImage from "../images/glasgow_background.jpg"
 
 
+
 function HomePage() {
   const [sliderGroups, setSliderGroups] = React.useState({
     ecological: {global: {}, local: {}},
@@ -29,8 +30,8 @@ function HomePage() {
         <ImageBg src={BackgroundImage}/>
       </MainBg>
       <Header title="Gallant Donut Graph" size="2rem"/>
-      <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
-        <BarChart data={sliderGroups} size={600}/>
+      <div>
+        <BarChart data={sliderGroups} size={700}/>
       </div>
     
       <h1>Understanding the Graph</h1>
