@@ -5,6 +5,7 @@ import AdminAddData from '../components/Admin/AdminAddData'
 import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
+import {getFormElements, populateForm, onClose, onSave} from '../components/Admin/ModalFunctions'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
@@ -58,7 +59,6 @@ export default function AdminPage(){
     }
     if(!loaded) getData();
   }, [loaded]);
-
   
   const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
     switch(type){
@@ -98,6 +98,17 @@ export default function AdminPage(){
       delete New[ecoOrSoc][gloOrLoc][name];
       return New;
     });
+  }
+
+  function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
+    setShowingModal(true);
+
+  }
+
+  function TESTING(){
+    console.log(getFormElements());
+    //populateForm();
+    //onClose();
   }
   
   return (
@@ -151,6 +162,7 @@ export default function AdminPage(){
 
       <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
+        <button onClick={TESTING}>TEST MODAL FUNCTIONS</button>
       </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
