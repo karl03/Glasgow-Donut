@@ -459,6 +459,30 @@
     },
     "social": {
       "global": {
+        "community": {
+          "value": 48,
+          "adjacent": [
+            [
+              "social",
+              "local",
+              "connectivity",
+              "connectivity affects community"
+            ],
+            [
+              "social",
+              "local",
+              "health",
+              "health affects community"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "community quality",
+          "quotes": "These are the quotes/citations",
+          "symbol_id": "Local_Social/Connectivity-black.png",
+          "video_hash": "dQw4w9WgXcQ"
+        },
+
         "networks": {
           "value": 80,
           "adjacent": [

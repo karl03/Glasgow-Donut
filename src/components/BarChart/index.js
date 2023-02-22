@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
-import axios from 'axios';
 import "../LightBox/Lightbox.css";
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
@@ -16,7 +15,7 @@ export default function BarChart({
   const margin = 3;
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
-  const [trigger, setTrigger] = useState("hidden");
+  const [trigger, setTrigger] = useState(false);
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
   const innerTextRadius = innerRadius - (ringRadius + smallRingRadius) / 4;
@@ -26,7 +25,7 @@ export default function BarChart({
     function LightBoxTrigger(Event, ElementProperties){
       document.body.scrollTop = 65; // For Safari
       document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
-      setTrigger("active")
+      setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
       document.body.id="hide_scroll"
@@ -245,22 +244,6 @@ export default function BarChart({
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
-
-          Properties.forEach(function(d) {
-            axios.get("/api/get-icon/" + d[1].symbol_id, { responseType: 'arraybuffer' })
-              .then(response => {
-                const blob = new Blob([response.data], { type: 'image/png' });
-                const url = URL.createObjectURL(blob);
-                d3.selectAll("image")
-                  .filter(function(f) {
-                    return f[0] === d[0];
-                  })
-                  .attr("xlink:href", url);
-              })
-              .catch( error => {
-                console.error(error);
-              });
-          });
         }
 
         for(const [Half, Properties] of Object.entries(data.social)){

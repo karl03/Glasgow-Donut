@@ -1,9 +1,23 @@
-.hidden{
-  display:none;
+.grid-container {
+  display: grid;
+  gap: 50px 100px;
+  position: absolute;
+  pointer-events: none;
 }
 
-.active{
-  display:inline-block;
+#primary_circle{
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#right_circle{
+  grid-row: 1;
+  grid-column: 3;
+}
+
+#left_circle{
+  grid-row: 1;
+  grid-column: 1;
 }
 
 #lightbox{
@@ -11,7 +25,8 @@
   position:absolute;
   height:120%;
   width: 100%;
-  background-color: rgba(134, 134, 134, 0.8);
+  background-color: rgba(0,0,0,0.5);
+  transition: all 0.3s ease-in-out;
   overflow:hidden;
 }
 
@@ -30,10 +45,11 @@
   margin: auto;
   text-align: center;
   display: block;
+  margin-top: 0px;
+  margin-bottom: -50px;
 }
 
 .lightbox_title{
-  vertical-align: top;
   margin: auto;
   text-align: center;
   font-size:20px;
@@ -41,45 +57,43 @@
 
 .circle{
     z-index:5;
+    display: flex;
+    flex-direction: column;
     background-color: grey;
-    width: 180px;
     height: 180px;
+    width: 180px;
     border-radius: 90px;
     border-color: black;
+    transition: all 0.3s ease-in-out;
     border: solid;
     cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
 }
 
-.circle_used{
-  z-index:5;
-  background-color: grey;
-  width: 180px;
-  height: 180px;
-  border-radius: 90px;
-  border-color: black;
-  border: solid;
-  cursor: none;
-}
-
-#primary_circle{
-  position:absolute;
-}
-
-#right_circle{
-  margin-left: 650px;
-  margin-bottom: 118px;
-}
-
-#left_circle{
-  margin-right: 650px;
-  margin-bottom: 118px;
+.active{
+  opacity: 1;
+  pointer-events: visible;
 }
 
 .circle_hidden{
+  opacity: 0;
   display:none;
 }
 
 .circle_active{
   display:inline-flex;
   position:fixed;
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.isShow {
+  opacity: 1;
+  pointer-events: visible;
 }
