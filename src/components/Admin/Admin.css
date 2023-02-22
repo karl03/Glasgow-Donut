@@ -172,6 +172,13 @@
     border-radius: 10px;
 }
 
+.admin-upload-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .admin-upload-button:hover {
     background-color: #7cab32;
 }
