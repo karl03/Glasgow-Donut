@@ -6,13 +6,14 @@ import "../LightBox/Lightbox.css";
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
   size = 500,
-  outerRadius = (size / 2) - 20,
-  innerRadius = outerRadius / 2,
-  ringRadius = 70,
-  smallRingRadius = 45,
-  margin = 3,
+  
   data = null//Data[0]
 }){
+  const outerRadius = (size / 2) - 20;
+  const innerRadius = outerRadius / 2;
+  const ringRadius = 70;
+  const smallRingRadius = 45;
+  const margin = 3;
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
   const [trigger, setTrigger] = useState("hidden");
@@ -35,7 +36,7 @@ export default function BarChart({
 
       function SetupBarChart(){
         svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
-        
+        svg.classed("svg-containter", true)
         const group = svg.append("g")
           .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
     
