@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
-import axios from 'axios';
 import "../LightBox/Lightbox.css";
 //TODO: Refactor this to use more idiomatic react
 export default function BarChart({
