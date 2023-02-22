@@ -3,7 +3,7 @@
     "ecological": {
       "global": {
         "air_pollution": {
-          "value": 83,
+          "value": 86,
           "adjacent": [
             [
               "ecological",
@@ -52,8 +52,8 @@
           "target": "aim to make it a better category",
           "description": "how much pollution is in the air",
           "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ",
-          "id": "b647b23e-a98f-4bad-a66f-9d59b4ef60e1"
+          "symbol_id": "Global_Ecological/AirPollution-black.png",
+          "video_hash": "I77B871YOTQ"
         },
         "chemical_pollution": {
           "value": 47,
@@ -75,8 +75,8 @@
           "target": "aim to make it a better category",
           "description": "how much chemical pollution there is",
           "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ",
-          "id": "afb56837-ef86-45f4-9787-19e3439a6101"
+          "symbol_id": "Global_Ecological/ChemicalPollution-black.png",
+          "video_hash": "I77B871YOTQ"
         },
         "biodiversity_loss": {
           "value": 78,
@@ -98,8 +98,8 @@
           "target": "aim to make it a better category",
           "description": "how much loss in biodiversity",
           "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ",
-          "id": "f58071d7-668d-4479-9d04-3c7e083c4afd"
+          "symbol_id": "Global_Ecological/BiodiversityLoss-black.png",
+          "video_hash": "I77B871YOTQ"
         },
         "excessive_fertilizer_use": {
           "value": 44,
@@ -121,8 +121,8 @@
           "target": "aim to make it a better category",
           "description": "how much excessive use of fertilizer",
           "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ",
-          "id": "0db9bfbf-85b9-44aa-b030-0e7a143d39f4"
+          "symbol_id": "Global_Ecological/ExcessiveFertilizerUse-black.png",
+          "video_hash": "I77B871YOTQ"
         },
         "fresh_water_withdrawal": {
           "value": 24,
@@ -150,8 +150,8 @@
           "target": "aim to make it a better category",
           "description": "how much fresh water loss",
           "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ",
-          "id": "afcd85e6-1b7c-4839-a980-7935c1220ac4"
+          "symbol_id": "Global_Ecological/FreshwaterWithdrawal-black.png",
+          "video_hash": "I77B871YOTQ"
         },
         "land_conversion": {
           "value": 90,
@@ -173,8 +173,8 @@
           "target": "aim to make it a better category",
           "description": "if land is the same",
           "quotes": "These are the quotes/citations",
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "b6c9a981-a565-48ee-8ef0-87863af866e4"
+          "symbol_id": "Global_Ecological/LandConversion-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "ozone_layer_depletion": {
           "value": 100,
@@ -190,8 +190,96 @@
           "target": "aim to make it a better category",
           "description": "how much depletion in the ozone layer",
           "quotes": "These are the quotes/citations",
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "64997078-625f-45ac-917f-b62fe51d8480"
+          "symbol_id": "Global_Ecological/OzoneLayerDepletion-black.png",
+          "video_hash": "dQw4w9WgXcQ"
+        },
+        "River1": {
+          "value": 75,
+          "adjacent": [
+            [
+              "ecological",
+              "local",
+              "fresh_water",
+              "ocean acidification affects the water quality"
+            ],
+            [
+              "social",
+              "local",
+              "water",
+              "ocean acidification affects water"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "how much acid in the ocean",
+          "quotes": "These are the quotes/citations",
+          "video_hash": "I77B871YOTQ"
+        },
+        "Lake2": {
+          "value": 73,
+          "adjacent": [
+            [
+              "ecological",
+              "local",
+              "fresh_water",
+              "ocean acidification affects the water quality"
+            ],
+            [
+              "social",
+              "local",
+              "water",
+              "ocean acidification affects water"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "how much acid in the ocean",
+          "quotes": "These are the quotes/citations",
+          "video_hash": "I77B871YOTQ"
+        },
+        "Forest3": {
+          "value": 1,
+          "adjacent": [
+            [
+              "ecological",
+              "local",
+              "fresh_water",
+              "ocean acidification affects the water quality"
+            ],
+            [
+              "social",
+              "local",
+              "water",
+              "ocean acidification affects water"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "how much acid in the ocean",
+          "quotes": "These are the quotes/citations",
+          "video_hash": "I77B871YOTQ"
+        },
+        "Mountain4": {
+          "value": 16,
+          "adjacent": [
+            [
+              "ecological",
+              "local",
+              "fresh_water",
+              "ocean acidification affects the water quality"
+            ],
+            [
+              "social",
+              "local",
+              "water",
+              "ocean acidification affects water"
+            ]
+          ],
+          "indicator": "this is the indicator",
+          "target": "aim to make it a better category",
+          "description": "how much acid in the ocean",
+          "quotes": "These are the quotes/citations",
+          "video_hash": "I77B871YOTQ"
         }
       },
       "local": {
@@ -215,12 +303,11 @@
           "target": "aim to make it a better category",
           "description": "if soil is good",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 0,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "eaf76c80-8ebb-4414-ac32-09e14e7f3c10"
+          "symbol_id": "Local_Ecological/BuildAndProtectSoil-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "air": {
-          "value": 77,
+          "value": 72,
           "adjacent": [
             [
               "ecological",
@@ -251,9 +338,8 @@
           "target": "aim to make it a better category",
           "description": "air quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 1,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "adf0baad-82e3-4c9c-ae86-4e34a36f961a"
+          "symbol_id": "Local_Ecological/CleanseTheAir-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "fresh_water": {
           "value": 44,
@@ -275,12 +361,11 @@
           "target": "aim to make it a better category",
           "description": "fresh water quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 2,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "d0e5fb02-ebaa-4ac0-8006-449e06306704"
+          "symbol_id": "Local_Ecological/CycleFreshwater-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "wellbeing": {
-          "value": 86,
+          "value": 66,
           "adjacent": [
             [
               "ecological",
@@ -299,9 +384,8 @@
           "target": "aim to make it a better category",
           "description": "wellbeing quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 3,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "4b060032-2f1d-4e89-b72d-7033a6f25fb2"
+          "symbol_id": "Local_Ecological/EnhanceWellbeing-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "energy": {
           "value": 23,
@@ -317,9 +401,8 @@
           "target": "aim to make it a better category",
           "description": "energy use",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 4,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "95b1fdb2-a7e8-47c4-b2ea-e9c4bf1e35f0"
+          "symbol_id": "Local_Ecological/HarvestEnergy-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "biodiversity": {
           "value": 14,
@@ -335,9 +418,8 @@
           "target": "aim to make it a better category",
           "description": "biodiversity goodness",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 5,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "cd19f033-8375-4cd2-9ae6-3ca81d3abe16"
+          "symbol_id": "Local_Ecological/HouseBiodiversity-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "temperature": {
           "value": 4,
@@ -353,9 +435,8 @@
           "target": "aim to make it a better category",
           "description": "temperature quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 6,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "36594b31-ee18-4dc7-a3a4-0b35bb0e5590"
+          "symbol_id": "Local_Ecological/RegulateTheTemperature-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "store_carbon": {
           "value": 69,
@@ -371,9 +452,8 @@
           "target": "aim to make it a better category",
           "description": "how much carbon is stored and if its a good amount stored",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 7,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "7464cbfc-1962-40ff-9be9-50b7cb8fb3f0"
+          "symbol_id": "Local_Ecological/StoreCarbon-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         }
       }
     },
@@ -399,12 +479,12 @@
           "target": "aim to make it a better category",
           "description": "community quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 9,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "33b02936-54e2-498c-a018-9696fa5de29e"
+          "symbol_id": "Local_Social/Connectivity-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
+
         "networks": {
-          "value": 73,
+          "value": 80,
           "adjacent": [
             [
               "ecological",
@@ -423,9 +503,8 @@
           "target": "aim to make it a better category",
           "description": "how much networking affects globally",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 8,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "cc24ab56-97e2-4b53-a8dd-63eb92d92ffd"
+          "symbol_id": "Global_Social/Networks-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         }
       },
       "local": {
@@ -443,9 +522,8 @@
           "target": "aim to make it a better category",
           "description": "connectivity quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 10,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "45f5f50c-e4e4-4a6b-ae69-e398ec3e1aee"
+          "symbol_id": "Local_Social/Connectivity-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "culture": {
           "value": 98,
@@ -461,9 +539,8 @@
           "target": "aim to make it a better category",
           "description": "culture quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 11,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "33b21a68-5e18-49ba-b5d1-ac71e585ebaa"
+          "symbol_id": "Local_Social/Culture-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "education": {
           "value": 45,
@@ -485,9 +562,8 @@
           "target": "aim to make it a better category",
           "description": "how educated people are",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 12,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "ecc8975c-36a5-4e66-956c-0d98821dbd81"
+          "symbol_id": "Local_Social/Education-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "water": {
           "value": 76,
@@ -515,9 +591,8 @@
           "target": "aim to make it a better category",
           "description": "water quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 13,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "c2f103d3-050a-42a3-84cc-10c75debd097"
+          "symbol_id": "Local_Social/Water-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         },
         "health": {
           "value": 34,
@@ -551,9 +626,8 @@
           "target": "aim to make it a better category",
           "description": "health quality",
           "quotes": "These are the quotes/citations",
-          "symbol_id": 14,
-          "video_hash": "dQw4w9WgXcQ",
-          "id": "52255844-536c-4274-93ae-b41b8ea3ae12"
+          "symbol_id": "Local_Social/Health-black.png",
+          "video_hash": "dQw4w9WgXcQ"
         }
       }
     }

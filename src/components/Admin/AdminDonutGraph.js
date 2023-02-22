@@ -1,7 +1,7 @@
 import React from "react";
 import BarChart from "../BarChart";
 
-export default function AdminDonutGraph({sliderGroups}){
+export default function AdminDonutGraph({sliderGroups, size}){
   const [data, setData] = React.useState({
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
@@ -35,8 +35,8 @@ export default function AdminDonutGraph({sliderGroups}){
   });
   
   return (
-    <div>
-      <BarChart data={data} />
+    <div style={{height:"max-content"}}>
+      <BarChart data={data} size={size}/>
     </div>
   );
 };

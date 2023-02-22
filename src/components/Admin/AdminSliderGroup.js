@@ -1,16 +1,17 @@
 import AdminSlider from "./AdminSlider";
 import styled from "styled-components";
-import { v4 as uuidv4 } from 'uuid';
 
 const AdminSliderWrapper = styled.div`
   width: calc(100% - 20px);
   align-items: center;
   padding: 10px;
+  padding-top: 0px;
   margin: 0 10px 10px 10px;
   box-sizing: border-box;
   background-color: #8fc53a;
+  border-radius: 10px;
 `;
-const Title = styled.h2`
+const Title = styled.h3`
   text-align: center;
   margin: 10px;
 `;
@@ -40,7 +41,6 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
-                id={SliderInfo.id = uuidv4()}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );

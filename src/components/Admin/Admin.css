@@ -1,4 +1,10 @@
 /* --- Header Styles --- */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
 
 .admin-header {
     background-color: var(--dark-green);
@@ -7,20 +13,23 @@
     align-items: center;
     padding-left: 5%;
     padding-right: 5%;
+    height: 8vh;
 }
 
 .admin-title {
-    color: var(--light-green);
+    color: var(--white);
     font-size: x-large;
     font-family: 'Poppins', sans-serif;
 }
 
 .admin-back-button, .admin-help-button {
     background-color: var(--light-green);
+    text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     color: var(--dark-green);
     border-radius: 8px;
     border: 0;
+    font-size: medium;
     font-weight: bold;
     max-height: fit-content;
     max-width: fit-content;
@@ -35,48 +44,143 @@
 .admin-body {
     display: flex;
     justify-content: center;
-    align-items: center;
-    max-height: min-content;
+    align-items: flex-start;
+
+    height: 92vh;
     padding: 15px;
+    overflow: hidden;
 }
 
 .admin-left-panel {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
     background-color: var(--light-green);
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     min-width: min-content;
-    max-width: 50%;
-    max-height: 700px;
+    width: 50%;
+    height: 93%;
 
     padding: 20px;
-    padding-top: 25px;
 
     overflow: auto;
 }
 
 .admin-right-panel {
     overflow: hidden;
-    flex-grow: 1;
-    max-width: 50%;
+    width: 50%;
+    min-height: 95%;
     margin: 15px;
-    margin-right: 8%;
+    margin-top: 0px;
 }
 
 .admin-barchart-container, .admin-io-container {
     background-color: var(--light-green);
+    box-sizing: border-box;
     border-radius: 12px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .admin-barchart-container {
+    padding: 0px;
     margin-bottom: 15px;
-    min-width: 600px;
-    min-height: 600px;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-io-container {
+    height: 20%;
+    min-height: 100px;
+}
+
+.admin-upload-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.admin-upload-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.admin-upload-input:before{
+    content: 'Select some files';
+    display: inline-block;
+    background: linear-gradient(to top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px var(--white);
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.admin-upload-input:focus + label {
+    outline: 0px dotted var(--black);
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.admin-upload-label {
+    font-size: 1rem;
+    height: 70px;
+    width: 70%;
+    font-weight: 700;
+    color: var(--white);
+    background-color: #e45b01;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.admin-upload-label:hover {
+    background-color: #b24601;
+}
+
+.admin-upload-button {
+    font-size: 1rem;
+    height: 70px;
+    width: 15%;
+    font-weight: 700;
+    border: 0;
+    color: var(--dark-green);
+    background-color: var(--bright-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.admin-upload-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-upload-button:hover {
+    background-color: #7cab32;
 }
 
 /* Custom Scroll Bar */

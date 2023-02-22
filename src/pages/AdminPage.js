@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AdminAddData from '../components/Admin/AdminAddData'
@@ -11,6 +12,7 @@ export default function AdminPage(){
   const [file, setFile] = useState(null);
   const [lastCategorySelect, setLastCategorySelect] = useState();
   const [isShowingEditModal, setShowingEditModal] = useState(false);
+  const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
     ecological: {global: {}, local: {}},
@@ -19,19 +21,31 @@ export default function AdminPage(){
 
   const [loaded, setLoaded] = useState(false);
 
-	const changeHandler = (e) => {
-		setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
-	};
+	const changeUploadHandler = (e) => {
+    const file = e.target.files[0];
+    const label = e.target.nextElementSibling;
 
-  const handleUpload = async e => {
-    e.preventDefault();
+    setFile(file);
+    setFilename(file.name);
+    label.textContent = file ? file.name : "File Upload";
+  };
+
+  const showUploadModal = (e) => {
+    if (!file) {
+      alert("No file upload");
+    } else {
+      setShowingUploadModal(true);
+    }
+  }
+
+  const handleUpload = async (e) => {
     const formData = new FormData();
     formData.append('myfile', file);
 
     try {
-      console.log(file)
-      const res = await axios.post('/api/upload', formData, {
+      const selectedFolder = document.getElementById("folder").value;
+      
+      const res = await axios.post(`/api/upload/${selectedFolder}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -41,11 +55,14 @@ export default function AdminPage(){
 
       console.log(fileName);
       console.log(filePath);
+      alert('Upload Success');
 
     } catch (err) {
       if (err.response.status === 500) {
+        alert('There was a problem with the server');
         console.log('There was a problem with the server');
       } else {
+        alert(err.response.data.msg);
         console.log(err.response.data.msg);
       }
     }
@@ -76,7 +93,7 @@ export default function AdminPage(){
     }
   }, []);
 
-  const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
+  /*const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
     setSliderGroups(function(oldSliders){
       const New = JSON.parse(JSON.stringify(oldSliders));
       New[ecoOrSoc][gloOrLoc][name] = {
@@ -90,7 +107,7 @@ export default function AdminPage(){
       };
       return New;
     });
-  }, []);
+  }, []);*/
 
   function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setSliderGroups(function(oldSliders){
@@ -103,8 +120,39 @@ export default function AdminPage(){
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setShowingEditModal(true);
 
+  function addUploadModal(){
+    return (
+      <ModalMenu
+          isShow={isShowingUploadModal}
+          onClose={() => setShowingUploadModal(false)}
+          onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
+          title="Modal Title"
+          >
+          <div className='admin-upload-modal'>
+            <label>Choose Upload Folder:</label>
+            <select style={{marginTop:"20px"}} name="folder" id="folder">
+              <option value="Global_Ecological">Global_Ecological</option>
+              <option value="Global_Social">Global_Social</option>
+              <option value="Local_Ecological">Local_Ecological</option>
+              <option value="Local_Social">Local_Social</option>
+            </select>
+            <button style={{maxHeight:"40px", marginTop:"20px"}} className="admin-upload-button" onClick={handleUpload}>Upload</button>
+          </div>
+        </ModalMenu>
+    )
   }
 
+  function quitUploadModal(){
+    return (
+      <ModalMenu
+         isShow={isShowingUploadModal}
+         onClose={() => setShowingUploadModal(false)}
+         onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
+         title="Unsaved Data!"
+         >
+          <p>There is unsaved changes to the upload!</p>
+        </ModalMenu>
+    )
   function TESTING(sliderGroups, lastCategorySelect){
     const elements = getFormElements();
     const {e, g} = lastCategorySelect;
@@ -113,10 +161,10 @@ export default function AdminPage(){
   }
   
   return (
-    <div className="admin">
+    <div className="admin-container">
       <header className="admin-header">
-        <button className="admin-back-button">Back</button>
-        <h1 className="admin-title">GALLANT Doughnut Chart Editor</h1>
+        <LinkR to="/" className="admin-back-button">&lt; Back</LinkR>
+        <h1 className="admin-title">Gallant Donut Chart Editor</h1>
         <button className="admin-help-button">HELP</button>
       </header>
 
@@ -147,24 +195,26 @@ export default function AdminPage(){
         <div className="admin-right-panel">
 
           <div className="admin-barchart-container">
-            <AdminDonutGraph sliderGroups={sliderGroups}/>
+            <AdminDonutGraph sliderGroups={sliderGroups} size={500}/>
           </div>
 
           <div className="admin-io-container">
-            <form onSubmit={handleUpload}>
-            <input type="file" name='file' onChange={changeHandler}/>
-            <button>Upload</button>
-            </form>
+            <div className="admin-upload-form">
+              <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeUploadHandler}/>
+              <label className="admin-upload-label" for="file">File Upload</label>
+              <button className="admin-upload-button" onClick={showUploadModal}>Upload</button>
+            </div>
           </div>
-
         </div>
 
       </div>
-
-      <div className="modal-manager">
+      <div>
+        {true ? addUploadModal(): quitUploadModal()}
+      </div>
+      {/* <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
         <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
-      </div>
+      </div> */}
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
         isShow={isShowingEditModal}
@@ -172,7 +222,7 @@ export default function AdminPage(){
         sliderGroups={sliderGroups}
         setSliderGroups={setSliderGroups}
         ></AddSectorModal>
-      <AdminAddData addedElementHandler={addedElementHandler}/>
+      {/* <AdminAddData addedElementHandler={addedElementHandler}/> */}
     </div>
   );
 };
