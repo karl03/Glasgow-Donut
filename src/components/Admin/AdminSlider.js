@@ -67,18 +67,18 @@ const TextInput = styled.input`
 export default function AdminSlider({initialValue, eventHandler, initialName, initialFactor, ecoOrSoc, gloOrLoc, id, deleteFunction}){
   const [value, setValue] = React.useState(initialValue);
   const [name/*, setName*/] = React.useState(initialName);
-  const [factor/*, setFactor*/] = React.useState(initialFactor);
 
   React.useEffect(() => {
     eventHandler(ecoOrSoc, gloOrLoc, "value", name, value);
-  }, [value, name, factor, ecoOrSoc, gloOrLoc, eventHandler]);
+  }, [value, name, ecoOrSoc, gloOrLoc, eventHandler]);
   
   
   return (
     <AdminSliderWrapper>
       <Left>
         <Top>
-          <div>{initialName}</div><div style={{"textAlign": "right"}}>Factor type: <TextInput type="text" defaultValue={initialFactor} /></div>
+          <div>{initialName}</div>
+          <button>EDIT</button>
         </Top>
         <Bottom>
           <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
