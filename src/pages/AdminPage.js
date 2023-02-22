@@ -10,7 +10,7 @@ import {getFormElements, populateForm, onClose, onSave} from '../components/Admi
 export default function AdminPage(){
   const [file, setFile] = useState(null);
   const [lastCategorySelect, setLastCategorySelect] = useState();
-  const [isShowingModal, setShowingModal] = useState(false);
+  const [isShowingEditModal, setShowingEditModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
     ecological: {global: {}, local: {}},
@@ -101,7 +101,7 @@ export default function AdminPage(){
   }
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    setShowingModal(true);
+    setShowingEditModal(true);
 
   }
 
@@ -134,7 +134,7 @@ export default function AdminPage(){
                       gloOrLoc={gloOrLoc}
                       eventHandler={eventHandler}
                       deleteFunction={deleteSliderHandler}
-                      modalHandles={[setLastCategorySelect, setShowingModal]}
+                      modalHandles={[setLastCategorySelect, setShowingEditModal]}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
@@ -162,13 +162,13 @@ export default function AdminPage(){
       </div>
 
       <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
         <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
       </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
-        isShow={isShowingModal}
-        setShow={setShowingModal}
+        isShow={isShowingEditModal}
+        setShow={setShowingEditModal}
         sliderGroups={sliderGroups}
         setSliderGroups={setSliderGroups}
         ></AddSectorModal>
