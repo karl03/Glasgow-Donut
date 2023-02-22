@@ -83,36 +83,36 @@ export default function AddSectorModal(props) {
     >
         <form action="" className="add-sector-form" method='post'>
 
-            <label for="sector-title">Title </label>
+            <label htmlFor="sector-title">Title </label>
             <input type="text" name='title' id='modal-sector-title' className="sector-title" 
                 placeholder='Title...'/>
 
-            <label for="sector-value">Value </label>
+            <label htmlFor="sector-value">Value </label>
             <input type="number" name="sector-value" id="modal-sector-value"
                 max="100" min="0" placeholder='0' defaultValue='0'/>
 
 
-            <label for="sector-indicator">Indicator </label>
+            <label htmlFor="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"
                 placeholder='Category indicator...' />
         
     
-            <label for="sector-target">Target </label>
+            <label htmlFor="sector-target">Target </label>
             <input type="text" name='target' id='modal-sector-target'className="sector-target"
                 placeholder='Category target...' />
         
     
-            <label for="sector-description">Description </label>
+            <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
                 placeholder='Description...'></textarea>
         
     
-            <label for="sector-cites">Citations </label>
+            <label htmlFor="sector-cites">Citations </label>
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
                 placeholder="John Smith, 'generic paper', www.JohnSmith.com" />
         
     
-            <label for="sector-videolink">Videolink </label>
+            <label htmlFor="sector-videolink">Videolink </label>
             <input type="url" name='video' id="modal-sector-videolink" className="sector-videolink"
                 placeholder="https://example.com"
                 pattern="https://.*"/>
