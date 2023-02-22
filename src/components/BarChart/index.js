@@ -157,7 +157,7 @@ export default function BarChart({
                   .attr('y', -smallRingRadius / 3.)
                   .attr('width', smallRingRadius / 1.9)
                   .attr('height', smallRingRadius / 1.9)
-                  .attr("xlink:href", function(d){return "";/*([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])*/})
+                  .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
                   .style("cursor", "pointer")
                   .on("mouseover", mouseover)
                   .on("mousemove", mousemove)
@@ -249,22 +249,6 @@ export default function BarChart({
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
-
-          Properties.forEach(function(d) {
-            axios.get("/api/get-icon/" + d[1].symbol_id, { responseType: 'arraybuffer' })
-              .then(response => {
-                const blob = new Blob([response.data], { type: 'image/png' });
-                const url = URL.createObjectURL(blob);
-                d3.selectAll("image")
-                  .filter(function(f) {
-                    return f[0] === d[0];
-                  })
-                  .attr("xlink:href", url);
-              })
-              .catch( error => {
-                console.error(error);
-              });
-          });
         }
 
         for(const [Half, Properties] of Object.entries(data.social)){
