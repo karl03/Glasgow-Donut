@@ -137,6 +137,7 @@ export default function BarChart({
               //.style("opacity", 0.8)
           }
 
+          // inner ring icons 
           group.append("g")
               .selectAll("g")
               .data(Properties)
@@ -150,6 +151,34 @@ export default function BarChart({
                 .append("svg:image")
                   .attr('x', -smallRingRadius + 10)
                   .attr('y', -smallRingRadius + 10)
+                  .attr('width', smallRingRadius / 3)
+                  .attr('height', smallRingRadius / 3)
+                  .attr("xlink:href", function(d){return "";/*([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])*/})
+                  .style("cursor", "pointer")
+                  .attr('transform', 'translate(50, 50)')
+                  .on("mouseover", mouseover)
+                  .on("mousemove", mousemove)
+                  .on("mouseleave", mouseleave)
+                  .on("click", function(Event, ElementProperties){
+                    if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
+                      LightBoxTrigger(Event, ElementProperties);
+                    }
+                  });
+
+            // outer ring icons
+          group.append("g")
+              .selectAll("g")
+              .data(Properties)
+              .enter()
+                .append("g")
+                  .attr("text-anchor", "middle")
+                  .attr("transform", function(d) {
+                    const Rotation = ((xScale(d[0]) + xScale.bandwidth() / 2) * 180 / Math.PI - 90);
+                    return `rotate(${Rotation}) translate(${smallRingRadius*2.55},0) rotate(${-Rotation})`;
+                  })
+                .append("svg:image")
+                  .attr('x', -smallRingRadius + 10)
+                  .attr('y', -smallRingRadius + 13)
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
                   .attr("xlink:href", function(d){return "";/*([AirPollutionB, BioDiversityB, ChemicalPollutionB, ExcessiveFertilizerUseB, FreshwaterWithdrawalB, LandConversionB, OceanAcidificationB, OzoneLayerDepletionB, NetworksB, BuildAndProtectSoilB][d[0].charCodeAt(0) & 7])*/})
