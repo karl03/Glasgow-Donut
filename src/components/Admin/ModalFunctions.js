@@ -41,7 +41,7 @@ export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
 export function onClose(setShow){
     const formElements = getFormElements();
     // Clear form.
-    for( const [key, value] of Object.entries(formElements)){
+    for( const value of Object.values(formElements)){
         value.value = '';
     }
     // Close modal.

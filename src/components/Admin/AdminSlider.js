@@ -60,13 +60,10 @@ const Number = styled.input`
   font-size: 20px;
 `;
 
-const TextInput = styled.input`
-  font-size: 20px;
-`;
 
 export default function AdminSlider({initialValue, eventHandler, initialName, ecoOrSoc, gloOrLoc, deleteFunction, editFunction}){
   const [value, setValue] = React.useState(initialValue);
-  const [name, setName] = React.useState(initialName);
+  const [name, /*setName*/] = React.useState(initialName);
 
   React.useEffect(() => {
     eventHandler(ecoOrSoc, gloOrLoc, "value", name, value);
