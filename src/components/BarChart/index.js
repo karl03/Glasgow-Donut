@@ -53,11 +53,17 @@ export default function BarChart({
 
       var Tooltip = d3.select(".svgClass")
             .append("text")
+            .style("opacity", 0)
             .attr("class", "tooltip")
             .style("fill", "black")
             .style("font-size", "12px")
             .style("pointer-events", "none")
-          
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+                  
           var mouseover = function(event, data) {
             Tooltip
               .style("opacity", 1)
@@ -73,6 +79,7 @@ export default function BarChart({
           var mousemove = function(event, data) {
             Tooltip
               .html("Value: " + data[1].indicator)
+             // .style()
               .attr("x", (event.offsetX + 20))
               .attr("y", (event.offsetY + 20))
           }
