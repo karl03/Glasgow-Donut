@@ -102,6 +102,12 @@ export default function AdminPage(){
     });
   }
 
+  function newSliderHandler(ecoOrSoc, gloOrLoc){
+    console.log("newSliderHandler: ", ecoOrSoc,gloOrLoc);
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+    setShowingEditModal(true);
+  }
+
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
     console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
     //setShowingEditModal(true);
@@ -172,7 +178,7 @@ export default function AdminPage(){
                       eventHandler={eventHandler}
                       deleteFunction={deleteSliderHandler}
                       editFunction={editSliderHandler}
-                      modalHandles={[setLastCategorySelect, setShowingEditModal]}
+                      newFunction={newSliderHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );

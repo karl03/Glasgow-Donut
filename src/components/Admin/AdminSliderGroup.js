@@ -16,18 +16,12 @@ const Title = styled.h3`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, modalHandles}){
-
-  function openAddSectorModal(ecoOrSoc, gloOrLoc, modalHandles){
-    const [setLastCategorySelect, setShowingModal] = modalHandles;
-    setLastCategorySelect({ecoOrSoc, gloOrLoc});
-    setShowingModal(true);
-  }
+export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, newFunction}){
 
   return (
     <AdminSliderWrapper>
       <Title>{ecoOrSoc === "ecological" ? "Ecological" : "Social"} - {gloOrLoc === "global" ? "Global" : "Local"}</Title>
-      <button onClick={() => openAddSectorModal(ecoOrSoc, gloOrLoc, modalHandles)}>+</button>
+      <button onClick={() => newFunction(ecoOrSoc, gloOrLoc)}>+</button>
       {
         (function(){
           const Elements = [];
