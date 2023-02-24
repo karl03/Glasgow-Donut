@@ -6,11 +6,11 @@ import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
 import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
-import {getFormElements, populateForm, onClose, onSave} from '../components/Admin/ModalFunctions'
+import {populateForm} from '../components/Admin/ModalFunctions'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  const [isShowingEditModal, setShowingEditModal] = useState(false);
+  const [isShowingEditModal, setShowingEditModal] = useState(true);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
@@ -113,7 +113,10 @@ export default function AdminPage(){
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
     console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
-    //setShowingEditModal(true);
+    setLastSliderName(name);
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+    populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
+    setShowingEditModal(true);
   }
 
   function addUploadModal(){
@@ -152,9 +155,8 @@ export default function AdminPage(){
   }
 
   function TESTING(sliderGroups, lastCategorySelect){
-    const elements = getFormElements();
     const {e, g} = lastCategorySelect;
-    populateForm(sliderGroups, elements, 'Hello', e, g);
+    populateForm(sliderGroups, 'Hello', e, g);
     //onClose();
   }
   

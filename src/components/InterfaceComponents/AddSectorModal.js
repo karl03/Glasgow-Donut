@@ -2,102 +2,30 @@ import React from 'react'
 import ModalMenu from './ModalMenu'
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
+import {onClose, onSave} from '../Admin/ModalFunctions'
 
-export default function AddSectorModal(lastCategorySelect,
+export default function AddSectorModal({lastCategorySelect,
     lastSliderName,
     isShow,
     setShow,
     sliderGroups,
-    setSliderGroups) {
+    setSliderGroups}) {
 
-    function getFormElements(){
-        return {
-            "title" : document.getElementById("modal-sector-title"),
-            "value" : document.getElementById("modal-sector-value"),
-            "indicator" : document.getElementById("modal-sector-indicator"),
-            "target" : document.getElementById("modal-sector-target"),
-            "description" : document.getElementById("modal-sector-description"),
-            "cites" : document.getElementById("modal-sector-cites"),
-            "videolink" : document.getElementById("modal-sector-videolink")
-           };
-    }
-
-    function getFormData(formElements){
-        let formData = {};
-        for (var key in formElements){
-            const value = formElements[key].value;
-            if (typeof(value) === "undefined") {
-                formData[key] = '';
-            }
-            else{
-                formData[key] = value;
-            }
-            formElements[key].value = '';
-        }
-
-        return formData;
-    }
-
-    function isValidForm(title){
-        if (title !== '') {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    function handleSubmit(sliderGroups, lastCategorySelect, setSliderGroups, setShow){
-        const {
-            title, 
-            value, 
-            indicator, 
-            target, 
-            description, 
-            cites, 
-            videolink
-        } = getFormData(getFormElements());
-
-        console.log("handleSubmit: " + title, 
-        value, 
-        indicator, 
-        target, 
-        description, 
-        cites, 
-        videolink)
-
-        if (!isValidForm(title.value)) {
-            alert("The sector requires a title!");
-            return;
-        }
-
-        const New = JSON.parse(JSON.stringify(sliderGroups));
+    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow){
         const {ecoOrSoc, gloOrLoc} = lastCategorySelect;
-
-        New[ecoOrSoc][gloOrLoc][title] = {
-            "value": value,
-            "adjacent": [],
-            "indicator": indicator,
-            "target": target,
-            "description": description,
-            "quotes": cites,
-            "video_hash": videolink
-        };
-        setSliderGroups(New);
-
-        setShow(false);
+        console.log("handleSubmit: ", lastSliderName);
+        onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
     }
 
     function handleClose(setShow){
-        getFormData();
-        setShow(false);
+        onClose(setShow);
     }
 
   return (
     <ModalMenu 
         isShow={isShow}
         onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, setSliderGroups, setShow)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
