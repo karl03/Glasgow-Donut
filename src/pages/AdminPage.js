@@ -10,7 +10,6 @@ import {getFormElements, populateForm, onClose, onSave} from '../components/Admi
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  const [lastCategorySelect, setLastCategorySelect] = useState();
   const [isShowingEditModal, setShowingEditModal] = useState(false);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
@@ -18,6 +17,10 @@ export default function AdminPage(){
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
+
+  // 'Edit modal' state variables.
+  const [lastCategorySelect, setLastCategorySelect] = useState();
+  const [lastSliderName, setLastSliderName] = useState();
 
   const [loaded, setLoaded] = useState(false);
 
@@ -213,6 +216,7 @@ export default function AdminPage(){
       </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
+        lastSliderName={lastSliderName}
         isShow={isShowingEditModal}
         setShow={setShowingEditModal}
         sliderGroups={sliderGroups}

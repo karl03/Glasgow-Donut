@@ -3,7 +3,12 @@ import ModalMenu from './ModalMenu'
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
 
-export default function AddSectorModal(props) {
+export default function AddSectorModal(lastCategorySelect,
+    lastSliderName,
+    isShow,
+    setShow,
+    sliderGroups,
+    setSliderGroups) {
 
     function getFormElements(){
         return {
@@ -42,7 +47,7 @@ export default function AddSectorModal(props) {
         }
     }
 
-    function handleSubmit(props){
+    function handleSubmit(sliderGroups, lastCategorySelect, setSliderGroups, setShow){
         const {
             title, 
             value, 
@@ -66,8 +71,8 @@ export default function AddSectorModal(props) {
             return;
         }
 
-        const New = JSON.parse(JSON.stringify(props.sliderGroups));
-        const {ecoOrSoc, gloOrLoc} = props.lastCategorySelect;
+        const New = JSON.parse(JSON.stringify(sliderGroups));
+        const {ecoOrSoc, gloOrLoc} = lastCategorySelect;
 
         New[ecoOrSoc][gloOrLoc][title] = {
             "value": value,
@@ -78,21 +83,21 @@ export default function AddSectorModal(props) {
             "quotes": cites,
             "video_hash": videolink
         };
-        props.setSliderGroups(New);
+        setSliderGroups(New);
 
-        props.setShow(false);
+        setShow(false);
     }
 
-    function handleClose(props){
+    function handleClose(setShow){
         getFormData();
-        props.setShow(false);
+        setShow(false);
     }
 
   return (
     <ModalMenu 
-        isShow={props.isShow}
-        onClose={() => handleClose(props)}
-        onSave={() => handleSubmit(props)}
+        isShow={isShow}
+        onClose={() => handleClose(setShow)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, setSliderGroups, setShow)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
