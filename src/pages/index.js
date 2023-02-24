@@ -30,7 +30,7 @@ function HomePage() {
       </MainBg>
       <Header title="Gallant Donut Graph" size="2rem"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
-        <BarChart data={sliderGroups} size={600}/>
+        <BarChart data={sliderGroups} size={700}/>
       </div>
     
       <h1>Understanding the Graph</h1>
