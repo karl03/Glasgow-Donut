@@ -189,7 +189,7 @@ export default function AdminPage(){
           <div className="admin-io-container">
             <div className="admin-upload-form">
               <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeUploadHandler}/>
-              <label className="admin-upload-label" for="file">File Upload</label>
+              <label className="admin-upload-label" htmlFor="file">File Upload</label>
               <button className="admin-upload-button" onClick={showUploadModal}>Upload</button>
             </div>
           </div>
