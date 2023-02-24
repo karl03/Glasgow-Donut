@@ -16,25 +16,13 @@ const Title = styled.h3`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction}){
+export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, newFunction}){
 
   return (
     <AdminSliderWrapper>
       <Title>{ecoOrSoc === "ecological" ? "Ecological" : "Social"} - {gloOrLoc === "global" ? "Global" : "Local"}</Title>
-      {/*
-        sliders.map((slider) => (
-          <AdminSlider
-            eventHandler={eventHandler}
-            id = {slider.id = uuidv4()}
-            initialValue={slider.Value}
-            initialName={slider.Name}
-            initialFactor={slider.Factor}
-            deleteFunction={deleteFunction}
-            groupID={groupID}
-            key={`AdminSlider${slider.Name},${groupID}`}
-          />
-        ))
-        */
+      <button onClick={() => newFunction(ecoOrSoc, gloOrLoc)}>+</button>
+      {
         (function(){
           const Elements = [];
           for(const [SliderName, SliderInfo] of Object.entries(sliders)){
@@ -47,6 +35,7 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
+                editFunction={editFunction}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );

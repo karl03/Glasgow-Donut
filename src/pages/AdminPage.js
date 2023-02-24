@@ -2,20 +2,25 @@ import React, { useState } from 'react';
 import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
-//import AdminAddData from '../components/Admin/AdminAddData'
+import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
+import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
-import ModalMenu from '../components/InterfaceComponents/ModalMenu';
 import '../components/Admin/Admin.css'
+import {populateForm} from '../components/Admin/ModalFunctions'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  // const [isShowingModal, setShowingModal] = useState(false);
+  const [isShowingEditModal, setShowingEditModal] = useState(true);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
+
+  // 'Edit modal' state variables.
+  const [lastCategorySelect, setLastCategorySelect] = useState();
+  const [lastSliderName, setLastSliderName] = useState();
 
   const [loaded, setLoaded] = useState(false);
 
@@ -74,7 +79,6 @@ export default function AdminPage(){
     }
     if(!loaded) getData();
   }, [loaded]);
-
   
   const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
     switch(type){
@@ -92,21 +96,6 @@ export default function AdminPage(){
     }
   }, []);
 
-  /*const addedElementHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, name){
-    setSliderGroups(function(oldSliders){
-      const New = JSON.parse(JSON.stringify(oldSliders));
-      New[ecoOrSoc][gloOrLoc][name] = {
-        "value": Math.round(Math.random() * 100.),
-        "adjacent":[["ecological","local","fresh_water","ocean acidification affects the water quality"],["social","local","water","ocean acidification affects water"]],
-        "indicator":"this is the indicator",
-        "target":"aim to make it a better category",
-        "description":"how much acid in the ocean",
-        "quotes":"These are the quotes/citations",
-        "video_hash":"I77B871YOTQ"
-      };
-      return New;
-    });
-  }, []);*/
 
   function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setSliderGroups(function(oldSliders){
@@ -116,44 +105,19 @@ export default function AdminPage(){
     });
   }
 
-  // function addSectorModal(){
-  //   /* Opens a new modal when clicking the 'edit' icon of a slider or the + icon.
-  //       - Should generate a modal for sector modification containing prior data.
-  //         - Upon saving, the old sector should be delete, and the new inserted in its place.
+  function newSliderHandler(ecoOrSoc, gloOrLoc){
+    console.log("newSliderHandler: ", ecoOrSoc,gloOrLoc);
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+    setShowingEditModal(true);
+  }
 
-  //       - If it is a new sector, the Modal is unpopulated.
-  //         - Upon saving, the new sector is added.
-  //   */
-  //   return (
-  //     <ModalMenu
-  //         isShow={isShowingModal}
-  //         onClose={() => setShowingModal(false)}
-  //         onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
-  //         title="Modal Title"
-  //         >
-  //         <p>This is inside the menu.</p>
-  //         <p>More text</p>
-  //         <p>More text</p>
-  //         <p>More text</p>
-  //       </ModalMenu>
-  //   )
-  // }
-
-  // function quitWithoutSaveModal(){
-  //   /* Opens an warning / query when clicking to leave the editor without saving.
-  //       - A simple message Modal.
-  //   */
-  //   return (
-  //     <ModalMenu
-  //        isShow={isShowingModal}
-  //        onClose={() => setShowingModal(false)}
-  //        onSave={() => setShowingModal(false)} // TODO: onSave function to pass data from Modal
-  //        title="Unsaved Data!"
-  //        >
-  //         <p>There is unsaved changes to the bar chart!</p>
-  //       </ModalMenu>
-  //   )
-  // }
+  function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
+    console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
+    setLastSliderName(name);
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+    populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
+    setShowingEditModal(true);
+  }
 
   function addUploadModal(){
     return (
@@ -189,6 +153,12 @@ export default function AdminPage(){
         </ModalMenu>
     )
   }
+
+  function TESTING(sliderGroups, lastCategorySelect){
+    const {e, g} = lastCategorySelect;
+    populateForm(sliderGroups, 'Hello', e, g);
+    //onClose();
+  }
   
   return (
     <div className="admin-container">
@@ -212,6 +182,8 @@ export default function AdminPage(){
                       gloOrLoc={gloOrLoc}
                       eventHandler={eventHandler}
                       deleteFunction={deleteSliderHandler}
+                      editFunction={editSliderHandler}
+                      newFunction={newSliderHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
@@ -230,7 +202,7 @@ export default function AdminPage(){
           <div className="admin-io-container">
             <div className="admin-upload-form">
               <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeUploadHandler}/>
-              <label className="admin-upload-label" for="file">File Upload</label>
+              <label className="admin-upload-label" htmlFor="file">File Upload</label>
               <button className="admin-upload-button" onClick={showUploadModal}>Upload</button>
             </div>
           </div>
@@ -240,11 +212,18 @@ export default function AdminPage(){
       <div>
         {true ? addUploadModal(): quitUploadModal()}
       </div>
-      {/* <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingModal(true)}>DEBUG MODAL MENU</button>
-        {true ? addSectorModal(): quitWithoutSaveModal()}        
-      </div> */}
-      {/* <AdminAddData addedElementHandler={addedElementHandler}/> */}
+      <div className="modal-manager">
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
+        <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
+      </div>
+      <AddSectorModal 
+        lastCategorySelect={lastCategorySelect}
+        lastSliderName={lastSliderName}
+        isShow={isShowingEditModal}
+        setShow={setShowingEditModal}
+        sliderGroups={sliderGroups}
+        setSliderGroups={setSliderGroups}
+        ></AddSectorModal>
     </div>
   );
 };
