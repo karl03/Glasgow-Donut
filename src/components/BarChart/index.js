@@ -197,6 +197,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .text("GLOBAL SOCIAL FOUNDATION");
 
@@ -216,6 +218,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("LOCAL SOCIAL FOUNDATION");
@@ -236,6 +240,8 @@ export default function BarChart({
                   .style("font-size", 12 + "px")
                   .style("letter-spacing", "0.001em")
                   .style("text-anchor","middle")
+                  .style("user-select","none")
+                  .style("cursor","default")
                   .attr("startOffset", "50%")
                   .attr("dy", ".1em")
                   .text("LOCAL ECOLOGICAL GENEROSITY");
@@ -257,6 +263,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
@@ -296,12 +304,7 @@ export default function BarChart({
               .endAngle(d => xScale(d[0]) + xScale.bandwidth())
               .padAngle(margin / 100.)
               .padRadius(innerRadius))
-              .style("cursor", "pointer")
-              .on("click", function(Event, ElementProperties){
-                if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
-                  LightBoxTrigger(Event, ElementProperties);
-                }
-              });
+              ;
         }
 
         function CreateIconRing(Properties, group, xScale){
@@ -364,6 +367,11 @@ export default function BarChart({
       width: size.toString(),
     }}>
     </svg>
+    <div style={{
+    "background-color":"black",
+    "position":"absolute",
+    "width":"100%",
+    "height":"5px"}}></div>
     <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
     </>
   );

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ImageBg = styled.img`
   display:'';
   width:100%;
-  height:100%;
+  height:61%;
   -o-object-fit: cover;
   object-fit: cover;
   background:#232a34;
