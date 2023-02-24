@@ -28,7 +28,7 @@ function HomePage() {
       <MainBg>
         <ImageBg src={BackgroundImage}/>
       </MainBg>
-      <Header title="Gallant Donut Graph" size="2rem"/>
+      <Header title="Glasgow City Portrait" size="2rem"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>

@@ -156,7 +156,7 @@ export default function BarChart({
                     return `rotate(${Rotation}) translate(${smallRingRadius*1.9},0) rotate(${-Rotation})`;
                   })
                 .append("svg:image")
-                  .attr('x', -smallRingRadius + 10)
+                  .attr('x', -smallRingRadius + 13)
                   .attr('y', -smallRingRadius + 13)
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
