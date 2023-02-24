@@ -20,7 +20,13 @@ export default function AddSectorModal(props) {
     function getFormData(formElements){
         let formData = {};
         for (var key in formElements){
-            formData[key] = formElements[key].value;
+            const value = formElements[key].value;
+            if (typeof(value) === "undefined") {
+                formData[key] = '';
+            }
+            else{
+                formData[key] = value;
+            }
             formElements[key].value = '';
         }
 
@@ -46,6 +52,14 @@ export default function AddSectorModal(props) {
             cites, 
             videolink
         } = getFormData(getFormElements());
+
+        console.log("handleSubmit: " + title, 
+        value, 
+        indicator, 
+        target, 
+        description, 
+        cites, 
+        videolink)
 
         if (!isValidForm(title.value)) {
             alert("The sector requires a title!");

@@ -64,7 +64,7 @@ const TextInput = styled.input`
   font-size: 20px;
 `;
 
-export default function AdminSlider({initialValue, eventHandler, initialName, ecoOrSoc, gloOrLoc, deleteFunction}){
+export default function AdminSlider({initialValue, eventHandler, initialName, ecoOrSoc, gloOrLoc, deleteFunction, editFunction}){
   const [value, setValue] = React.useState(initialValue);
   const [name, setName] = React.useState(initialName);
 
@@ -78,7 +78,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, ec
       <Left>
         <Top>
           <div>{initialName}</div>
-          <button>EDIT</button>
+          <button onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
           <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />

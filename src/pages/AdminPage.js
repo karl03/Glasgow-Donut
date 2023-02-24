@@ -103,7 +103,8 @@ export default function AdminPage(){
   }
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    setShowingEditModal(true);
+    console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
+    //setShowingEditModal(true);
   }
 
   function addUploadModal(){
@@ -170,6 +171,7 @@ export default function AdminPage(){
                       gloOrLoc={gloOrLoc}
                       eventHandler={eventHandler}
                       deleteFunction={deleteSliderHandler}
+                      editFunction={editSliderHandler}
                       modalHandles={[setLastCategorySelect, setShowingEditModal]}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />

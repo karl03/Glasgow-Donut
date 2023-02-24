@@ -16,7 +16,7 @@ const Title = styled.h3`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, modalHandles}){
+export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, modalHandles}){
 
   function openAddSectorModal(ecoOrSoc, gloOrLoc, modalHandles){
     const [setLastCategorySelect, setShowingModal] = modalHandles;
@@ -41,6 +41,7 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
+                editFunction={editFunction}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );
