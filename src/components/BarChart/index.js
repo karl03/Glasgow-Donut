@@ -23,7 +23,7 @@ export default function BarChart({
 
     function LightBoxTrigger(Event, ElementProperties){
       document.body.scrollTop = 65; // For Safari
-      document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+      document.documentElement.scrollTop = 72; // For Chrome, Firefox, IE and Opera
       setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
@@ -352,12 +352,12 @@ export default function BarChart({
 
   return (
     <>
-    <svg className = "svgClass" ref={ref} width={size} height={size} style={{
-      height: size.toString(),
-      width: size.toString(),
-    }}>
-    </svg>
-    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
+      <svg className = "svgClass" ref={ref} width={size} height={size} style={{
+        height: size.toString(),
+        width: size.toString(),
+      }}>
+      </svg>
+      <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
     </>
   );
 };
