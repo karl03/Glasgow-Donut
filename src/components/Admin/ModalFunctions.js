@@ -1,6 +1,5 @@
 // Functions for the modal menu!
 
-// get all form elements
 function getFormElements(){
     const title = document.getElementById('modal-sector-title');
     const value = document.getElementById('modal-sector-value');
@@ -21,13 +20,13 @@ function getFormElements(){
 }
 
 export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
-    // Find existing data
+    // Find existing data.
 
     const data = sliderGroups[ecoOrSoc][gloOrLoc][name];
 
     console.log("populateForm: ", name, JSON.stringify(data));
 
-    // write data to elemenets
+    // Write data to elemenets.
     const {title, value, indicator, target, description, cites, videolink} = getFormElements();
     title.value = name;
     value.value = data['value'];
@@ -73,8 +72,8 @@ function getFormData(formElements){
 }
 
 export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow){
-    // get form data
-    const x = getFormData(getFormElements());
+    // Get form data.
+    const formData = getFormData(getFormElements());
 
     if (!isValidForm(title)) {
         alert("The sector requires a title!");
@@ -82,26 +81,25 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
     }
 
     console.log("onSave: " + title, 
-    x['value'], 
-    x["indicator"], 
-    x["target"], 
-    x["description"], 
-    x["cites"], 
-    x["videolink"])
+    formData['value'], 
+    formData["indicator"], 
+    formData["target"], 
+    formData["description"], 
+    formData["cites"], 
+    formData["videolink"])
 
-    console.log("AAHSDHJASIJDHKJADSN",Object.keys(x));
-    // insert/overwrite new data 
+    // Insert or overwrite new data.
 
     const New = JSON.parse(JSON.stringify(sliderGroups));
-    New[ecoOrSoc][gloOrLoc][x['title']] = {
-        "value": x['value'],
+    New[ecoOrSoc][gloOrLoc][formData['title']] = {
+        "value": formData['value'],
         "adjacent": [],//NEEDS TO BE IMPLEMENTED
-        "indicator": x['indicator'],
-        "target": x['target'],
-        "description": x['description'],
-        "quotes": x['cites'],
+        "indicator": formData['indicator'],
+        "target": formData['target'],
+        "description": formData['description'],
+        "quotes": formData['cites'],
         "symbol_id": '', //NEEDS TO BE IMPLEMENTED
-        "video_hash": x['videolink']
+        "video_hash": formData['videolink']
     };
     console.log(New);
     setSliderGroups(New);
