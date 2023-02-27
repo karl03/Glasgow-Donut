@@ -58,15 +58,19 @@ export default function BarChart({
 
       const Tooltip = TooltipGroup
             .append("foreignObject")
-            .attr("width", 250)
-            .attr("height", 100)
-            /*.style("opacity", 0)
+            .attr("width", 100)
+            .attr("height", 50)
+            .attr("class", "tooltip")
+            .style("fill", "black")
+            .style("font-size", "12px")
+            .style("pointer-events", "none")
+            .style("opacity", 0)
             .attr("class", "tooltip")
             .style("background-color", "white")
             .style("border", "solid")
             .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")*/
+            .style("border-radius", "2px")
+            //.style("padding", "2px")
                   
           var mouseover = function(event, data) {
             Tooltip
@@ -83,7 +87,7 @@ export default function BarChart({
           }
           var mousemove = function(event, data) {
             Tooltip
-              .html(`<p style="background-color: #007faf;">Value: ${data[1].indicator}</p>`);
+              .html(`<p style="padding: 0; display: inline-block; margin: 0; background-color: #ffffff7f;">Value: ${data[1].indicator}</p>`);
               TooltipGroup
               .attr("transform", `translate(${(event.offsetX + 20)}, ${event.offsetY + 20})`);
           }
