@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './DropdownMenu.css'
 
 export default function DropdownMenu(props) {
-  const dataArray = props.dataArray === undefined ? [] : props.dataArray;
+  const dataArray = props.dataArray || [];
   if (props.notifyFunction === undefined) props.notifyFunction = function() {return undefined;};
 
   const [isOpen, SetOpen] = useState(false);
@@ -37,6 +37,7 @@ export default function DropdownMenu(props) {
       <button className='dropdown_deselect_button' onClick={handleOnClear}>X</button>
       {isOpen ? 
       <ul className='menu'>
+        {console.log(dataArray)}
         {dataArray.map((item, index) => (<li key={index} className="menu-item" data-index={index} data-item={item} onClick={handleSelection}>{item}</li> ))} 
       </ul> : null}
     </div>

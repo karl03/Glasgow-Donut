@@ -1,0 +1,14 @@
+.adjacency-selector {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.message-input {
+    min-width: 350px;
+    height: 30px;
+}
+
+/* .enter-adjacency-button{
+
+} */

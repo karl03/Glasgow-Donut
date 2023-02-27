@@ -2,6 +2,7 @@ import React from 'react'
 import ModalMenu from './ModalMenu'
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
+import AdjacencySelector from './AdjacencySelector'
 import {onClose, onSave} from '../Admin/ModalFunctions'
 
 export default function AddSectorModal({lastCategorySelect,
@@ -21,6 +22,10 @@ export default function AddSectorModal({lastCategorySelect,
         onClose(setShow);
     }
 
+    function handleNotify(selection){
+        console.log("handleNotify: " + selection);
+    }
+
   return (
     <ModalMenu 
         isShow={isShow}
@@ -28,6 +33,8 @@ export default function AddSectorModal({lastCategorySelect,
         onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow)}
         title="Sector Editor"
     >
+        {/*<DropDownMenu notifyFunction={handleNotify} dataArray={["a","b"]} onClear={() => {console.log("CLOSE!")}}></DropDownMenu>*/}
+        <AdjacencySelector sliderGroups={sliderGroups} ecoOrSoc={lastCategorySelect !== undefined ? lastCategorySelect.ecoOrSoc : ''} gloOrLoc={lastCategorySelect !== undefined ? lastCategorySelect.gloOrLoc : ''} ></AdjacencySelector>
         <form action="" className="add-sector-form" method='post'>
 
             <label htmlFor="sector-title">Title </label>
@@ -52,7 +59,8 @@ export default function AddSectorModal({lastCategorySelect,
             <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
                 placeholder='Description...'></textarea>
-        
+
+            <label htmlFor='sector-adjacencies'>Adjacencies </label>
     
             <label htmlFor="sector-cites">Citations </label>
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"

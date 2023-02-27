@@ -7,20 +7,19 @@
 }
   
 .menu {
-  position: relative;
+  position: static;
 
   list-style-type: none;
-  margin: 5px;
-  padding: 5px;
-
-  border: 1px solid grey;
-  width:max-content;
+  padding: 0px;
+  margin-top: 0px;
+  border-radius: 5px;
 }
 
 .menu > li {
   margin: 0;
-
   background-color: white;
+  border-radius: 5px;
+  font-size: smaller;
 }
 
 .menu > li:hover {
@@ -35,7 +34,7 @@
   background: none;
   color: inherit;
   border: none;
-  padding: 5px;
+  padding: 0px;
   margin: 0;
   font: inherit;
   cursor: pointer;
