@@ -58,19 +58,19 @@ export default function BarChart({
 
       const Tooltip = TooltipGroup
             .append("foreignObject")
-            .attr("width", 100)
-            .attr("height", 50)
+            .attr("width", 180)
+            .attr("height", 100)
             .attr("class", "tooltip")
             .style("fill", "black")
             .style("font-size", "12px")
             .style("pointer-events", "none")
             .style("opacity", 0)
             .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "2px")
-            //.style("padding", "2px")
+            .style("background-color", "transparent")
+            //.style("border", "solid")
+            //.style("border-width", "2px")
+            //.style("border-radius", "2px")
+            
                   
           var mouseover = function(event, data) {
             Tooltip
@@ -86,10 +86,14 @@ export default function BarChart({
               //.style("opacity", 1)
           }
           var mousemove = function(event, data) {
+            const CapitalisedProperty = data[0][0].toUpperCase() + data[0].slice(1);
             Tooltip
-              .html(`<p style="padding: 0; display: inline-block; margin: 0; background-color: #ffffff7f;">Value: ${data[1].indicator}</p>`);
+              .html(`<p style="max-width: calc(100% - 40px); max-height: calc(100% - 40px);
+               position: absolute; top: 10px; left: 10px; padding: 0; 
+               box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+               display: inline-block; margin: 0; padding: 2px; background-color: white;"><b>${CapitalisedProperty.replaceAll(/_/g, " ")}</b><br />${data[1].value}%</p>`);
               TooltipGroup
-              .attr("transform", `translate(${(event.offsetX + 20)}, ${event.offsetY + 20})`);
+              .attr("transform", `translate(${(event.offsetX + 10)}, ${event.offsetY + 10})`);
           }
           var mouseleave = function(event, data) {
             Tooltip
