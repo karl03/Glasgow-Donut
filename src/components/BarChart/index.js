@@ -51,24 +51,29 @@ export default function BarChart({
 
       let {group, yOuter, yInner} = SetupBarChart();
 
-      var Tooltip = d3.select(".svgClass")
-            .append("text")
-            .style("opacity", 0)
+      const TooltipGroup = d3.select(".svgClass")
+      .append("g")
+      .attr("width", 250)
+      .attr("height", 100)
+
+      const Tooltip = TooltipGroup
+            .append("foreignObject")
+            .attr("width", 250)
+            .attr("height", 100)
+            /*.style("opacity", 0)
             .attr("class", "tooltip")
-            .style("fill", "black")
-            .style("font-size", "12px")
-            .style("pointer-events", "none")
             .style("background-color", "white")
             .style("border", "solid")
             .style("border-width", "2px")
             .style("border-radius", "5px")
-            .style("padding", "5px")
+            .style("padding", "5px")*/
                   
           var mouseover = function(event, data) {
             Tooltip
               .style("opacity", 1)
             d3.select(this)
               .style("stroke", "black")
+              .style("opacity", 1)
             if(document.getElementById(data[0]+"_outer")){
               document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
             } else if(document.getElementById(data[0]+"_inner")){
@@ -78,16 +83,16 @@ export default function BarChart({
           }
           var mousemove = function(event, data) {
             Tooltip
-              .html("Value: " + data[1].indicator)
-             // .style()
-              .attr("x", (event.offsetX + 20))
-              .attr("y", (event.offsetY + 20))
+              .html(`<p style="background-color: #007faf;">Value: ${data[1].indicator}</p>`);
+              TooltipGroup
+              .attr("transform", `translate(${(event.offsetX + 20)}, ${event.offsetY + 20})`);
           }
           var mouseleave = function(event, data) {
             Tooltip
               .style("opacity", 0)
             d3.select(this)
               .style("stroke", "none")
+              //.style("opacity", 0.8)
             if(document.getElementById(data[0]+"_outer")){
               document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197")
             } else if(document.getElementById(data[0]+"_inner")){
