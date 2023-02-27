@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import React, { useEffect } from 'react'
 import "./Lightbox.css";
 
@@ -15,7 +16,6 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
   },[trigger, DataProperty, setTrigger]);
 
   function changeState() {
-    console.log("LightBox ChangeState function called!");
     if(trigger ===true){
       setShowAdditional(false);
       setTrigger(false)
@@ -28,9 +28,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
 
   function additionalCircles() {
     if(additionalCirclesIsShow===false){
-      //document.getElementById("primary_circle").style.cursor = 'default';
+      document.getElementById("primary_circle").style.cursor = 'default';
       setShowAdditional(true);
-      console.log("yeah");
     }
   }
 
