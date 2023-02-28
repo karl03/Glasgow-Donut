@@ -1,51 +1,59 @@
 import React, {useState, useEffect} from 'react'
-import DropDownMenu from './DropdownMenu'
 import './AdjacencySelector.css'
 
 export default function AdjacencySelector(props) {
-    const [ecoOrSoc, setEcoOrSoc] = useState('');
-    const [gloOrLoc, setGlocOrLoc] = useState('');
+    const [ecoOrSoc, setEcoOrSoc] = useState('ecological');
+    const [gloOrLoc, setGlocOrLoc] = useState('global');
+    const [sector, setSector] = useState();
     const [selectionArray, SetSelectionArray] = useState([]);
+
     function getConstrainedSectors(sliderGroups, ecoOrSoc, gloOrLoc){
-        if (ecoOrSoc === '' || gloOrLoc === '') return;
         return Object.keys(sliderGroups[ecoOrSoc][gloOrLoc]);
     }
 
-    function handleEcoOrSoc(selection){
-        setEcoOrSoc(selection === "Ecological" ? "ecological" : "social");
+    function handleEcoOrSocSelect(){
+        const element = document.getElementById("adj-select-EcoOrSoc");
+        setEcoOrSoc(element.value);
     }
 
-    function handleGloOrLoc(selection){
-        setGlocOrLoc(selection === "Global" ? "global" : "local");
-    }
-
-    function setAdjacency(sliderGroups, setSliderGroups){
-        
+    function handleGloOrLocSelect(){
+        const element = document.getElementById("adj-select-GloOrLoc");
+        setGlocOrLoc(element.value);
     }
 
     useEffect(() => {
         SetSelectionArray(getConstrainedSectors(props.sliderGroups, ecoOrSoc, gloOrLoc));
     }, [ecoOrSoc, gloOrLoc]);
 
+    function handleSubmit(e){
+        e.preventDefault();
+        // Selection slider variables
+        const adjacencyData = [ecoOrSoc,
+        gloOrLoc,
+        sector,
+        document.getElementById("message-input").value]
+        // Current slider variables 
+        // FROM SOMEWHERE!
+
+    }
+
   return (
-    <div className='adjacency-selector'>
-        <DropDownMenu 
-            dataArray={["Ecological", "Social"]} 
-            notifyFunction={handleEcoOrSoc} 
-            onClear={()=>{setEcoOrSoc('')}}>
-        </DropDownMenu>
-        <DropDownMenu 
-            dataArray={["Global", "Local"]} 
-            notifyFunction={handleGloOrLoc} 
-            onClear={()=>{setGlocOrLoc('')}}>
-        </DropDownMenu>
-        <DropDownMenu 
-            dataArray={selectionArray}
-            notifyFunction={() => setAdjacency(props.sliderGroups, props.setSliderGroups)}
-            onClear={() => {}}>
-        </DropDownMenu>
-        <input type="text" className='message-input' id='message-input' defaultValue="Message..."/>
-        <button className='enter-adjacency-button'>Enter</button>
-    </div>
+    <form className='adj-select' onSubmit={handleSubmit}>
+        <select name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
+            <option value="ecological">Ecological</option>
+            <option value="social">Social</option>
+        </select>
+
+        <select name="GloOrLoc" id="adj-select-GloOrLoc" onChange={handleGloOrLocSelect}>
+            <option value="global">Global</option>
+            <option value="local">Local</option>
+        </select>
+
+        <select name="sector" id="adj-select-sector" value={sector} onChange={e => setSector(e.target.value)}>
+            {selectionArray.map(opt => <option>{opt}</option>)}
+        </select>
+        <input type="text" className='message-input' id='message-input' placeholder='Message...'/>
+        <input type="submit" value="Enter" />
+    </form>
   )
 }
