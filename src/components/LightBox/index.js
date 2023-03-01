@@ -21,6 +21,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Target").innerText = 'Target';
+      document.getElementById("Thriving").innerText = 'Thriving';
+      document.getElementById("top_circle").style.borderRadius = '90px';
+      document.getElementById("top_circle").style.width = '180px';
       document.body.id="show_scroll"
     }
   }
@@ -52,9 +55,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
     const circle = document.getElementById("top_circle");
     const text = document.getElementById("Thriving");
     if(text.innerText === 'Thriving'){
-      text.innerText = DataProperty[1]?.target ?? "why are you here go away";
-      circle.style.borderRadius = '5px';
-      circle.style.width = '300px';
+      text.innerText = DataProperty[1]?.description ?? "why are you here go away";
+      circle.style.borderRadius = '25px';
+      circle.style.width = '500px';
     }else{
       text.innerText = 'Thriving';
       circle.style.borderRadius = '90px';
