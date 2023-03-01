@@ -101,11 +101,14 @@ export default function BarChart({
             d3.select(this)
               .style("stroke", "none")
               //.style("opacity", 0.8)
+              
             if(document.getElementById(data[0]+"_outer")){
-              document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197")
+              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+              else document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197");
             } else if(document.getElementById(data[0]+"_inner")){
-              document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79")
-              }
+              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+              else document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79");
+            }
               //.style("opacity", 0.8)
           }
     
@@ -118,11 +121,11 @@ export default function BarChart({
               .enter()
               .append("path")
                 .attr("class", "GraphColumn")
-                .attr("fill", "#ed7d79")
+                .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#ed7d79")
                 .attr("id", d=>d[0]+"_inner")
                 .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                   .innerRadius(innerRadius - ringRadius / 2. - margin)
-                  .outerRadius(d => yInner(d[1].value))
+                  .outerRadius(d => yInner(d[1].value === -1 ? 100 : d[1].value))
                   .startAngle(d => xScale(d[0]))
                   .endAngle(d => xScale(d[0]) + xScale.bandwidth())
                   .padAngle(margin / 100.)
@@ -308,11 +311,11 @@ export default function BarChart({
           
           .append("path")
           .attr("class", "GraphColumn")
-            .attr("fill", "#fa9197")
+            .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#fa9197")
             .attr("id", d=>d[0]+"_outer")
             .attr("d", d3.arc()     // imagine your doing a part of a donut plot
               .innerRadius(innerRadius + ringRadius / 2. + margin)
-              .outerRadius(d => yOuter(d[1].value))
+              .outerRadius(d => yOuter(d[1].value === -1 ? 100 : d[1].value))
               .startAngle(d =>xScale(d[0]))
               .endAngle(d => xScale(d[0]) + xScale.bandwidth())
               .padAngle(margin / 100.)

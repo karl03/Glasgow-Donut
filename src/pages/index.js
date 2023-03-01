@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg, ImageBgLower} from "./PageElements";
 import BackgroundImage from "../images/glasgow_background.jpg"
+import "./index.css";
 
 
 function HomePage() {
@@ -40,23 +41,85 @@ function HomePage() {
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
-    
-      <h1>Understanding the Graph</h1>
-      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", padding:"40px" }}>
-        <div>
+      <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "40px"}}>
+        <div style={{"maxWidth": "45%"}}>
+        <h1>About the Project</h1>
+        <p>
+          Connecting climate action to the Sustainable Development Goals: Analyse and compare
+          how climate actions formulated in Nationally Determined Contributions (NDCs) corresponds to each of 
+          the 17 Sustainable Development Goals (SDGs).
+        </p>
+        </div>
+        <div class="SponsorsWrapper" style={{"width": "45%", position: "relative", display: "flex", flexDirection: "row"}}>
+          <div style={{aspectRatio: "1093 / 393",
+          minWidth: "100%",
+          backgroundImage:"url(\"/snip.jpg\")",
+          backgroundPosition: "center",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat"
+        }} />
+        </div>
+      </div>
+      
+      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", padding:"40px", backgroundColor: "#D3D3D3" }}>
+        <div style={{marginInline:"150px"}}>
+          <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Nam bibendum viverra sem, in facilisis ligula fringilla eget. 
+          Praesent maximus sed orci quis bibendum. Curabitur eget sodales lorem. 
+          Phasellus porta tempor faucibus. Pellentesque interdum nisi ex, luctus imperdiet ante consectetur sit amet. 
+          Sed consequat aliquet libero, id efficitur felis dapibus eu. Nunc sem nulla, porttitor vel sagittis lacinia, 
+          scelerisque at massa. Nullam sit amet suscipit sapien. Ut lectus orci, iaculis egestas pellentesque non, 
+          vulputate tempor leo. Ut vitae metus mollis, ultrices magna vel, tempor augue. Integer euismod arcu lorem, 
+          at commodo felis porttitor eget.
+          <br/>
+          <br/>
+          Etiam dictum pretium quam, in tempus libero ullamcorper quis. Praesent sit amet elementum ante. 
+          Integer et est ac urna vulputate efficitur eget sit amet nibh. Duis varius augue consequat mauris imperdiet vehicula. 
+          Etiam consectetur fringilla lorem, eu mollis libero sodales ut. Sed sapien elit, 
+          blandit eu efficitur pretium, semper ut dolor. Vestibulum in est finibus, semper eros quis, aliquet dui. 
+          Mauris hendrerit faucibus lacinia. Proin pharetra diam lacus, eu vulputate lectus sagittis a. Phasellus eu justo turpis.
+          <br/>
+          <br/>
+          In sollicitudin orci vitae nisi viverra rhoncus. Integer cursus vel sapien in vulputate. Nulla facilisi. 
+          In hac habitasse platea dictumst. In condimentum ultrices felis in congue. 
+          Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aliquam commodo interdum metus, a egestas dui aliquam eget. Quisque vel interdum urna. Etiam in blandit diam. 
+          Etiam ultrices posuere nunc in rhoncus.
+          <br/>
+          <br/>
+          </p>
           <YoutubeEmbed embedId="I77B871YOTQ" />
+          <br/>
+          <br/>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. 
+          Commodo nulla  facilisi nullam vehicula ipsum a arcu. Quis lectus nulla at volutpat  diam ut venenatis tellus. 
+          Urna nunc id cursus metus aliquam eleifend mi.  Lacus vestibulum sed arcu non odio. Ridiculus mus mauris vitae  ultricies. 
+          Viverra vitae congue eu consequat ac felis donec et odio.  Varius quam quisque id diam.
+          <br/>
+          <br/>
+          Nunc pulvinar sapien et ligula ullamcorper  malesuada proin libero. Integer malesuada nunc vel risus commodo viverra  maecenas. 
+          Leo duis ut diam quam nulla porttitor massa. Ultrices  tincidunt arcu non sodales neque sodales ut. 
+          Quis commodo odio aenean  sed adipiscing diam donec adipiscing tristique. 
+          Vitae auctor eu augue ut  lectus arcu bibendum at varius.
+          <br/>
+          <br/>
+          Auctor augue mauris augue neque gravida in fermentum et sollicitudin.  
+          Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing  elit. 
+          Adipiscing elit duis tristique sollicitudin nibh sit amet commodo  nulla. 
+          Eu tincidunt tortor aliquam nulla facilisi cras fermentum. 
+          Ligula  ullamcorper malesuada proin libero nunc consequat interdum varius. 
+          Faucibus in ornare quam viverra. Donec pretium vulputate sapien nec.  
+          Egestas egestas fringilla phasellus faucibus scelerisque eleifend.  
+          Elementum curabitur vitae nunc sed velit dignissim sodales. Volutpat sed  cras ornare arcu dui vivamus arcu felis bibendum.
+          <br/>
+          <br/>
+          Bibendum ut tristique  et egestas quis. At urna condimentum mattis pellentesque id nibh  tortor. 
+          Id diam maecenas ultricies mi eget. Turpis in eu mi bibendum. Et  malesuada fames ac turpis egestas. 
+          Proin libero nunc consequat interdum  varius sit amet ma.
+                  
         </div>
         <br/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Commodo nulla  facilisi nullam vehicula ipsum a arcu. Quis lectus nulla at volutpat  diam ut venenatis tellus. Urna nunc id cursus metus aliquam eleifend mi.  Lacus vestibulum sed arcu non odio. Ridiculus mus mauris vitae  ultricies. Viverra vitae congue eu consequat ac felis donec et odio.  Varius quam quisque id diam.
-</p>
-<p>
-Nunc pulvinar sapien et ligula ullamcorper  malesuada proin libero. Integer malesuada nunc vel risus commodo viverra  maecenas. Leo duis ut diam quam nulla porttitor massa. Ultrices  tincidunt arcu non sodales neque sodales ut. Quis commodo odio aenean  sed adipiscing diam donec adipiscing tristique. Vitae auctor eu augue ut  lectus arcu bibendum at varius.
-Auctor augue mauris augue neque gravida in fermentum et sollicitudin.  Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing  elit. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo  nulla. Eu tincidunt tortor aliquam nulla facilisi cras fermentum. Ligula  ullamcorper malesuada proin libero nunc consequat interdum varius.  Faucibus in ornare quam viverra. Donec pretium vulputate sapien nec.  Egestas egestas fringilla phasellus faucibus scelerisque eleifend.  Elementum curabitur vitae nunc sed velit dignissim sodales. Volutpat sed  cras ornare arcu dui vivamus arcu felis bibendum.
-</p>
-<p>
-Bibendum ut tristique  et egestas quis. At urna condimentum mattis pellentesque id nibh  tortor. Id diam maecenas ultricies mi eget. Turpis in eu mi bibendum. Et  malesuada fames ac turpis egestas. Proin libero nunc consequat interdum  varius sit amet ma.
-        </p>
       </div>
     </div>
   );
