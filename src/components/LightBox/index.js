@@ -22,6 +22,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
+    while(document.getElementById("lightbox").childElementCount > 0){
+      document.getElementById("lightbox").removeChild(document.getElementById("lightbox").lastChild)
+    }
+    
     if(trigger ===true){
       setShowAdditional(false);
       setTrigger(false)
@@ -62,6 +66,39 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       // ****Continue here for connections feature!!!***
 
       if (adjacencyList != "No adjacencies") {
+        for(let i=0;i<adjacencyList.length;i++){
+          if(adjacencyList[i][0] == "social"){
+            const inner_dimensions = document.getElementById(adjacencyList[i][2]+"_inner_img").getBoundingClientRect()
+            
+            console.log(adjacencyList)
+            console.log(data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
+            console.log(inner_dimensions);
+
+            const container = document.createElement('svg');
+            const image = document.createElement('img')
+            image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
+            image.setAttribute("height",inner_dimensions["height"])
+            image.setAttribute("width",inner_dimensions["width"])
+            
+            container.appendChild(image)
+            document.getElementById("lightbox").appendChild(container)
+            
+          }else{
+            const outer_dimensions = document.getElementById(adjacencyList[i][2]+"_outer_img").getBoundingClientRect()
+            console.log(document.getElementById(adjacencyList[i][2]+"_outer_img").getBoundingClientRect());
+            const container = document.createElement('svg');
+            const image = document.createElement('img')
+            image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
+            image.setAttribute("height",outer_dimensions["height"])
+            image.setAttribute("width",outer_dimensions["width"])
+            container.appendChild(image)
+            document.getElementById("lightbox").appendChild(container)
+          }
+
+        }
+        
+        
+
         
       }
     } else {
