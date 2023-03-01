@@ -48,6 +48,19 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
     }
   }
 
+  function changeThriving(){
+    const circle = document.getElementById("top_circle");
+    const text = document.getElementById("Thriving");
+    if(text.innerText === 'Thriving'){
+      text.innerText = DataProperty[1]?.target ?? "why are you here go away";
+      circle.style.borderRadius = '5px';
+      circle.style.width = '300px';
+    }else{
+      text.innerText = 'Thriving';
+      circle.style.borderRadius = '90px';
+      circle.style.width = '180px';
+    }
+  }
 
 
   return (
@@ -60,18 +73,18 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
-    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} /*onClick={changeThriving}*/>
+    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
       <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
+    </span>
+    {/* Just here as a placeholder so the layout is correct */}
+    <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} /*onClick={showConnections}*/>
+      <p id="Connections" className="lightbox_title">{"Connections"}</p>
     </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
     <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
-    </span>
-    {/* Just here as a placeholder so the layout is correct */}
-    <span  id="bottom_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} /*onClick={showConnections}*/>
-      <p id="Bottom" className="lightbox_title">{"Connections"}</p>
     </span>
   </div>
   </>
