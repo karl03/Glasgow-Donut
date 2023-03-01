@@ -33,8 +33,6 @@ export default function AddSectorModal({lastCategorySelect,
         onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow)}
         title="Sector Editor"
     >
-        {/*<DropDownMenu notifyFunction={handleNotify} dataArray={["a","b"]} onClear={() => {console.log("CLOSE!")}}></DropDownMenu>*/}
-        <AdjacencySelector sliderGroups={sliderGroups} ecoOrSoc={lastCategorySelect !== undefined ? lastCategorySelect.ecoOrSoc : ''} gloOrLoc={lastCategorySelect !== undefined ? lastCategorySelect.gloOrLoc : ''} ></AdjacencySelector>
         <form action="" className="add-sector-form" method='post'>
 
             <label htmlFor="sector-title">Title </label>

@@ -25,20 +25,28 @@ export default function AdjacencySelector(props) {
         SetSelectionArray(getConstrainedSectors(props.sliderGroups, ecoOrSoc, gloOrLoc));
     }, [ecoOrSoc, gloOrLoc]);
 
-    function handleSubmit(e){
+    function handleSubmit(e, props){
+        console.log(e, props);
         e.preventDefault();
-        // Selection slider variables
+        // Selection slider variables.
         const adjacencyData = [ecoOrSoc,
         gloOrLoc,
         sector,
         document.getElementById("message-input").value]
-        // Current slider variables 
-        // FROM SOMEWHERE!
 
+        // Current slider variables.
+        const currentEcoOrSoc = props.ecoOrSoc;
+        const currentGloOrLoc = props.gloOrLoc;
+        const currentTitle = props.title;
+        
+        const newSliderGroup = JSON.parse(JSON.stringify(props.sliderGroups)); 
+        console.log(props.sliderGroups);
+        newSliderGroup[currentEcoOrSoc][currentGloOrLoc][currentTitle]["adjacent"].push(adjacencyData);
+        props.setSliderGroups(newSliderGroup);
     }
 
   return (
-    <form className='adj-select' onSubmit={handleSubmit}>
+    <form className='adj-select' onSubmit={(e) => handleSubmit(e, props)}>
         <select name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
             <option value="ecological">Ecological</option>
             <option value="social">Social</option>

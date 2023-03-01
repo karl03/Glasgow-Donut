@@ -3,6 +3,7 @@ import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
+import AdjacencyModal from '../components/InterfaceComponents/AdjacencyModal'
 import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
@@ -11,6 +12,7 @@ import {populateForm} from '../components/Admin/ModalFunctions'
 export default function AdminPage(){
   const [file, setFile] = useState(null);
   const [isShowingEditModal, setShowingEditModal] = useState(false);
+  const [isShowingAdjModal, setShowingAdjModal] = useState(false);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
@@ -122,8 +124,9 @@ export default function AdminPage(){
   function editAdjHandler(name, ecoOrSoc, gloOrLoc){
     console.log("editAdjHandler: ", name, ecoOrSoc, gloOrLoc);
     setLastSliderName(name);
-    setLastCategorySelect({ecoOrSoc, glo});
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
     // editAdj functionality.
+    setShowingAdjModal(true);
   }
 
   function addUploadModal(){
@@ -221,7 +224,7 @@ export default function AdminPage(){
         {true ? addUploadModal(): quitUploadModal()}
       </div>
       <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
+        <button className="DEBUG modal-manager-button" onClick={() => setShowingAdjModal(true)}>DEBUG MODAL MENU</button>
         <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
       </div>
       <AddSectorModal 
@@ -231,7 +234,16 @@ export default function AdminPage(){
         setShow={setShowingEditModal}
         sliderGroups={sliderGroups}
         setSliderGroups={setSliderGroups}
-        ></AddSectorModal>
+      ></AddSectorModal>
+
+      <AdjacencyModal
+        lastCategorySelect={lastCategorySelect} 
+        lastSliderName={lastSliderName}
+        isShow={isShowingAdjModal}
+        setShow={setShowingAdjModal}
+        sliderGroups={sliderGroups}
+        setSliderGroups={setSliderGroups}
+      ></AdjacencyModal>
     </div>
   );
 };
