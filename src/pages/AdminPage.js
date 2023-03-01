@@ -229,6 +229,7 @@ export default function AdminPage(){
       </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
+        setLastSliderName={setLastSliderName}
         lastSliderName={lastSliderName}
         isShow={isShowingEditModal}
         setShow={setShowingEditModal}

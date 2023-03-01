@@ -20,7 +20,11 @@ export default function AdjacencyModal({lastCategorySelect,
     }
 
     // useEffect(() => {
-    //     setAdjData(sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
+    //   if (lastCategorySelect !== undefined) {
+    //     console.log(lastSliderName);
+    //     console.log("USEEFFECT!: ", sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
+    //     //setAdjData()
+    //   }
     // }, [sliderGroups])
     
   return (
@@ -32,7 +36,7 @@ export default function AdjacencyModal({lastCategorySelect,
     >
 
     <div className='adj-display'>
-
+      {}
     </div>
 
     <AdjacencySelector 

@@ -2,35 +2,36 @@ import React from 'react'
 import ModalMenu from './ModalMenu'
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
-import AdjacencySelector from './AdjacencySelector'
 import {onClose, onSave} from '../Admin/ModalFunctions'
 
 export default function AddSectorModal({lastCategorySelect,
     lastSliderName,
+    setLastSliderName,
     isShow,
     setShow,
     sliderGroups,
     setSliderGroups}) {
 
-    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow){
+    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setLastSliderName, setSliderGroups, setShow){
         const {ecoOrSoc, gloOrLoc} = lastCategorySelect;
-        console.log("handleSubmit: ", lastSliderName);
-        onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
+        if (lastSliderName === undefined) {
+            lastSliderName = document.getElementById('modal-sector-title').value;
+            setLastSliderName(lastSliderName);
+            onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
+        } else {
+            onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
+        }
     }
 
     function handleClose(setShow){
         onClose(setShow);
     }
 
-    function handleNotify(selection){
-        console.log("handleNotify: " + selection);
-    }
-
   return (
     <ModalMenu 
         isShow={isShow}
         onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setLastSliderName, setSliderGroups, setShow)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
@@ -57,8 +58,6 @@ export default function AddSectorModal({lastCategorySelect,
             <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
                 placeholder='Description...'></textarea>
-
-            <label htmlFor='sector-adjacencies'>Adjacencies </label>
     
             <label htmlFor="sector-cites">Citations </label>
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
