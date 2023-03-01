@@ -60,11 +60,18 @@ export default function LightBox ({trigger, setTrigger, DataProperty}){
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
+    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} /*onClick={changeThriving}*/>
+      <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
+    </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
     <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
+    </span>
+    {/* Just here as a placeholder so the layout is correct */}
+    <span  id="bottom_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} /*onClick={showConnections}*/>
+      <p id="Bottom" className="lightbox_title">{"Connections"}</p>
     </span>
   </div>
   </>
