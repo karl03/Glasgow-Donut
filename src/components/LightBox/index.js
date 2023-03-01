@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import "./Lightbox.css";
-import * as d3 from "d3";
 
 
 export default function LightBox ({trigger, setTrigger, DataProperty, data}){
@@ -47,10 +46,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   }
 
   function changeTarget(){
-    if(document.getElementById("Target").innerText === 'TARGET'){
+    if(document.getElementById("Target").innerText === 'Target'){
       document.getElementById("Target").innerText = DataProperty[1]?.target ?? "why are you here go away";
     } else {
-      document.getElementById("Target").innerText = 'TARGET';
+      document.getElementById("Target").innerText = 'Target';
     }
   }
 
@@ -68,41 +67,41 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
       // ****Continue here for connections feature!!!***
 
-      if (adjacencyList != "No adjacencies") {
+      if (adjacencyList !== "No adjacencies") {
         for(let i=0;i<adjacencyList.length;i++){
-          if(adjacencyList[i][0] == "social"){
+          if(adjacencyList[i][0] === "social"){
             const inner_dimensions = document.getElementById(adjacencyList[i][2]+"_inner_img").getBoundingClientRect()
-            
-            console.log(adjacencyList)
-            console.log(data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
-            console.log(inner_dimensions);
 
-            const container = document.createElement('svg');
             const image = document.createElement('img')
             image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
             image.setAttribute("height",inner_dimensions["height"])
             image.setAttribute("width",inner_dimensions["width"])
+
+            image.style.position = 'absolute';
+            image.style.top = (inner_dimensions.top + window.pageYOffset) + 'px';
+            image.style.left = (inner_dimensions.left + window.pageXOffset) + 'px';
+            image.style.filter = 'drop-shadow(0 0 1rem rgb(255, 255, 255))';
             
-            container.appendChild(image)
-            document.getElementById("lightbox").appendChild(container)
+            document.getElementById("lightbox").appendChild(image)
             
           }else{
             const outer_dimensions = document.getElementById(adjacencyList[i][2]+"_outer_img").getBoundingClientRect()
-            console.log(document.getElementById(adjacencyList[i][2]+"_outer_img").getBoundingClientRect());
-            const container = document.createElement('svg');
+
             const image = document.createElement('img')
             image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
             image.setAttribute("height",outer_dimensions["height"])
             image.setAttribute("width",outer_dimensions["width"])
-            container.appendChild(image)
-            document.getElementById("lightbox").appendChild(container)
+
+            image.style.position = 'absolute';
+            image.style.top = (outer_dimensions.top + window.pageYOffset) + 'px';
+            image.style.left = (outer_dimensions.left + window.pageXOffset) + 'px';
+            image.style.filter = 'drop-shadow(0 0 1rem rgb(255, 255, 255))';
+
+            document.getElementById("lightbox").appendChild(image)
           }
 
         }
-        
-        
 
-        
       }
     } else {
       document.getElementById("Connections").innerText = 'CONNECTIONS';
@@ -138,14 +137,14 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
     </span>
     {/* Just here as a placeholder so the layout is correct */}
-    <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
-      <p id="Connections" className="lightbox_title">{"Connections"}</p>
-    </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
     <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
+    </span>
+    <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
+      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
     </span>
   </div>
   </>
