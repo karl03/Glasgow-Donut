@@ -51,18 +51,33 @@ export default function BarChart({
 
       let {group, yOuter, yInner} = SetupBarChart();
 
-      var Tooltip = d3.select(".svgClass")
-            .append("text")
+      const TooltipGroup = d3.select(".svgClass")
+      .append("g")
+      .attr("width", 250)
+      .attr("height", 100)
+
+      const Tooltip = TooltipGroup
+            .append("foreignObject")
+            .attr("width", 180)
+            .attr("height", 100)
             .attr("class", "tooltip")
             .style("fill", "black")
             .style("font-size", "12px")
             .style("pointer-events", "none")
-          
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "transparent")
+            //.style("border", "solid")
+            //.style("border-width", "2px")
+            //.style("border-radius", "2px")
+            
+                  
           var mouseover = function(event, data) {
             Tooltip
               .style("opacity", 1)
             d3.select(this)
               .style("stroke", "black")
+              .style("opacity", 1)
             if(document.getElementById(data[0]+"_outer")){
               document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
             } else if(document.getElementById(data[0]+"_inner")){
@@ -71,21 +86,29 @@ export default function BarChart({
               //.style("opacity", 1)
           }
           var mousemove = function(event, data) {
+            const CapitalisedProperty = data[0][0].toUpperCase() + data[0].slice(1);
             Tooltip
-              .html("Value: " + data[1].indicator)
-              .attr("x", (event.offsetX + 20))
-              .attr("y", (event.offsetY + 20))
+              .html(`<p style="max-width: calc(100% - 40px); max-height: calc(100% - 40px);
+               position: absolute; top: 10px; left: 10px; padding: 0; 
+               box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+               display: inline-block; margin: 0; padding: 2px; background-color: white;"><b>${CapitalisedProperty.replaceAll(/_/g, " ")}</b><br />${data[1].value}%</p>`);
+              TooltipGroup
+              .attr("transform", `translate(${(event.offsetX + 10)}, ${event.offsetY + 10})`);
           }
           var mouseleave = function(event, data) {
             Tooltip
               .style("opacity", 0)
             d3.select(this)
               .style("stroke", "none")
+              //.style("opacity", 0.8)
+              
             if(document.getElementById(data[0]+"_outer")){
-              document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197")
+              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+              else document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197");
             } else if(document.getElementById(data[0]+"_inner")){
-              document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79")
-              }
+              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+              else document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79");
+            }
               //.style("opacity", 0.8)
           }
     
@@ -98,11 +121,11 @@ export default function BarChart({
               .enter()
               .append("path")
                 .attr("class", "GraphColumn")
-                .attr("fill", "#ed7d79")
+                .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#ed7d79")
                 .attr("id", d=>d[0]+"_inner")
                 .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                   .innerRadius(innerRadius - ringRadius / 2. - margin)
-                  .outerRadius(d => yInner(d[1].value))
+                  .outerRadius(d => yInner(d[1].value === -1 ? 100 : d[1].value))
                   .startAngle(d => xScale(d[0]))
                   .endAngle(d => xScale(d[0]) + xScale.bandwidth())
                   .padAngle(margin / 100.)
@@ -156,7 +179,7 @@ export default function BarChart({
                     return `rotate(${Rotation}) translate(${smallRingRadius*1.9},0) rotate(${-Rotation})`;
                   })
                 .append("svg:image")
-                  .attr('x', -smallRingRadius + 10)
+                  .attr('x', -smallRingRadius + 13)
                   .attr('y', -smallRingRadius + 13)
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
@@ -191,6 +214,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .text("GLOBAL SOCIAL FOUNDATION");
 
@@ -210,6 +235,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("LOCAL SOCIAL FOUNDATION");
@@ -230,6 +257,8 @@ export default function BarChart({
                   .style("font-size", 12 + "px")
                   .style("letter-spacing", "0.001em")
                   .style("text-anchor","middle")
+                  .style("user-select","none")
+                  .style("cursor","default")
                   .attr("startOffset", "50%")
                   .attr("dy", ".1em")
                   .text("LOCAL ECOLOGICAL GENEROSITY");
@@ -251,6 +280,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
@@ -281,21 +312,16 @@ export default function BarChart({
           
           .append("path")
           .attr("class", "GraphColumn")
-            .attr("fill", "#fa9197")
+            .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#fa9197")
             .attr("id", d=>d[0]+"_outer")
             .attr("d", d3.arc()     // imagine your doing a part of a donut plot
               .innerRadius(innerRadius + ringRadius / 2. + margin)
-              .outerRadius(d => yOuter(d[1].value))
+              .outerRadius(d => yOuter(d[1].value === -1 ? 100 : d[1].value))
               .startAngle(d =>xScale(d[0]))
               .endAngle(d => xScale(d[0]) + xScale.bandwidth())
               .padAngle(margin / 100.)
               .padRadius(innerRadius))
-              .style("cursor", "pointer")
-              .on("click", function(Event, ElementProperties){
-                if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
-                  LightBoxTrigger(Event, ElementProperties);
-                }
-              });
+              ;
         }
 
         function CreateIconRing(Properties, group, xScale){
@@ -359,7 +385,12 @@ export default function BarChart({
         width: size.toString(),
       }}>
       </svg>
-      <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
+      <div style={{
+    "background-color":"black",
+    "position":"absolute",
+    "width":"100%",
+    "height":"5px"}}></div>
+    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
     </>
   );
 };

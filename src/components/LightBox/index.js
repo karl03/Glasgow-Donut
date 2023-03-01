@@ -32,13 +32,16 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Target").innerText = 'Target';
+      document.getElementById("Thriving").innerText = 'Thriving';
+      document.getElementById("top_circle").style.borderRadius = '90px';
+      document.getElementById("top_circle").style.width = '180px';
       document.body.id="show_scroll"
     }
   }
 
   function additionalCircles() {
     if(additionalCirclesIsShow===false){
-      //document.getElementById("primary_circle").style.cursor = 'default';
+      document.getElementById("primary_circle").style.cursor = 'default';
       setShowAdditional(true);
     }
   }
@@ -106,6 +109,19 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     }
   }
 
+  function changeThriving(){
+    const circle = document.getElementById("top_circle");
+    const text = document.getElementById("Thriving");
+    if(text.innerText === 'Thriving'){
+      text.innerText = DataProperty[1]?.description ?? "why are you here go away";
+      circle.style.borderRadius = '25px';
+      circle.style.width = '500px';
+    }else{
+      text.innerText = 'Thriving';
+      circle.style.borderRadius = '90px';
+      circle.style.width = '180px';
+    }
+  }
 
 
   return (
@@ -113,21 +129,25 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
       </div>
 
-      <div className={`grid-container  ${trigger ? 'isShow' : ''}`}>
-        <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
-          <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
-          <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
-        </span>
-        <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
-          <h1 id="Target" className="lightbox_title">{"TARGET"}</h1>
-        </span>
-        <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
-          <h1 id="Indicator" className="lightbox_title">{"INDICATOR"}</h1>
-        </span>
-        <span  id="bottom_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
-          <h1 id="Connections" className="lightbox_title">{"CONNECTIONS"}</h1>
-        </span>
-      </div>
+  <div className={`grid-container  ${trigger ? 'isShow' : ''}`}>
+    <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
+      <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
+      <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
+    </span>
+    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
+      <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
+    </span>
+    {/* Just here as a placeholder so the layout is correct */}
+    <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
+      <p id="Connections" className="lightbox_title">{"Connections"}</p>
+    </span>
+    <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
+      <p id="Target" className="lightbox_title">{"Target"}</p>
+    </span>
+    <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
+      <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
+    </span>
+  </div>
   </>
     );
   };

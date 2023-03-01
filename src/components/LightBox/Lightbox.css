@@ -1,27 +1,39 @@
 .grid-container {
   display: grid;
+  align-items: center;
+  justify-items: center;
   gap: 50px 100px;
   position: absolute;
   pointer-events: none;
 }
 
 #primary_circle{
+  grid-row: 2;
+  grid-column: 2;
+}
+
+#top_circle{
   grid-row: 1;
+  grid-column: 1 / span 3;
+}
+
+#bottom_circle{
+  grid-row: 3;
   grid-column: 2;
 }
 
 #right_circle{
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 3;
 }
 
 #left_circle{
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 1;
 }
 
 #bottom_circle{
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 2;
 }
 
@@ -30,7 +42,7 @@
   position:absolute;
   height:120%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.4);
   transition: all 0.3s ease-in-out;
   overflow:hidden;
 }
@@ -45,7 +57,7 @@
 
 #lightbox_img{
   filter: brightness(0);
-  height:4vh;
+  height:6vh;
   padding-top:20%;
   margin: auto;
   text-align: center;
@@ -58,13 +70,14 @@
   margin: auto;
   text-align: center;
   font-size:20px;
+  overflow: auto;
 }
 
 .circle{
     z-index:5;
     display: flex;
     flex-direction: column;
-    background-color: grey;
+    background-color: white;
     height: 180px;
     width: 180px;
     border-radius: 90px;
@@ -74,6 +87,11 @@
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.center_column{
+  grid-column: 2;
 }
 
 .active{

@@ -1,0 +1,36 @@
+#lightbox{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  height:100%;
+  width:100%;
+  background-color: rgba(134, 134, 134, 0.8);
+  display:none;
+}
+
+#lightbox.active{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+
+#hide_scroll{
+  overflow:hidden;
+}
+
+#show_scroll{
+  overflow:visible;
+}
+
+#lightbox img{
+  z-index: 1000;
+  filter: brightness(0);
+  height:4vw;
+  position:fixed;
+}
+
+#lightbox h1{
+  vertical-align: top;
+  position:relative;
+  padding-top:30vh;
+}

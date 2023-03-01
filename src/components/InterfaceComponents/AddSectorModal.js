@@ -36,7 +36,7 @@ export default function AddSectorModal({lastCategorySelect,
 
             <label htmlFor="sector-value">Value </label>
             <input type="number" name="sector-value" id="modal-sector-value"
-                max="100" min="0" placeholder='0' defaultValue='0'/>
+                max="100" min="-1" placeholder='0' defaultValue='0'/>
 
 
             <label htmlFor="sector-indicator">Indicator </label>
