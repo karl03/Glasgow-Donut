@@ -119,6 +119,13 @@ export default function AdminPage(){
     setShowingEditModal(true);
   }
 
+  function editAdjHandler(name, ecoOrSoc, gloOrLoc){
+    console.log("editAdjHandler: ", name, ecoOrSoc, gloOrLoc);
+    setLastSliderName(name);
+    setLastCategorySelect({ecoOrSoc, glo});
+    // editAdj functionality.
+  }
+
   function addUploadModal(){
     return (
       <ModalMenu
@@ -184,6 +191,7 @@ export default function AdminPage(){
                       deleteFunction={deleteSliderHandler}
                       editFunction={editSliderHandler}
                       newFunction={newSliderHandler}
+                      adjFunction={editAdjHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );

@@ -16,7 +16,16 @@ const Title = styled.h3`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, newFunction}){
+export default function AdminSliderGroup({
+  sliders,
+  eventHandler,
+  ecoOrSoc,
+  gloOrLoc,
+  deleteFunction,
+  editFunction,
+  newFunction,
+  adjFunction})
+  {
 
   return (
     <AdminSliderWrapper>
@@ -36,6 +45,7 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
                 editFunction={editFunction}
+                adjFunction={adjFunction}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );

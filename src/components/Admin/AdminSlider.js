@@ -61,7 +61,7 @@ const Number = styled.input`
 `;
 
 
-export default function AdminSlider({initialValue, eventHandler, initialName, ecoOrSoc, gloOrLoc, deleteFunction, editFunction}){
+export default function AdminSlider({initialValue, eventHandler, initialName, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, adjFunction}){
   const [value, setValue] = React.useState(initialValue);
   const [name, /*setName*/] = React.useState(initialName);
 
@@ -80,6 +80,7 @@ export default function AdminSlider({initialValue, eventHandler, initialName, ec
         <Bottom>
           <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
           <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
+          <button onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
         </Bottom>
       </Left>
       <TrashIcon onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>
