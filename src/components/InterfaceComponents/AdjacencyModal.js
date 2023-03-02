@@ -16,16 +16,21 @@ export default function AdjacencyModal({lastCategorySelect,
     }
 
     function onSave(){
-        setShow(false);
+      //sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"].push()
+      setShow(false);
     }
 
-    // useEffect(() => {
-    //   if (lastCategorySelect !== undefined) {
-    //     console.log(lastSliderName);
-    //     console.log("USEEFFECT!: ", sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
-    //     //setAdjData()
-    //   }
-    // }, [sliderGroups])
+    function formatAdjacency(){
+
+    }
+
+    useEffect(() => {
+      if (lastCategorySelect !== undefined) {
+        if (lastSliderName in sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc]) {
+          setAdjData(sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
+        }
+      }
+    }, [sliderGroups])
     
   return (
     <ModalMenu 
@@ -35,12 +40,14 @@ export default function AdjacencyModal({lastCategorySelect,
         title='Adjacency Editor'
     >
 
-    <div className='adj-display'>
-      {}
-    </div>
+    <ul className='adj-display'>
+      {adjData.map((item, index) => <li key={index}>{item}</li>)}
+    </ul>
 
     <AdjacencySelector 
       sliderGroups={sliderGroups} 
+      lastSliderName={lastSliderName}
+      setSliderGroups={setSliderGroups}
       ecoOrSoc={lastCategorySelect !== undefined ? lastCategorySelect.ecoOrSoc : ''} 
       gloOrLoc={lastCategorySelect !== undefined ? lastCategorySelect.gloOrLoc : ''} 
     ></AdjacencySelector>

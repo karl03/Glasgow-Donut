@@ -165,8 +165,7 @@ export default function AdminPage(){
   }
 
   function TESTING(sliderGroups, lastCategorySelect){
-    const {e, g} = lastCategorySelect;
-    populateForm(sliderGroups, 'Hello', e, g);
+    console.log(sliderGroups);
     //onClose();
   }
   
@@ -225,7 +224,7 @@ export default function AdminPage(){
       </div>
       <div className="modal-manager">
         <button className="DEBUG modal-manager-button" onClick={() => setShowingAdjModal(true)}>DEBUG MODAL MENU</button>
-        <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
+        <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST FUNCTIONS</button>
       </div>
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}

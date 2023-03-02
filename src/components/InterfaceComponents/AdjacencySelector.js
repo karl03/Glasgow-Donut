@@ -23,25 +23,42 @@ export default function AdjacencySelector(props) {
 
     useEffect(() => {
         SetSelectionArray(getConstrainedSectors(props.sliderGroups, ecoOrSoc, gloOrLoc));
-    }, [ecoOrSoc, gloOrLoc]);
+    }, [ecoOrSoc, gloOrLoc, props.sliderGroups]);
+
+    function checkValidAdj(sliderGroups, ecoOrSoc, gloOrLoc, title){
+        // check if self adjacency (use an alert...)
+        // for every adjacency
+            // check if adjacency is the same as the proposed new one.
+            // If overwrite, then call overwrite.
+            // else, create new
+
+
+        if (sliderGroups[ecoOrSoc][gloOrLoc][title]) {
+            
+        }
+    }
 
     function handleSubmit(e, props){
-        console.log(e, props);
+        // props = sliderGroup, ecoOrSoc, gloOrLoc
         e.preventDefault();
         // Selection slider variables.
+        const form = document.getElementById("message-input");
         const adjacencyData = [ecoOrSoc,
         gloOrLoc,
         sector,
-        document.getElementById("message-input").value]
+        form.value]
+
+        form.value = ''; // Clear the form.
 
         // Current slider variables.
         const currentEcoOrSoc = props.ecoOrSoc;
         const currentGloOrLoc = props.gloOrLoc;
-        const currentTitle = props.title;
+        const currentTitle = props.lastSliderName;
         
-        const newSliderGroup = JSON.parse(JSON.stringify(props.sliderGroups)); 
-        console.log(props.sliderGroups);
+        const newSliderGroup = JSON.parse(JSON.stringify(props.sliderGroups));
+        console.log("THIS -->",currentTitle);
         newSliderGroup[currentEcoOrSoc][currentGloOrLoc][currentTitle]["adjacent"].push(adjacencyData);
+        console.log("!!!", newSliderGroup);
         props.setSliderGroups(newSliderGroup);
     }
 
@@ -58,7 +75,7 @@ export default function AdjacencySelector(props) {
         </select>
 
         <select name="sector" id="adj-select-sector" value={sector} onChange={e => setSector(e.target.value)}>
-            {selectionArray.map(opt => <option>{opt}</option>)}
+            {selectionArray.map((item, index) => <option key={index}>{item}</option>)}
         </select>
         <input type="text" className='message-input' id='message-input' placeholder='Message...'/>
         <input type="submit" value="Enter" />
