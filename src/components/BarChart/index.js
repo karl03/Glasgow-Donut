@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Tooltip from "./Tooltip";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
@@ -15,6 +16,14 @@ export default function BarChart({
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
   const [trigger, setTrigger] = useState(false);
+  
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const [tooltipTitle, setTooltipTitle] = React.useState("");
+  const [tooltipText, setTooltipText] = React.useState("");
+  const [tooltipX, setTooltipX] = React.useState(0);
+  const [tooltipY, setTooltipY] = React.useState(0);
+
+  
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
   const innerTextRadius = innerRadius - (ringRadius + smallRingRadius) / 4;
@@ -52,66 +61,41 @@ export default function BarChart({
 
       let {group, yOuter, yInner} = SetupBarChart();
 
-      const TooltipGroup = d3.select(".svgClass")
-      .append("g")
-      .attr("width", 250)
-      .attr("height", 100)
-
-      const Tooltip = TooltipGroup
-            .append("foreignObject")
-            .attr("width", 180)
-            .attr("height", 100)
-            .attr("class", "tooltip")
-            .style("fill", "black")
-            .style("font-size", "12px")
-            .style("pointer-events", "none")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "transparent")
-            //.style("border", "solid")
-            //.style("border-width", "2px")
-            //.style("border-radius", "2px")
             
                   
-          var mouseover = function(event, data) {
-            Tooltip
-              .style("opacity", 1)
-            d3.select(this)
-              .style("stroke", "black")
-              .style("opacity", 1)
-            if(document.getElementById(data[0]+"_outer")){
-              document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
-            } else if(document.getElementById(data[0]+"_inner")){
-              document.getElementById(data[0]+"_inner").setAttribute("fill","blue")
-            }
-              //.style("opacity", 1)
-          }
-          var mousemove = function(event, data) {
-            const CapitalisedProperty = data[0][0].toUpperCase() + data[0].slice(1);
-            Tooltip
-              .html(`<p style="max-width: calc(100% - 40px); max-height: calc(100% - 40px);
-               position: absolute; top: 10px; left: 10px; padding: 0; 
-               box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-               display: inline-block; margin: 0; padding: 2px; background-color: white;"><b>${CapitalisedProperty.replaceAll(/_/g, " ")}</b><br />${data[1].value === -1 ? "Not Known" : data[1].value + "%"}</p>`);
-              TooltipGroup
-              .attr("transform", `translate(${(event.offsetX + 10)}, ${event.offsetY + 10})`);
-          }
-          var mouseleave = function(event, data) {
-            Tooltip
-              .style("opacity", 0)
-            d3.select(this)
-              .style("stroke", "none")
-              //.style("opacity", 0.8)
-              
-            if(document.getElementById(data[0]+"_outer")){
-              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
-              else document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197");
-            } else if(document.getElementById(data[0]+"_inner")){
-              if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
-              else document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79");
-            }
-              //.style("opacity", 0.8)
-          }
+      const mouseover = function(event, data) {
+        const CapitalisedProperty = (data[0][0].toUpperCase() + data[0].slice(1)).replaceAll(/_/g, " ");
+        setTooltipVisible(true);
+        setTooltipTitle(CapitalisedProperty);
+        setTooltipText(data[1].value === -1 ? "Not Known" : data[1].value + "%");
+        
+        Tooltip
+          .style("opacity", 1)
+        d3.select(this)
+          .style("stroke", "black")
+          .style("opacity", 1)
+        if(document.getElementById(data[0]+"_outer")){
+          document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
+        } else if(document.getElementById(data[0]+"_inner")){
+          document.getElementById(data[0]+"_inner").setAttribute("fill","blue")
+        }
+      }
+      const mousemove = function(event, data) {
+        const CapitalisedProperty = data[0][0].toUpperCase() + data[0].slice(1);
+        setTooltipX(event.clientX + 10);
+        setTooltipY(event.clientY + 10);
+      }
+      const mouseleave = function(event, data) {
+        setTooltipVisible(false);
+          
+        if(document.getElementById(data[0]+"_outer")){
+          if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+          else document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197");
+        } else if(document.getElementById(data[0]+"_inner")){
+          if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+          else document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79");
+        }
+      }
     
       function SetupBarChartInnerSectors(group, yInner){
         
@@ -389,6 +373,13 @@ export default function BarChart({
     "position":"absolute",
     "width":"100%",
     "height":"5px"}}></div>
+    <Tooltip
+      title={tooltipTitle}
+      text={tooltipText}
+      x={tooltipX}
+      y={tooltipY}
+      visible={tooltipVisible}
+    />
     <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
     </>
   );
