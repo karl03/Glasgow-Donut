@@ -17,6 +17,7 @@
     margin: 0;
     list-style: none;
     background-color: #e3e3e3;
+    padding-inline: 60px;
   }
 
   .flex-container > li {
@@ -45,7 +46,9 @@
     margin-top: 20px;
     margin-inline: 0;
     /*padding-left: 20px;*/
-    width: 400px;
+    /* width: 200px; */
+    white-space: nowrap;
+    overflow: visible;
   }
 
   .pStyle > p {
