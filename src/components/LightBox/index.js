@@ -21,7 +21,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    for(const element of [... document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+    for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
 
     if(trigger ===true){
       setShowAdditional(false);
