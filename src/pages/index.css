@@ -1,3 +1,96 @@
-.SponsorsWrapper img{
+.flex-container {
+    /* We first create a flex layout context */
+    display: flex;
     
-}
+    /* Then we define the flow direction 
+       and if we allow the items to wrap 
+     * Remember this is the same as:
+     * flex-direction: row;
+     * flex-wrap: wrap;
+     */
+    /*flex-flow: row wrap;
+    
+    /* Then we define how is distributed the remaining space */
+    justify-content: space-around;
+    
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: #e3e3e3;
+    padding-inline: 60px;
+  }
+
+  .flex-container > li {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .flex-item {
+    background: #e3e3e3;
+    padding: 5px;
+    /*width: 178.5px;*/
+    height: 100px;
+    margin-top: 10px;
+    color: black;
+    font-size: 3em;
+    text-align: left;
+    margin-block-start: 0;
+    display: block;
+    padding-inline: 10px;
+    
+  }
+
+  .item1 {
+    color: #f54287;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-inline: 0;
+    /*padding-left: 20px;*/
+    /* width: 200px; */
+    white-space: nowrap;
+    overflow: visible;
+  }
+
+  .pStyle > p {
+    font-size: 10px;
+    color: #616161;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .headStyle > h1 {
+    font-size: 15px;
+    color: #616161;
+  }
+
+  .imageDiv {
+    margin-top: 15px;
+    padding: 0%;
+  }
+
+  .image {
+    width: 30px;
+    height: 30px;
+  }
+
+  .empty {
+    width: 150px;
+  }
+
+  .line {
+    width: 80%;
+    color: #616161 noshade;
+    size: 5px;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+  }
