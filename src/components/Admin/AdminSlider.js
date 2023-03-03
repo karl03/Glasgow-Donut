@@ -78,8 +78,8 @@ export default function AdminSlider({initialValue, eventHandler, initialName, ec
           <button onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
-          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
-          <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
+          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="-1" max="100" value={value} />
+          <Number onInput={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="-1" max="100" step="1" value={value} />
         </Bottom>
       </Left>
       <TrashIcon onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>

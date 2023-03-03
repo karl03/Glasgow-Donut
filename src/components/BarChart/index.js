@@ -33,7 +33,8 @@ export default function BarChart({
     function CreateBarChart(svg){
 
       function SetupBarChart(){
-        svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
+        svg.selectAll("g").remove();
+         //TODO: This is to remove the element from last render, probably not a good way of doing this
         
         const group = svg.append("g")
           .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
