@@ -32,6 +32,11 @@
   grid-column: 1;
 }
 
+#bottom_circle{
+  grid-row: 3;
+  grid-column: 2;
+}
+
 #lightbox{
   z-index:4;
   position:absolute;
@@ -114,4 +119,17 @@
 .isShow {
   opacity: 1;
   pointer-events: visible;
+}
+
+.small-circle {
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  background-size:60%;
+  background-repeat:no-repeat;
+  background-position:center;
 }

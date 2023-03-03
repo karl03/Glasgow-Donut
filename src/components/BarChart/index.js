@@ -32,7 +32,7 @@ export default function BarChart({
 
     function LightBoxTrigger(Event, ElementProperties){
       document.body.scrollTop = 65; // For Safari
-      document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+      document.documentElement.scrollTop = 72; // For Chrome, Firefox, IE and Opera
       setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
@@ -168,6 +168,7 @@ export default function BarChart({
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
                   .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
+                  .attr("id", d=>d[0]+"_inner_img")
                   .style("cursor", "pointer")
                   .attr('transform', `translate(${ringRadius / 2}, ${ringRadius / 2})`)
                   .on("mouseover", mouseover)
@@ -324,6 +325,7 @@ export default function BarChart({
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
                   .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
+                  .attr("id", d=>d[0]+"_outer_img")
                   .style("cursor", "pointer")
                   .attr('transform', `translate(${ringRadius / 2}, ${ringRadius / 2})`)
                   .on("mouseover", mouseover)
@@ -362,12 +364,12 @@ export default function BarChart({
 
   return (
     <>
-    <svg className = "svgClass" ref={ref} width={size} height={size} style={{
-      height: size.toString(),
-      width: size.toString(),
-    }}>
-    </svg>
-    <div style={{
+      <svg className = "svgClass" ref={ref} width={size} height={size} style={{
+        height: size.toString(),
+        width: size.toString(),
+      }}>
+      </svg>
+      <div style={{
     "background-color":"black",
     "position":"absolute",
     "width":"100%",
