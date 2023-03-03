@@ -81,7 +81,6 @@ export default function BarChart({
         }
       }
       const mousemove = function(event, data) {
-        const CapitalisedProperty = data[0][0].toUpperCase() + data[0].slice(1);
         setTooltipX(event.clientX + 10);
         setTooltipY(event.clientY + 10);
       }
