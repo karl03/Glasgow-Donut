@@ -21,10 +21,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    while(document.getElementById("lightbox").childElementCount > 0){
-      document.getElementById("lightbox").removeChild(document.getElementById("lightbox").lastChild)
-    }
-    
+    for(const element of [... document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+
     if(trigger ===true){
       setShowAdditional(false);
       setTrigger(false)
@@ -65,47 +63,37 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     if(document.getElementById("Connections").innerText === 'CONNECTIONS'){
       setShowAdditional(false);
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
-      // ****Continue here for connections feature!!!***
-
       if (adjacencyList !== "No adjacencies") {
-        for(let i=0;i<adjacencyList.length;i++){
-          if(adjacencyList[i][0] === "social"){
-            const inner_dimensions = document.getElementById(adjacencyList[i][2]+"_inner_img").getBoundingClientRect()
+            for(let i=0;i<adjacencyList.length;i++){
+              const adjacencyListItem = adjacencyList[i]
+              const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+              if(adjacencyList[i][0] === "social"){
+                const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
+                createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
+              }else{
+                const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
+                createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
+              }
 
-            const image = document.createElement('img')
-            image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
-            image.setAttribute("height",inner_dimensions["height"])
-            image.setAttribute("width",inner_dimensions["width"])
-
-            image.style.position = 'absolute';
-            image.style.top = (inner_dimensions.top + window.pageYOffset) + 'px';
-            image.style.left = (inner_dimensions.left + window.pageXOffset) + 'px';
-            image.style.filter = 'drop-shadow(0 0 1rem rgb(255, 255, 255))';
-            
-            document.getElementById("lightbox").appendChild(image)
-            
-          }else{
-            const outer_dimensions = document.getElementById(adjacencyList[i][2]+"_outer_img").getBoundingClientRect()
-
-            const image = document.createElement('img')
-            image.setAttribute("src","/api/get-icon/"+data[adjacencyList[i][0]][adjacencyList[i][1]][adjacencyList[i][2]]["symbol_id"])
-            image.setAttribute("height",outer_dimensions["height"])
-            image.setAttribute("width",outer_dimensions["width"])
-
-            image.style.position = 'absolute';
-            image.style.top = (outer_dimensions.top + window.pageYOffset) + 'px';
-            image.style.left = (outer_dimensions.left + window.pageXOffset) + 'px';
-            image.style.filter = 'drop-shadow(0 0 1rem rgb(255, 255, 255))';
-
-            document.getElementById("lightbox").appendChild(image)
-          }
-
-        }
-
+            }
       }
     } else {
       document.getElementById("Connections").innerText = 'CONNECTIONS';
     }
+  }
+
+  function createIcon(offsetDimensions, initialDimensions, adjacencyListItem){
+    const circle = document.createElement('span')
+
+    circle.className = "small-circle";
+
+    const imageUrl = "/api/get-icon/"+data[adjacencyListItem[0]][adjacencyListItem[1]][adjacencyListItem[2]]["symbol_id"]
+    circle.style.backgroundImage = `url(${imageUrl})`;
+
+    circle.style.top = (initialDimensions.top - offsetDimensions.top - 5) + 'px';
+    circle.style.left = (initialDimensions.left - offsetDimensions.left - 5) + 'px';
+      
+    document.getElementById("grid-container").appendChild(circle)
   }
 
   function changeThriving(){
@@ -125,10 +113,11 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   return (
     <>
-      <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
+     <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
       </div>
 
-  <div className={`grid-container  ${trigger ? 'isShow' : ''}`}>
+  <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
+  
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>

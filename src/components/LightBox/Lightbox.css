@@ -120,3 +120,16 @@
   opacity: 1;
   pointer-events: visible;
 }
+
+.small-circle {
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  background-size:60%;
+  background-repeat:no-repeat;
+  background-position:center;
+}
