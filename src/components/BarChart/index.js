@@ -92,7 +92,7 @@ export default function BarChart({
               .html(`<p style="max-width: calc(100% - 40px); max-height: calc(100% - 40px);
                position: absolute; top: 10px; left: 10px; padding: 0; 
                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-               display: inline-block; margin: 0; padding: 2px; background-color: white;"><b>${CapitalisedProperty.replaceAll(/_/g, " ")}</b><br />${data[1].value}%</p>`);
+               display: inline-block; margin: 0; padding: 2px; background-color: white;"><b>${CapitalisedProperty.replaceAll(/_/g, " ")}</b><br />${data[1].value === -1 ? "Not Known" : data[1].value + "%"}</p>`);
               TooltipGroup
               .attr("transform", `translate(${(event.offsetX + 10)}, ${event.offsetY + 10})`);
           }
