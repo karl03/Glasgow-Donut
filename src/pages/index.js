@@ -171,7 +171,7 @@ function HomePage() {
                   
         </div>
         <br/>
-        <button class="button">Download</button>
+        <button class="button">Download Report</button>
         <br/>
       </div>
     </div>
