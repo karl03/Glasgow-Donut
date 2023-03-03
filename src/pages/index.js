@@ -51,7 +51,7 @@ function HomePage() {
 
         <li>
           <div class="imageDiv">
-            <img src="goal.png" class = "image"></img>
+            <img src="goal.png" class = "image" alt = "archery target"></img>
           </div>
           <div class="flex-item pStyle headStyle">
             <h1>target</h1>
@@ -61,7 +61,7 @@ function HomePage() {
 
         <li>
           <div class="imageDiv">
-            <img src="speedometer.png" class = "image"></img>
+            <img src="speedometer.png" class = "image" alt = "speedometer"></img>
           </div>
           <div class="flex-item pStyle headStyle">
             <h1>indicator</h1>
@@ -71,7 +71,7 @@ function HomePage() {
 
         <li>
           <div class="imageDiv">
-            <img src="happy.png" class = "image"></img>
+            <img src="happy.png" class = "image" alt = "smiley face"></img>
           </div>
           <div class="flex-item pStyle headStyle">
             <h1>thriving</h1>
@@ -81,7 +81,7 @@ function HomePage() {
 
         <li>
           <div class="imageDiv">
-            <img src="group.png" class = "image"></img>
+            <img src="group.png" class = "image" alt = "molecule with connections"></img>
           </div>
           <div class="flex-item pStyle headStyle">
             <h1>connections</h1>
