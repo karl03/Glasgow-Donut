@@ -35,13 +35,64 @@ function HomePage() {
         <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
-      
-      
       <Header title="Glasgow City Portrait" size="2rem"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
-      <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "40px"}}>
+
+      <div style={{backgroundColor:"#e3e3e3", width: "100%"}}>
+        <hr class="line"></hr>
+      </div>
+
+      <div class="flex-container">
+
+        {/* <li class="flex-item empty"></li> */}
+        <li class="flex-item item1">How did we do this?</li>
+
+        <li>
+          <div class="imageDiv">
+            <img src="goal.png" class = "image"></img>
+          </div>
+          <div class="flex-item pStyle headStyle">
+            <h1>target</h1>
+            <p>taken from an officical existing policy or strategy document (local or national)</p>
+          </div>  
+        </li>
+
+        <li>
+          <div class="imageDiv">
+            <img src="speedometer.png" class = "image"></img>
+          </div>
+          <div class="flex-item pStyle headStyle">
+            <h1>indicator</h1>
+            <p>Quis lectus nulla at volutpat diam ut venenatis tellus. Urna nunc id</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="imageDiv">
+            <img src="happy.png" class = "image"></img>
+          </div>
+          <div class="flex-item pStyle headStyle">
+            <h1>thriving</h1>
+            <p>Et malesuada fames ac turpis egestas. Volutpat sed cras ornare arcu dui vivamus arcu felis bibendum.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="imageDiv">
+            <img src="group.png" class = "image"></img>
+          </div>
+          <div class="flex-item pStyle headStyle">
+            <h1>connections</h1>
+            <p>Egestas egestas fringilla phasellus faucibus scelerisque eleifend.</p>
+          </div>
+        </li>
+
+        {/* <li class="flex-item empty" ></li> */}
+      </div>
+
+      <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
         <div style={{"maxWidth": "45%"}}>
         <h1>About the Project</h1>
         <p>
@@ -61,7 +112,7 @@ function HomePage() {
         </div>
       </div>
       
-      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", padding:"40px", backgroundColor: "#D3D3D3" }}>
+      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", padding:"40px", backgroundColor: "#e3e3e3" }}>
         <div style={{marginInline:"150px"}}>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -119,6 +170,8 @@ function HomePage() {
           Proin libero nunc consequat interdum  varius sit amet ma.
                   
         </div>
+        <br/>
+        <button class="button">Download</button>
         <br/>
       </div>
     </div>
