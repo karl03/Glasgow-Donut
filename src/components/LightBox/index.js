@@ -87,7 +87,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
     circle.className = "small-circle";
 
-    const imageUrl = "/api/get-icon/"+data[adjacencyListItem[0]][adjacencyListItem[1]][adjacencyListItem[2]]["symbol_id"]
+    const imageUrl = "/api/get-icon/"+data[adjacencyListItem[0]][adjacencyListItem[1]][adjacencyListItem[2]]["symbol_id"];
     circle.style.backgroundImage = `url(${imageUrl})`;
 
     circle.style.top = (initialDimensions.top - offsetDimensions.top - 5) + 'px';

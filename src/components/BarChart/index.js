@@ -381,7 +381,7 @@ export default function BarChart({
       y={tooltipY}
       visible={tooltipVisible}
     />
-    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
+    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
     </>
   );
 };
