@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ImageBg = styled.img`
   display:'';
   width:100%;
-  height:60vh;
+  height:50vh;
   -o-object-fit: cover;
   object-fit: cover;
   background:#232a34;
@@ -31,7 +31,7 @@ export const MainBg = styled.div`
   bottom:0;
   left:0;
   width:100%;
-  height:110vh;
+  height:100vh;
   overflow: hidden;
   z-index: -1;
   font-size:0;

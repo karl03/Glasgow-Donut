@@ -1,96 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .flex-container {
-    /* We first create a flex layout context */
-    display: flex;
-    
-    /* Then we define the flow direction 
-       and if we allow the items to wrap 
-     * Remember this is the same as:
-     * flex-direction: row;
-     * flex-wrap: wrap;
-     */
-    /*flex-flow: row wrap;
-    
-    /* Then we define how is distributed the remaining space */
-    justify-content: space-around;
-    
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    background-color: #e3e3e3;
-    padding-inline: 60px;
-  }
-
-  .flex-container > li {
-    display: flex;
-    flex-direction: row;
-  }
+  /* We first create a flex layout context */
+  display: flex;
   
-  .flex-item {
-    background: #e3e3e3;
-    padding: 5px;
-    /*width: 178.5px;*/
-    height: 100px;
-    margin-top: 10px;
-    color: black;
-    font-size: 3em;
-    text-align: left;
-    margin-block-start: 0;
-    display: block;
-    padding-inline: 10px;
-    
-  }
+  /* Then we define the flow direction 
+      and if we allow the items to wrap 
+    * Remember this is the same as:
+    * flex-direction: row;
+    * flex-wrap: wrap;
+    */
+  /*flex-flow: row wrap;
+  
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+  
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: #e3e3e3;
+  /*padding-inline: 60px;*/
+  width: 100%;
+  flex-wrap: wrap;
+}
 
-  .item1 {
-    color: #f54287;
-    font-size: 15px;
-    margin-top: 20px;
-    margin-inline: 0;
-    /*padding-left: 20px;*/
-    /* width: 200px; */
-    white-space: nowrap;
-    overflow: visible;
-  }
+.flex-container > li + li{
+  display: flex;
+  flex-direction: row;
+  
+  max-width: calc(max(19vw, 250px));
+  min-width: 250px;
+}
 
-  .pStyle > p {
-    font-size: 10px;
-    color: #616161;
-    width: fit-content;
-    height: fit-content;
-  }
+.flex-item {
+  background: #e3e3e3;
+  padding: 5px;
+  /*width: 178.5px;*/
+  height: 100px;
+  margin-top: 10px;
+  color: black;
+  font-size: 3em;
+  text-align: left;
+  margin-block-start: 0;
+  display: block;
+  padding-inline: 10px;
+}
 
-  .headStyle > h1 {
-    font-size: 15px;
-    color: #616161;
-  }
 
-  .imageDiv {
-    margin-top: 15px;
-    padding: 0%;
-  }
 
-  .image {
-    width: 30px;
-    height: 30px;
-  }
+.item1 {
+  color: #f54287;
+  font-size: 15px;
+  margin-top: 20px;
+  margin-inline: 0;
+  /*padding-left: 20px;*/
+  /* width: 200px; */
+  white-space: nowrap;
+  overflow: visible;
+}
 
-  .empty {
-    width: 150px;
-  }
+.pStyle > p {
+  font-size: 10px;
+  color: #616161;
+  width: fit-content;
+  height: fit-content;
+}
 
-  .line {
-    width: 80%;
-    color: #616161 noshade;
-    size: 5px;
-  }
+.headStyle > h1 {
+  font-size: 15px;
+  color: #616161;
+}
 
-  .button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-  }
+.imageDiv {
+  margin-top: 15px;
+  padding: 0%;
+}
+
+.image {
+  width: 30px;
+  height: 30px;
+}
+
+.empty {
+  width: 150px;
+}
+
+.line {
+  width: 80%;
+  color: #616161 noshade;
+  size: 5px;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}

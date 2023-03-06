@@ -1,5 +1,4 @@
 import React from 'react'
-import '../DefaultStyles.css'
 import { Head } from './HeaderElements'
 
 const Header = ({title, color, size}) => {
