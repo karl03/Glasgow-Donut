@@ -10,7 +10,7 @@ import {populateForm} from '../components/Admin/ModalFunctions'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
-  const [isShowingEditModal, setShowingEditModal] = useState(true);
+  const [isShowingEditModal, setShowingEditModal] = useState(false);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
