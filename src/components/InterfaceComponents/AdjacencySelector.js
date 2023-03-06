@@ -37,11 +37,25 @@ export default function AdjacencySelector(props) {
         const message = document.getElementById("message-input").value;
         const newAdjacency = [targetEcoOrSoc, targetGloOrLoc, targetName, message];
 
-        // Check if the adjacency already exists.
-
-        // Add the new Adjacency to the dataset.
-        console.log(props.sliderGroups);
         const newSliderGroups = JSON.parse(JSON.stringify(props.sliderGroups));
+
+        // Check if the adjacency already exists.
+        const adjacencies = props.sliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"];
+            
+        for (let index = 0; index < adjacencies.length; index++) {
+            const element = adjacencies[index];
+            // If the same target is already and adjacency: update the message.
+            if (element[0] === targetEcoOrSoc &&
+                element[1] === targetGloOrLoc &&
+                element[2] === targetName) {
+                newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"][index][3] = message;
+                props.setSliderGroups(newSliderGroups);
+                return;
+            }
+        }
+
+        // If new adjacency: Add the new Adjacency to the dataset.
+        
         newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"].push(newAdjacency);
         props.setSliderGroups(newSliderGroups);
         console.log(props.sliderGroups);
