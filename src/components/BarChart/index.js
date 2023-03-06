@@ -183,7 +183,7 @@ export default function BarChart({
             // All Text Labeling of Bar Chart --------
             group.append("path")
               .attr("id", "arc-top") //Unique id of the path
-              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 1 ${innerTextRadius} 0`) //SVG path
+              .attr("d", `M -${innerTextRadius-0.5},0 A ${innerTextRadius-0.5} ${innerTextRadius-0.5} 0 0 1 ${innerTextRadius-0.5} 0`) //SVG path
               .attr("dy", ".1em")
               .style("fill", "none")
               .style("stroke", "0");
@@ -205,7 +205,7 @@ export default function BarChart({
 
             group.append("path")
               .attr("id", "arc-bottom") //Unique id of the path
-              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 0 ${innerTextRadius} 0`) //SVG path
+              .attr("d", `M -${innerTextRadius+0.5},0 A ${innerTextRadius+0.5} ${innerTextRadius+0.5} 0 0 0 ${innerTextRadius+0.5} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
           
@@ -227,7 +227,7 @@ export default function BarChart({
 
             group.append("path")
                 .attr("id", "lower-arc-bottom") //Unique id of the path
-                .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 0 ${outerTextRadius} 0`) //SVG path
+                .attr("d", `M -${outerTextRadius+0.5},0 A ${outerTextRadius+0.5} ${outerTextRadius+0.5} 0 0 0 ${outerTextRadius+0.5} 0`) //SVG path
                 .style("fill", "none")
                 .style("stroke", "0");
 
@@ -250,7 +250,7 @@ export default function BarChart({
 
             group.append("path")
               .attr("id", "upper-arc-top") //Unique id of the path
-              .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 1 ${outerTextRadius} 0`) //SVG path
+              .attr("d", `M -${outerTextRadius-0.5},0 A ${outerTextRadius-0.5} ${outerTextRadius-0.5} 0 0 1 ${outerTextRadius-0.5} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
 
