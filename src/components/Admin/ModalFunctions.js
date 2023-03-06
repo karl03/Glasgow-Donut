@@ -16,7 +16,8 @@ function getFormElements(){
         "target": target,
         "description": description,
         "cites": cites,
-        "videolink": videolink};
+        "videolink": videolink
+    };
 }
 
 export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
@@ -69,7 +70,8 @@ function getFormData(formElements){
     return formData;
 }
 
-export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow){
+    
+export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow, icon){
     // Get form data.
     const formData = getFormData(getFormElements());
 
@@ -84,12 +86,12 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
     New[ecoOrSoc][gloOrLoc][formData['title']] = {
         "value": formData['value'] || 0,
         "adjacent": [],//NEEDS TO BE IMPLEMENTED
-        "indicator": formData['indicator'] || '',
-        "target": formData['target'] || '',
-        "description": formData['description'] || '',
-        "quotes": formData['cites'] || '',
-        "symbol_id": '', //NEEDS TO BE IMPLEMENTED
-        "video_hash": formData['videolink'] || ''
+        "indicator": formData['indicator'],
+        "target": formData['target'],
+        "description": formData['description'],
+        "quotes": formData['cites'],
+        "symbol_id": icon,
+        "video_hash": formData['videolink']
     };
     setSliderGroups(New);
     onClose(setShow)

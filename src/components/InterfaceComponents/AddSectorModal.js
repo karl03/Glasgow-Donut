@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ModalMenu from './ModalMenu'
+import Select from "react-select";
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
 import {onClose, onSave} from '../Admin/ModalFunctions'
@@ -12,26 +13,115 @@ export default function AddSectorModal({lastCategorySelect,
     sliderGroups,
     setSliderGroups}) {
 
-    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setLastSliderName, setSliderGroups, setShow){
+    const [selectedIconOption, setSelectedIconOption] = useState(null);
+
+    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, iconLabel){
         const {ecoOrSoc, gloOrLoc} = lastCategorySelect;
-        if (lastSliderName === undefined) {
-            lastSliderName = document.getElementById('modal-sector-title').value;
-            setLastSliderName(lastSliderName);
-            onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
-        } else {
-            onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow);
-        }
+        const ecoOrSocIcon = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
+        const gloOrLocIcon = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
+        const icon = `${gloOrLocIcon}_${ecoOrSocIcon}/${iconLabel}`;
+
+        console.log("handleSubmit: ", lastSliderName);
+        onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow, icon);
     }
 
     function handleClose(setShow){
         onClose(setShow);
     }
 
+    function getFileNames(folder) {
+        return new Promise((resolve, reject) => {
+          fetch(`/api/get-filenames/${folder}`) // Replace with your server endpoint
+            .then((response) => response.json())
+            .then((data) => {
+              const fileNames = data;
+              resolve(fileNames);
+            })
+            .catch((err) => {
+              console.error(err);
+              reject(err);
+            });
+        });
+    }      
+
+    function IconOptions(lastCategorySelect, sliderGroups, selectedOption, setSelectedOption) {
+        const [iconOptions, setIconOptions] = useState([]);
+        const customSelectStyles = {
+          control: (provided) => ({
+            ...provided,
+            borderRadius: 'none',
+            border: 'none',
+            boxShadow: 'none'
+          }),
+        };
+      
+        useEffect(() => {
+          // Set null value to Icon options
+          setSelectedOption(null);
+
+          if (lastCategorySelect) {
+            function populateIcons() {
+              let { ecoOrSoc, gloOrLoc } = lastCategorySelect;
+              ecoOrSoc = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
+              gloOrLoc = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
+              const folder = `${gloOrLoc}_${ecoOrSoc}`;
+              
+              // Get default Option Value (The one in Data.json)
+              let data = sliderGroups[ecoOrSoc.toLowerCase()][gloOrLoc.toLowerCase()][document.getElementById('modal-sector-title').value];
+              if (data && data['symbol_id'] && data['symbol_id'] !== "") {
+                let defaultValue = data['symbol_id'].split("/")[1]
+                setSelectedOption({label: defaultValue, value: defaultValue, iconUrl: `/api/get-icon/${folder}/${defaultValue}`})
+              }
+
+              getFileNames(folder)
+                .then((fileNames) => {
+                  const options = fileNames.map((fileName, index) => ({
+                    label: fileName,
+                    value: fileName,
+                    iconUrl: `/api/get-icon/${folder}/${fileName}`,
+                  }));
+                  setIconOptions(options);
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            populateIcons();
+          }
+        }, [lastCategorySelect, sliderGroups, setSelectedOption]);
+
+        const handleSelectChange = (option) => {
+          setSelectedOption(option);
+        };
+      
+        return (
+          <>
+            <label htmlFor="sector-icon">Icon </label>
+            <Select
+              name='icon'
+              id="modal-sector-icon"
+              styles={customSelectStyles}
+              className="my-custom-select"
+              options={iconOptions}
+              value={selectedOption}
+              getOptionLabel={(option) => (
+                <>
+                  <img src={option.iconUrl} alt={option.label} width="20" height="20" />
+                  {"   " + option.label}
+                </>
+              )}
+              getOptionValue={(option) => option.value}
+              onChange={handleSelectChange}
+            />
+          </>
+        );
+      } 
+
   return (
     <ModalMenu 
         isShow={isShow}
         onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setLastSliderName, setSliderGroups, setShow)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption.label)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
@@ -42,8 +132,9 @@ export default function AddSectorModal({lastCategorySelect,
 
             <label htmlFor="sector-value">Value </label>
             <input type="number" name="sector-value" id="modal-sector-value"
-                max="100" min="0" placeholder='0' defaultValue='0'/>
-
+                max="100" min="-1" placeholder='0' defaultValue='0'/>
+            
+            {IconOptions(lastCategorySelect, sliderGroups, selectedIconOption, setSelectedIconOption)}
 
             <label htmlFor="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"

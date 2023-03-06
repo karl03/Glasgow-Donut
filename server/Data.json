@@ -78,6 +78,29 @@
           "symbol_id": "Global_Ecological/ChemicalPollution-black.png",
           "video_hash": "I77B871YOTQ"
         },
+        "ocean_acidification":{
+          "value":0,
+          "adjacent":[
+            ["ecological",
+              "local",
+              "fresh_water",
+              "ocean acidification affects the water quality"
+            ],
+            [
+              "social",
+              "local",
+              "water",
+              "ocean acidification affects water"
+            ]
+          ],
+          "indicator":"this is the indicator",
+          "target":"aim to make it a better category",
+          "description":"how much acid in the ocean",
+          "quotes":"These are the quotes/citations",
+          "symbol_id": "Global_Ecological/OceanAcidification-black.png",
+          "video_hash":"I77B871YOTQ"
+        },
+
         "biodiversity_loss": {
           "value": 78,
           "adjacent": [
@@ -192,94 +215,6 @@
           "quotes": "These are the quotes/citations",
           "symbol_id": "Global_Ecological/OzoneLayerDepletion-black.png",
           "video_hash": "dQw4w9WgXcQ"
-        },
-        "River1": {
-          "value": 75,
-          "adjacent": [
-            [
-              "ecological",
-              "local",
-              "fresh_water",
-              "ocean acidification affects the water quality"
-            ],
-            [
-              "social",
-              "local",
-              "water",
-              "ocean acidification affects water"
-            ]
-          ],
-          "indicator": "this is the indicator",
-          "target": "aim to make it a better category",
-          "description": "how much acid in the ocean",
-          "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ"
-        },
-        "Lake2": {
-          "value": 73,
-          "adjacent": [
-            [
-              "ecological",
-              "local",
-              "fresh_water",
-              "ocean acidification affects the water quality"
-            ],
-            [
-              "social",
-              "local",
-              "water",
-              "ocean acidification affects water"
-            ]
-          ],
-          "indicator": "this is the indicator",
-          "target": "aim to make it a better category",
-          "description": "how much acid in the ocean",
-          "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ"
-        },
-        "Forest3": {
-          "value": 1,
-          "adjacent": [
-            [
-              "ecological",
-              "local",
-              "fresh_water",
-              "ocean acidification affects the water quality"
-            ],
-            [
-              "social",
-              "local",
-              "water",
-              "ocean acidification affects water"
-            ]
-          ],
-          "indicator": "this is the indicator",
-          "target": "aim to make it a better category",
-          "description": "how much acid in the ocean",
-          "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ"
-        },
-        "Mountain4": {
-          "value": 16,
-          "adjacent": [
-            [
-              "ecological",
-              "local",
-              "fresh_water",
-              "ocean acidification affects the water quality"
-            ],
-            [
-              "social",
-              "local",
-              "water",
-              "ocean acidification affects water"
-            ]
-          ],
-          "indicator": "this is the indicator",
-          "target": "aim to make it a better category",
-          "description": "how much acid in the ocean",
-          "quotes": "These are the quotes/citations",
-          "video_hash": "I77B871YOTQ"
         }
       },
       "local": {

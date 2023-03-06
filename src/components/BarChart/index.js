@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Tooltip from "./Tooltip";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
@@ -15,6 +16,14 @@ export default function BarChart({
   const [events, eventSetter] = useState({ target: { href: { baseVal: 'Default Value' }}});
   const [elementProperties, propertySetter] = useState({ Name: 'Default Name'});
   const [trigger, setTrigger] = useState(false);
+  
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const [tooltipTitle, setTooltipTitle] = React.useState("");
+  const [tooltipText, setTooltipText] = React.useState("");
+  const [tooltipX, setTooltipX] = React.useState(0);
+  const [tooltipY, setTooltipY] = React.useState(0);
+
+  
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
   const innerTextRadius = innerRadius - (ringRadius + smallRingRadius) / 4;
@@ -23,7 +32,7 @@ export default function BarChart({
 
     function LightBoxTrigger(Event, ElementProperties){
       document.body.scrollTop = 65; // For Safari
-      document.documentElement.scrollTop = 65; // For Chrome, Firefox, IE and Opera
+      document.documentElement.scrollTop = 72; // For Chrome, Firefox, IE and Opera
       setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
@@ -33,7 +42,8 @@ export default function BarChart({
     function CreateBarChart(svg){
 
       function SetupBarChart(){
-        svg.select("g")?.remove?.(); //TODO: This is to remove the element from last render, probably not a good way of doing this
+        svg.selectAll("g").remove();
+         //TODO: This is to remove the element from last render, probably not a good way of doing this
         
         const group = svg.append("g")
           .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
@@ -51,43 +61,40 @@ export default function BarChart({
 
       let {group, yOuter, yInner} = SetupBarChart();
 
-      var Tooltip = d3.select(".svgClass")
-            .append("text")
-            .attr("class", "tooltip")
-            .style("fill", "black")
-            .style("font-size", "12px")
-            .style("pointer-events", "none")
+            
+                  
+      const mouseover = function(event, data) {
+        const CapitalisedProperty = (data[0][0].toUpperCase() + data[0].slice(1)).replaceAll(/_/g, " ");
+        setTooltipVisible(true);
+        setTooltipTitle(CapitalisedProperty);
+        setTooltipText(data[1].value === -1 ? "Not Known" : data[1].value + "%");
+        
+        Tooltip
+          .style("opacity", 1)
+        d3.select(this)
+          .style("stroke", "black")
+          .style("opacity", 1)
+        if(document.getElementById(data[0]+"_outer")){
+          document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
+        } else if(document.getElementById(data[0]+"_inner")){
+          document.getElementById(data[0]+"_inner").setAttribute("fill","blue")
+        }
+      }
+      const mousemove = function(event, data) {
+        setTooltipX(event.clientX + 10);
+        setTooltipY(event.clientY + 10);
+      }
+      const mouseleave = function(event, data) {
+        setTooltipVisible(false);
           
-          var mouseover = function(event, data) {
-            Tooltip
-              .style("opacity", 1)
-            d3.select(this)
-              .style("stroke", "black")
-            if(document.getElementById(data[0]+"_outer")){
-              document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
-            } else if(document.getElementById(data[0]+"_inner")){
-              document.getElementById(data[0]+"_inner").setAttribute("fill","blue")
-            }
-              //.style("opacity", 1)
-          }
-          var mousemove = function(event, data) {
-            Tooltip
-              .html("Value: " + data[1].indicator)
-              .attr("x", (event.offsetX + 20))
-              .attr("y", (event.offsetY + 20))
-          }
-          var mouseleave = function(event, data) {
-            Tooltip
-              .style("opacity", 0)
-            d3.select(this)
-              .style("stroke", "none")
-            if(document.getElementById(data[0]+"_outer")){
-              document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197")
-            } else if(document.getElementById(data[0]+"_inner")){
-              document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79")
-              }
-              //.style("opacity", 0.8)
-          }
+        if(document.getElementById(data[0]+"_outer")){
+          if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+          else document.getElementById(data[0]+"_outer").setAttribute("fill","#fa9197");
+        } else if(document.getElementById(data[0]+"_inner")){
+          if(data[1].value === -1) document.getElementById(data[0]+"_outer").setAttribute("fill","#cfcfcf");
+          else document.getElementById(data[0]+"_inner").setAttribute("fill","#ed7d79");
+        }
+      }
     
       function SetupBarChartInnerSectors(group, yInner){
         
@@ -98,11 +105,11 @@ export default function BarChart({
               .enter()
               .append("path")
                 .attr("class", "GraphColumn")
-                .attr("fill", "#ed7d79")
+                .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#ed7d79")
                 .attr("id", d=>d[0]+"_inner")
                 .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                   .innerRadius(innerRadius - ringRadius / 2. - margin)
-                  .outerRadius(d => yInner(d[1].value))
+                  .outerRadius(d => yInner(d[1].value === -1 ? 100 : d[1].value))
                   .startAngle(d => xScale(d[0]))
                   .endAngle(d => xScale(d[0]) + xScale.bandwidth())
                   .padAngle(margin / 100.)
@@ -156,11 +163,12 @@ export default function BarChart({
                     return `rotate(${Rotation}) translate(${smallRingRadius*1.9},0) rotate(${-Rotation})`;
                   })
                 .append("svg:image")
-                  .attr('x', -smallRingRadius + 10)
+                  .attr('x', -smallRingRadius + 13)
                   .attr('y', -smallRingRadius + 13)
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
                   .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
+                  .attr("id", d=>d[0]+"_inner_img")
                   .style("cursor", "pointer")
                   .attr('transform', `translate(${ringRadius / 2}, ${ringRadius / 2})`)
                   .on("mouseover", mouseover)
@@ -175,7 +183,7 @@ export default function BarChart({
             // All Text Labeling of Bar Chart --------
             group.append("path")
               .attr("id", "arc-top") //Unique id of the path
-              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 1 ${innerTextRadius} 0`) //SVG path
+              .attr("d", `M -${innerTextRadius-0.5},0 A ${innerTextRadius-0.5} ${innerTextRadius-0.5} 0 0 1 ${innerTextRadius-0.5} 0`) //SVG path
               .attr("dy", ".1em")
               .style("fill", "none")
               .style("stroke", "0");
@@ -190,12 +198,14 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .text("GLOBAL SOCIAL FOUNDATION");
 
             group.append("path")
               .attr("id", "arc-bottom") //Unique id of the path
-              .attr("d", `M -${innerTextRadius},0 A ${innerTextRadius} ${innerTextRadius} 0 0 0 ${innerTextRadius} 0`) //SVG path
+              .attr("d", `M -${innerTextRadius+0.5},0 A ${innerTextRadius+0.5} ${innerTextRadius+0.5} 0 0 0 ${innerTextRadius+0.5} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
           
@@ -209,13 +219,15 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("LOCAL SOCIAL FOUNDATION");
 
             group.append("path")
                 .attr("id", "lower-arc-bottom") //Unique id of the path
-                .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 0 ${outerTextRadius} 0`) //SVG path
+                .attr("d", `M -${outerTextRadius+0.5},0 A ${outerTextRadius+0.5} ${outerTextRadius+0.5} 0 0 0 ${outerTextRadius+0.5} 0`) //SVG path
                 .style("fill", "none")
                 .style("stroke", "0");
 
@@ -229,6 +241,8 @@ export default function BarChart({
                   .style("font-size", 12 + "px")
                   .style("letter-spacing", "0.001em")
                   .style("text-anchor","middle")
+                  .style("user-select","none")
+                  .style("cursor","default")
                   .attr("startOffset", "50%")
                   .attr("dy", ".1em")
                   .text("LOCAL ECOLOGICAL GENEROSITY");
@@ -236,7 +250,7 @@ export default function BarChart({
 
             group.append("path")
               .attr("id", "upper-arc-top") //Unique id of the path
-              .attr("d", `M -${outerTextRadius},0 A ${outerTextRadius} ${outerTextRadius} 0 0 1 ${outerTextRadius} 0`) //SVG path
+              .attr("d", `M -${outerTextRadius-0.5},0 A ${outerTextRadius-0.5} ${outerTextRadius-0.5} 0 0 1 ${outerTextRadius-0.5} 0`) //SVG path
               .style("fill", "none")
               .style("stroke", "0");
 
@@ -250,6 +264,8 @@ export default function BarChart({
                 .style("font-size", 12 + "px")
                 .style("letter-spacing", "0.001em")
                 .style("text-anchor","middle")
+                .style("user-select","none")
+                .style("cursor","default")
                 .attr("startOffset", "50%")
                 .attr("dy", ".1em")
                 .text("GLOBAL ECOLOGICAL CEILING");
@@ -280,21 +296,16 @@ export default function BarChart({
           
           .append("path")
           .attr("class", "GraphColumn")
-            .attr("fill", "#fa9197")
+            .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#fa9197")
             .attr("id", d=>d[0]+"_outer")
             .attr("d", d3.arc()     // imagine your doing a part of a donut plot
               .innerRadius(innerRadius + ringRadius / 2. + margin)
-              .outerRadius(d => yOuter(d[1].value))
+              .outerRadius(d => yOuter(d[1].value === -1 ? 100 : d[1].value))
               .startAngle(d =>xScale(d[0]))
               .endAngle(d => xScale(d[0]) + xScale.bandwidth())
               .padAngle(margin / 100.)
               .padRadius(innerRadius))
-              .style("cursor", "pointer")
-              .on("click", function(Event, ElementProperties){
-                if(window.location.pathname === '/') { //to be changed when giving website away or url changes to proper one
-                  LightBoxTrigger(Event, ElementProperties);
-                }
-              });
+              ;
         }
 
         function CreateIconRing(Properties, group, xScale){
@@ -314,6 +325,7 @@ export default function BarChart({
                   .attr('width', smallRingRadius / 3)
                   .attr('height', smallRingRadius / 3)
                   .attr("xlink:href", function(d){return `/api/get-icon/${d[1].symbol_id}`;})
+                  .attr("id", d=>d[0]+"_outer_img")
                   .style("cursor", "pointer")
                   .attr('transform', `translate(${ringRadius / 2}, ${ringRadius / 2})`)
                   .on("mouseover", mouseover)
@@ -352,12 +364,24 @@ export default function BarChart({
 
   return (
     <>
-    <svg className = "svgClass" ref={ref} width={size} height={size} style={{
-      height: size.toString(),
-      width: size.toString(),
-    }}>
-    </svg>
-    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events}/>
+      <svg className = "svgClass" ref={ref} width={size} height={size} style={{
+        height: size.toString(),
+        width: size.toString(),
+      }}>
+      </svg>
+      <div style={{
+    "background-color":"black",
+    "position":"absolute",
+    "width":"100%",
+    "height":"5px"}}></div>
+    <Tooltip
+      title={tooltipTitle}
+      text={tooltipText}
+      x={tooltipX}
+      y={tooltipY}
+      visible={tooltipVisible}
+    />
+    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
     </>
   );
 };

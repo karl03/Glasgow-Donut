@@ -37,3 +37,22 @@
 .add-sector-form > textarea {
     min-height: 3em;
 }
+
+.my-custom-select {
+    min-width: 350px;
+    max-width: 600px;
+    max-height: 500px;
+    font-size: 14px;
+    border: none;
+    border-radius: none;
+}
+  
+.my-custom-select .react-select__control {
+    background-color: #fff;
+    color: #333;
+}
+
+.my-custom-select .react-select__option--is-selected {
+    background-color: #f7f7f7;
+    color: #333;
+}

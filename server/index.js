@@ -46,6 +46,18 @@ app.get("/api/get-icon/:folder/:filename", (req, res) => {
   });
 });
 
+app.get('/api/get-filenames/:folder', (req, res) => {
+  const folder = req.params.folder;
+  let fileNames = [];
+  fs.readdir(`${__dirname}/Icons/${folder}`, (err, files) => {
+    if (err) {
+      console.log('Error reading folder:', err);
+      return res.status(500).send(err);
+    }
+    fileNames = files;
+    res.send(fileNames);
+  });
+});
 
 app.use(fileUpload());
 app.post('/api/upload/:folder', (req, res) => {
