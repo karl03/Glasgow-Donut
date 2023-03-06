@@ -17,7 +17,8 @@ function getFormElements(){
         "target": target,
         "description": description,
         "cites": cites,
-        "videolink": videolink};
+        "videolink": videolink
+    };
 }
 
 export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
@@ -27,7 +28,7 @@ export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
 
     console.log("populateForm: ", name, JSON.stringify(data));
 
-    // write data to elemenets
+    // write data to elements
     const {title, value, indicator, target, description, cites, videolink} = getFormElements();
     title.value = name;
     value.value = data['value'];
@@ -72,17 +73,18 @@ function getFormData(formElements){
     return formData;
 }
 
-export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow){
+export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow, icon){
     // get form data
     const x = getFormData(getFormElements());
-
+    
     if (!isValidForm(title)) {
         alert("The sector requires a title!");
         return;
     }
 
     console.log("onSave: " + title, 
-    x['value'], 
+    x['value'],
+    icon,
     x["indicator"], 
     x["target"], 
     x["description"], 
@@ -95,12 +97,12 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
     const New = JSON.parse(JSON.stringify(sliderGroups));
     New[ecoOrSoc][gloOrLoc][x['title']] = {
         "value": x['value'],
-        "adjacent": [],//NEEDS TO BE IMPLEMENTED
+        "adjacent": "xxx",//NEEDS TO BE IMPLEMENTED
         "indicator": x['indicator'],
         "target": x['target'],
         "description": x['description'],
         "quotes": x['cites'],
-        "symbol_id": '', //NEEDS TO BE IMPLEMENTED
+        "symbol_id": icon,
         "video_hash": x['videolink']
     };
     console.log(New);
