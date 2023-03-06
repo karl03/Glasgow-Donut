@@ -25,9 +25,7 @@ export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
 
     const data = sliderGroups[ecoOrSoc][gloOrLoc][name];
 
-    console.log("populateForm: ", name, JSON.stringify(data));
-
-    // write data to elements
+    // Write data to elemenets.
     const {title, value, indicator, target, description, cites, videolink} = getFormElements();
     title.value = name;
     value.value = data['value'];
@@ -82,20 +80,11 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
         return;
     }
 
-    console.log("onSave: " + title, 
-    formData['value'], 
-    icon,
-    formData["indicator"], 
-    formData["target"], 
-    formData["description"], 
-    formData["cites"], 
-    formData["videolink"])
-
     // Insert or overwrite new data.
 
     const New = JSON.parse(JSON.stringify(sliderGroups));
     New[ecoOrSoc][gloOrLoc][formData['title']] = {
-        "value": formData['value'],
+        "value": formData['value'] || 0,
         "adjacent": [],//NEEDS TO BE IMPLEMENTED
         "indicator": formData['indicator'],
         "target": formData['target'],
@@ -104,7 +93,6 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
         "symbol_id": icon,
         "video_hash": formData['videolink']
     };
-    console.log(New);
     setSliderGroups(New);
     onClose(setShow)
 }
