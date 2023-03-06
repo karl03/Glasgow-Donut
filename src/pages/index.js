@@ -29,13 +29,13 @@ function HomePage() {
       
       
       <MainBg>
-        <div style={{position:"absolute", top:"8vh", right:"8px", textAlign:"right", fontSize:"16px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
+        <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
-        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"16px"}}>LOCAL <br/> ASPIRATIONS </div>
+        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px"}}>LOCAL <br/> ASPIRATIONS </div>
         <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
-      <Header title="Glasgow City Portrait" size="2rem"/>
+      <Header title="Glasgow City Portrait" size="3rem"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
@@ -93,12 +93,13 @@ function HomePage() {
       </div>
 
       <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
-        <div style={{"maxWidth": "45%"}}>
+        <div style={{"maxWidth": "45%", marginLeft: "8rem", paddingLeft : "4rem"}}>
         <h1>About the Project</h1>
         <p>
-          Connecting climate action to the Sustainable Development Goals: Analyse and compare
-          how climate actions formulated in Nationally Determined Contributions (NDCs) corresponds to each of 
-          the 17 Sustainable Development Goals (SDGs).
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend, mi eget bibendum facilisis, 
+        arcu est scelerisque nisi, non dignissim mauris erat a augue. Donec vulputate odio ut metus luctus congue. 
+        Curabitur ligula nisi, varius quis rutrum id, tempor ac urna. Aenean sollicitudin, neque sed feugiat laoreet, 
+        libero dui vehicula eros, finibus finibus ipsum urna id tellus. Nulla laoreet sed nisi tincidunt ullamcorper.
         </p>
         </div>
         <div class="SponsorsWrapper" style={{"width": "45%", position: "relative", display: "flex", flexDirection: "row"}}>
