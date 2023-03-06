@@ -29,13 +29,13 @@ function HomePage() {
       
       
       <MainBg>
-        <div style={{position:"absolute", top:"8vh", right:"8px", textAlign:"right", fontSize:"16px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
+        <div style={{position:"absolute", top:"8vh", right:"8px", textAlign:"right", fontSize:"24px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
-        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"16px"}}>LOCAL <br/> ASPIRATIONS </div>
+        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px"}}>LOCAL <br/> ASPIRATIONS </div>
         <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
-      <Header title="Glasgow City Portrait" size="2rem"/>
+      <Header title="Glasgow City Portrait" size="3rem"/>
       <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
