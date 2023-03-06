@@ -29,7 +29,7 @@ function HomePage() {
       
       
       <MainBg>
-        <div style={{position:"absolute", top:"8vh", right:"8px", textAlign:"right", fontSize:"24px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
+        <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
         <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px"}}>LOCAL <br/> ASPIRATIONS </div>
         <ImageBgLower src={BackgroundImage}/>
