@@ -16,7 +16,6 @@ export default function AdjacencyModal({lastCategorySelect,
     }
 
     function onSave(){
-      //sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"].push()
       setShow(false);
     }
 
@@ -39,7 +38,7 @@ export default function AdjacencyModal({lastCategorySelect,
           setAdjData(sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
         }
       }
-    }, [sliderGroups])
+    }, [sliderGroups, lastCategorySelect, lastSliderName, isShow])
     
   return (
     <ModalMenu 
