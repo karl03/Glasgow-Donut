@@ -93,7 +93,7 @@ function HomePage() {
       </div>
 
       <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
-        <div style={{"maxWidth": "45%"}}>
+        <div style={{"maxWidth": "45%", marginLeft: "8rem", paddingLeft : "4rem"}}>
         <h1>About the Project</h1>
         <p>
           Connecting climate action to the Sustainable Development Goals: Analyse and compare
