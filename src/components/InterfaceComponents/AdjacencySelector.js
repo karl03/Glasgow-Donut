@@ -32,9 +32,12 @@ export default function AdjacencySelector(props) {
 
     function handleSubmit(event, props){
         event.preventDefault();
+        // Get the form message and clear the input.
+        const messageElement = document.getElementById("message-input"); 
+        const message = messageElement.value;
+        messageElement.value = "";
 
         // Collate the new adjaceny data.
-        const message = document.getElementById("message-input").value;
         const newAdjacency = [targetEcoOrSoc, targetGloOrLoc, targetName, message];
 
         const newSliderGroups = JSON.parse(JSON.stringify(props.sliderGroups));

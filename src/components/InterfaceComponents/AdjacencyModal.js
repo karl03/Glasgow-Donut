@@ -22,6 +22,15 @@ export default function AdjacencyModal({lastCategorySelect,
 
     function deleteAdjacency(item, index){
       console.log("Delete ", item, index);
+
+      // Gather the existing adjacency data.
+      const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
+      
+      // Remove the specific adjacency.
+      newSliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"].splice(index, 1);
+
+      // Update the dataset.
+      setSliderGroups(newSliderGroups);
     }
 
     useEffect(() => {
@@ -42,7 +51,7 @@ export default function AdjacencyModal({lastCategorySelect,
 
     <ul className='adj-display'>
       {adjData.map((item, index) => 
-      <li key={index}>{item[0] + " " + item[1] + ": " + item[3]}
+      <li key={index}>{item[0] + "→" + item[1] + ": " + item[3]}
       <button onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
       }
     </ul>
