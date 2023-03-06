@@ -96,9 +96,10 @@ function HomePage() {
         <div style={{"maxWidth": "45%", marginLeft: "8rem", paddingLeft : "4rem"}}>
         <h1>About the Project</h1>
         <p>
-          Connecting climate action to the Sustainable Development Goals: Analyse and compare
-          how climate actions formulated in Nationally Determined Contributions (NDCs) corresponds to each of 
-          the 17 Sustainable Development Goals (SDGs).
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend, mi eget bibendum facilisis, 
+        arcu est scelerisque nisi, non dignissim mauris erat a augue. Donec vulputate odio ut metus luctus congue. 
+        Curabitur ligula nisi, varius quis rutrum id, tempor ac urna. Aenean sollicitudin, neque sed feugiat laoreet, 
+        libero dui vehicula eros, finibus finibus ipsum urna id tellus. Nulla laoreet sed nisi tincidunt ullamcorper.
         </p>
         </div>
         <div class="SponsorsWrapper" style={{"width": "45%", position: "relative", display: "flex", flexDirection: "row"}}>
