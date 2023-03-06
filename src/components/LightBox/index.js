@@ -22,6 +22,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   function changeState() {
     console.log("LightBox ChangeState function called!");
     for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+    for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
 
     if(trigger ===true){
       setShowAdditional(false);
@@ -84,15 +85,23 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function createIcon(offsetDimensions, initialDimensions, adjacencyListItem){
     const circle = document.createElement('span')
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
     circle.className = "small-circle";
+    line.id = "lines";
 
     const imageUrl = "/api/get-icon/"+data[adjacencyListItem[0]][adjacencyListItem[1]][adjacencyListItem[2]]["symbol_id"];
     circle.style.backgroundImage = `url(${imageUrl})`;
 
     circle.style.top = (initialDimensions.top - offsetDimensions.top - 5) + 'px';
     circle.style.left = (initialDimensions.left - offsetDimensions.left - 5) + 'px';
+
+    line.setAttributeNS(null, "x1",document.getElementById("line-canvas").getBoundingClientRect().width / 2.);
+    line.setAttributeNS(null, "y1",document.getElementById("line-canvas").getBoundingClientRect().height / 2.);
+    line.setAttributeNS(null, "x2",(initialDimensions.left - offsetDimensions.left + 12) + 'px');
+    line.setAttributeNS(null, "y2",(initialDimensions.top - offsetDimensions.top + 10) + 'px');
       
+    document.getElementById("line-canvas").appendChild(line)
     document.getElementById("grid-container").appendChild(circle)
   }
 
@@ -115,9 +124,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     <>
      <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
       </div>
+      
 
   <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
-  
+    <svg id="line-canvas" height="100%" width="100%"/>
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
@@ -135,6 +145,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
       <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
     </span>
+    
+    
   </div>
   </>
     );

@@ -8,6 +8,7 @@
 }
 
 #primary_circle{
+  z-index: 13;
   grid-row: 2;
   grid-column: 2;
 }
@@ -132,4 +133,16 @@
   background-size:60%;
   background-repeat:no-repeat;
   background-position:center;
+}
+
+#line-canvas{
+  z-index:4;
+  background-color: transparent;
+  position:absolute;
+  pointer-events:none;
+}
+
+#lines{
+  stroke:rgb(255,255,255);
+  stroke-width:2;
 }
