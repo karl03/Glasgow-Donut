@@ -20,8 +20,8 @@ export default function AdjacencyModal({lastCategorySelect,
       setShow(false);
     }
 
-    function formatAdjacency(){
-
+    function deleteAdjacency(item, index){
+      console.log("Delete ", item, index);
     }
 
     useEffect(() => {
@@ -41,7 +41,10 @@ export default function AdjacencyModal({lastCategorySelect,
     >
 
     <ul className='adj-display'>
-      {adjData.map((item, index) => <li key={index}>{item[0] + " " + item[1] + ": " + item[3]}<button onClick={console.log(index, item)}>Delete</button></li>)}
+      {adjData.map((item, index) => 
+      <li key={index}>{item[0] + " " + item[1] + ": " + item[3]}
+      <button onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
+      }
     </ul>
 
     <AdjacencySelector 
