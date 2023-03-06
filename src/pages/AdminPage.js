@@ -124,8 +124,8 @@ export default function AdminPage(){
       <ModalMenu
           isShow={isShowingUploadModal}
           onClose={() => setShowingUploadModal(false)}
-          onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
-          title="Modal Title"
+          onSave={handleUpload}
+          title="Upload Model"
           >
           <div className='admin-upload-modal'>
             <label>Choose Upload Folder:</label>
@@ -135,7 +135,7 @@ export default function AdminPage(){
               <option value="Local_Ecological">Local_Ecological</option>
               <option value="Local_Social">Local_Social</option>
             </select>
-            <button style={{maxHeight:"40px", marginTop:"20px"}} className="admin-upload-button" onClick={handleUpload}>Upload</button>
+            {/* <button style={{maxHeight:"40px", marginTop:"20px"}} className="admin-upload-button" onClick={handleUpload}>Upload</button> */}
           </div>
         </ModalMenu>
     )
