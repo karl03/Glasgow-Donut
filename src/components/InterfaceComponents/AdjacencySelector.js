@@ -2,68 +2,62 @@ import React, {useState, useEffect} from 'react'
 import './AdjacencySelector.css'
 
 export default function AdjacencySelector(props) {
-    const [ecoOrSoc, setEcoOrSoc] = useState('ecological');
-    const [gloOrLoc, setGlocOrLoc] = useState('global');
-    const [sector, setSector] = useState();
-    const [selectionArray, SetSelectionArray] = useState([]);
+    const [targetEcoOrSoc, setTargetEcoOrSoc] = useState('ecological');
+    const [targetGloOrLoc, setTargetGloOrLoc] = useState('global');
+    const [targetName, setTargetName] = useState('Select...')
 
-    function getConstrainedSectors(sliderGroups, ecoOrSoc, gloOrLoc){
-        return Object.keys(sliderGroups[ecoOrSoc][gloOrLoc]);
-    }
+    const [adjacentArray, setAdjacentArray] = useState([]);
+    const [isDisabled, setIsDisable] = useState(true);
 
     function handleEcoOrSocSelect(){
         const element = document.getElementById("adj-select-EcoOrSoc");
-        setEcoOrSoc(element.value);
+        setTargetEcoOrSoc(element.value);
     }
 
     function handleGloOrLocSelect(){
         const element = document.getElementById("adj-select-GloOrLoc");
-        setGlocOrLoc(element.value);
+        setTargetGloOrLoc(element.value);
     }
 
-    useEffect(() => {
-        SetSelectionArray(getConstrainedSectors(props.sliderGroups, ecoOrSoc, gloOrLoc));
-    }, [ecoOrSoc, gloOrLoc, props.sliderGroups]);
-
-    function checkValidAdj(sliderGroups, ecoOrSoc, gloOrLoc, title){
-        // check if self adjacency (use an alert...)
-        // for every adjacency
-            // check if adjacency is the same as the proposed new one.
-            // If overwrite, then call overwrite.
-            // else, create new
-
-
-        if (sliderGroups[ecoOrSoc][gloOrLoc][title]) {
-            
+    function updateTargetName(targetValue){
+        if (targetValue !== 'Select...') {
+            setTargetName(targetValue);
+            setIsDisable(false);
+            console.log("Update Target Name: ", targetValue);
+        }
+        else {
+            setIsDisable(true);
         }
     }
 
-    function handleSubmit(e, props){
-        // props = sliderGroup, ecoOrSoc, gloOrLoc
-        e.preventDefault();
-        // Selection slider variables.
-        const form = document.getElementById("message-input");
-        const adjacencyData = [ecoOrSoc,
-        gloOrLoc,
-        sector,
-        form.value]
+    function handleSubmit(event, props){
+        event.preventDefault();
 
-        form.value = ''; // Clear the form.
+        // Collate the new adjaceny data.
+        const message = document.getElementById("message-input").value;
+        const newAdjacency = [targetEcoOrSoc, targetGloOrLoc, targetName, message];
 
-        // Current slider variables.
-        const currentEcoOrSoc = props.ecoOrSoc;
-        const currentGloOrLoc = props.gloOrLoc;
-        const currentTitle = props.lastSliderName;
-        
-        const newSliderGroup = JSON.parse(JSON.stringify(props.sliderGroups));
-        console.log("THIS -->",currentTitle);
-        newSliderGroup[currentEcoOrSoc][currentGloOrLoc][currentTitle]["adjacent"].push(adjacencyData);
-        console.log("!!!", newSliderGroup);
-        props.setSliderGroups(newSliderGroup);
+        // Check if the adjacency already exists.
+
+        // Add the new Adjacency to the dataset.
+        console.log(props.sliderGroups);
+        const newSliderGroups = JSON.parse(JSON.stringify(props.sliderGroups));
+        newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"].push(newAdjacency);
+        props.setSliderGroups(newSliderGroups);
+        console.log(props.sliderGroups);
     }
 
+    useEffect(() => {
+        const keys = Object.keys(props.sliderGroups[targetEcoOrSoc][targetGloOrLoc]);
+        if (props.ecoOrSoc === targetEcoOrSoc && props.gloOrLoc === targetGloOrLoc) {
+            setAdjacentArray(keys.filter((x) => x !== props.lastSliderName));
+            return;
+        }
+        setAdjacentArray(keys);
+    }, [targetEcoOrSoc, targetGloOrLoc, props])
+
   return (
-    <form className='adj-select' onSubmit={(e) => handleSubmit(e, props)}>
+    <form className='adj-select' onSubmit={(event) => handleSubmit(event, props)}>
         <select name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
             <option value="ecological">Ecological</option>
             <option value="social">Social</option>
@@ -74,11 +68,12 @@ export default function AdjacencySelector(props) {
             <option value="local">Local</option>
         </select>
 
-        <select name="sector" id="adj-select-sector" value={sector} onChange={e => setSector(e.target.value)}>
-            {selectionArray.map((item, index) => <option key={index}>{item}</option>)}
+        <select name="sector" id="adj-select-sector" onChange={(e) => updateTargetName(e.target.value)}>
+            <option key="0">Select...</option>
+            {adjacentArray.map((item, index) => <option key={index + 1}>{item}</option>)}
         </select>
         <input type="text" className='message-input' id='message-input' placeholder='Message...'/>
-        <input type="submit" value="Enter" />
+        <input type="submit" disabled={isDisabled} value="Enter" />
     </form>
   )
 }
