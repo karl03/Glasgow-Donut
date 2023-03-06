@@ -41,7 +41,7 @@ export default function AdjacencyModal({lastCategorySelect,
     >
 
     <ul className='adj-display'>
-      {adjData.map((item, index) => <li key={index}>{item}</li>)}
+      {adjData.map((item, index) => <li key={index}>{item[0] + " " + item[1] + ": " + item[3]}<button onClick={console.log(index, item)}>Delete</button></li>)}
     </ul>
 
     <AdjacencySelector 
