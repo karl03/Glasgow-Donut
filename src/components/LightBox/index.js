@@ -53,10 +53,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   }
 
   function changeIndicator() {
-    if(document.getElementById("Indicator").innerText === 'INDICATOR'){
+    if(document.getElementById("Indicator").innerText === 'Indicator'){
       document.getElementById("Indicator").innerText = DataProperty[1]?.indicator ?? "why are you here go away";
     } else {
-      document.getElementById("Indicator").innerText = 'INDICATOR';
+      document.getElementById("Indicator").innerText = 'Indicator';
     }
   }
 
@@ -133,7 +133,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
     <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={()=>setConnections(true)}>
-      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
+      <p id="Connections" className="lightbox_title">{"Connections"}</p>
     </span>
   </div>
   </>
