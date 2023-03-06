@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import "./Lightbox.css";
-import * as d3 from "d3";
 
 
 export default function LightBox ({trigger, setTrigger, DataProperty, data}){
@@ -61,7 +60,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
       // ****Continue here for connections feature!!!***
 
-      if (adjacencyList != "No adjacencies") {
+      if (adjacencyList !== "No adjacencies") {
         
       }
     } else {

@@ -59,32 +59,35 @@ export default function AddSectorModal({lastCategorySelect,
           setSelectedOption(null);
 
           if (lastCategorySelect) {
-            let { ecoOrSoc, gloOrLoc } = lastCategorySelect;
-            ecoOrSoc = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
-            gloOrLoc = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
-            const folder = `${gloOrLoc}_${ecoOrSoc}`;
-            
-            // Get default Option Value (The one in Data.json)
-            let data = sliderGroups[ecoOrSoc.toLowerCase()][gloOrLoc.toLowerCase()][document.getElementById('modal-sector-title').value];
-            if (data && data['symbol_id'] && data['symbol_id'] != "") {
-              let defaultValue = data['symbol_id'].split("/")[1]
-              setSelectedOption({label: defaultValue, value: defaultValue, iconUrl: `/api/get-icon/${folder}/${defaultValue}`})
-            }
+            function populateIcons() {
+              let { ecoOrSoc, gloOrLoc } = lastCategorySelect;
+              ecoOrSoc = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
+              gloOrLoc = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
+              const folder = `${gloOrLoc}_${ecoOrSoc}`;
+              
+              // Get default Option Value (The one in Data.json)
+              let data = sliderGroups[ecoOrSoc.toLowerCase()][gloOrLoc.toLowerCase()][document.getElementById('modal-sector-title').value];
+              if (data && data['symbol_id'] && data['symbol_id'] !== "") {
+                let defaultValue = data['symbol_id'].split("/")[1]
+                setSelectedOption({label: defaultValue, value: defaultValue, iconUrl: `/api/get-icon/${folder}/${defaultValue}`})
+              }
 
-            getFileNames(folder)
-              .then((fileNames) => {
-                const options = fileNames.map((fileName, index) => ({
-                  label: fileName,
-                  value: fileName,
-                  iconUrl: `/api/get-icon/${folder}/${fileName}`,
-                }));
-                setIconOptions(options);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
+              getFileNames(folder)
+                .then((fileNames) => {
+                  const options = fileNames.map((fileName, index) => ({
+                    label: fileName,
+                    value: fileName,
+                    iconUrl: `/api/get-icon/${folder}/${fileName}`,
+                  }));
+                  setIconOptions(options);
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+            populateIcons();
           }
-        }, [lastCategorySelect]);
+        }, [lastCategorySelect, sliderGroups, setSelectedOption]);
 
         const handleSelectChange = (option) => {
           setSelectedOption(option);
