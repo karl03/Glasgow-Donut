@@ -67,7 +67,7 @@ export default function BarChart({
         const CapitalisedProperty = (data[0][0].toUpperCase() + data[0].slice(1)).replaceAll(/_/g, " ");
         setTooltipVisible(true);
         setTooltipTitle(CapitalisedProperty);
-        setTooltipText(data[1].value === -1 ? "Not Known" : data[1].value + "%");
+        //setTooltipText(data[1].value === -1 ? "Not Known" : data[1].value + "%");
         
         Tooltip
           .style("opacity", 1)
