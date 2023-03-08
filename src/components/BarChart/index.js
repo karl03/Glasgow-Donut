@@ -65,11 +65,6 @@ export default function BarChart({
         setTooltipTitle(CapitalisedProperty);
         //setTooltipText(data[1].value === -1 ? "Not Known" : data[1].value + "%");
         
-        Tooltip
-          .style("opacity", 1)
-        d3.select(this)
-          .style("stroke", "black")
-          .style("opacity", 1)
         if(document.getElementById(data[0]+"_outer")){
           document.getElementById(data[0]+"_outer").setAttribute("fill","blue")
         } else if(document.getElementById(data[0]+"_inner")){
