@@ -87,8 +87,8 @@ export default function AdminSlider({
           <button onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
-          <SliderInput onChange={event => {setValue(event.target.value);}} type="range" step="1" min="-1" max="100" value={value} />
-          <Number onChange={event => {changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)}} type="Number" min="-1" max="100" step="1" value={value} /> 
+          <SliderInput onChange={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="range" step="1" min="-1" max="100" value={value} />
+          <Number onInput={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="Number" min="-1" max="100" step="1" value={value} /> 
           <button onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
         </Bottom>
       </Left>

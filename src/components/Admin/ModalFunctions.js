@@ -84,7 +84,7 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
 
     const New = JSON.parse(JSON.stringify(sliderGroups));
     New[ecoOrSoc][gloOrLoc][formData['title']] = {
-        "value": formData['value'] || 0,
+        "value": Number.parseInt(formData['value']) || 0,
         "adjacent": [],//NEEDS TO BE IMPLEMENTED
         "indicator": formData['indicator'],
         "target": formData['target'],
