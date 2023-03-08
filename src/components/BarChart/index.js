@@ -369,19 +369,13 @@ export default function BarChart({
         width: size.toString(),
       }}>
       </svg>
-      <div style={{
-    "background-color":"black",
-    "position":"absolute",
-    "width":"100%",
-    "height":"5px"}}></div>
-    <Tooltip
-      title={tooltipTitle}
-      text={tooltipText}
-      x={tooltipX}
-      y={tooltipY}
-      visible={tooltipVisible}
-    />
-    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
-    </>
+      {window.location.pathname !== '/' ? null :
+        <>
+        <div style={{"background-color":"black", "position":"absolute", "width":"100%", "height":"5px"}}></div>
+        <Tooltip title={tooltipTitle} text={tooltipText} x={tooltipX} y={tooltipY} visible={tooltipVisible}/>
+        <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
+        </>
+    }
+  </>
   );
 };
