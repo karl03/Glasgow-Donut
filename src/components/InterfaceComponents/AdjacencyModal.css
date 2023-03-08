@@ -1,7 +1,9 @@
 .adj-display {
-    list-style: none;
     display: flex;
-
+    list-style: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-size: small;
 }
 
 .adj-list-element {
