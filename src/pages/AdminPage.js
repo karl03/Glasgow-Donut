@@ -84,7 +84,7 @@ export default function AdminPage(){
 
   function changeSliderHandler(ecoOrSoc, gloOrLoc, name, newValue){
     const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
-    newSliderGroups[ecoOrSoc][gloOrLoc][name].value = newValue;
+    newSliderGroups[ecoOrSoc][gloOrLoc][name].value = Number.parseInt(newValue);
     setSliderGroups(newSliderGroups)
   }
 
