@@ -21,7 +21,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+    for (const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) {
+      element.remove();
+    }
 
     if(trigger ===true){
       setShowAdditional(false);
@@ -79,15 +81,18 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
         }
         // Add event listener to window object to recall createIcon function when window size changes
         window.addEventListener('resize', () => {
-          for (let i = 0; i < adjacencyList.length; i++) {
-            const adjacencyListItem = adjacencyList[i];
-            const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
-            if(adjacencyList[i][0] === "social"){
-              const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
-              createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
-            }else{
-              const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
-              createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
+          let isShow = document.getElementById('lightbox').className;
+          if (isShow === "isShow") {
+            for (let i = 0; i < adjacencyList.length; i++) {
+              const adjacencyListItem = adjacencyList[i];
+              const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+              if(adjacencyList[i][0] === "social"){
+                const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
+                createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
+              }else{
+                const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
+                createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
+              }
             }
           }
         });
