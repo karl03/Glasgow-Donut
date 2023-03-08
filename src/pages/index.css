@@ -24,6 +24,15 @@
     display: flex;
     flex-direction: row;
   }
+
+  .title {
+    font: var(--title-font);
+  }
+
+  .subtitle {
+    font: var(--subtitle-font);
+    color: #4CAF50;
+  }
   
   .flex-item {
     background: #e3e3e3;
