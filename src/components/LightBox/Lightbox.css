@@ -38,6 +38,20 @@
   grid-column: 2;
 }
 
+#context_circle{
+  grid-row: 3;
+  grid-column: 2;
+  width: 500px;
+  border-radius: 25px;
+  z-index:20;
+  display:none;
+  cursor:default;
+}
+
+#icon-space{
+  position:absolute;
+}
+
 #lightbox{
   z-index:4;
   position:absolute;
@@ -77,6 +91,7 @@
 .circle{
     z-index:5;
     display: flex;
+    justify-self: center;
     flex-direction: column;
     background-color: white;
     height: 180px;
@@ -96,18 +111,6 @@
 }
 
 .active{
-  opacity: 1;
-  pointer-events: visible;
-}
-
-.circle_hidden{
-  opacity: 0;
-  display:none;
-}
-
-.circle_active{
-  display:inline-flex;
-  position:fixed;
   opacity: 1;
   pointer-events: visible;
 }
@@ -137,7 +140,6 @@
 
 #line-canvas{
   z-index:4;
-  background-color: transparent;
   position:absolute;
   pointer-events:none;
 }
@@ -145,4 +147,6 @@
 #lines{
   stroke:rgb(255,255,255);
   stroke-width:2;
+  pointer-events:visible;
+  cursor: pointer;
 }

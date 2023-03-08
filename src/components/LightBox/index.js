@@ -3,14 +3,9 @@ import "./Lightbox.css";
 
 
 export default function LightBox ({trigger, setTrigger, DataProperty, data}){
-  
-  // const xScale = d3.scaleBand()
-  //   .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
-  //   .align(0)                  // This does nothing
-  //   .domain(Object.keys(Properties));
-
   const [Name,setName] = React.useState(DataProperty[0]);
   const [additionalCirclesIsShow, setShowAdditional] = React.useState(false);
+  const [contextCircleIsShow,setContextCircle] = React.useState(false);
 
   useEffect(() => {
     if(trigger===true){
@@ -26,11 +21,13 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
     if(trigger ===true){
       setShowAdditional(false);
+      setContextCircle(false);
       setTrigger(false)
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Target").innerText = 'Target';
       document.getElementById("Thriving").innerText = 'Thriving';
+      document.getElementById("context_circle").style.display = "none";
       document.getElementById("top_circle").style.borderRadius = '90px';
       document.getElementById("top_circle").style.width = '180px';
       document.body.id="show_scroll"
@@ -61,13 +58,20 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   }
 
   function changeConnections() {
-    if(document.getElementById("Connections").innerText === 'CONNECTIONS'){
+    if(document.getElementById("Connections").innerText === 'Connections'){
       setShowAdditional(false);
+
+      document.getElementById("icon-space").style.width = document.getElementById("grid-container").getBoundingClientRect().width + 'px';
+      document.getElementById("icon-space").style.height = document.getElementById("grid-container").getBoundingClientRect().height + 'px';
+
+      document.getElementById("line-canvas").setAttribute("width",document.getElementById("grid-container").getBoundingClientRect().width + 'px');
+      document.getElementById("line-canvas").setAttribute("height",document.getElementById("grid-container").getBoundingClientRect().height + 'px');
+
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
       if (adjacencyList !== "No adjacencies") {
             for(let i=0;i<adjacencyList.length;i++){
               const adjacencyListItem = adjacencyList[i]
-              const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+              const offsetDimensions = document.getElementById("line-canvas").getBoundingClientRect();
               if(adjacencyList[i][0] === "social"){
                 const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
                 createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
@@ -79,13 +83,14 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
             }
       }
     } else {
-      document.getElementById("Connections").innerText = 'CONNECTIONS';
+      document.getElementById("Connections").innerText = 'Connections';
     }
   }
 
   function createIcon(offsetDimensions, initialDimensions, adjacencyListItem){
-    const circle = document.createElement('span')
+    const circle = document.createElement('span');
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
 
     circle.className = "small-circle";
     line.id = "lines";
@@ -96,13 +101,21 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     circle.style.top = (initialDimensions.top - offsetDimensions.top - 5) + 'px';
     circle.style.left = (initialDimensions.left - offsetDimensions.left - 5) + 'px';
 
-    line.setAttributeNS(null, "x1",document.getElementById("line-canvas").getBoundingClientRect().width / 2.);
-    line.setAttributeNS(null, "y1",document.getElementById("line-canvas").getBoundingClientRect().height / 2.);
+    const lineDimensions = document.getElementById("line-canvas").getBoundingClientRect();
+
+    line.setAttributeNS(null, "x1",lineDimensions.width / 2.);
+    line.setAttributeNS(null, "y1",lineDimensions.height / 2.);
     line.setAttributeNS(null, "x2",(initialDimensions.left - offsetDimensions.left + 12) + 'px');
     line.setAttributeNS(null, "y2",(initialDimensions.top - offsetDimensions.top + 10) + 'px');
+    line.onclick = function(){
+      document.getElementById("context_circle").style.display = "flex";
+      setContextCircle(true);
+      document.getElementById("Context").innerText = adjacencyListItem[3];
+    }
       
-    document.getElementById("line-canvas").appendChild(line)
-    document.getElementById("grid-container").appendChild(circle)
+    document.getElementById("icon-space").appendChild(circle);
+    document.getElementById("line-canvas").appendChild(line);
+    
   }
 
   function changeThriving(){
@@ -119,6 +132,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     }
   }
 
+  
+
 
   return (
     <>
@@ -127,7 +142,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       
 
   <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
-    <svg id="line-canvas" height="100%" width="100%"/>
+    <div id="icon-space">
+      <svg id="line-canvas">
+      </svg>
+    </div>
     <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
@@ -135,7 +153,6 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
       <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
     </span>
-    {/* Just here as a placeholder so the layout is correct */}
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>
     </span>
@@ -143,11 +160,14 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
     <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeConnections}>
-      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
+      <p id="Connections" className="lightbox_title">{"Connections"}</p>
     </span>
-    
-    
+    <span  id="context_circle" className={`circle ${contextCircleIsShow ? 'isShow' : ''}`}>
+      <p id="Context" className="lightbox_title">{"Context"}</p>
+    </span>
   </div>
+  
+  
   </>
     );
   };
