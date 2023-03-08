@@ -121,7 +121,7 @@ export default function AddSectorModal({lastCategorySelect,
     <ModalMenu 
         isShow={isShow}
         onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption.label)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption === null ? null : selectedIconOption.label)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
