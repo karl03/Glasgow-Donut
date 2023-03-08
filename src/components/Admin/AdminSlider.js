@@ -77,7 +77,7 @@ export default function AdminSlider({
 
   React.useEffect(() => {
     setValue(sliderGroups[ecoOrSoc][gloOrLoc][name].value);
-  }, [sliderGroups]);
+  }, [sliderGroups, ecoOrSoc, gloOrLoc, name]);
   
   return (
     <AdminSliderWrapper>
