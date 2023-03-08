@@ -213,10 +213,7 @@ export default function AdminPage(){
       <div>
         {true ? addUploadModal(): quitUploadModal()}
       </div>
-      <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingAdjModal(true)}>DEBUG MODAL MENU</button>
-        <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST FUNCTIONS</button>
-      </div>
+
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
         setLastSliderName={setLastSliderName}
