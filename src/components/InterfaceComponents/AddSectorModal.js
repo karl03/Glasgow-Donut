@@ -7,6 +7,7 @@ import {onClose, onSave} from '../Admin/ModalFunctions'
 
 export default function AddSectorModal({lastCategorySelect,
     lastSliderName,
+    setLastSliderName,
     isShow,
     setShow,
     sliderGroups,
@@ -20,7 +21,6 @@ export default function AddSectorModal({lastCategorySelect,
         const gloOrLocIcon = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
         const icon = `${gloOrLocIcon}_${ecoOrSocIcon}/${iconLabel}`;
 
-        console.log("handleSubmit: ", lastSliderName);
         onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow, icon);
     }
 
@@ -120,7 +120,7 @@ export default function AddSectorModal({lastCategorySelect,
     <ModalMenu 
         isShow={isShow}
         onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption.label)}
+        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption === null ? null : selectedIconOption.label)}
         title="Sector Editor"
     >
         <form action="" className="add-sector-form" method='post'>
@@ -148,7 +148,6 @@ export default function AddSectorModal({lastCategorySelect,
             <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
                 placeholder='Description...'></textarea>
-        
     
             <label htmlFor="sector-cites">Citations </label>
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"

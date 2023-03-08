@@ -16,7 +16,17 @@ const Title = styled.h3`
   margin: 10px;
 `;
 
-export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, newFunction}){
+export default function AdminSliderGroup({
+  sliders,
+  sliderGroups,
+  changeSliderHandler,
+  ecoOrSoc,
+  gloOrLoc,
+  deleteFunction,
+  editFunction,
+  newFunction,
+  adjFunction})
+  {
 
   return (
     <AdminSliderWrapper>
@@ -28,14 +38,15 @@ export default function AdminSliderGroup({sliders, eventHandler, ecoOrSoc, gloOr
           for(const [SliderName, SliderInfo] of Object.entries(sliders)){
             Elements.push(
               <AdminSlider
-                eventHandler={eventHandler}
+                changeSliderHandler={changeSliderHandler}
                 initialValue={SliderInfo.value}
-                initialFactor={SliderInfo.indicator}
                 initialName={SliderName}
+                sliderGroups={sliderGroups}
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}
                 editFunction={editFunction}
+                adjFunction={adjFunction}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );

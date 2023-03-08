@@ -3,10 +3,9 @@ import Tooltip from "./Tooltip";
 import * as d3 from "d3";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
-//TODO: Refactor this to use more idiomatic react
 export default function BarChart({
   size = 500,
-  data = null//Data[0]
+  data = null
 }){
   const outerRadius = (size / 2) - 20;
   const innerRadius = outerRadius / 2;
@@ -22,7 +21,6 @@ export default function BarChart({
   const [tooltipText, setTooltipText] = React.useState("");
   const [tooltipX, setTooltipX] = React.useState(0);
   const [tooltipY, setTooltipY] = React.useState(0);
-
   
   //const [data, setData] = useState(data); Potentially needed for dynamic read-write operations
   const ref = useRef();
@@ -60,9 +58,7 @@ export default function BarChart({
       }
 
       let {group, yOuter, yInner} = SetupBarChart();
-
-            
-                  
+          
       const mouseover = function(event, data) {
         const CapitalisedProperty = (data[0][0].toUpperCase() + data[0].slice(1)).replaceAll(/_/g, " ");
         setTooltipVisible(true);
@@ -149,7 +145,6 @@ export default function BarChart({
                 .padRadius(innerRadius)
               );
         }
-
 
         function CreateIconRing(Properties, group, xScale){
           group.append("g")
@@ -284,8 +279,6 @@ export default function BarChart({
           }
       }
 
-        
-    
       function SetupBarChartOuterSectors(group, yOuter){
 
         function CreateGraphColumnOuter(Properties, group, xScale, yOuter){
@@ -351,9 +344,6 @@ export default function BarChart({
           }
       }
 
-
-    
-      
       SetupBarChartInnerSectors(group, yInner);
       SetupBarChartOuterSectors(group, yOuter);
     }
@@ -369,19 +359,13 @@ export default function BarChart({
         width: size.toString(),
       }}>
       </svg>
-      <div style={{
-    "background-color":"black",
-    "position":"absolute",
-    "width":"100%",
-    "height":"5px"}}></div>
-    <Tooltip
-      title={tooltipTitle}
-      text={tooltipText}
-      x={tooltipX}
-      y={tooltipY}
-      visible={tooltipVisible}
-    />
-    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
-    </>
+      {window.location.pathname !== '/' ? null :
+        <>
+        <div style={{"background-color":"black", "position":"absolute", "width":"100%", "height":"5px"}}></div>
+        <Tooltip title={tooltipTitle} text={tooltipText} x={tooltipX} y={tooltipY} visible={tooltipVisible}/>
+        <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
+        </>
+    }
+  </>
   );
 };

@@ -3,6 +3,7 @@ import {Link as LinkR} from 'react-router-dom';
 import AdminDonutGraph from "../components/Admin/AdminDonutGraph";
 import AdminSliderGroup from '../components/Admin/AdminSliderGroup';
 import AddSectorModal from '../components/InterfaceComponents/AddSectorModal'
+import AdjacencyModal from '../components/InterfaceComponents/AdjacencyModal'
 import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
@@ -11,6 +12,7 @@ import {populateForm} from '../components/Admin/ModalFunctions'
 export default function AdminPage(){
   const [file, setFile] = useState(null);
   const [isShowingEditModal, setShowingEditModal] = useState(false);
+  const [isShowingAdjModal, setShowingAdjModal] = useState(false);
   const [isShowingUploadModal, setShowingUploadModal] = useState(false);
   const setFilename = useState('Choose File')[1];
   const [sliderGroups, setSliderGroups] = useState({
@@ -80,22 +82,27 @@ export default function AdminPage(){
     if(!loaded) getData();
   }, [loaded]);
   
-  const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
-    switch(type){
-      case "value":{
-        const NewValue = Number.parseInt(newValue);
-        setSliderGroups(function(oldSliders){
-          //Make a deep copy of the object (avoids React's State)
-          const New = JSON.parse(JSON.stringify(oldSliders));
-          New[ecoOrSoc][gloOrLoc][name].value = NewValue;
-          return New;
-        });
-        break;
-      }
-      default: throw new Error("Not implemented!"); //TODO: Remove this in release
-    }
-  }, []);
+  // const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
+  //   switch(type){
+  //     case "value":{
+  //       const NewValue = Number.parseInt(newValue);
+  //       setSliderGroups(function(oldSliders){
+  //         //Make a deep copy of the object (avoids React's State)
+  //         const New = JSON.parse(JSON.stringify(oldSliders));
+  //         New[ecoOrSoc][gloOrLoc][name].value = NewValue;
+  //         return New;
+  //       });
+  //       break;
+  //     }
+  //     default: throw new Error("Not implemented!"); //TODO: Remove this in release
+  //   }
+  // }, []);
 
+  function changeSliderHandler(ecoOrSoc, gloOrLoc, name, newValue){
+    const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
+    newSliderGroups[ecoOrSoc][gloOrLoc][name].value = newValue;
+    setSliderGroups(newSliderGroups)
+  }
 
   function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
     setSliderGroups(function(oldSliders){
@@ -106,17 +113,21 @@ export default function AdminPage(){
   }
 
   function newSliderHandler(ecoOrSoc, gloOrLoc){
-    console.log("newSliderHandler: ", ecoOrSoc,gloOrLoc);
     setLastCategorySelect({ecoOrSoc, gloOrLoc});
     setShowingEditModal(true);
   }
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
     setLastSliderName(name);
     setLastCategorySelect({ecoOrSoc, gloOrLoc});
     populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
     setShowingEditModal(true);
+  }
+
+  function editAdjHandler(name, ecoOrSoc, gloOrLoc){
+    setLastSliderName(name);
+    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+    setShowingAdjModal(true);
   }
 
   function addUploadModal(){
@@ -153,12 +164,6 @@ export default function AdminPage(){
         </ModalMenu>
     )
   }
-
-  function TESTING(sliderGroups, lastCategorySelect){
-    const {e, g} = lastCategorySelect;
-    populateForm(sliderGroups, 'Hello', e, g);
-    //onClose();
-  }
   
   return (
     <div className="admin-container">
@@ -178,12 +183,14 @@ export default function AdminPage(){
                   Elements.push(
                     <AdminSliderGroup
                       sliders={sliders}
+                      sliderGroups={sliderGroups}
                       ecoOrSoc={ecoOrSoc}
                       gloOrLoc={gloOrLoc}
-                      eventHandler={eventHandler}
+                      changeSliderHandler={changeSliderHandler}
                       deleteFunction={deleteSliderHandler}
                       editFunction={editSliderHandler}
                       newFunction={newSliderHandler}
+                      adjFunction={editAdjHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
@@ -212,18 +219,25 @@ export default function AdminPage(){
       <div>
         {true ? addUploadModal(): quitUploadModal()}
       </div>
-      <div className="modal-manager">
-        <button className="DEBUG modal-manager-button" onClick={() => setShowingEditModal(true)}>DEBUG MODAL MENU</button>
-        <button onClick={() => TESTING(sliderGroups, lastCategorySelect)}>TEST MODAL FUNCTIONS</button>
-      </div>
+
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
+        setLastSliderName={setLastSliderName}
         lastSliderName={lastSliderName}
         isShow={isShowingEditModal}
         setShow={setShowingEditModal}
         sliderGroups={sliderGroups}
         setSliderGroups={setSliderGroups}
-        ></AddSectorModal>
+      ></AddSectorModal>
+
+      <AdjacencyModal
+        lastCategorySelect={lastCategorySelect} 
+        lastSliderName={lastSliderName}
+        isShow={isShowingAdjModal}
+        setShow={setShowingAdjModal}
+        sliderGroups={sliderGroups}
+        setSliderGroups={setSliderGroups}
+      ></AdjacencyModal>
     </div>
   );
 };
