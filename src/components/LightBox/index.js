@@ -124,7 +124,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
-    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
+    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving} style={{borderRadius: "90px", width: "180px", boxSizing: "border-box"}}>
       <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
     </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
