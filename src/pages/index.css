@@ -24,6 +24,15 @@
     display: flex;
     flex-direction: row;
   }
+
+  .title {
+    font-family: var(--title-font);
+  }
+
+  .subtitle {
+    font-family: var(--subtitle-font);
+    font-weight: 600;
+  }
   
   .flex-item {
     background: #e3e3e3;

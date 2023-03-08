@@ -25,18 +25,18 @@ function HomePage() {
 
   return (
     
-    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", paddingTop: "20px"}}>
       
       
       <MainBg>
-        <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
+        <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
-        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px"}}>LOCAL <br/> ASPIRATIONS </div>
+        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>LOCAL <br/> ASPIRATIONS </div>
         <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
-      <Header title="Glasgow City Portrait" size="3rem"/>
-      <div style={{height:"100vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
+      <Header title="GLASGOW CITY PORTRAIT" size="3rem" class="title"/>
+      <div style={{height:"95vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
 
@@ -47,7 +47,7 @@ function HomePage() {
       <div class="flex-container">
 
         {/* <li class="flex-item empty"></li> */}
-        <li class="flex-item item1">How did we do this?</li>
+        {/* <li class="flex-item item1">How did we do this?</li> */}
 
         <li>
           <div class="imageDiv">
@@ -94,7 +94,7 @@ function HomePage() {
 
       <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
         <div style={{"maxWidth": "45%", marginLeft: "8rem", paddingLeft : "4rem"}}>
-        <h1>About the Project</h1>
+        <h1 class="subtitle">About the Project </h1>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend, mi eget bibendum facilisis, 
         arcu est scelerisque nisi, non dignissim mauris erat a augue. Donec vulputate odio ut metus luctus congue. 
