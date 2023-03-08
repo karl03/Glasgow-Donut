@@ -43,7 +43,6 @@ export default function DropdownMenu(props) {
       <button className='dropdown_deselect_button' disabled={disabled} onClick={handleOnClear}>X</button>
       {isOpen ? 
       <ul className='menu'>
-        {console.log(dataArray)}
         {dataArray.map((item, index) => (
           <li 
             key={index} 

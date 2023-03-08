@@ -20,7 +20,6 @@ export default function AdjacencyModal({lastCategorySelect,
     }
 
     function deleteAdjacency(item, index){
-      console.log("Delete ", item, index);
 
       // Gather the existing adjacency data.
       const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));

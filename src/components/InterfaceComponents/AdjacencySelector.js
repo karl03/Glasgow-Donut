@@ -23,7 +23,6 @@ export default function AdjacencySelector(props) {
         if (targetValue !== 'Select...') {
             setTargetName(targetValue);
             setIsDisable(false);
-            console.log("Update Target Name: ", targetValue);
         }
         else {
             setIsDisable(true);
@@ -61,7 +60,6 @@ export default function AdjacencySelector(props) {
         
         newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"].push(newAdjacency);
         props.setSliderGroups(newSliderGroups);
-        console.log(props.sliderGroups);
     }
 
     useEffect(() => {

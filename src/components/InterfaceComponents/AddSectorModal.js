@@ -21,7 +21,6 @@ export default function AddSectorModal({lastCategorySelect,
         const gloOrLocIcon = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
         const icon = `${gloOrLocIcon}_${ecoOrSocIcon}/${iconLabel}`;
 
-        console.log("handleSubmit: ", lastSliderName);
         onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow, icon);
     }
 

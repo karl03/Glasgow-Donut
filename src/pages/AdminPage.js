@@ -108,13 +108,11 @@ export default function AdminPage(){
   }
 
   function newSliderHandler(ecoOrSoc, gloOrLoc){
-    console.log("newSliderHandler: ", ecoOrSoc,gloOrLoc);
     setLastCategorySelect({ecoOrSoc, gloOrLoc});
     setShowingEditModal(true);
   }
 
   function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    console.log("editSliderHandler: ", name, ecoOrSoc, gloOrLoc);
     setLastSliderName(name);
     setLastCategorySelect({ecoOrSoc, gloOrLoc});
     populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
@@ -122,10 +120,8 @@ export default function AdminPage(){
   }
 
   function editAdjHandler(name, ecoOrSoc, gloOrLoc){
-    console.log("editAdjHandler: ", name, ecoOrSoc, gloOrLoc);
     setLastSliderName(name);
     setLastCategorySelect({ecoOrSoc, gloOrLoc});
-    // editAdj functionality.
     setShowingAdjModal(true);
   }
 
@@ -162,11 +158,6 @@ export default function AdminPage(){
           <p>There is unsaved changes to the upload!</p>
         </ModalMenu>
     )
-  }
-
-  function TESTING(sliderGroups, lastCategorySelect){
-    console.log(sliderGroups);
-    //onClose();
   }
   
   return (
