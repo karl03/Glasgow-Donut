@@ -18,7 +18,8 @@ const Title = styled.h3`
 
 export default function AdminSliderGroup({
   sliders,
-  eventHandler,
+  sliderGroups,
+  changeSliderHandler,
   ecoOrSoc,
   gloOrLoc,
   deleteFunction,
@@ -37,10 +38,10 @@ export default function AdminSliderGroup({
           for(const [SliderName, SliderInfo] of Object.entries(sliders)){
             Elements.push(
               <AdminSlider
-                eventHandler={eventHandler}
+                changeSliderHandler={changeSliderHandler}
                 initialValue={SliderInfo.value}
-                initialFactor={SliderInfo.indicator}
                 initialName={SliderName}
+                sliderGroups={sliderGroups}
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
                 deleteFunction={deleteFunction}

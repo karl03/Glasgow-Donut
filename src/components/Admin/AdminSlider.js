@@ -61,14 +61,23 @@ const Number = styled.input`
 `;
 
 
-export default function AdminSlider({changeSliderHandler, ecoOrSoc, gloOrLoc, deleteFunction, editFunction, adjFunction}){
+export default function AdminSlider({
+  changeSliderHandler,
+  initialValue,
+  initialName,
+  sliderGroups,
+  ecoOrSoc,
+  gloOrLoc,
+  deleteFunction,
+  editFunction,
+  adjFunction}){
+
   const [value, setValue] = React.useState(initialValue);
   const [name, /*setName*/] = React.useState(initialName);
 
   React.useEffect(() => {
-    changeSliderHandler(ecoOrSoc, gloOrLoc, name, value);
-  }, [value]);
-  
+    setValue(sliderGroups[ecoOrSoc][gloOrLoc][name].value);
+  }, [sliderGroups]);
   
   return (
     <AdminSliderWrapper>
@@ -78,8 +87,8 @@ export default function AdminSlider({changeSliderHandler, ecoOrSoc, gloOrLoc, de
           <button onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
-          <SliderInput onInput={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
-          <Number onChange={event => {setValue(Math.max(Math.min(event.target.value, 100), 0));}} type="Number" min="0" max="100" step="1" value={value} />
+          <SliderInput onChange={event => {setValue(event.target.value);}} type="range" step="1" min="0" max="100" value={value} />
+          <Number onChange={event => {changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)}} type="Number" min="0" max="100" step="1" value={value} /> 
           <button onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
         </Bottom>
       </Left>
