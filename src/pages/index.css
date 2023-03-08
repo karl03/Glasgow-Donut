@@ -26,12 +26,12 @@
   }
 
   .title {
-    font: var(--title-font);
+    font-family: var(--title-font);
   }
 
   .subtitle {
-    font: var(--subtitle-font);
-    color: #4CAF50;
+    font-family: var(--subtitle-font);
+    font-weight: 600;
   }
   
   .flex-item {
