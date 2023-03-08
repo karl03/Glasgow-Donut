@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ModalMenu from './ModalMenu'
 import AdjacencySelector from './AdjacencySelector'
+import './AdjacencyModal.css'
 
 export default function AdjacencyModal({lastCategorySelect, 
     lastSliderName,
@@ -44,13 +45,14 @@ export default function AdjacencyModal({lastCategorySelect,
         isShow={isShow}
         onClose={() => onClose()}
         onSave={() => onSave()}
-        title='Adjacency Editor'
+        title={'Adjacency Editor: ' + lastSliderName}
     >
 
     <ul className='adj-display'>
       {adjData.map((item, index) => 
-      <li key={index}>{item[0] + "→" + item[1] + ": " + item[3]}
-      <button onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
+      <li className='adj-list-element' key={index}>{lastCategorySelect.ecoOrSoc + " " + lastCategorySelect.gloOrLoc + " " + lastSliderName + "→" + 
+        item[0] + " " + item[1] + " " + item[2] + ": " + item[3]}
+      <button className='adj-delete-button' onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
       }
     </ul>
 

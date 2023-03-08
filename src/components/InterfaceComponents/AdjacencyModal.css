@@ -1,0 +1,9 @@
+.adj-display {
+    list-style: none;
+    display: flex;
+
+}
+
+.adj-list-element {
+    color: var(--dark-green);
+}
