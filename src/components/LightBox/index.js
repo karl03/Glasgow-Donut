@@ -103,7 +103,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     if(text.innerText === 'Thriving'){
       text.innerText = DataProperty[1]?.description ?? "why are you here go away";
       circle.style.borderRadius = '25px';
-      circle.style.width = '500px';
+      circle.style.width = 'calc(min(500px, 100vw))';
+      circle.style.boxSizing = 'border-box';
     }else{
       text.innerText = 'Thriving';
       circle.style.borderRadius = '90px';

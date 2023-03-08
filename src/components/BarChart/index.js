@@ -31,8 +31,8 @@ export default function BarChart({
   useEffect(() => {
 
     function LightBoxTrigger(Event, ElementProperties){
-      document.body.scrollTop = 65; // For Safari
-      document.documentElement.scrollTop = 72; // For Chrome, Firefox, IE and Opera
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
