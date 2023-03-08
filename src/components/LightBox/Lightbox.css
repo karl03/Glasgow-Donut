@@ -2,9 +2,11 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  gap: 50px 100px;
+  gap: 0 0;
   position: absolute;
   pointer-events: none;
+  width: calc(min(100%, 800px));
+  height: calc(min(100%, 650px));
 }
 
 #primary_circle{
@@ -94,8 +96,8 @@
     justify-self: center;
     flex-direction: column;
     background-color: white;
-    height: 180px;
-    width: 180px;
+    height: calc(min(180px, 30vmin));
+    aspect-ratio: 1/1;
     border-radius: 90px;
     border-color: black;
     transition: all 0.3s ease-in-out;
@@ -127,8 +129,8 @@
 
 .small-circle {
   z-index: 10;
-  height: 40px;
-  width: 40px;
+  width: calc(min(40px, 7.5vmin));
+  aspect-ratio: 1/1;
   background-color: #ffffff;
   border-radius: 50%;
   display: inline-block;

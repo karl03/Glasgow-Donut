@@ -1,7 +1,6 @@
 import React from "react";
 //import axios from "axios";
 import BarChart from "../components/BarChart";
-import Header from "../components/Header";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg, ImageBgLower} from "./PageElements";
 import BackgroundImage from "../images/glasgow_background.jpg"
@@ -25,7 +24,7 @@ function HomePage() {
 
   return (
     
-    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", paddingTop: "20px"}}>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
       
       
       <MainBg>
@@ -35,8 +34,18 @@ function HomePage() {
         <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
-      <Header title="GLASGOW CITY PORTRAIT" size="3rem" class="title"/>
-      <div style={{height:"95vh", width:"100wh", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", zIndex:999}}>
+      <h1 style={{position: "absolute", zIndex: "1000", fontSize: "2rem", top: "0", width: "100%", textAlign: "center"}}>Glasgow City Portrait</h1>
+      <div style={{
+        height:"100vh",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+        flexDirection:"column",
+        zIndex:999,
+        overflow: "hidden",
+        width: "100%",
+        position: "relative"
+      }}>
         <BarChart data={sliderGroups} size={700}/>
       </div>
 
@@ -113,8 +122,8 @@ function HomePage() {
         </div>
       </div>
       
-      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", padding:"40px", backgroundColor: "#e3e3e3" }}>
-        <div style={{marginInline:"150px"}}>
+      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", backgroundColor: "#e3e3e3" }}>
+        <div style={{marginInline:"10%"}}>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Nam bibendum viverra sem, in facilisis ligula fringilla eget. 

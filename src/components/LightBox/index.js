@@ -70,8 +70,26 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
       if (adjacencyList !== "No adjacencies") {
-            for(let i=0;i<adjacencyList.length;i++){
-              const adjacencyListItem = adjacencyList[i]
+        for(let i=0;i<adjacencyList.length;i++){
+          const adjacencyListItem = adjacencyList[i];
+          const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+          if(adjacencyList[i][0] === "social"){
+            const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
+            createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
+          }else{
+            const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
+            createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
+          }
+
+        }
+        // Add event listener to window object to recall createIcon function when window size changes
+        window.addEventListener('resize', () => {
+          for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+          for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
+          let isShow = document.getElementById('lightbox').className;
+          if (isShow === "isShow") {
+            for (let i = 0; i < adjacencyList.length; i++) {
+              const adjacencyListItem = adjacencyList[i];
               const offsetDimensions = document.getElementById("line-canvas").getBoundingClientRect();
               if(adjacencyList[i][0] === "social"){
                 const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
@@ -80,8 +98,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
                 const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
                 createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
               }
-
             }
+          }
+        });
       }
     } else {
       document.getElementById("Connections").innerText = 'CONNECTIONS';
@@ -127,7 +146,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     if(text.innerText === 'Thriving'){
       text.innerText = DataProperty[1]?.description ?? "why are you here go away";
       circle.style.borderRadius = '25px';
-      circle.style.width = '500px';
+      circle.style.width = 'calc(min(500px, 100vw))';
+      circle.style.boxSizing = 'border-box';
     }else{
       text.innerText = 'Thriving';
       circle.style.borderRadius = '90px';
@@ -142,10 +162,9 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     <>
      <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
       </div>
-      
 
   <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
-    <div id="icon-space">
+  <div id="icon-space">
       <svg id="line-canvas">
       </svg>
     </div>
@@ -163,14 +182,12 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
     <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={()=>setConnections(true)}>
-      <p id="Connections" className="lightbox_title">{"Connections"}</p>
+      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
     </span>
     <span  id="context_circle" className={`circle ${contextCircleIsShow ? 'isShow' : ''}`}>
       <p id="Context" className="lightbox_title">{"Context"}</p>
     </span>
   </div>
-  
-  
   </>
     );
   };

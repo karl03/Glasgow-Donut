@@ -29,8 +29,8 @@ export default function BarChart({
   useEffect(() => {
 
     function LightBoxTrigger(Event, ElementProperties){
-      document.body.scrollTop = 65; // For Safari
-      document.documentElement.scrollTop = 72; // For Chrome, Firefox, IE and Opera
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       setTrigger(true)
       eventSetter(Event);
       propertySetter(ElementProperties);
@@ -349,18 +349,23 @@ export default function BarChart({
 
   return (
     <>
-      <svg className = "svgClass" ref={ref} width={size} height={size} style={{
-        height: size.toString(),
-        width: size.toString(),
-      }}>
-      </svg>
+      <svg className = "svgClass" ref={ref} height={size} style={{maxWidth: "100%"}} viewBox={"0 0 " + size + " " + size}></svg>
       {window.location.pathname !== '/' ? null :
         <>
         <div style={{"background-color":"black", "position":"absolute", "width":"100%", "height":"5px"}}></div>
-        <Tooltip title={tooltipTitle} text={tooltipText} x={tooltipX} y={tooltipY} visible={tooltipVisible}/>
-        <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
-        </>
-    }
-  </>
+      <div style={{
+    "background-color":"black",
+    "position":"absolute",
+    "width":"100%",
+    "height":"5px"}}></div>
+    <Tooltip
+      title={tooltipTitle}
+      text={tooltipText}
+      x={tooltipX}
+      y={tooltipY}
+      visible={tooltipVisible}
+    />
+    <LightBox trigger={trigger} setTrigger={setTrigger} DataProperty={elementProperties} EventProperty={events} data={data}/>
+    </>}</>
   );
 };
