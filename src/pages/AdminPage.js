@@ -81,22 +81,6 @@ export default function AdminPage(){
     }
     if(!loaded) getData();
   }, [loaded]);
-  
-  // const eventHandler = React.useCallback(function(ecoOrSoc, gloOrLoc, type, name, newValue){
-  //   switch(type){
-  //     case "value":{
-  //       const NewValue = Number.parseInt(newValue);
-  //       setSliderGroups(function(oldSliders){
-  //         //Make a deep copy of the object (avoids React's State)
-  //         const New = JSON.parse(JSON.stringify(oldSliders));
-  //         New[ecoOrSoc][gloOrLoc][name].value = NewValue;
-  //         return New;
-  //       });
-  //       break;
-  //     }
-  //     default: throw new Error("Not implemented!"); //TODO: Remove this in release
-  //   }
-  // }, []);
 
   function changeSliderHandler(ecoOrSoc, gloOrLoc, name, newValue){
     const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
