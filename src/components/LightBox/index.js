@@ -65,18 +65,32 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setShowAdditional(false);
       let adjacencyList = DataProperty[1]?.adjacent ?? "No adjacencies";
       if (adjacencyList !== "No adjacencies") {
-            for(let i=0;i<adjacencyList.length;i++){
-              const adjacencyListItem = adjacencyList[i]
-              const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
-              if(adjacencyList[i][0] === "social"){
-                const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
-                createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
-              }else{
-                const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
-                createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
-              }
+        for(let i=0;i<adjacencyList.length;i++){
+          const adjacencyListItem = adjacencyList[i];
+          const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+          if(adjacencyList[i][0] === "social"){
+            const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
+            createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
+          }else{
+            const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
+            createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
+          }
 
+        }
+        // Add event listener to window object to recall createIcon function when window size changes
+        window.addEventListener('resize', () => {
+          for (let i = 0; i < adjacencyList.length; i++) {
+            const adjacencyListItem = adjacencyList[i];
+            const offsetDimensions = document.getElementById("grid-container").getBoundingClientRect();
+            if(adjacencyList[i][0] === "social"){
+              const innerDimensions = document.getElementById(adjacencyListItem[2]+"_inner_img").getBoundingClientRect()
+              createIcon(offsetDimensions, innerDimensions, adjacencyListItem)
+            }else{
+              const outerDimensions = document.getElementById(adjacencyListItem[2]+"_outer_img").getBoundingClientRect()
+              createIcon(offsetDimensions, outerDimensions, adjacencyListItem)
             }
+          }
+        });
       }
     } else {
       for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
@@ -84,6 +98,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   }
 
   function createIcon(offsetDimensions, initialDimensions, adjacencyListItem){
+    // Remove all previously created small-circle elements
+    for (const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) {
+      element.remove();
+    }
     const circle = document.createElement('span')
 
     circle.className = "small-circle";
@@ -115,28 +133,26 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   return (
     <>
-     <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
-      </div>
+      <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}/>
 
-  <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
-  
-    <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
-      <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
-      <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
-    </span>
-    <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
-      <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
-    </span>
-    <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
-      <p id="Target" className="lightbox_title">{"Target"}</p>
-    </span>
-    <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
-      <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
-    </span>
-    <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={()=>setConnections(true)}>
-      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
-    </span>
-  </div>
-  </>
+      <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
+        <span id="primary_circle" className={`circle  ${trigger ? 'isShow' : ''}`} onClick={additionalCircles}>
+          <img id="lightbox_img" onClick={additionalCircles} src={"/api/get-icon/" + DataProperty[1]?.symbol_id ?? 4} alt={DataProperty.Name}/>
+          <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
+        </span>
+        <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeThriving}>
+          <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
+        </span>
+        <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
+          <p id="Target" className="lightbox_title">{"Target"}</p>
+        </span>
+        <span  id="left_circle" className={`circle  ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeIndicator}>
+          <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
+        </span>
+        <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={()=>setConnections(true)}>
+          <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
+        </span>
+      </div>
+    </>
     );
   };
