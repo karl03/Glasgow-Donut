@@ -18,7 +18,7 @@ export default function BarChart({
   
   const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const [tooltipTitle, setTooltipTitle] = React.useState("");
-  const [tooltipText, setTooltipText] = React.useState("");
+  const [tooltipText, /*setTooltipText*/] = React.useState("");
   const [tooltipX, setTooltipX] = React.useState(0);
   const [tooltipY, setTooltipY] = React.useState(0);
   
