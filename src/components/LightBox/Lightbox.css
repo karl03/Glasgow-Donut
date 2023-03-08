@@ -125,8 +125,8 @@
 
 .small-circle {
   z-index: 10;
-  height: 40px;
-  width: 40px;
+  width: calc(min(40px, 7.5vmin));
+  aspect-ratio: 1/1;
   background-color: #ffffff;
   border-radius: 50%;
   display: inline-block;
