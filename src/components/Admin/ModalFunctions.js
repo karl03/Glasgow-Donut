@@ -89,12 +89,12 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
     New[ecoOrSoc][gloOrLoc][formData['title']] = {
         "value": Number.parseInt(formData['value']) || 0,
         "adjacent": New[ecoOrSoc][gloOrLoc][formData['title']] === undefined ? [] : New[ecoOrSoc][gloOrLoc][formData['title']]['adjacent'],
-        "indicator": formData['indicator'],
-        "indicator_link": formData['indicator_link'],
-        "target": formData['target'],
-        "target_link": formData['target_link'],
-        "description": formData['description'],
-        "quotes": formData['cites'],
+        "indicator": formData['indicator'] || '',
+        "indicator_link": formData['indicator_link'] || '',
+        "target": formData['target'] || '',
+        "target_link": formData['target_link'] || '',
+        "description": formData['description'] || '',
+        "quotes": formData['cites'] || '',
         "symbol_id": icon
     };
     setSliderGroups(New);
