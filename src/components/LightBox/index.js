@@ -53,9 +53,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
         createLink("Target", "right_circle", DataProperty[1].target_link);
       }
     } else {
-      document.getElementById("Target").innerText = 'Target';
-      document.getElementById("Target").style.margin = "auto";
-      for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
+      removeLink("Target", "right_circle");
     }
   }
 
@@ -66,9 +64,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
         createLink("Indicator", "left_circle", DataProperty[1].indicator_link);
       }
     } else {
-      document.getElementById("Indicator").innerText = 'Indicator';
-      document.getElementById("Indicator").style.margin = "auto";
-      for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
+      removeLink("Indicator", "left_circle");
     }
   }
 
@@ -77,8 +73,14 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     const link = document.createElement("a");
     link.setAttribute("href",url);
     link.innerText = "Source";
-    link.id = destinationText+"Link";
+    link.id = destinationText.toLowerCase()+"Link";
     document.getElementById(destinationArea).appendChild(link);
+  }
+
+  function removeLink(destinationText, destinationArea){
+    document.getElementById(destinationText).innerText = destinationText;
+      document.getElementById(destinationText).style.margin = "auto";
+      for(const element of [...document.getElementById(destinationArea).querySelectorAll("#" + destinationText.toLowerCase() +"Link")]) element.remove();
   }
 
   function setConnections(value) {
