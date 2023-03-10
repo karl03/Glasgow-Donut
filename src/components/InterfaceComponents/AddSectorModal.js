@@ -163,11 +163,6 @@ export default function AddSectorModal({lastCategorySelect,
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
                 placeholder="John Smith, 'generic paper', www.JohnSmith.com" />
         
-            <label htmlFor="sector-videolink">Videolink </label>
-            <input type="url" name='video' id="modal-sector-videolink" className="sector-videolink"
-                placeholder="https://example.com"
-                pattern="https://.*"/>
-        
         </form>
     </ModalMenu>
   )
