@@ -3,7 +3,7 @@ import React from "react";
 import BarChart from "../components/BarChart";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg, ImageBgLower} from "./PageElements";
-import BackgroundImage from "../images/glasgow_background.jpg"
+import BackgroundImage from "../images/background_image.jpg"
 import "./index.css";
 
 
@@ -31,7 +31,6 @@ function HomePage() {
         <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
         <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>LOCAL <br/> ASPIRATIONS </div>
-        <ImageBgLower src={BackgroundImage}/>
       </MainBg>
       
       <h1 style={{position: "absolute", zIndex: "1000", fontSize: "2rem", top: "0", width: "100%", textAlign: "center"}}>Glasgow City Portrait</h1>
