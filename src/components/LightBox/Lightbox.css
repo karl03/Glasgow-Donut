@@ -159,3 +159,15 @@
   pointer-events:visible;
   cursor: pointer;
 }
+
+#targetLink{
+  position:relative;
+  text-align: center;
+  margin-bottom:5px;
+}
+
+#indicatorLink{
+  position:relative;
+  text-align: center;
+  margin-bottom:5px;
+}

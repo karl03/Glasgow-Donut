@@ -45,16 +45,36 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   function changeTarget(){
     if(document.getElementById("Target").innerText === 'Target'){
       document.getElementById("Target").innerText = DataProperty[1]?.target ?? "why are you here go away";
+      if(DataProperty[1].target_link !== null){
+        document.getElementById("Target").style.marginBottom= "12%";
+        const link = document.createElement("a");
+        link.setAttribute("href",DataProperty[1].target_link);
+        link.innerText = "Source";
+        link.id = "targetLink";
+        document.getElementById("right_circle").appendChild(link);
+      }
     } else {
       document.getElementById("Target").innerText = 'Target';
+      document.getElementById("Target").style.margin = "auto";
+      for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
     }
   }
 
   function changeIndicator() {
     if(document.getElementById("Indicator").innerText === 'Indicator'){
       document.getElementById("Indicator").innerText = DataProperty[1]?.indicator ?? "why are you here go away";
+      if(DataProperty[1].indicator_link !== undefined){
+        document.getElementById("Indicator").style.marginBottom= "12%";
+        const link = document.createElement("a");
+        link.setAttribute("href",DataProperty[1].indicator_link);
+        link.innerText = "Source";
+        link.id = "indicatorLink";
+        document.getElementById("left_circle").appendChild(link);
+      }
     } else {
       document.getElementById("Indicator").innerText = 'Indicator';
+      document.getElementById("Indicator").style.margin = "auto";
+      for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
     }
   }
 
