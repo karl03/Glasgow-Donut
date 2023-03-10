@@ -2,7 +2,7 @@ import React from "react";
 //import axios from "axios";
 import BarChart from "../components/BarChart";
 import YoutubeEmbed from "../components/YoutubeAddon";
-import {ImageBg, MainBg, ImageBgLower} from "./PageElements";
+import {ImageBg, MainBg} from "./PageElements";
 import BackgroundImage from "../images/background_image.jpg"
 import "./index.css";
 
