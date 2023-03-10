@@ -352,9 +352,9 @@ export default function BarChart({
       <svg className = "svgClass" ref={ref} height={size} style={{maxWidth: "100%"}} viewBox={"0 0 " + size + " " + size}></svg>
       {window.location.pathname !== '/' ? null :
         <>
-        <div style={{"background-color":"black", "position":"absolute", "width":"100%", "height":"5px"}}></div>
+        <div style={{"backgroundColor":"black", "position":"absolute", "width":"100%", "height":"5px"}}></div>
       <div style={{
-    "background-color":"black",
+    "backgroundColor":"black",
     "position":"absolute",
     "width":"100%",
     "height":"5px"}}></div>
