@@ -138,12 +138,22 @@ export default function AddSectorModal({lastCategorySelect,
             <label htmlFor="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"
                 placeholder='Category indicator...' />
-        
+
+            <label htmlFor='sector-indicator-link'>Indicator Hyperlink</label>
+            <input type="url" name='indicator-link' id='modal-sector-indicator-link' className='sector-indicator-link'
+              placeholder="https://example.com"
+              pattern="https://.*"
+            />
     
             <label htmlFor="sector-target">Target </label>
             <input type="text" name='target' id='modal-sector-target'className="sector-target"
                 placeholder='Category target...' />
-        
+
+            <label htmlFor='sector-target-link'>Target Hyperlink</label>
+            <input type="url" name='target-link' id='modal-sector-target-link' className='sector-target-link'
+              placeholder="https://example.com"
+              pattern="https://.*"
+            />
     
             <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
@@ -153,7 +163,6 @@ export default function AddSectorModal({lastCategorySelect,
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
                 placeholder="John Smith, 'generic paper', www.JohnSmith.com" />
         
-    
             <label htmlFor="sector-videolink">Videolink </label>
             <input type="url" name='video' id="modal-sector-videolink" className="sector-videolink"
                 placeholder="https://example.com"
