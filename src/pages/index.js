@@ -33,7 +33,7 @@ function HomePage() {
         <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>LOCAL <br/> ASPIRATIONS </div>
       </MainBg>
       
-      <h1 style={{position: "absolute", zIndex: "1000", fontSize: "2rem", top: "0", width: "100%", textAlign: "center"}}>Glasgow City Portrait</h1>
+      <h1 style={{position: "absolute", zIndex: "1000", fontSize: "2rem", top: "0", width: "100%", textAlign: "center"}}>THE GLASGOW DOUGHNUT</h1>
       <div style={{
         height:"100vh",
         display:"flex",
@@ -101,7 +101,7 @@ function HomePage() {
       </div>
 
       <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
-        <div style={{"maxWidth": "45%", marginLeft: "8rem", paddingLeft : "4rem"}}>
+        <div style={{"maxWidth": "45%", marginLeft: "10%"}}>
         <h1 class="subtitle">About the Project </h1>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend, mi eget bibendum facilisis, 

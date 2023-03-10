@@ -27,7 +27,7 @@
   flex-wrap: wrap;
 }
 
-.flex-container > li + li{
+.flex-container > li{
   display: flex;
   flex-direction: row;
   
