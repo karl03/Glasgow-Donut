@@ -41,6 +41,9 @@
 }
 
 #context_circle{
+  position:absolute;
+  top:50%;
+  right:26%;
   grid-row: 3;
   grid-column: 2;
   width: 500px;
@@ -74,13 +77,16 @@
 
 #lightbox_img{
   filter: brightness(0);
-  height:6vh;
   padding-top:20%;
   margin: auto;
   text-align: center;
   display: block;
   margin-top: 0px;
-  margin-bottom: -50px;
+  margin-bottom: -25px;
+  height: auto;
+  width:auto;
+  max-height: 5vh;
+  max-width: 4vw;
 }
 
 .lightbox_title{
@@ -138,6 +144,7 @@
   background-size:60%;
   background-repeat:no-repeat;
   background-position:center;
+  cursor: pointer;
 }
 
 #line-canvas{

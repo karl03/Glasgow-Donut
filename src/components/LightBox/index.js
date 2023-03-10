@@ -103,7 +103,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
         });
       }
     } else {
-      document.getElementById("Connections").innerText = 'CONNECTIONS';
+      document.getElementById("Connections").innerText = 'Connections';
       for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
       for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
     }
@@ -134,6 +134,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setContextCircle(true);
       document.getElementById("Context").innerText = adjacencyListItem[3];
     }
+    circle.onclick = line.onclick;
       
     document.getElementById("icon-space").appendChild(circle);
     document.getElementById("line-canvas").appendChild(line);
@@ -182,7 +183,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       <p id="Indicator" className="lightbox_title">{"Indicator"}</p>
     </span>
     <span  id="bottom_circle" div="center_column" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={()=>setConnections(true)}>
-      <p id="Connections" className="lightbox_title">{"CONNECTIONS"}</p>
+      <p id="Connections" className="lightbox_title">{"Connections"}</p>
     </span>
     <span  id="context_circle" className={`circle ${contextCircleIsShow ? 'isShow' : ''}`}>
       <p id="Context" className="lightbox_title">{"Context"}</p>
