@@ -19,11 +19,12 @@
   justify-content: space-around;
   
   padding: 0;
-  margin: 0;
+  /* padding-inline: 30%; */
   list-style: none;
   background-color: #e3e3e3;
   /*padding-inline: 60px;*/
-  width: 100%;
+  width: 80%;
+  padding-inline: 10%;
   flex-wrap: wrap;
 }
 
