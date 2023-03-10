@@ -18,6 +18,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     console.log("LightBox ChangeState function called!");
     for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
     for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
+    for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
+    for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
 
     if(trigger ===true){
       setShowAdditional(false);
