@@ -32,7 +32,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       }
       setTop(top);
     }
-  },[trigger, DataProperty, setTrigger]);
+  },[trigger, DataProperty, setTrigger, data.social.local, data.ecological.local]);
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
