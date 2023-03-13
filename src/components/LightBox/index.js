@@ -25,6 +25,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setShowAdditional(false);
       setContextCircle(false);
       setTrigger(false)
+      document.getElementById("primary_circle").style.filter = 'brightness(100%)';
+      document.getElementById("lightbox").style.backgroundColor = 'rgba(0,0,0,0.4)';
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Indicator").style.margin = "auto";
@@ -43,6 +45,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setConnections(false);
       document.getElementById("primary_circle").style.cursor = 'default';
       setShowAdditional(true);
+      document.getElementById("primary_circle").style.filter = 'brightness(80%)';
+      document.getElementById("lightbox").style.backgroundColor = 'rgba(0,0,0,0.5)';
     }
   }
 
@@ -86,6 +90,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   function setConnections(value) {
     if(value){
       setShowAdditional(false);
+      document.getElementById("primary_circle").style.filter = 'brightness(100%)';
 
       document.getElementById("icon-space").style.width = document.getElementById("grid-container").getBoundingClientRect().width + 'px';
       document.getElementById("icon-space").style.height = document.getElementById("grid-container").getBoundingClientRect().height + 'px';
