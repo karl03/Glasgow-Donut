@@ -6,13 +6,33 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   const [Name,setName] = React.useState(DataProperty[0]);
   const [additionalCirclesIsShow, setShowAdditional] = React.useState(false);
   const [contextCircleIsShow,setContextCircle] = React.useState(false);
+  const [isTop, setTop] = React.useState(false);
+
 
   useEffect(() => {
     if(trigger===true){
       setName(DataProperty[0].split('_').join(' '));
+
+      
+
       setTrigger(true)
+
+      const stringified = JSON.stringify(DataProperty);
+      const top = new Set([...Object.entries(data.ecological.local), ...Object.entries(data.social.local)].map(x => JSON.stringify(x))).has(stringified);
+
+      if(top){
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.5)';
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.3)';
+        document.getElementById("bottom_text").style.color = "white";
+      }
+      else {
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.5)';
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.3)';
+        document.getElementById("top_text").style.color = "white";
+      }
+      setTop(top);
     }
-  },[trigger, DataProperty, setTrigger]);
+  },[trigger, DataProperty, setTrigger, data.social.local, data.ecological.local]);
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
@@ -21,10 +41,14 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
     for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
 
+    
     if(trigger ===true){
       setShowAdditional(false);
       setContextCircle(false);
-      setTrigger(false)
+      setTrigger(false);
+      document.getElementById("primary_circle").style.filter = 'brightness(100%)';
+      document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0)';
+      document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0)';
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
       document.getElementById("Indicator").style.margin = "auto";
@@ -34,7 +58,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       document.getElementById("context_circle").style.display = "none";
       document.getElementById("top_circle").style.borderRadius = '90px';
       document.getElementById("top_circle").style.width = '180px';
-      document.body.id="show_scroll"
+      document.getElementById("top_text").style.color = "black";
+      document.getElementById("bottom_text").style.color = "black";
+      document.body.id="show_scroll";
+
     }
   }
 
@@ -43,6 +70,20 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setConnections(false);
       document.getElementById("primary_circle").style.cursor = 'default';
       setShowAdditional(true);
+      document.getElementById("primary_circle").style.filter = 'brightness(80%)';
+
+      if(isTop){
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.6)';
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.4)';
+      }
+      else {
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.6)';
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.4)';
+      }
+
+      
+
+      
     }
   }
 
@@ -86,6 +127,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   function setConnections(value) {
     if(value){
       setShowAdditional(false);
+      document.getElementById("primary_circle").style.filter = 'brightness(100%)';
 
       document.getElementById("icon-space").style.width = document.getElementById("grid-container").getBoundingClientRect().width + 'px';
       document.getElementById("icon-space").style.height = document.getElementById("grid-container").getBoundingClientRect().height + 'px';
@@ -111,8 +153,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
         window.addEventListener('resize', () => {
           for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
           for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
-          let isShow = document.getElementById('lightbox').className;
-          if (isShow === "isShow") {
+          const isShow = document.getElementById('lightboxTop').className === "isShow" || document.getElementById('lightboxBottom').className === "isShow";
+          if (isShow) {
             for (let i = 0; i < adjacencyList.length; i++) {
               const adjacencyListItem = adjacencyList[i];
               const offsetDimensions = document.getElementById("line-canvas").getBoundingClientRect();
@@ -184,8 +226,10 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   return (
     <>
-     <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightbox" onClick={changeState}>
-      </div>
+    <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightboxTop" onClick={changeState}></div>
+    <div className={`${trigger ? 'isShow' : 'hidden'}`} id="lightboxBottom" onClick={changeState}></div>
+    <div className="outer_indicators" style ={{top:"12vh"}} ><p id="top_text">GLOBAL </p><p> RESPONSIBILITIES </p></div>
+    <div className="outer_indicators" style={{bottom:"3vh"}}><p id="bottom_text">LOCAL </p><p> ASPIRATIONS </p></div>
 
   <div className={`grid-container  ${trigger ? 'isShow' : ''}`} id="grid-container">
   <div id="icon-space">
