@@ -57,14 +57,18 @@
   position:absolute;
 }
 
-#lightbox{
+#lightboxBottom,
+#lightboxTop{
   z-index:4;
   position:absolute;
-  height:120%;
+  height:50%;
   width: 100%;
-  background-color: rgba(0,0,0,0.4);
+  top: 0;
   transition: all 0.3s ease-in-out;
   overflow:hidden;
+}
+#lightboxBottom{
+  top: 50%;
 }
 
 #hide_scroll{
@@ -94,6 +98,20 @@
   text-align: center;
   font-size:20px;
   overflow: auto;
+}
+
+.outer_indicators{
+  position:absolute;
+  right:8px;
+  text-align:right;
+  font-size:24px;
+  padding-right:20px;
+  z-index: 20;
+}
+
+.outer_indicators > p{
+  margin: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .circle{

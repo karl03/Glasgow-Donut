@@ -27,9 +27,7 @@ function HomePage() {
       
       
       <MainBg>
-        <div style={{position:"absolute", top:"12vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>GLOBAL <br/> RESPONSIBILITIES </div>
         <ImageBg src={BackgroundImage}/>
-        <div style={{position:"absolute", bottom:"3vh", right:"8px", textAlign:"right", fontSize:"24px", paddingRight:"20px"}}>LOCAL <br/> ASPIRATIONS </div>
       </MainBg>
       
       <h1 style={{position: "absolute", zIndex: "1000", fontSize: "2rem", top: "0", width: "100%", textAlign: "center"}}>THE GLASGOW DOUGHNUT</h1>
