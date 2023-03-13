@@ -29,18 +29,18 @@ export default function AddSectorModal({lastCategorySelect,
     }
 
     function getFileNames(folder) {
-        return new Promise((resolve, reject) => {
-          fetch(`/api/get-filenames/${folder}`) // Replace with your server endpoint
-            .then((response) => response.json())
-            .then((data) => {
-              const fileNames = data;
-              resolve(fileNames);
-            })
-            .catch((err) => {
-              console.error(err);
-              reject(err);
-            });
-        });
+      return new Promise((resolve, reject) => {
+        fetch(`/api/get-icon-filenames/${folder}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const fileNames = data;
+            resolve(fileNames);
+          })
+          .catch((err) => {
+            console.error(err);
+            reject(err);
+          });
+      });
     }      
 
     function IconOptions(lastCategorySelect, sliderGroups, selectedOption, setSelectedOption) {
