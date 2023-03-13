@@ -162,6 +162,13 @@
     background-color: #b24601;
 }
 
+.admin-upload-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .admin-upload-button {
     font-size: 1rem;
     height: 70px;
@@ -177,15 +184,28 @@
     border-radius: 10px;
 }
 
-.admin-upload-modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .admin-upload-button:hover {
     background-color: #7cab32;
+}
+
+.admin-report-button {
+    font-size: 1rem;
+    height: 5vh;
+    max-width: 20vw;
+    font-weight: 700;
+    border: 0;
+    color: var(--dark-orange);
+    background-color: var(--bright-orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.admin-report-button:hover {
+    color: var(--bright-orange);
+    background-color: var(--light-orange);
 }
 
 /* Custom Scroll Bar */

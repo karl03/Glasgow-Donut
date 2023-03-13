@@ -21,6 +21,50 @@ function HomePage() {
     if(!loaded) getData();
   }, [loaded]);
 
+  function getReportFileName() {
+    return new Promise((resolve, reject) => {
+      fetch(`/api/get-report-filename`)
+        .then((response) => response.json())
+        .then((data) => {
+          const fileName = data;
+          resolve(fileName);
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
+    });
+  }   
+
+  function downloadReport() {
+    getReportFileName()
+      .then((fileName) => {
+        fetch(`/api/download-report/${fileName}`)
+          .then(response => {
+            if (response.ok) {
+              return response.blob();
+            }
+            alert("No Report file");
+            throw new Error('Network response was not ok.');
+          })
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          })
+          .catch(error => {
+            console.error('There was an error downloading the report:', error);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   return (
     
     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
@@ -177,7 +221,7 @@ function HomePage() {
                   
         </div>
         <br/>
-        <button className="button">Download Report</button>
+        <button className="button" onClick={downloadReport}>Download Report</button>
         <br/>
       </div>
     </div>

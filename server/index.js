@@ -8,6 +8,7 @@ const fs = require("fs");
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
 app.use(express.json());
+app.use(fileUpload());
 
 app.use((req, res, next) => {
   if (/^\/api\//.test(req.originalUrl)) return void next();
@@ -46,7 +47,7 @@ app.get("/api/get-icon/:folder/:filename", (req, res) => {
   });
 });
 
-app.get('/api/get-filenames/:folder', (req, res) => {
+app.get('/api/get-icon-filenames/:folder', (req, res) => {
   const folder = req.params.folder;
   let fileNames = [];
   fs.readdir(`${__dirname}/Icons/${folder}`, (err, files) => {
@@ -59,8 +60,7 @@ app.get('/api/get-filenames/:folder', (req, res) => {
   });
 });
 
-app.use(fileUpload());
-app.post('/api/upload/:folder', (req, res) => {
+app.post('/api/upload-icon/:folder', (req, res) => {
   if (req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded' });
   }
@@ -72,8 +72,71 @@ app.post('/api/upload/:folder', (req, res) => {
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    res.json({ fileName: file.name, filePath: `/Icons/${folder}/${file.name}` });
   });
+});
+
+app.delete('/api/delete-all/:folder', (req, res) => {
+  const folder = req.params.folder;
+  const directory = `${__dirname}/${folder}`;
+
+  fs.readdir(directory, (err, files) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal server error');
+    }
+
+    for (const file of files) {
+      fs.unlink(path.join(directory, file), err => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Internal server error');
+        }
+        console.log(`Deleted ${file}`);
+      });
+    }
+
+    res.status(200).send('All files deleted successfully');
+  });
+});
+
+app.post('/api/upload-report', async (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+  const file = req.files.myfile;
+  const fileExtension = file.name.split(".").pop()
+  file.mv(`${__dirname}/Report/Report.${fileExtension}`, err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/Report/Report.${fileExtension}` });
+  });
+});
+
+app.get('/api/get-report-filename', (req, res) => {
+  let fileName = [];
+  fs.readdir(`${__dirname}/Report`, (err, files) => {
+    if (err) {
+      console.log('Error reading folder:', err);
+      return res.status(500).send(err);
+    }
+    fileName = files;
+    res.send(fileName);
+  });
+});
+
+app.get('/api/download-report/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = `${__dirname}/Report/${fileName}`;
+
+  if (fs.existsSync(filePath)) {
+    res.download(filePath, fileName);
+  } else {
+    res.status(404).send('File not found');
+  }
 });
 
 // start express server on port 5000
