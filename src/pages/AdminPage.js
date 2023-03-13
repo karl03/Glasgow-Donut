@@ -73,20 +73,14 @@ export default function AdminPage(){
   };
 
   const reportUpload = async (e) => {
-    // Call the delete-all API to delete all files in the specified folder
-    axios.delete('/api/delete-all/Report')
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-
-    // Upload Report File
-    const formData = new FormData();
-    formData.append('myfile', file);
-
     try {
+      // Call the delete-all API to delete all files in the specified folder
+      await axios.delete('/api/delete-all/Report');
+
+      // Upload Report File
+      const formData = new FormData();
+      formData.append('myfile', file);
+
       const res = await axios.post(`/api/upload-report`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
