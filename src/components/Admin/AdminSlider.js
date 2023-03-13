@@ -83,16 +83,16 @@ export default function AdminSlider({
     <AdminSliderWrapper>
       <Left>
         <Top>
-          <div>{initialName}</div>
-          <button onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
+          <div data-testid="title">{initialName}</div>
+          <button data-testid="edit" onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
-          <SliderInput onChange={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="range" step="1" min="-1" max="100" value={value} />
-          <Number onInput={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="Number" min="-1" max="100" step="1" value={value} /> 
-          <button onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
+          <SliderInput data-testid="slider" onChange={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="range" step="1" min="-1" max="100" value={value} />
+          <Number data-testid="number" onInput={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="Number" min="-1" max="100" step="1" value={value} /> 
+          <button data-testid="edit adjacent" onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
         </Bottom>
       </Left>
-      <TrashIcon onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>
+      <TrashIcon data-testid="delete" onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>
     </AdminSliderWrapper>
   );
 };
