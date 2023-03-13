@@ -50,14 +50,50 @@ export default function AdminPage(){
     try {
       const selectedFolder = document.getElementById("folder").value;
       
-      const res = await axios.post(`/api/upload/${selectedFolder}`, formData, {
+      const res = await axios.post(`/api/upload-icon/${selectedFolder}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
 
       const { fileName, filePath } = res.data;
+      console.log(fileName);
+      console.log(filePath);
+      alert('Upload Success');
 
+    } catch (err) {
+      if (err.response.status === 500) {
+        alert('There was a problem with the server');
+        console.log('There was a problem with the server');
+      } else {
+        alert(err.response.data.msg);
+        console.log(err.response.data.msg);
+      }
+    }
+  };
+
+  const reportUpload = async (e) => {
+    // Call the delete-all API to delete all files in the specified folder
+    axios.delete('/api/delete-all/Report')
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    // Upload Report File
+    const formData = new FormData();
+    formData.append('myfile', file);
+
+    try {
+      const res = await axios.post(`/api/upload-report`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      const { fileName, filePath } = res.data;
       console.log(fileName);
       console.log(filePath);
       alert('Upload Success');
@@ -131,6 +167,7 @@ export default function AdminPage(){
               <option value="Local_Ecological">Local_Ecological</option>
               <option value="Local_Social">Local_Social</option>
             </select>
+            <button style={{marginTop:"2vh"}} className="admin-report-button" onClick={reportUpload}>Upload Report</button>
           </div>
         </ModalMenu>
     )
