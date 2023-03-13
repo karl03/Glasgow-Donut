@@ -27,6 +27,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       setTrigger(false)
       document.getElementById("primary_circle").style.cursor = 'pointer';
       document.getElementById("Indicator").innerText = 'Indicator';
+      document.getElementById("Indicator").style.margin = "auto";
+      document.getElementById("Target").style.margin = "auto";
       document.getElementById("Target").innerText = 'Target';
       document.getElementById("Thriving").innerText = 'Thriving';
       document.getElementById("context_circle").style.display = "none";
@@ -47,37 +49,38 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
   function changeTarget(){
     if(document.getElementById("Target").innerText === 'Target'){
       document.getElementById("Target").innerText = DataProperty[1]?.target ?? "why are you here go away";
-      if(DataProperty[1].target_link !== null){
-        document.getElementById("Target").style.marginBottom= "12%";
-        const link = document.createElement("a");
-        link.setAttribute("href",DataProperty[1].target_link);
-        link.innerText = "Source";
-        link.id = "targetLink";
-        document.getElementById("right_circle").appendChild(link);
+      if(DataProperty[1].target_link !== ""){
+        createLink("Target", "right_circle", DataProperty[1].target_link);
       }
     } else {
-      document.getElementById("Target").innerText = 'Target';
-      document.getElementById("Target").style.margin = "auto";
-      for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
+      removeLink("Target", "right_circle");
     }
   }
 
   function changeIndicator() {
     if(document.getElementById("Indicator").innerText === 'Indicator'){
       document.getElementById("Indicator").innerText = DataProperty[1]?.indicator ?? "why are you here go away";
-      if(DataProperty[1].indicator_link !== undefined){
-        document.getElementById("Indicator").style.marginBottom= "12%";
-        const link = document.createElement("a");
-        link.setAttribute("href",DataProperty[1].indicator_link);
-        link.innerText = "Source";
-        link.id = "indicatorLink";
-        document.getElementById("left_circle").appendChild(link);
+      if(DataProperty[1].indicator_link !== ""){
+        createLink("Indicator", "left_circle", DataProperty[1].indicator_link);
       }
     } else {
-      document.getElementById("Indicator").innerText = 'Indicator';
-      document.getElementById("Indicator").style.margin = "auto";
-      for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
+      removeLink("Indicator", "left_circle");
     }
+  }
+
+  function createLink(destinationText, destinationArea, url){
+    document.getElementById(destinationText).style.marginBottom= "12%";
+    const link = document.createElement("a");
+    link.setAttribute("href",url);
+    link.innerText = "Source";
+    link.id = destinationText.toLowerCase()+"Link";
+    document.getElementById(destinationArea).appendChild(link);
+  }
+
+  function removeLink(destinationText, destinationArea){
+    document.getElementById(destinationText).innerText = destinationText;
+      document.getElementById(destinationText).style.margin = "auto";
+      for(const element of [...document.getElementById(destinationArea).querySelectorAll("#" + destinationText.toLowerCase() +"Link")]) element.remove();
   }
 
   function setConnections(value) {
@@ -157,10 +160,8 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       document.getElementById("Context").innerText = adjacencyListItem[3];
     }
     circle.onclick = line.onclick;
-      
     document.getElementById("icon-space").appendChild(circle);
     document.getElementById("line-canvas").appendChild(line);
-    
   }
 
   function changeThriving(){

@@ -1,5 +1,4 @@
 import React from "react";
-//import axios from "axios";
 import BarChart from "../components/BarChart";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg} from "./PageElements";
@@ -49,60 +48,60 @@ function HomePage() {
       </div>
 
       <div style={{backgroundColor:"#e3e3e3", width: "100%"}}>
-        <hr class="line"></hr>
+        <hr className="line"></hr>
       </div>
 
-      <div class="flex-container">
+      <div className="flex-container">
 
-        {/* <li class="flex-item empty"></li> */}
-        {/* <li class="flex-item item1">How did we do this?</li> */}
+        {/* <li className="flex-item empty"></li> */}
+        {/* <li className="flex-item item1">How did we do this?</li> */}
 
         <li>
-          <div class="imageDiv">
-            <img src="goal.png" class = "image" alt = "archery target"></img>
+          <div className="imageDiv">
+            <img src="goal.png" className = "image" alt = "archery target"></img>
           </div>
-          <div class="flex-item pStyle headStyle">
+          <div className="flex-item pStyle headStyle">
             <h1>target</h1>
             <p>taken from an officical existing policy or strategy document (local or national)</p>
           </div>  
         </li>
 
         <li>
-          <div class="imageDiv">
-            <img src="speedometer.png" class = "image" alt = "speedometer"></img>
+          <div className="imageDiv">
+            <img src="speedometer.png" className = "image" alt = "speedometer"></img>
           </div>
-          <div class="flex-item pStyle headStyle">
+          <div className="flex-item pStyle headStyle">
             <h1>indicator</h1>
             <p>Quis lectus nulla at volutpat diam ut venenatis tellus. Urna nunc id</p>
           </div>
         </li>
 
         <li>
-          <div class="imageDiv">
-            <img src="happy.png" class = "image" alt = "smiley face"></img>
+          <div className="imageDiv">
+            <img src="happy.png" className = "image" alt = "smiley face"></img>
           </div>
-          <div class="flex-item pStyle headStyle">
+          <div className="flex-item pStyle headStyle">
             <h1>thriving</h1>
             <p>Et malesuada fames ac turpis egestas. Volutpat sed cras ornare arcu dui vivamus arcu felis bibendum.</p>
           </div>
         </li>
 
         <li>
-          <div class="imageDiv">
-            <img src="group.png" class = "image" alt = "molecule with connections"></img>
+          <div className="imageDiv">
+            <img src="group.png" className = "image" alt = "molecule with connections"></img>
           </div>
-          <div class="flex-item pStyle headStyle">
+          <div className="flex-item pStyle headStyle">
             <h1>connections</h1>
             <p>Egestas egestas fringilla phasellus faucibus scelerisque eleifend.</p>
           </div>
         </li>
 
-        {/* <li class="flex-item empty" ></li> */}
+        {/* <li className="flex-item empty" ></li> */}
       </div>
 
       <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
         <div style={{"maxWidth": "45%", marginLeft: "10%"}}>
-        <h1 class="subtitle">About the Project </h1>
+        <h1 className="subtitle">About the Project </h1>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend, mi eget bibendum facilisis, 
         arcu est scelerisque nisi, non dignissim mauris erat a augue. Donec vulputate odio ut metus luctus congue. 
@@ -110,7 +109,7 @@ function HomePage() {
         libero dui vehicula eros, finibus finibus ipsum urna id tellus. Nulla laoreet sed nisi tincidunt ullamcorper.
         </p>
         </div>
-        <div class="SponsorsWrapper" style={{"width": "45%", position: "relative", display: "flex", flexDirection: "row"}}>
+        <div className="SponsorsWrapper" style={{"width": "45%", position: "relative", display: "flex", flexDirection: "row"}}>
           <div style={{aspectRatio: "1093 / 393",
           minWidth: "100%",
           backgroundImage:"url(\"/snip.jpg\")",
@@ -180,7 +179,7 @@ function HomePage() {
                   
         </div>
         <br/>
-        <button class="button">Download Report</button>
+        <button className="button">Download Report</button>
         <br/>
       </div>
     </div>

@@ -121,6 +121,7 @@ export default function AdminPage(){
           onClose={() => setShowingUploadModal(false)}
           onSave={handleUpload}
           title="Upload Model"
+          canSave={true}
           >
           <div className='admin-upload-modal'>
             <label>Choose Upload Folder:</label>
@@ -130,21 +131,7 @@ export default function AdminPage(){
               <option value="Local_Ecological">Local_Ecological</option>
               <option value="Local_Social">Local_Social</option>
             </select>
-            {/* <button style={{maxHeight:"40px", marginTop:"20px"}} className="admin-upload-button" onClick={handleUpload}>Upload</button> */}
           </div>
-        </ModalMenu>
-    )
-  }
-
-  function quitUploadModal(){
-    return (
-      <ModalMenu
-         isShow={isShowingUploadModal}
-         onClose={() => setShowingUploadModal(false)}
-         onSave={() => setShowingUploadModal(false)} // TODO: onSave function to pass data from Modal
-         title="Unsaved Data!"
-         >
-          <p>There is unsaved changes to the upload!</p>
         </ModalMenu>
     )
   }
@@ -201,7 +188,7 @@ export default function AdminPage(){
 
       </div>
       <div>
-        {true ? addUploadModal(): quitUploadModal()}
+        {addUploadModal()}
       </div>
 
       <AddSectorModal 

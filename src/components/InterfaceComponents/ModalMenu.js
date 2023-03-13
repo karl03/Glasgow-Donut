@@ -4,7 +4,7 @@ import './ModalMenu.css'
 
 export default function ModalMenu(props) {
 
-  return ReactDOM.createPortal(
+    return ReactDOM.createPortal(
     <div className={`modal ${props.isShow ? 'isShow' : ''}`}>
         <div className="modal-content">
 
@@ -18,7 +18,9 @@ export default function ModalMenu(props) {
 
             <div className="modal-footer">
                 <button className="modal-close" onClick={props.onClose}>Close</button>
-                <button className="modal-save" onClick={props.onSave}>Save</button>
+                {props.canSave === true ? 
+                    <button className="modal-save" onClick={props.onSave}>Save</button>
+                : null}
             </div>
             
         </div>

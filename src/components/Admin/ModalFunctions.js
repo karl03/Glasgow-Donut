@@ -4,19 +4,21 @@ function getFormElements(){
     const title = document.getElementById('modal-sector-title');
     const value = document.getElementById('modal-sector-value');
     const indicator = document.getElementById('modal-sector-indicator');
+    const indicator_link = document.getElementById('modal-sector-indicator-link');
     const target = document.getElementById('modal-sector-target');
+    const target_link = document.getElementById('modal-sector-target-link');
     const description = document.getElementById('modal-sector-description');
     const cites = document.getElementById('modal-sector-cites');
-    const videolink = document.getElementById('modal-sector-videolink');
     
     return {
         "title": title,
         "value": value,
         "indicator": indicator,
+        "indicator_link": indicator_link,
         "target": target,
+        "target_link": target_link,
         "description": description,
         "cites": cites,
-        "videolink": videolink
     };
 }
 
@@ -26,14 +28,15 @@ export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
     const data = sliderGroups[ecoOrSoc][gloOrLoc][name];
 
     // Write data to elemenets.
-    const {title, value, indicator, target, description, cites, videolink} = getFormElements();
+    const {title, value, indicator, indicator_link, target, target_link, description, cites} = getFormElements();
     title.value = name;
     value.value = data['value'];
     indicator.value = data['indicator'];
+    indicator_link.value = data['indicator_link'];
     target.value = data['target'];
+    target_link.value = data['target_link'];
     description.value = data['description'];
     cites.value = data['quotes'];
-    videolink.value = data['video_hash'];
 }
 
 export function onClose(setShow){
@@ -85,13 +88,14 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
     const New = JSON.parse(JSON.stringify(sliderGroups));
     New[ecoOrSoc][gloOrLoc][formData['title']] = {
         "value": Number.parseInt(formData['value']) || 0,
-        "adjacent": [],//NEEDS TO BE IMPLEMENTED
-        "indicator": formData['indicator'],
-        "target": formData['target'],
-        "description": formData['description'],
-        "quotes": formData['cites'],
-        "symbol_id": icon,
-        "video_hash": formData['videolink']
+        "adjacent": New[ecoOrSoc][gloOrLoc][formData['title']] === undefined ? [] : New[ecoOrSoc][gloOrLoc][formData['title']]['adjacent'],
+        "indicator": formData['indicator'] || '',
+        "indicator_link": formData['indicator_link'] || '',
+        "target": formData['target'] || '',
+        "target_link": formData['target_link'] || '',
+        "description": formData['description'] || '',
+        "quotes": formData['cites'] || '',
+        "symbol_id": icon
     };
     setSliderGroups(New);
     onClose(setShow)

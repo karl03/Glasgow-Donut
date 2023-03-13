@@ -35,6 +35,11 @@
     max-width: fit-content;
 }
 
+.admin-help-button {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .admin-back-button:hover, .admin-help-button:hover {
     color: var(--bright-green);
 }
