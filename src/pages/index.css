@@ -112,6 +112,7 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
 }
