@@ -3,11 +3,10 @@ import ModalMenu from './ModalMenu'
 import Select from "react-select";
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
-import {onClose, onSave} from '../Admin/ModalFunctions'
+import {onClose, onSave} from './ModalFunctions'
 
 export default function AddSectorModal({lastCategorySelect,
     lastSliderName,
-    setLastSliderName,
     isShow,
     setShow,
     sliderGroups,
@@ -128,41 +127,43 @@ export default function AddSectorModal({lastCategorySelect,
 
             <label htmlFor="sector-title">Title </label>
             <input type="text" name='title' id='modal-sector-title' className="sector-title" 
-                placeholder='Title...'/>
+                placeholder='Title...' data-testid='add modal title'/>
 
             <label htmlFor="sector-value">Value </label>
             <input type="number" name="sector-value" id="modal-sector-value"
-                max="100" min="-1" placeholder='0' defaultValue='0'/>
+                max="100" min="-1" placeholder='0' defaultValue='0' data-testid='add modal value'/>
             
             {IconOptions(lastCategorySelect, sliderGroups, selectedIconOption, setSelectedIconOption)}
 
             <label htmlFor="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"
-                placeholder='Category indicator...' />
+                placeholder='Category indicator...' data-testid='add modal indicator'/>
 
             <label htmlFor='sector-indicator-link'>Indicator Hyperlink</label>
             <input type="url" name='indicator-link' id='modal-sector-indicator-link' className='sector-indicator-link'
               placeholder="https://example.com"
               pattern="https://.*"
+              data-testid='add modal indicator link'
             />
     
             <label htmlFor="sector-target">Target </label>
             <input type="text" name='target' id='modal-sector-target'className="sector-target"
-                placeholder='Category target...' />
+                placeholder='Category target...'  data-testid='add modal target'/>
 
             <label htmlFor='sector-target-link'>Target Hyperlink</label>
             <input type="url" name='target-link' id='modal-sector-target-link' className='sector-target-link'
               placeholder="https://example.com"
               pattern="https://.*"
+              data-testid='add modal target link'
             />
     
             <label htmlFor="sector-description">Description </label>
             <textarea name="sector-description" id="modal-sector-description" cols="30" rows="10"
-                placeholder='Description...'></textarea>
+                placeholder='Description...' data-testid='add modal description'></textarea>
     
             <label htmlFor="sector-cites">Citations </label>
             <input type="text" name='cites' id='modal-sector-cites' className="sector-cites"
-                placeholder="John Smith, 'generic paper', www.JohnSmith.com" />
+                placeholder="John Smith, 'generic paper', www.JohnSmith.com" data-testid='add modal cites'/>
         
         </form>
     </ModalMenu>

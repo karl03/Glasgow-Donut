@@ -30,8 +30,8 @@ export default function AdminSliderGroup({
 
   return (
     <AdminSliderWrapper>
-      <Title>{ecoOrSoc === "ecological" ? "Ecological" : "Social"} - {gloOrLoc === "global" ? "Global" : "Local"}</Title>
-      <button onClick={() => newFunction(ecoOrSoc, gloOrLoc)}>+</button>
+      <Title data-testid="title">{ecoOrSoc === "ecological" ? "Ecological" : "Social"} - {gloOrLoc === "global" ? "Global" : "Local"}</Title>
+      <button data-testid="add button" onClick={() => newFunction(ecoOrSoc, gloOrLoc)}>+</button>
       {
         (function(){
           const Elements = [];

@@ -35,7 +35,8 @@ export default function AdminDonutGraph({sliderGroups, size}){
   });
   
   return (
-    <div style={{height:"max-content"}}>
+    <div data-testid="donut container" style={{height:"max-content"}}>
+      <div data-testid="barchart"></div>
       <BarChart data={data} size={size}/>
     </div>
   );

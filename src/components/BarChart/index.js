@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Tooltip from "./Tooltip";
-import * as d3 from "d3";
+import { scaleRadial, scaleBand, arc, select } from "d3";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
 export default function BarChart({
@@ -46,11 +46,11 @@ export default function BarChart({
         const group = svg.append("g")
           .attr("transform", "translate(" + size / 2 + "," + size / 2 + ")");
     
-        const yOuter = d3.scaleRadial()
+        const yOuter = scaleRadial()
           .range([innerRadius + ringRadius / 2. + margin, outerRadius])   // Domain will be define later.
           .domain([0, 100]); // Domain of Y is from 0 to the max seen in the data
     
-        const yInner = d3.scaleRadial()
+        const yInner = scaleRadial()
           .range([innerRadius - ringRadius / 2. - margin, 10]) //This is 10 because the inner part of the graph would become too pointy
           .domain([0, 100]);
     
@@ -98,7 +98,7 @@ export default function BarChart({
                 .attr("class", "GraphColumn")
                 .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#ed7d79")
                 .attr("id", d=>d[0]+"_inner")
-                .attr("d", d3.arc()     // imagine your doing a part of a donut plot
+                .attr("d", arc()     // imagine your doing a part of a donut plot
                   .innerRadius(innerRadius - ringRadius / 2. - margin)
                   .outerRadius(d => yInner(d[1].value === -1 ? 100 : d[1].value))
                   .startAngle(d => xScale(d[0]))
@@ -115,7 +115,7 @@ export default function BarChart({
             .append("path")
               .attr("class", "GraphRingSegment")
               .attr("fill", "#1e693a")
-              .attr("d", d3.arc()
+              .attr("d", arc()
                 .innerRadius(innerRadius - ringRadius / 2.)
                 .outerRadius(innerRadius + ringRadius / 2.)
                 .startAngle(d => xScale(d[0]) - .01) //The -.01 is to fix slight gaps
@@ -131,7 +131,7 @@ export default function BarChart({
             .append("path")
               .attr("class", "GraphRingSegment")
               .attr("fill", "#44d345")
-              .attr("d", d3.arc()
+              .attr("d", arc()
                 .innerRadius(innerRadius - smallRingRadius / 2.)
                 .outerRadius(innerRadius + smallRingRadius / 2.)
                 .startAngle(d => xScale(d[0]) - .01 ) //The -.01 is to fix slight gaps
@@ -262,7 +262,7 @@ export default function BarChart({
         }
 
         for(const [Half, Properties] of Object.entries(data.social)){
-            const xScale = d3.scaleBand()
+            const xScale = scaleBand()
               // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])
               .align(0)                  // This does nothing
@@ -286,7 +286,7 @@ export default function BarChart({
           .attr("class", "GraphColumn")
             .attr("fill", d => d[1].value === -1 ? "#cfcfcf" : "#fa9197")
             .attr("id", d=>d[0]+"_outer")
-            .attr("d", d3.arc()     // imagine your doing a part of a donut plot
+            .attr("d", arc()     // imagine your doing a part of a donut plot
               .innerRadius(innerRadius + ringRadius / 2. + margin)
               .outerRadius(d => yOuter(d[1].value === -1 ? 100 : d[1].value))
               .startAngle(d =>xScale(d[0]))
@@ -327,7 +327,7 @@ export default function BarChart({
           }
 
         for(const [Half, Properties] of Object.entries(data.ecological)){
-            const xScale = d3.scaleBand()
+            const xScale = scaleBand()
               .range(Half === "global" ? [-Math.PI / 2., Math.PI / 2.] : [Math.PI / 2., Math.PI * 1.5])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
               .align(0)                  // This does nothing
               .domain(Object.keys(Properties)); // The domain of the X axis is the list of states.
@@ -343,7 +343,7 @@ export default function BarChart({
       SetupBarChartOuterSectors(group, yOuter);
     }
 
-    const svgElement = d3.select(ref.current);
+    const svgElement = select(ref.current);
     CreateBarChart(svgElement);
   }, [data, innerRadius, margin, outerRadius, ringRadius, smallRingRadius, innerTextRadius, outerTextRadius, size]);
 

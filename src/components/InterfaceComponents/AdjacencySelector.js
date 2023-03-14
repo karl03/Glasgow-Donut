@@ -73,22 +73,22 @@ export default function AdjacencySelector(props) {
 
   return (
     <form className='adj-select' onSubmit={(event) => handleSubmit(event, props)}>
-        <select name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
+        <select data-testid='adjSelect ecoOrSoc' name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
             <option value="ecological">Ecological</option>
             <option value="social">Social</option>
         </select>
 
-        <select name="GloOrLoc" id="adj-select-GloOrLoc" onChange={handleGloOrLocSelect}>
+        <select data-testid='adjSelect gloOrLoc' name="GloOrLoc" id="adj-select-GloOrLoc" onChange={handleGloOrLocSelect}>
             <option value="global">Global</option>
             <option value="local">Local</option>
         </select>
 
-        <select name="sector" id="adj-select-sector" onChange={(e) => updateTargetName(e.target.value)}>
+        <select data-testid='adjSelect sector' name="sector" id="adj-select-sector" onChange={(e) => updateTargetName(e.target.value)}>
             <option key="0">Select...</option>
-            {adjacentArray.map((item, index) => <option key={index + 1}>{item}</option>)}
+            {adjacentArray.map((item, index) => <option data-testid='adj-select sector option' key={index + 1}>{item}</option>)}
         </select>
-        <input type="text" className='message-input' id='message-input' placeholder='Message...'/>
-        <input type="submit" disabled={isDisabled} value="Enter" />
+        <input data-testid='adjSelect message' type="text" className='message-input' id='message-input' placeholder='Message...'/>
+        <input data-testid='adjSelect submit' type="submit" disabled={isDisabled} value="Enter" />
     </form>
   )
 }
