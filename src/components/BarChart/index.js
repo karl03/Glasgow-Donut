@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Tooltip from "./Tooltip";
-import { scaleRadial, scaleBand, arc, select } from "d3/dist/d3.min";
+import { scaleRadial, scaleBand, arc, select } from "d3";
 import LightBox from "../LightBox";
 import "../LightBox/Lightbox.css";
 export default function BarChart({
