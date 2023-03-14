@@ -9,10 +9,10 @@ export default function ModalMenu(props) {
         <div className="modal-content">
 
             <div className="modal-header">
-                <h4 className="modal-title">{props.title}</h4>
+                <h4 data-testid='modal title' className="modal-title">{props.title}</h4>
             </div>
 
-            <div className="modal-body">
+            <div data-testid='modal body' className="modal-body">
                 {props.children}
             </div>
 
