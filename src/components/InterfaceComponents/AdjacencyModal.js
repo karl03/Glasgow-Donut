@@ -50,9 +50,9 @@ export default function AdjacencyModal({lastCategorySelect,
 
     <ul className='adj-display'>
       {adjData.map((item, index) => 
-      <li className='adj-list-element' key={index}>{lastCategorySelect.ecoOrSoc + " " + lastCategorySelect.gloOrLoc + " " + lastSliderName + "→" + 
+      <li data-testid='adj li' className='adj-list-element' key={index}>{lastCategorySelect.ecoOrSoc + " " + lastCategorySelect.gloOrLoc + " " + lastSliderName + "→" + 
         item[0] + " " + item[1] + " " + item[2] + ": " + item[3]}
-      <button className='adj-delete-button' onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
+      <button data-testid='adj delete' className='adj-delete-button' onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
       }
     </ul>
 
