@@ -1,6 +1,6 @@
 import {populateForm} from '../ModalFunctions';
 import AddSectorModal from '../AddSectorModal'
-import {render, screen} from '@testing-library/react';
+import {render, screen, fireEvent} from '@testing-library/react';
 
 test('tests the validity of the ModalFunctions collection of functions', () => {
 
@@ -37,6 +37,8 @@ test('tests the validity of the ModalFunctions collection of functions', () => {
     const description = screen.getByTestId('add modal description');
     const cites = screen.getByTestId('add modal cites');
 
+    const saveBtn = screen.getByTestId('modal save');
+
     // Assert valid population of form.
     populateForm(sliderGroups, 'name', 'ecological', 'global');
 
@@ -67,4 +69,19 @@ test('tests the validity of the ModalFunctions collection of functions', () => {
     expect(targetLink.value).toBe('14');
     expect(description.value).toBe('15');
     expect(cites.value).toBe('16');
+
+    // Close and save modal.
+    fireEvent.click(saveBtn);
+
+    // Assert save called and cleared form.
+    expect(sliderGroupFn).toHaveBeenCalledTimes(1);
+    expect(showFn).toHaveBeenCalledTimes(1);
+    expect(title.value).toBe('');
+    expect(value.value).toBe('');
+    expect(indicator.value).toBe('');
+    expect(indicatorLink.value).toBe('');
+    expect(target.value).toBe('');
+    expect(targetLink.value).toBe('');
+    expect(description.value).toBe('');
+    expect(cites.value).toBe('');
 })
