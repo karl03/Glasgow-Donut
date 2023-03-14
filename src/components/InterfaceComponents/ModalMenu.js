@@ -4,7 +4,7 @@ import './ModalMenu.css'
 
 export default function ModalMenu(props) {
 
-    return ReactDOM.createPortal(
+    return(
     <div className={`modal ${props.isShow ? 'isShow' : ''}`}>
         <div className="modal-content">
 
@@ -25,6 +25,5 @@ export default function ModalMenu(props) {
             
         </div>
     </div>
-    , document.getElementById('root')
   )
 }

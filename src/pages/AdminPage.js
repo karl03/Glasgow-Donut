@@ -7,7 +7,7 @@ import AdjacencyModal from '../components/InterfaceComponents/AdjacencyModal'
 import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
-import {populateForm} from '../components/Admin/ModalFunctions'
+import {populateForm} from '../components/InterfaceComponents/ModalFunctions'
 
 export default function AdminPage(){
   const [file, setFile] = useState(null);
