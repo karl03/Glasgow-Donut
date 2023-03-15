@@ -67,6 +67,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function additionalCircles() {
     if(additionalCirclesIsShow===false){
+      setContextCircle(false);
       setConnections(false);
       document.getElementById("primary_circle").style.cursor = 'default';
       setShowAdditional(true);
