@@ -253,7 +253,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data, setP
       <h1 className="lightbox_title" onClick={additionalCircles}>{Name}</h1>
     </span>
     <span  id="top_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} style={{borderRadius: '90px', width: '180px', boxSizing: 'borderBox'}} onClick={changeThriving}>
-      <p id="Thriving" className="lightbox_title">{"Thriving"}</p>
+      <p id="Thriving" className="lightbox_title scrollable">{"Thriving"}</p>
     </span>
     <span  id="right_circle" className={`circle ${additionalCirclesIsShow ? 'isShow' : ''}`} onClick={changeTarget}>
       <p id="Target" className="lightbox_title">{"Target"}</p>

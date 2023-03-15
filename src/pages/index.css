@@ -116,7 +116,9 @@
   cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
+  margin: 3%;
 }
+
 
   ::-webkit-scrollbar{
       /* Hide scrollbar for Chrome, Safari and Opera */
