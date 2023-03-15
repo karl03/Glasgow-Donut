@@ -31,6 +31,13 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data, setP
         document.getElementById("bottom_text").style.color = "black";
       }
       setTop(top);
+
+      const circle = document.getElementById("top_circle");
+      const text = document.getElementById("Thriving");
+
+      text.innerText = 'Thriving';
+      circle.style.borderRadius = '90px';
+      circle.style.width = '180px';
     }
   },[trigger, DataProperty, setTrigger, data.social.local, data.ecological.local]);
 
