@@ -22,11 +22,13 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data, setP
         document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.6)';
         document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.3)';
         document.getElementById("bottom_text").style.color = "white";
+        document.getElementById("top_text").style.color = "black";
       }
       else {
         document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.6)';
         document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.3)';
         document.getElementById("top_text").style.color = "white";
+        document.getElementById("bottom_text").style.color = "black";
       }
       setTop(top);
     }
