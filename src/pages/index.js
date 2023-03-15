@@ -89,14 +89,7 @@ function HomePage() {
         <BarChart data={sliderGroups} size={700}/>
       </div>
 
-      <div style={{backgroundColor:"#e3e3e3", width: "100%"}}>
-        <hr className="line"></hr>
-      </div>
-
       <div className="flex-container">
-
-        {/* <li className="flex-item empty"></li> */}
-        {/* <li className="flex-item item1">How did we do this?</li> */}
 
         <li>
           <div className="imageDiv">
@@ -137,11 +130,9 @@ function HomePage() {
             <p>Egestas egestas fringilla phasellus faucibus scelerisque eleifend.</p>
           </div>
         </li>
-
-        {/* <li className="flex-item empty" ></li> */}
       </div>
 
-      <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px"}}>
+      <div style={{width: "100%", display: "flex", "flexDirection": "row", gap: "15px", justifyContent: "center", padding: "0px", paddingBottom: "1.5%", paddingTop: "1.5%"}}>
         <div style={{"maxWidth": "45%", marginLeft: "10%"}}>
         <h1 className="subtitle">About the Project </h1>
         <p>
@@ -162,7 +153,7 @@ function HomePage() {
         </div>
       </div>
       
-      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", backgroundColor: "#e3e3e3" }}>
+      <div style={{display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center", backgroundColor: "#e3e3e3", paddingTop: "1.5%" }}>
         <div style={{marginInline:"10%"}}>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 

@@ -21,12 +21,12 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       const top = new Set([...Object.entries(data.ecological.local), ...Object.entries(data.social.local)].map(x => JSON.stringify(x))).has(stringified);
 
       if(top){
-        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.5)';
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.6)';
         document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.3)';
         document.getElementById("bottom_text").style.color = "white";
       }
       else {
-        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.5)';
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.6)';
         document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.3)';
         document.getElementById("top_text").style.color = "white";
       }
@@ -74,11 +74,11 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       document.getElementById("primary_circle").style.filter = 'brightness(80%)';
 
       if(isTop){
-        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.6)';
+        document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.7)';
         document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.4)';
       }
       else {
-        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.6)';
+        document.getElementById("lightboxBottom").style.backgroundColor = 'rgba(0,0,0,0.7)';
         document.getElementById("lightboxTop").style.backgroundColor = 'rgba(0,0,0,0.4)';
       }
 
