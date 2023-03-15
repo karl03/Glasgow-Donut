@@ -23,7 +23,7 @@
     border-radius: 8px;
     background-color: var(--light-green);
     width: calc(min(850px, 90%));
-    max-height: 99%;
+    max-height: 95%;
     overflow: auto;
     transform: translateY(-200px);
     transition: all 0.3s ease-in-out;
