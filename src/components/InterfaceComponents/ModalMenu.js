@@ -18,7 +18,7 @@ export default function ModalMenu(props) {
             <div className="modal-footer">
                 <button data-testid='modal close' className="modal-close" onClick={props.onClose}>Close</button>
                 {props.canSave === true ? 
-                    <button data-testid='modal save' className="modal-save" onClick={props.onSave}>Save</button>
+                    <button data-testid='modal save' className="modal-save" onClick={props.onSave}>Upload</button>
                 : null}
             </div>
             
