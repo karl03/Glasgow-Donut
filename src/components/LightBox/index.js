@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import "./Lightbox.css";
 
 
-export default function LightBox ({trigger, setTrigger, DataProperty, data}){
+export default function LightBox ({trigger, setTrigger, DataProperty, data, setProperty}){
+  console.log(DataProperty);
   const [Name,setName] = React.useState(DataProperty[0]);
   const [additionalCirclesIsShow, setShowAdditional] = React.useState(false);
   const [contextCircleIsShow,setContextCircle] = React.useState(false);
@@ -13,10 +14,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     if(trigger===true){
       setName(DataProperty[0].split('_').join(' '));
 
-      
-
       setTrigger(true)
-
       const stringified = JSON.stringify(DataProperty);
       const top = new Set([...Object.entries(data.ecological.local), ...Object.entries(data.social.local)].map(x => JSON.stringify(x))).has(stringified);
 
@@ -36,10 +34,7 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
 
   function changeState() {
     console.log("LightBox ChangeState function called!");
-    for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
-    for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
-    for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
-    for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
+    
 
     
     if(trigger ===true){
@@ -61,6 +56,11 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
       document.getElementById("top_text").style.color = "black";
       document.getElementById("bottom_text").style.color = "black";
       document.body.id="show_scroll";
+
+      for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+      for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
+      for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
+      for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
 
     }
   }
@@ -198,6 +198,17 @@ export default function LightBox ({trigger, setTrigger, DataProperty, data}){
     line.setAttributeNS(null, "x2",(initialDimensions.left - offsetDimensions.left + 12) + 'px');
     line.setAttributeNS(null, "y2",(initialDimensions.top - offsetDimensions.top + 10) + 'px');
     line.onclick = function(){
+      if(document.getElementById("Context").innerText === adjacencyListItem[3]){
+        setProperty([adjacencyListItem[2],data[adjacencyListItem[0]][adjacencyListItem[1]][adjacencyListItem[2]]]);
+        document.getElementById("primary_circle").style.cursor = 'pointer';
+        document.getElementById("top_text","bottom_text").style.color = "black";
+
+        for(const element of [...document.getElementById("grid-container").querySelectorAll(".small-circle")]) element.remove();
+        for(const element of [...document.getElementById("line-canvas").querySelectorAll("#lines")]) element.remove();
+        for(const element of [...document.getElementById("right_circle").querySelectorAll("#targetLink")]) element.remove();
+        for(const element of [...document.getElementById("left_circle").querySelectorAll("#indicatorLink")]) element.remove();
+        document.getElementById("context_circle").className = "circle";
+      }
       document.getElementById("context_circle").style.display = "flex";
       setContextCircle(true);
       document.getElementById("Context").innerText = adjacencyListItem[3];
