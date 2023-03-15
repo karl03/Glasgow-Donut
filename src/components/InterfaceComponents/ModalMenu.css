@@ -22,10 +22,18 @@
 .modal-content {
     border-radius: 8px;
     background-color: var(--light-green);
-    width: 850px;
+    width: calc(min(850px, 90%));
+    max-height: 99%;
+    overflow: auto;
     transform: translateY(-200px);
     transition: all 0.3s ease-in-out;
-    overflow: hidden;
+}
+
+.modal-content::-webkit-scrollbar {
+  /* Show scrollbar for Chrome, Safari and Opera */
+  display: inline;
+  -ms-overflow-style: inline;  /* IE and Edge */
+  scrollbar-width: inline;  /* Firefox */
 }
 
 .isShow .modal-content {
