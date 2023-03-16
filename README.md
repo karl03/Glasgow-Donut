@@ -6,20 +6,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Function Names: PascalCase
 Variable Names: camelCase
 
+## Data Storage
+All graph data is stored in "server/data.json", though this should only be modified through the admin page, to ensure format is kept correct.
+
+Icons are stored within their respective subfolders in "Server/Icons/"
+
+The report file is stored in "Server/Report/", but is best modified through the admin page.
+
 ## Useful Commands
 *As a minor warning, do not run* `npm install` *or equivalent* `npm` *commands as this will generate an additional set of dependency files.*
 
 In the project directory, you can run:
 
-### `yarn start-client`
+### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Builds and runs the page locally, then accessible through localhost:5000, with the admin page on localhost:5000/admin
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn run build`
+### `yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
