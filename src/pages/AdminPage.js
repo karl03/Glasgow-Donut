@@ -68,7 +68,7 @@ export default function AdminPage(){
     }
   };
 
-  const reportUpload = async (e) => {
+  const ReportUpload = async (e) => {
     const result = window.confirm("Uploading the report will delete the previous one. Are you sure?");
     if (result) {
       try {
