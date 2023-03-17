@@ -19,39 +19,39 @@ const Title = styled.h3`
 export default function AdminSliderGroup({
   sliders,
   sliderGroups,
-  changeSliderHandler,
+  ChangeSliderHandler,
   ecoOrSoc,
   gloOrLoc,
-  deleteFunction,
-  editFunction,
-  newFunction,
-  adjFunction})
+  DeleteFunction,
+  EditFunction,
+  NewFunction,
+  AdjFunction})
   {
 
   return (
     <AdminSliderWrapper>
       <Title data-testid="title">{ecoOrSoc === "ecological" ? "Ecological" : "Social"} - {gloOrLoc === "global" ? "Global" : "Local"}</Title>
-      <button data-testid="add button" onClick={() => newFunction(ecoOrSoc, gloOrLoc)}>+</button>
+      <button data-testid="add button" onClick={() => NewFunction(ecoOrSoc, gloOrLoc)}>+</button>
       {
         (function(){
-          const Elements = [];
+          const elements = [];
           for(const [SliderName, SliderInfo] of Object.entries(sliders)){
-            Elements.push(
+            elements.push(
               <AdminSlider
-                changeSliderHandler={changeSliderHandler}
+                ChangeSliderHandler={ChangeSliderHandler}
                 initialValue={SliderInfo.value}
                 initialName={SliderName}
                 sliderGroups={sliderGroups}
                 ecoOrSoc={ecoOrSoc}
                 gloOrLoc={gloOrLoc}
-                deleteFunction={deleteFunction}
-                editFunction={editFunction}
-                adjFunction={adjFunction}
+                DeleteFunction={DeleteFunction}
+                EditFunction={EditFunction}
+                AdjFunction={AdjFunction}
                 key={`AdminSlider${SliderName},${ecoOrSoc},${gloOrLoc}`}
               />
             );
           }
-          return Elements;
+          return elements;
         })()
       }
     </AdminSliderWrapper>
