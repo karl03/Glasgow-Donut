@@ -79,15 +79,11 @@ export default function AdminPage(){
         const formData = new FormData();
         formData.append('myfile', file);
   
-        const res = await axios.post(`/api/upload-report`, formData, {
+        await axios.post(`/api/upload-report`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
-  
-        const { fileName, filePath } = res.data;
-        console.log(fileName);
-        console.log(filePath);
         alert('Upload Success');
   
       } catch (err) {
