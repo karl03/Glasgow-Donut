@@ -68,7 +68,7 @@ export default function AdminPage(){
     }
   };
 
-  const reportUpload = async (e) => {
+  const ReportUpload = async (e) => {
     const result = window.confirm("Uploading the report will delete the previous one. Are you sure?");
     if (result) {
       try {
@@ -79,15 +79,11 @@ export default function AdminPage(){
         const formData = new FormData();
         formData.append('myfile', file);
   
-        const res = await axios.post(`/api/upload-report`, formData, {
+        await axios.post(`/api/upload-report`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
-  
-        const { fileName, filePath } = res.data;
-        console.log(fileName);
-        console.log(filePath);
         alert('Upload Success');
   
       } catch (err) {
