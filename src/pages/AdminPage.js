@@ -68,30 +68,39 @@ export default function AdminPage(){
     }
   };
 
-  const ReportUpload = async (e) => {
-    try {
-      // Call the delete-all API to delete all files in the specified folder
-      await axios.delete('/api/delete-all/Report');
-
-      // Upload Report File
-      const formData = new FormData();
-      formData.append('myfile', file);
-
-      await axios.post(`/api/upload-report`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+  const reportUpload = async (e) => {
+    const result = window.confirm("Uploading the report will delete the previous one. Are you sure?");
+    if (result) {
+      try {
+        // Call the delete-all API to delete all files in the specified folder
+        await axios.delete('/api/delete-all/Report');
+  
+        // Upload Report File
+        const formData = new FormData();
+        formData.append('myfile', file);
+  
+        const res = await axios.post(`/api/upload-report`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+  
+        const { fileName, filePath } = res.data;
+        console.log(fileName);
+        console.log(filePath);
+        alert('Upload Success');
+  
+      } catch (err) {
+        if (err.response.status === 500) {
+          alert('There was a problem with the server');
+          console.log('There was a problem with the server');
+        } else {
+          alert(err.response.data.msg);
+          console.log(err.response.data.msg);
         }
-      });
-      alert('Upload Success');
-
-    } catch (err) {
-      if (err.response.status === 500) {
-        alert('There was a problem with the server');
-        console.log('There was a problem with the server');
-      } else {
-        alert(err.response.data.msg);
-        console.log(err.response.data.msg);
       }
+    } else {
+      console.log("Report Upload Cancelled");
     }
   };
   
