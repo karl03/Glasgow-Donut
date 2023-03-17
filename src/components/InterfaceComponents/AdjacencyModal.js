@@ -6,21 +6,21 @@ import './AdjacencyModal.css'
 export default function AdjacencyModal({lastCategorySelect, 
     lastSliderName,
     isShow,
-    setShow,
+    SetShow,
     sliderGroups,
-    setSliderGroups}) {
+    SetSliderGroups}) {
 
-    const [adjData, setAdjData] = useState([]);
+    const [adjData, SetAdjData] = useState([]);
 
-    function onClose(){
-      setShow(false);
+    function OnClose(){
+      SetShow(false);
     }
 
-    function onSave(){
-      setShow(false);
+    function OnSave(){
+      SetShow(false);
     }
 
-    function deleteAdjacency(item, index){
+    function DeleteAdjacency(item, index){
 
       // Gather the existing adjacency data.
       const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
@@ -29,13 +29,13 @@ export default function AdjacencyModal({lastCategorySelect,
       newSliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"].splice(index, 1);
 
       // Update the dataset.
-      setSliderGroups(newSliderGroups);
+      SetSliderGroups(newSliderGroups);
     }
 
     useEffect(() => {
       if (lastCategorySelect !== undefined) {
         if (lastSliderName in sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc]) {
-          setAdjData(sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
+          SetAdjData(sliderGroups[lastCategorySelect.ecoOrSoc][lastCategorySelect.gloOrLoc][lastSliderName]["adjacent"]);
         }
       }
     }, [sliderGroups, lastCategorySelect, lastSliderName, isShow])
@@ -43,8 +43,8 @@ export default function AdjacencyModal({lastCategorySelect,
   return (
     <ModalMenu 
         isShow={isShow}
-        onClose={() => onClose()}
-        onSave={() => onSave()}
+        OnClose={() => OnClose()}
+        OnSave={() => OnSave()}
         title={'Adjacency Editor: ' + lastSliderName}
     >
 
@@ -52,14 +52,14 @@ export default function AdjacencyModal({lastCategorySelect,
       {adjData.map((item, index) => 
       <li data-testid='adj li' className='adj-list-element' key={index}>{lastCategorySelect.ecoOrSoc + " " + lastCategorySelect.gloOrLoc + " " + lastSliderName + "→" + 
         item[0] + " " + item[1] + " " + item[2] + ": " + item[3]}
-      <button data-testid='adj delete' className='adj-delete-button' onClick={() => deleteAdjacency(item, index)}>Delete</button></li>)
+      <button data-testid='adj delete' className='adj-delete-button' onClick={() => DeleteAdjacency(item, index)}>Delete</button></li>)
       }
     </ul>
 
     <AdjacencySelector 
       sliderGroups={sliderGroups} 
       lastSliderName={lastSliderName}
-      setSliderGroups={setSliderGroups}
+      SetSliderGroups={SetSliderGroups}
       ecoOrSoc={lastCategorySelect !== undefined ? lastCategorySelect.ecoOrSoc : ''} 
       gloOrLoc={lastCategorySelect !== undefined ? lastCategorySelect.gloOrLoc : ''} 
     ></AdjacencySelector>
