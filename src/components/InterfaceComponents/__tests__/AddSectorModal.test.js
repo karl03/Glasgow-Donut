@@ -1,4 +1,4 @@
-import {populateForm} from '../ModalFunctions';
+import {PopulateForm} from '../ModalFunctions';
 import AddSectorModal from '../AddSectorModal'
 import {render, screen, fireEvent} from '@testing-library/react';
 
@@ -22,9 +22,9 @@ test('tests the validity of the ModalFunctions collection of functions', () => {
         lastCategorySelect={{'ecoOrSoc': 'ecological', 'gloOrLoc': 'global'}}
         lastSliderName={'name'}
         isShow={true}
-        setShow={showFn}
+        SetShow={showFn}
         sliderGroups={sliderGroups}
-        setSliderGroups={sliderGroupFn}
+        SetSliderGroups={sliderGroupFn}
     />)
 
     // Select test elements.
@@ -40,7 +40,7 @@ test('tests the validity of the ModalFunctions collection of functions', () => {
     const saveBtn = screen.getByTestId('modal save');
 
     // Assert valid population of form.
-    populateForm(sliderGroups, 'name', 'ecological', 'global');
+    PopulateForm(sliderGroups, 'name', 'ecological', 'global');
 
     expect(title.value).toBe('name');
     expect(value.value).toBe('0');

@@ -11,8 +11,8 @@ test('test the validity of ModalMenu', () => {
     render(<ModalMenu
         isShow={true}
         title={"title"}
-        onClose={closeFn}
-        onSave={saveFn}
+        OnClose={closeFn}
+        OnSave={saveFn}
         canSave={true}
         >
             <div data-testid='test div'></div>

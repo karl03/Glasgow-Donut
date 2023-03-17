@@ -23,7 +23,7 @@ test('tests the validity of AdjacencySelector', () => {
     render(<AdjacencySelector
         sliderGroups={sliderGroups}
         lastSliderName={'A'}
-        setSliderGroups={sliderGroupsFn}
+        SetSliderGroups={sliderGroupsFn}
         ecoOrSoc={'ecological'}
         gloOrLoc={'global'}
     />);
