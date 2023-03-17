@@ -10,15 +10,15 @@ test('renders and checks the validity of AdminSlider', () => {
     const adjFn = jest.fn().mockName('adjFn');
 
     render(<AdminSlider 
-        changeSliderHandler={changeFn}
+        ChangeSliderHandler={changeFn}
         initialValue={12}
         initialName={"Name"}
         sliderGroups={{"ecological":{"global":{"Name":{"value": 12}}}}}
         ecoOrSoc={"ecological"}
         gloOrLoc={"global"}
-        deleteFunction={delFn}
-        editFunction={editFn}
-        adjFunction={adjFn}
+        DeleteFunction={delFn}
+        EditFunction={editFn}
+        AdjFunction={adjFn}
         />);
     
     // Select test elements.

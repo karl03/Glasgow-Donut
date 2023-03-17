@@ -3,31 +3,31 @@ import ModalMenu from './ModalMenu'
 import Select from "react-select";
 import './AddSectorModal.css'
 import '../Admin/AdminSlider'
-import {onClose, onSave} from './ModalFunctions'
+import {OnClose, OnSave} from './ModalFunctions'
 
 export default function AddSectorModal({lastCategorySelect,
     lastSliderName,
     isShow,
-    setShow,
+    SetShow,
     sliderGroups,
-    setSliderGroups}) {
+    SetSliderGroups}) {
 
-    const [selectedIconOption, setSelectedIconOption] = useState(null);
+    const [selectedIconOption, SetSelectedIconOption] = useState(null);
 
-    function handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, iconLabel){
+    function HandleSubmit(sliderGroups, lastCategorySelect, lastSliderName, SetSliderGroups, SetShow, iconLabel){
         const {ecoOrSoc, gloOrLoc} = lastCategorySelect;
         const ecoOrSocIcon = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
         const gloOrLocIcon = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
         const icon = `${gloOrLocIcon}_${ecoOrSocIcon}/${iconLabel}`;
 
-        onSave(sliderGroups, setSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, setShow, icon);
+        OnSave(sliderGroups, SetSliderGroups, lastSliderName, ecoOrSoc, gloOrLoc, SetShow, icon);
     }
 
-    function handleClose(setShow){
-        onClose(setShow);
+    function HandleClose(SetShow){
+        OnClose(SetShow);
     }
 
-    function getFileNames(folder) {
+    function GetFileNames(folder) {
       return new Promise((resolve, reject) => {
         fetch(`/api/get-icon-filenames/${folder}`)
           .then((response) => response.json())
@@ -42,8 +42,8 @@ export default function AddSectorModal({lastCategorySelect,
       });
     }      
 
-    function IconOptions(lastCategorySelect, sliderGroups, selectedOption, setSelectedOption) {
-        const [iconOptions, setIconOptions] = useState([]);
+    function IconOptions(lastCategorySelect, sliderGroups, selectedOption, SetSelectedOption) {
+        const [iconOptions, SetIconOptions] = useState([]);
         const customSelectStyles = {
           control: (provided) => ({
             ...provided,
@@ -55,10 +55,10 @@ export default function AddSectorModal({lastCategorySelect,
       
         useEffect(() => {
           // Set null value to Icon options
-          setSelectedOption(null);
+          SetSelectedOption(null);
 
           if (lastCategorySelect) {
-            function populateIcons() {
+            function PopulateIcons() {
               let { ecoOrSoc, gloOrLoc } = lastCategorySelect;
               ecoOrSoc = ecoOrSoc.charAt(0).toUpperCase() + ecoOrSoc.slice(1);
               gloOrLoc = gloOrLoc.charAt(0).toUpperCase() + gloOrLoc.slice(1);
@@ -68,28 +68,28 @@ export default function AddSectorModal({lastCategorySelect,
               let data = sliderGroups[ecoOrSoc.toLowerCase()][gloOrLoc.toLowerCase()][document.getElementById('modal-sector-title').value];
               if (data && data['symbol_id'] && data['symbol_id'] !== "") {
                 let defaultValue = data['symbol_id'].split("/")[1]
-                setSelectedOption({label: defaultValue, value: defaultValue, iconUrl: `/api/get-icon/${folder}/${defaultValue}`})
+                SetSelectedOption({label: defaultValue, value: defaultValue, iconUrl: `/api/get-icon/${folder}/${defaultValue}`})
               }
 
-              getFileNames(folder)
+              GetFileNames(folder)
                 .then((fileNames) => {
                   const options = fileNames.map((fileName, index) => ({
                     label: fileName,
                     value: fileName,
                     iconUrl: `/api/get-icon/${folder}/${fileName}`,
                   }));
-                  setIconOptions(options);
+                  SetIconOptions(options);
                 })
                 .catch((err) => {
                   console.error(err);
                 });
             }
-            populateIcons();
+            PopulateIcons();
           }
-        }, [lastCategorySelect, sliderGroups, setSelectedOption]);
+        }, [lastCategorySelect, sliderGroups, SetSelectedOption]);
 
-        const handleSelectChange = (option) => {
-          setSelectedOption(option);
+        const HandleSelectChange = (option) => {
+          SetSelectedOption(option);
         };
       
         return (
@@ -109,7 +109,7 @@ export default function AddSectorModal({lastCategorySelect,
                 </>
               )}
               getOptionValue={(option) => option.value}
-              onChange={handleSelectChange}
+              onChange={HandleSelectChange}
             />
           </>
         );
@@ -118,8 +118,8 @@ export default function AddSectorModal({lastCategorySelect,
   return (
     <ModalMenu 
         isShow={isShow}
-        onClose={() => handleClose(setShow)}
-        onSave={() => handleSubmit(sliderGroups, lastCategorySelect, lastSliderName, setSliderGroups, setShow, selectedIconOption === null ? null : selectedIconOption.label)}
+        OnClose={() => HandleClose(SetShow)}
+        OnSave={() => HandleSubmit(sliderGroups, lastCategorySelect, lastSliderName, SetSliderGroups, SetShow, selectedIconOption === null ? null : selectedIconOption.label)}
         title="Sector Editor"
         canSave={true}
     >
@@ -133,7 +133,7 @@ export default function AddSectorModal({lastCategorySelect,
             <input type="number" name="sector-value" id="modal-sector-value"
                 max="100" min="-1" placeholder='0' defaultValue='0' data-testid='add modal value'/>
             
-            {IconOptions(lastCategorySelect, sliderGroups, selectedIconOption, setSelectedIconOption)}
+            {IconOptions(lastCategorySelect, sliderGroups, selectedIconOption, SetSelectedIconOption)}
 
             <label htmlFor="sector-indicator">Indicator </label>
             <input type="text" name='indicator' id='modal-sector-indicator' className="sector-indicator"

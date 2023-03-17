@@ -10,13 +10,13 @@ test('renders and checks validity of AdminSliderGroup', () => {
     render(<AdminSliderGroup
         sliders={{}}
         sliderGroups={{}}
-        changeSliderHandler={null}
+        ChangeSliderHandler={null}
         ecoOrSoc={"ecological"}
         gloOrLoc={"global"}
-        deleteFunction={null}
-        editFunction={null}
-        newFunction={newFn}
-        adjFunction={null}
+        DeleteFunction={null}
+        EditFunction={null}
+        NewFunction={newFn}
+        AdjFunction={null}
         />);
 
         // Select test elements.

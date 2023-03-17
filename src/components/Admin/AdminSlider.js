@@ -62,21 +62,21 @@ const Number = styled.input`
 
 
 export default function AdminSlider({
-  changeSliderHandler,
+  ChangeSliderHandler,
   initialValue,
   initialName,
   sliderGroups,
   ecoOrSoc,
   gloOrLoc,
-  deleteFunction,
-  editFunction,
-  adjFunction}){
+  DeleteFunction,
+  EditFunction,
+  AdjFunction}){
 
-  const [value, setValue] = React.useState(initialValue);
+  const [value, SetValue] = React.useState(initialValue);
   const [name, /*setName*/] = React.useState(initialName);
 
   React.useEffect(() => {
-    setValue(sliderGroups[ecoOrSoc][gloOrLoc][name].value);
+    SetValue(sliderGroups[ecoOrSoc][gloOrLoc][name].value);
   }, [sliderGroups, ecoOrSoc, gloOrLoc, name]);
   
   return (
@@ -84,15 +84,15 @@ export default function AdminSlider({
       <Left>
         <Top>
           <div data-testid="title">{initialName}</div>
-          <button data-testid="edit" onClick={() => editFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
+          <button data-testid="edit" onClick={() => EditFunction(name, ecoOrSoc, gloOrLoc)}>EDIT</button>
         </Top>
         <Bottom>
-          <SliderInput data-testid="slider" onChange={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="range" step="1" min="-1" max="100" value={value} />
-          <Number data-testid="number" onInput={(event) => changeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="Number" min="-1" max="100" step="1" value={value} /> 
-          <button data-testid="edit adjacent" onClick={() => adjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
+          <SliderInput data-testid="slider" onChange={(event) => ChangeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="range" step="1" min="-1" max="100" value={value} />
+          <Number data-testid="number" onInput={(event) => ChangeSliderHandler(ecoOrSoc, gloOrLoc, name, event.target.value)} type="Number" min="-1" max="100" step="1" value={value} /> 
+          <button data-testid="edit adjacent" onClick={() => AdjFunction(name, ecoOrSoc, gloOrLoc)}>Edit Adjacent</button>
         </Bottom>
       </Left>
-      <TrashIcon data-testid="delete" onClick={ () => deleteFunction(name, ecoOrSoc, gloOrLoc) }/>
+      <TrashIcon data-testid="delete" onClick={ () => DeleteFunction(name, ecoOrSoc, gloOrLoc) }/>
     </AdminSliderWrapper>
   );
 };

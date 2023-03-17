@@ -1,26 +1,26 @@
 import React from "react";
-import BarChart from "../BarChart";
+import BarChart from "../BarChart/BarChart";
 
 export default function AdminDonutGraph({sliderGroups, size}){
-  const [data, setData] = React.useState({
+  const [data, SetData] = React.useState({
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
-  const [updated, setUpdated] = React.useState(false);
+  const [updated, SetUpdated] = React.useState(false);
   React.useEffect(function(){
-    const New = JSON.parse(JSON.stringify(sliderGroups));
-    New.ecological.global = sliderGroups.ecological.global;
-    New.ecological.local = sliderGroups.ecological.local;
-    New.social.global = sliderGroups.social.global;
-    New.social.local = sliderGroups.social.local;
-    setData(New);
-    setUpdated(true);
+    const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
+    newSliderGroups.ecological.global = sliderGroups.ecological.global;
+    newSliderGroups.ecological.local = sliderGroups.ecological.local;
+    newSliderGroups.social.global = sliderGroups.social.global;
+    newSliderGroups.social.local = sliderGroups.social.local;
+    SetData(newSliderGroups);
+    SetUpdated(true);
   }, [sliderGroups]);
 
   React.useEffect(function(){
     const IntervalID = window.setInterval(async function(){
       if(!updated) return;
-      setUpdated(false);
+      SetUpdated(false);
       await window.fetch("/api/change-data", {
         "method": "POST",
         "headers": {

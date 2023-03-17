@@ -1,6 +1,6 @@
 // Functions for the modal menu!
 
-function getFormElements(){
+function GetFormElements(){
     const title = document.getElementById('modal-sector-title');
     const value = document.getElementById('modal-sector-value');
     const indicator = document.getElementById('modal-sector-indicator');
@@ -22,13 +22,13 @@ function getFormElements(){
     };
 }
 
-export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
+export function PopulateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
     // Find existing data.
 
     const data = sliderGroups[ecoOrSoc][gloOrLoc][name];
 
     // Write data to elemenets.
-    const {title, value, indicator, indicator_link, target, target_link, description, cites} = getFormElements();
+    const {title, value, indicator, indicator_link, target, target_link, description, cites} = GetFormElements();
     title.value = name;
     value.value = data['value'];
     indicator.value = data['indicator'];
@@ -39,17 +39,17 @@ export function populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc){
     cites.value = data['quotes'];
 }
 
-export function onClose(setShow){
-    const formElements = getFormElements();
+export function OnClose(SetShow){
+    const formElements = GetFormElements();
     // Clear form.
     for( const value of Object.values(formElements)){
         value.value = '';
     }
     // Close modal.
-    setShow(false);
+    SetShow(false);
 }
 
-function isValidForm(title){
+function IsValidForm(title){
     if (title !== '') {
         return true;
     }
@@ -58,7 +58,7 @@ function isValidForm(title){
     }
 }
 
-function getFormData(formElements){
+function GetFormData(formElements){
     let formData = {};
     for (var key in formElements){
         const value = formElements[key].value;
@@ -74,11 +74,11 @@ function getFormData(formElements){
 }
 
     
-export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc, setShow, icon){
+export function OnSave(sliderGroups, SetSliderGroups, title, ecoOrSoc, gloOrLoc, SetShow, icon){
     // Get form data.
-    const formData = getFormData(getFormElements());
+    const formData = GetFormData(GetFormElements());
 
-    if (!isValidForm(title)) {
+    if (!IsValidForm(title)) {
         alert("The sector requires a title!");
         return;
     }
@@ -97,6 +97,6 @@ export function onSave(sliderGroups, setSliderGroups, title, ecoOrSoc, gloOrLoc,
         "quotes": formData['cites'] || '',
         "symbol_id": icon
     };
-    setSliderGroups(New);
-    onClose(setShow)
+    SetSliderGroups(New);
+    OnClose(SetShow)
 }

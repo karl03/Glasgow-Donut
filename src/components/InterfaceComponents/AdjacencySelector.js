@@ -2,34 +2,34 @@ import React, {useState, useEffect} from 'react'
 import './AdjacencySelector.css'
 
 export default function AdjacencySelector(props) {
-    const [targetEcoOrSoc, setTargetEcoOrSoc] = useState('ecological');
-    const [targetGloOrLoc, setTargetGloOrLoc] = useState('global');
-    const [targetName, setTargetName] = useState('Select...')
+    const [targetEcoOrSoc, SetTargetEcoOrSoc] = useState('ecological');
+    const [targetGloOrLoc, SetTargetGloOrLoc] = useState('global');
+    const [targetName, SetTargetName] = useState('Select...')
 
-    const [adjacentArray, setAdjacentArray] = useState([]);
-    const [isDisabled, setIsDisable] = useState(true);
+    const [adjacentArray, SetAdjacentArray] = useState([]);
+    const [isDisabled, SetIsDisable] = useState(true);
 
-    function handleEcoOrSocSelect(){
+    function HandleEcoOrSocSelect(){
         const element = document.getElementById("adj-select-EcoOrSoc");
-        setTargetEcoOrSoc(element.value);
+        SetTargetEcoOrSoc(element.value);
     }
 
-    function handleGloOrLocSelect(){
+    function HandleGloOrLocSelect(){
         const element = document.getElementById("adj-select-GloOrLoc");
-        setTargetGloOrLoc(element.value);
+        SetTargetGloOrLoc(element.value);
     }
 
-    function updateTargetName(targetValue){
+    function UpdateTargetName(targetValue){
         if (targetValue !== 'Select...') {
-            setTargetName(targetValue);
-            setIsDisable(false);
+            SetTargetName(targetValue);
+            SetIsDisable(false);
         }
         else {
-            setIsDisable(true);
+            SetIsDisable(true);
         }
     }
 
-    function handleSubmit(event, props){
+    function HandleSubmit(event, props){
         event.preventDefault();
         // Get the form message and clear the input.
         const messageElement = document.getElementById("message-input"); 
@@ -51,7 +51,7 @@ export default function AdjacencySelector(props) {
                 element[1] === targetGloOrLoc &&
                 element[2] === targetName) {
                 newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"][index][3] = message;
-                props.setSliderGroups(newSliderGroups);
+                props.SetSliderGroups(newSliderGroups);
                 return;
             }
         }
@@ -59,31 +59,31 @@ export default function AdjacencySelector(props) {
         // If new adjacency: Add the new Adjacency to the dataset.
         
         newSliderGroups[props.ecoOrSoc][props.gloOrLoc][props.lastSliderName]["adjacent"].push(newAdjacency);
-        props.setSliderGroups(newSliderGroups);
+        props.SetSliderGroups(newSliderGroups);
     }
 
     useEffect(() => {
         const keys = Object.keys(props.sliderGroups[targetEcoOrSoc][targetGloOrLoc]);
         if (props.ecoOrSoc === targetEcoOrSoc && props.gloOrLoc === targetGloOrLoc) {
-            setAdjacentArray(keys.filter((x) => x !== props.lastSliderName));
+            SetAdjacentArray(keys.filter((x) => x !== props.lastSliderName));
             return;
         }
-        setAdjacentArray(keys);
+        SetAdjacentArray(keys);
     }, [targetEcoOrSoc, targetGloOrLoc, props])
 
   return (
-    <form className='adj-select' onSubmit={(event) => handleSubmit(event, props)}>
-        <select data-testid='adjSelect ecoOrSoc' name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={handleEcoOrSocSelect}>
+    <form className='adj-select' onSubmit={(event) => HandleSubmit(event, props)}>
+        <select data-testid='adjSelect ecoOrSoc' name="EcoOrSoc" id="adj-select-EcoOrSoc" onChange={HandleEcoOrSocSelect}>
             <option value="ecological">Ecological</option>
             <option value="social">Social</option>
         </select>
 
-        <select data-testid='adjSelect gloOrLoc' name="GloOrLoc" id="adj-select-GloOrLoc" onChange={handleGloOrLocSelect}>
+        <select data-testid='adjSelect gloOrLoc' name="GloOrLoc" id="adj-select-GloOrLoc" onChange={HandleGloOrLocSelect}>
             <option value="global">Global</option>
             <option value="local">Local</option>
         </select>
 
-        <select data-testid='adjSelect sector' name="sector" id="adj-select-sector" onChange={(e) => updateTargetName(e.target.value)}>
+        <select data-testid='adjSelect sector' name="sector" id="adj-select-sector" onChange={(e) => UpdateTargetName(e.target.value)}>
             <option key="0">Select...</option>
             {adjacentArray.map((item, index) => <option data-testid='adj-select sector option' key={index + 1}>{item}</option>)}
         </select>

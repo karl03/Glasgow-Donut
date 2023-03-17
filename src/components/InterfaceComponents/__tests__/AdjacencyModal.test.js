@@ -25,9 +25,9 @@ test('tests the validity of the AdjacencyModal', () =>{
         lastCategorySelect={{'ecoOrSoc': 'ecological', 'gloOrLoc': 'global'}}
         lastSliderName={'A'}
         isShow={true}
-        setShow={showFn}
+        SetShow={showFn}
         sliderGroups={sliderGroups}
-        setSliderGroups={sliderGroupsFn}
+        SetSliderGroups={sliderGroupsFn}
     />);
 
     // Select test elements.
