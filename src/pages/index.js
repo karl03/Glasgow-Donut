@@ -1,5 +1,5 @@
 import React from "react";
-import BarChart from "../components/BarChart";
+import BarChart from "../components/BarChart/BarChart";
 import YoutubeEmbed from "../components/YoutubeAddon";
 import {ImageBg, MainBg} from "./PageElements";
 import BackgroundImage from "../images/background_image.jpg"
@@ -13,15 +13,15 @@ function HomePage() {
   });
   const [loaded, setLoaded] = React.useState(false);
   React.useEffect(function(){
-    async function getData(){
-      const LoadedData = (await (await fetch("/api/get-data")).json())[0];
-      setSliderGroups(LoadedData);
+    async function GetData(){
+      const loadedData = (await (await fetch("/api/get-data")).json())[0];
+      setSliderGroups(loadedData);
       setLoaded(true);
     }
-    if(!loaded) getData();
+    if(!loaded) GetData();
   }, [loaded]);
 
-  function getReportFileName() {
+  function GetReportFileName() {
     return new Promise((resolve, reject) => {
       fetch(`/api/get-report-filename`)
         .then((response) => response.json())
@@ -36,8 +36,8 @@ function HomePage() {
     });
   }   
 
-  function downloadReport() {
-    getReportFileName()
+  function DownloadReport() {
+    GetReportFileName()
       .then((fileName) => {
         fetch(`/api/download-report/${fileName}`)
           .then(response => {
@@ -212,7 +212,7 @@ function HomePage() {
                   
         </div>
         <br/>
-        <button className="button" onClick={downloadReport}>Download Report</button>
+        <button className="button" onClick={DownloadReport}>Download Report</button>
         <br/>
       </div>
     </div>

@@ -10,40 +10,40 @@ import '../components/Admin/Admin.css'
 import {populateForm} from '../components/InterfaceComponents/ModalFunctions'
 
 export default function AdminPage(){
-  const [file, setFile] = useState(null);
-  const [isShowingEditModal, setShowingEditModal] = useState(false);
-  const [isShowingAdjModal, setShowingAdjModal] = useState(false);
-  const [isShowingUploadModal, setShowingUploadModal] = useState(false);
-  const setFilename = useState('Choose File')[1];
-  const [sliderGroups, setSliderGroups] = useState({
+  const [file, SetFile] = useState(null);
+  const [isShowingEditModal, SetShowingEditModal] = useState(false);
+  const [isShowingAdjModal, SetShowingAdjModal] = useState(false);
+  const [isShowingUploadModal, SetShowingUploadModal] = useState(false);
+  const SetFilename = useState('Choose File')[1];
+  const [sliderGroups, SetSliderGroups] = useState({
     ecological: {global: {}, local: {}},
     social: {global: {}, local: {}}
   });
 
   // 'Edit modal' state variables.
-  const [lastCategorySelect, setLastCategorySelect] = useState();
-  const [lastSliderName, setLastSliderName] = useState();
+  const [lastCategorySelect, SetLastCategorySelect] = useState();
+  const [lastSliderName, SetLastSliderName] = useState();
 
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, SetLoaded] = useState(false);
 
 	const changeUploadHandler = (e) => {
     const file = e.target.files[0];
     const label = e.target.nextElementSibling;
 
-    setFile(file);
-    setFilename(file.name);
+    SetFile(file);
+    SetFilename(file.name);
     label.textContent = file ? file.name : "File Upload";
   };
 
-  const showUploadModal = (e) => {
+  const ShowUploadModal = (e) => {
     if (!file) {
       alert("No file upload");
     } else {
-      setShowingUploadModal(true);
+      SetShowingUploadModal(true);
     }
   }
 
-  const handleUpload = async (e) => {
+  const HandleUpload = async (e) => {
     const formData = new FormData();
     formData.append('myfile', file);
 
@@ -57,8 +57,6 @@ export default function AdminPage(){
       });
 
       const { fileName, filePath } = res.data;
-      console.log(fileName);
-      console.log(filePath);
       alert('Upload Success');
 
     } catch (err) {
@@ -72,7 +70,7 @@ export default function AdminPage(){
     }
   };
 
-  const reportUpload = async (e) => {
+  const ReportUpload = async (e) => {
     try {
       // Call the delete-all API to delete all files in the specified folder
       await axios.delete('/api/delete-all/Report');
@@ -81,15 +79,11 @@ export default function AdminPage(){
       const formData = new FormData();
       formData.append('myfile', file);
 
-      const res = await axios.post(`/api/upload-report`, formData, {
+      await axios.post(`/api/upload-report`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-
-      const { fileName, filePath } = res.data;
-      console.log(fileName);
-      console.log(filePath);
       alert('Upload Success');
 
     } catch (err) {
@@ -104,52 +98,52 @@ export default function AdminPage(){
   };
   
   React.useEffect(function(){
-    async function getData(){
-      const LoadedData = (await (await fetch("/api/get-data")).json())[0];
-      setSliderGroups(LoadedData);
-      setLoaded(true);
+    async function GetData(){
+      const loadedData = (await (await fetch("/api/get-data")).json())[0];
+      SetSliderGroups(loadedData);
+      SetLoaded(true);
     }
-    if(!loaded) getData();
+    if(!loaded) GetData();
   }, [loaded]);
 
-  function changeSliderHandler(ecoOrSoc, gloOrLoc, name, newValue){
+  function ChangeSliderHandler(ecoOrSoc, gloOrLoc, name, newValue){
     const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
     newSliderGroups[ecoOrSoc][gloOrLoc][name].value = Number.parseInt(newValue);
-    setSliderGroups(newSliderGroups)
+    SetSliderGroups(newSliderGroups)
   }
 
-  function deleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    setSliderGroups(function(oldSliders){
+  function DeleteSliderHandler(name, ecoOrSoc, gloOrLoc) {
+    SetSliderGroups(function(oldSliders){
       let New = JSON.parse(JSON.stringify(oldSliders));
       delete New[ecoOrSoc][gloOrLoc][name];
       return New;
     });
   }
 
-  function newSliderHandler(ecoOrSoc, gloOrLoc){
-    setLastCategorySelect({ecoOrSoc, gloOrLoc});
-    setShowingEditModal(true);
+  function NewSliderHandler(ecoOrSoc, gloOrLoc){
+    SetLastCategorySelect({ecoOrSoc, gloOrLoc});
+    SetShowingEditModal(true);
   }
 
-  function editSliderHandler(name, ecoOrSoc, gloOrLoc) {
-    setLastSliderName(name);
-    setLastCategorySelect({ecoOrSoc, gloOrLoc});
+  function EditSliderHandler(name, ecoOrSoc, gloOrLoc) {
+    SetLastSliderName(name);
+    SetLastCategorySelect({ecoOrSoc, gloOrLoc});
     populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
-    setShowingEditModal(true);
+    SetShowingEditModal(true);
   }
 
-  function editAdjHandler(name, ecoOrSoc, gloOrLoc){
-    setLastSliderName(name);
-    setLastCategorySelect({ecoOrSoc, gloOrLoc});
-    setShowingAdjModal(true);
+  function EditAdjHandler(name, ecoOrSoc, gloOrLoc){
+    SetLastSliderName(name);
+    SetLastCategorySelect({ecoOrSoc, gloOrLoc});
+    SetShowingAdjModal(true);
   }
 
-  function addUploadModal(){
+  function AddUploadModal(){
     return (
       <ModalMenu
           isShow={isShowingUploadModal}
-          onClose={() => setShowingUploadModal(false)}
-          onSave={handleUpload}
+          onClose={() => SetShowingUploadModal(false)}
+          onSave={HandleUpload}
           title="Upload Model"
           canSave={true}
           >
@@ -161,7 +155,7 @@ export default function AdminPage(){
               <option value="Local_Ecological">Local_Ecological</option>
               <option value="Local_Social">Local_Social</option>
             </select>
-            <button style={{marginTop:"2vh"}} className="admin-report-button" onClick={reportUpload}>Upload Report</button>
+            <button style={{marginTop:"2vh"}} className="admin-report-button" onClick={ReportUpload}>Upload Report</button>
           </div>
         </ModalMenu>
     )
@@ -179,26 +173,26 @@ export default function AdminPage(){
 
         <div className="admin-left-panel">
           { (function(){
-              const Elements = [];
+              const elements = [];
               for(const [ecoOrSoc, gloAndLoc] of Object.entries(sliderGroups)){
                 for(const [gloOrLoc, sliders] of Object.entries(gloAndLoc)){
-                  Elements.push(
+                  elements.push(
                     <AdminSliderGroup
                       sliders={sliders}
                       sliderGroups={sliderGroups}
                       ecoOrSoc={ecoOrSoc}
                       gloOrLoc={gloOrLoc}
-                      changeSliderHandler={changeSliderHandler}
-                      deleteFunction={deleteSliderHandler}
-                      editFunction={editSliderHandler}
-                      newFunction={newSliderHandler}
-                      adjFunction={editAdjHandler}
+                      changeSliderHandler={ChangeSliderHandler}
+                      deleteFunction={DeleteSliderHandler}
+                      editFunction={EditSliderHandler}
+                      newFunction={NewSliderHandler}
+                      adjFunction={EditAdjHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
                 }
               }
-              return Elements;
+              return elements;
             })()}
         </div>
 
@@ -212,33 +206,33 @@ export default function AdminPage(){
             <div className="admin-upload-form">
               <input className="admin-upload-input" type="file" name='file' id="file" onChange={changeUploadHandler}/>
               <label className="admin-upload-label" htmlFor="file">Choose File</label>
-              <button className="admin-upload-button" onClick={showUploadModal}>Upload</button>
+              <button className="admin-upload-button" onClick={ShowUploadModal}>Upload</button>
             </div>
           </div>
         </div>
 
       </div>
       <div>
-        {addUploadModal()}
+        {AddUploadModal()}
       </div>
 
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
-        setLastSliderName={setLastSliderName}
+        setLastSliderName={SetLastSliderName}
         lastSliderName={lastSliderName}
         isShow={isShowingEditModal}
-        setShow={setShowingEditModal}
+        setShow={SetShowingEditModal}
         sliderGroups={sliderGroups}
-        setSliderGroups={setSliderGroups}
+        setSliderGroups={SetSliderGroups}
       ></AddSectorModal>
 
       <AdjacencyModal
         lastCategorySelect={lastCategorySelect} 
         lastSliderName={lastSliderName}
         isShow={isShowingAdjModal}
-        setShow={setShowingAdjModal}
+        setShow={SetShowingAdjModal}
         sliderGroups={sliderGroups}
-        setSliderGroups={setSliderGroups}
+        setSliderGroups={SetSliderGroups}
       ></AdjacencyModal>
     </div>
   );
