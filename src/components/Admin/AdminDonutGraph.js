@@ -8,12 +8,12 @@ export default function AdminDonutGraph({sliderGroups, size}){
   });
   const [updated, SetUpdated] = React.useState(false);
   React.useEffect(function(){
-    const New = JSON.parse(JSON.stringify(sliderGroups));
-    New.ecological.global = sliderGroups.ecological.global;
-    New.ecological.local = sliderGroups.ecological.local;
-    New.social.global = sliderGroups.social.global;
-    New.social.local = sliderGroups.social.local;
-    SetData(New);
+    const newSliderGroups = JSON.parse(JSON.stringify(sliderGroups));
+    newSliderGroups.ecological.global = sliderGroups.ecological.global;
+    newSliderGroups.ecological.local = sliderGroups.ecological.local;
+    newSliderGroups.social.global = sliderGroups.social.global;
+    newSliderGroups.social.local = sliderGroups.social.local;
+    SetData(newSliderGroups);
     SetUpdated(true);
   }, [sliderGroups]);
 
