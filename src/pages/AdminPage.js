@@ -7,7 +7,7 @@ import AdjacencyModal from '../components/InterfaceComponents/AdjacencyModal'
 import ModalMenu from '../components/InterfaceComponents/ModalMenu'
 import axios from 'axios';
 import '../components/Admin/Admin.css'
-import {populateForm} from '../components/InterfaceComponents/ModalFunctions'
+import {PopulateForm} from '../components/InterfaceComponents/ModalFunctions'
 
 export default function AdminPage(){
   const [file, SetFile] = useState(null);
@@ -50,13 +50,11 @@ export default function AdminPage(){
     try {
       const selectedFolder = document.getElementById("folder").value;
       
-      const res = await axios.post(`/api/upload-icon/${selectedFolder}`, formData, {
+      await axios.post(`/api/upload-icon/${selectedFolder}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-
-      const { fileName, filePath } = res.data;
       alert('Upload Success');
 
     } catch (err) {
@@ -128,7 +126,7 @@ export default function AdminPage(){
   function EditSliderHandler(name, ecoOrSoc, gloOrLoc) {
     SetLastSliderName(name);
     SetLastCategorySelect({ecoOrSoc, gloOrLoc});
-    populateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
+    PopulateForm(sliderGroups, name, ecoOrSoc, gloOrLoc);
     SetShowingEditModal(true);
   }
 
@@ -142,8 +140,8 @@ export default function AdminPage(){
     return (
       <ModalMenu
           isShow={isShowingUploadModal}
-          onClose={() => SetShowingUploadModal(false)}
-          onSave={HandleUpload}
+          OnClose={() => SetShowingUploadModal(false)}
+          OnSave={HandleUpload}
           title="Upload Model"
           canSave={true}
           >
@@ -182,11 +180,11 @@ export default function AdminPage(){
                       sliderGroups={sliderGroups}
                       ecoOrSoc={ecoOrSoc}
                       gloOrLoc={gloOrLoc}
-                      changeSliderHandler={ChangeSliderHandler}
-                      deleteFunction={DeleteSliderHandler}
-                      editFunction={EditSliderHandler}
-                      newFunction={NewSliderHandler}
-                      adjFunction={EditAdjHandler}
+                      ChangeSliderHandler={ChangeSliderHandler}
+                      DeleteFunction={DeleteSliderHandler}
+                      EditFunction={EditSliderHandler}
+                      NewFunction={NewSliderHandler}
+                      AdjFunction={EditAdjHandler}
                       key={`AdminSliderGroup${ecoOrSoc}.${gloOrLoc}`}
                     />
                   );
@@ -218,21 +216,21 @@ export default function AdminPage(){
 
       <AddSectorModal 
         lastCategorySelect={lastCategorySelect}
-        setLastSliderName={SetLastSliderName}
+        SetLastSliderName={SetLastSliderName}
         lastSliderName={lastSliderName}
         isShow={isShowingEditModal}
-        setShow={SetShowingEditModal}
+        SetShow={SetShowingEditModal}
         sliderGroups={sliderGroups}
-        setSliderGroups={SetSliderGroups}
+        SetSliderGroups={SetSliderGroups}
       ></AddSectorModal>
 
       <AdjacencyModal
         lastCategorySelect={lastCategorySelect} 
         lastSliderName={lastSliderName}
         isShow={isShowingAdjModal}
-        setShow={SetShowingAdjModal}
+        SetShow={SetShowingAdjModal}
         sliderGroups={sliderGroups}
-        setSliderGroups={SetSliderGroups}
+        SetSliderGroups={SetSliderGroups}
       ></AdjacencyModal>
     </div>
   );
